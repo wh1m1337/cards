@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wyrażenia algebraiczne – 6 klasa</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Baloo+2:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0f1117;
+    --card: #1a1d27;
+    --card2: #20243a;
+    --accent: #6c63ff;
+    --accent2: #ff6584;
+    --green: #43e97b;
+    --yellow: #f9c74f;
+    --text: #e8eaf6;
+    --muted: #8b90b8;
+    --border: #2e3256;
+    --radius: 16px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    padding: 0 0 60px 0;
+  }
+  header {
+    background: linear-gradient(135deg, #1a1d27 0%, #20243a 100%);
+    border-bottom: 2px solid var(--border);
+    padding: 28px 24px 20px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute;
+    top: -40px; left: -40px;
+    width: 180px; height: 180px;
+    background: radial-gradient(circle, rgba(108,99,255,0.18) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  header::after {
+    content: '';
+    position: absolute;
+    bottom: -40px; right: -20px;
+    width: 160px; height: 160px;
+    background: radial-gradient(circle, rgba(255,101,132,0.13) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  header h1 {
+    font-family: 'Baloo 2', sans-serif;
+    font-size: 1.7rem;
+    font-weight: 800;
+    color: #fff;
+    letter-spacing: -0.5px;
+    position: relative;
+  }
+  header p {
+    color: var(--muted);
+    font-size: 0.85rem;
+    margin-top: 4px;
+    position: relative;
+  }
+  .emoji-big { font-size: 2rem; display: block; margin-bottom: 6px; }
+
+  nav {
+    display: flex;
+    gap: 8px;
+    padding: 16px 16px 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  nav::-webkit-scrollbar { display: none; }
+  .tab {
+    flex-shrink: 0;
+    padding: 8px 16px;
+    border-radius: 50px;
+    border: 2px solid var(--border);
+    background: var(--card);
+    color: var(--muted);
+    font-size: 0.78rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all .2s;
+    font-family: 'Nunito', sans-serif;
+    white-space: nowrap;
+  }
+  .tab.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+  }
+
+  .section { display: none; padding: 16px; }
+  .section.active { display: block; }
+
+  /* THEORY CARDS */
+  .theory-block {
+    background: var(--card);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius);
+    padding: 18px;
+    margin-bottom: 14px;
+  }
+  .theory-block h2 {
+    font-family: 'Baloo 2', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .theory-block p, .theory-block li {
+    font-size: 0.88rem;
+    line-height: 1.6;
+    color: #c8cae8;
+  }
+  .theory-block ul { padding-left: 18px; margin-top: 6px; }
+  .theory-block li { margin-bottom: 4px; }
+  .formula {
+    display: inline-block;
+    background: rgba(108,99,255,0.15);
+    border: 1.5px solid rgba(108,99,255,0.35);
+    border-radius: 8px;
+    padding: 4px 12px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #a59fff;
+    font-family: 'Courier New', monospace;
+    margin: 3px 3px 3px 0;
+  }
+  .formula-block {
+    background: rgba(108,99,255,0.1);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 8px 8px 0;
+    padding: 10px 14px;
+    margin: 10px 0;
+  }
+  .formula-block p { color: #b8b4ff; font-size: 0.87rem; }
+  .highlight { color: var(--yellow); font-weight: 700; }
+  .highlight-green { color: var(--green); font-weight: 700; }
+  .highlight-pink { color: var(--accent2); font-weight: 700; }
+
+  .example-box {
+    background: var(--card2);
+    border-radius: 10px;
+    padding: 12px 14px;
+    margin-top: 10px;
+  }
+  .example-box .label {
+    font-size: 0.72rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--green);
+    margin-bottom: 6px;
+  }
+  .example-box p { font-size: 0.87rem; color: #c8cae8; }
+  .step { font-size: 0.82rem; color: var(--muted); margin-top: 4px; }
+  .step span { color: #a59fff; }
+
+  /* QUIZ */
+  .quiz-card {
+    background: var(--card);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius);
+    padding: 18px;
+    margin-bottom: 14px;
+    transition: border-color .2s;
+  }
+  .quiz-card.correct { border-color: var(--green); }
+  .quiz-card.wrong { border-color: var(--accent2); }
+  .quiz-number {
+    font-size: 0.7rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+  .quiz-question {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1.5;
+    margin-bottom: 14px;
+  }
+  .quiz-options { display: flex; flex-direction: column; gap: 8px; }
+  .option-btn {
+    background: var(--card2);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    padding: 10px 14px;
+    text-align: left;
+    color: var(--text);
+    font-size: 0.87rem;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all .18s;
+  }
+  .option-btn:hover:not(:disabled) {
+    border-color: var(--accent);
+    background: rgba(108,99,255,0.1);
+  }
+  .option-btn.selected-correct {
+    background: rgba(67,233,123,0.15);
+    border-color: var(--green);
+    color: var(--green);
+  }
+  .option-btn.selected-wrong {
+    background: rgba(255,101,132,0.15);
+    border-color: var(--accent2);
+    color: var(--accent2);
+  }
+  .option-btn.show-correct {
+    background: rgba(67,233,123,0.08);
+    border-color: var(--green);
+    color: var(--green);
+  }
+  .feedback {
+    margin-top: 10px;
+    font-size: 0.83rem;
+    font-weight: 700;
+    padding: 8px 12px;
+    border-radius: 8px;
+    display: none;
+  }
+  .feedback.correct { background: rgba(67,233,123,0.12); color: var(--green); display: block; }
+  .feedback.wrong { background: rgba(255,101,132,0.12); color: var(--accent2); display: block; }
+
+  /* INPUT QUIZ */
+  .input-wrap {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 6px;
+  }
+  .quiz-input {
+    flex: 1;
+    background: var(--card2);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    padding: 10px 14px;
+    color: var(--text);
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.93rem;
+    font-weight: 600;
+    outline: none;
+    transition: border-color .2s;
+  }
+  .quiz-input:focus { border-color: var(--accent); }
+  .quiz-input.correct { border-color: var(--green); }
+  .quiz-input.wrong { border-color: var(--accent2); }
+  .check-btn {
+    background: var(--accent);
+    border: none;
+    border-radius: 10px;
+    padding: 10px 16px;
+    color: #fff;
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 800;
+    cursor: pointer;
+    transition: opacity .2s;
+  }
+  .check-btn:hover { opacity: 0.85; }
+  .check-btn:disabled { opacity: 0.4; cursor: default; }
+
+  /* SCORE */
+  .score-bar {
+    background: var(--card);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px 18px;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .score-label { font-size: 0.82rem; color: var(--muted); font-weight: 700; }
+  .score-val { font-size: 1.4rem; font-weight: 900; color: var(--green); font-family: 'Baloo 2', sans-serif; }
+
+  .reset-btn {
+    width: 100%;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    border: none;
+    border-radius: 12px;
+    padding: 14px;
+    color: #fff;
+    font-family: 'Baloo 2', sans-serif;
+    font-size: 1rem;
+    font-weight: 800;
+    cursor: pointer;
+    margin-top: 8px;
+    letter-spacing: 0.3px;
+  }
+
+  .tag {
+    display: inline-block;
+    background: rgba(108,99,255,0.18);
+    color: var(--accent);
+    border-radius: 6px;
+    padding: 1px 8px;
+    font-size: 0.72rem;
+    font-weight: 800;
+    margin-right: 4px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+  .tag.green { background: rgba(67,233,123,0.15); color: var(--green); }
+  .tag.yellow { background: rgba(249,199,79,0.18); color: var(--yellow); }
+
+  .divider {
+    height: 1px;
+    background: var(--border);
+    margin: 14px 0;
+  }
+
+  .tip-box {
+    background: rgba(249,199,79,0.08);
+    border: 1.5px solid rgba(249,199,79,0.25);
+    border-radius: 10px;
+    padding: 10px 14px;
+    margin-top: 10px;
+  }
+  .tip-box p { font-size: 0.83rem; color: var(--yellow); }
+  .tip-box .tip-label { font-weight: 800; margin-bottom: 2px; }
+</style>
+</head>
+<body>
+
+<header>
+  <span class="emoji-big">🧮</span>
+  <h1>Wyrażenia algebraiczne</h1>
+  <p>Klasa 6 · Przygotowanie do kartkówki</p>
+</header>
+
+<nav>
+  <button class="tab active" onclick="showTab('theory')">📖 Teoria</button>
+  <button class="tab" onclick="showTab('quiz1')">✏️ Zapisywanie</button>
+  <button class="tab" onclick="showTab('quiz2')">🔢 Obliczanie</button>
+  <button class="tab" onclick="showTab('quiz3')">✨ Upraszczanie</button>
+</nav>
+
+<!-- TEORIA -->
+<div id="theory" class="section active">
+
+  <div class="theory-block">
+    <h2>📌 Co to jest wyrażenie algebraiczne?</h2>
+    <p>Wyrażenie algebraiczne to zapis matematyczny zawierający <span class="highlight">liczby</span>, <span class="highlight-pink">litery (zmienne)</span> i <span class="highlight-green">działania</span> (+, −, ·, :).</p>
+    <div class="example-box">
+      <div class="label">Przykłady wyrażeń</div>
+      <p><span class="formula">3a + 5</span> <span class="formula">2x − 7</span> <span class="formula">4(n + 2)</span> <span class="formula">a² + b</span></p>
+    </div>
+    <div class="tip-box">
+      <p class="tip-label">💡 Pamiętaj!</p>
+      <p>Litera w wyrażeniu to <strong>nieznana liczba</strong> – zastępuje dowolną wartość liczbową.</p>
+    </div>
+  </div>
+
+  <div class="theory-block">
+    <h2>✏️ 1. Zapisywanie wyrażeń algebraicznych</h2>
+    <p>Jak zamieniać słowa na zapis algebraiczny:</p>
+    <ul>
+      <li><span class="highlight">suma</span> liczby a i 5 → <span class="formula">a + 5</span></li>
+      <li><span class="highlight">różnica</span> x i 3 → <span class="formula">x − 3</span></li>
+      <li><span class="highlight">iloczyn</span> 4 i n → <span class="formula">4n</span> (zamiast 4·n)</li>
+      <li><span class="highlight">iloraz</span> b i 2 → <span class="formula">b : 2</span> lub <span class="formula">b/2</span></li>
+      <li>liczba <span class="highlight">zwiększona</span> o 7 → <span class="formula">n + 7</span></li>
+      <li>liczba <span class="highlight">zmniejszona</span> o 7 → <span class="formula">n − 7</span></li>
+      <li>liczba <span class="highlight">dwukrotnie większa</span> → <span class="formula">2n</span></li>
+      <li>liczba <span class="highlight">trzy razy mniejsza</span> → <span class="formula">n : 3</span></li>
+    </ul>
+    <div class="example-box">
+      <div class="label">Przykład zadania</div>
+      <p>„Cena jabłka wynosi <em>a</em> złotych. Kupuję 3 jabłka i płacę 2 zł więcej za torbę."</p>
+      <p class="step">→ <span>3a + 2</span></p>
+    </div>
+  </div>
+
+  <div class="theory-block">
+    <h2>🔢 2. Obliczanie wartości wyrażeń</h2>
+    <p>Podstawiamy konkretną liczbę zamiast litery i obliczamy.</p>
+    <div class="formula-block">
+      <p><strong>Krok 1:</strong> Podstaw liczbę zamiast litery</p>
+      <p><strong>Krok 2:</strong> Oblicz zgodnie z kolejnością działań</p>
+      <p><strong>Kolejność:</strong> nawiasy → potęgi → · i : → + i −</p>
+    </div>
+    <div class="example-box">
+      <div class="label">Przykład</div>
+      <p>Oblicz wartość wyrażenia <span class="formula">3a + 2</span> dla a = 4</p>
+      <p class="step">→ <span>3 · 4 + 2 = 12 + 2 = 14</span></p>
+    </div>
+    <div class="example-box">
+      <div class="label">Przykład z dwoma zmiennymi</div>
+      <p>Oblicz <span class="formula">2x − y</span> dla x = 5, y = 3</p>
+      <p class="step">→ <span>2 · 5 − 3 = 10 − 3 = 7</span></p>
+    </div>
+  </div>
+
+  <div class="theory-block">
+    <h2>✨ 3. Upraszczanie wyrażeń algebraicznych</h2>
+    <p>Upraszczamy przez <span class="highlight">łączenie wyrazów podobnych</span> (tych samych liter lub samych liczb).</p>
+    <ul>
+      <li><span class="tag">PODOBNE</span> <span class="formula">3a</span> i <span class="formula">5a</span> → można dodać → <span class="formula">8a</span></li>
+      <li><span class="tag green">RÓŻNE</span> <span class="formula">3a</span> i <span class="formula">5b</span> → nie można łączyć</li>
+      <li><span class="tag yellow">LICZBY</span> <span class="formula">4</span> i <span class="formula">7</span> → można dodać → <span class="formula">11</span></li>
+    </ul>
+    <div class="divider"></div>
+    <div class="example-box">
+      <div class="label">Przykład 1 – prosta suma</div>
+      <p><span class="formula">3a + 5a = 8a</span></p>
+      <p class="step">→ <span>(3 + 5)a = 8a</span></p>
+    </div>
+    <div class="example-box">
+      <div class="label">Przykład 2 – mieszane wyrazy</div>
+      <p>Uprość: <span class="formula">4x + 3 + 2x − 1</span></p>
+      <p class="step">→ <span>4x + 2x + 3 − 1 = 6x + 2</span></p>
+    </div>
+    <div class="example-box">
+      <div class="label">Przykład 3 – różne litery</div>
+      <p>Uprość: <span class="formula">5a + 3b + 2a − b</span></p>
+      <p class="step">→ <span>(5a + 2a) + (3b − b) = 7a + 2b</span></p>
+    </div>
+    <div class="tip-box">
+      <p class="tip-label">⚠️ Uwaga!</p>
+      <p>Wyrazy z różnymi literami (<em>a</em> i <em>b</em>) lub literami z różnymi wykładnikami (<em>a</em> i <em>a²</em>) <strong>NIE są podobne</strong> i nie można ich łączyć!</p>
+    </div>
+  </div>
+
+</div>
+
+<!-- QUIZ 1: Zapisywanie -->
+<div id="quiz1" class="section">
+  <div class="score-bar">
+    <span class="score-label">✏️ Zapisywanie wyrażeń</span>
+    <span class="score-val" id="score1">0 / 6</span>
+  </div>
+
+  <div class="quiz-card" id="q1_1">
+    <div class="quiz-number">Zadanie 1</div>
+    <div class="quiz-question">Jak zapiszesz algebraicznie: <br>„<span class="highlight">suma</span> liczby <em>x</em> i liczby 8"?</div>
+    <div class="quiz-options">
+      <button class="option-btn" onclick="checkOption(this,'q1_1','x + 8','x + 8')">x + 8</button>
+      <button class="option-btn" onclick="checkOption(this,'q1_1','x − 8','x + 8')">x − 8</button>
+      <button class="option-btn" onclick="checkOption(this,'q1_1','8x','x + 8')">8x</button>
+      <button class="option-btn" onclick="checkOption(this,'q1_1','x · 8','x + 8')">x · 8</button>
+    </div>
+    <div class="feedback" id="fb_q1_1"></div>
+  </div>
+
+  <div class="quiz-card" id="q1_2">
+    <div class="quiz-number">Zadanie 2</div>
+    <div class="quiz-question">Jak zapiszesz: „<span class="highlight">iloczyn</span> liczby 5 i liczby <em>n</em>"?</div>
+    <div class="quiz-options">
+      <button class="option-btn" onclick="checkOption(this,'q1_2','5 + n','5n')">5 + n</button>
+      <button class="option-btn" onclick="checkOption(this,'q1_2','5n','5n')">5n</button>
+      <button class="option-btn" onclick="checkOption(this,'q1_2','n − 5','5n')">n − 5</button>
+      <button class="option-btn" onclick="checkOption(this,'q1_2','n : 5','5n')">n : 5</button>
+    </div>
+    <div class="feedback" id="fb_q1_2"></div>
+  </div>
+
+  <div class="quiz-card" id="q1_3">
+    <div class="quiz-number">Zadanie 3</div>
+    <div class="quiz-question">Jak zapiszesz: „liczba <em>a</em> <span class="highlight">zmniejszona o</span> 4"?</div>
+    <div class="quiz-options">
+      <button class="option-btn" onclick="checkOption(this,'q1_3','a + 4','a − 4')">a + 4</button>
+      <button class="option-btn" onclick="checkOption(this,'q1_3','4 − a','a − 4')">4 − a</button>
+      <button class="option-btn" onclick="checkOption(this,'q1_3','a − 4','a − 4')">a − 4</button>
+      <button class="option-btn" onclick="checkOption(this,'q1_3','4a','a − 4')">4a</button>
+    </div>
+    <div class="feedback" id="fb_q1_3"></div>
+  </div>
+
+  <div class="quiz-card" id="q1_4">
+    <div class="quiz-number">Zadanie 4</div>
+    <div class="quiz-question">Zapisz algebraicznie: „<span class="highlight">trzy razy więcej</span> niż <em>k</em>, powiększone o 1"</div>
+    <div class="quiz-options">
+      <button class="option-btn" onclick="checkOption(this,'q1_4','3 + k + 1','3k + 1')">3 + k + 1</button>
+      <button class="option-btn" onclick="checkOption(this,'q1_4','3k − 1','3k + 1')">3k − 1</button>
+      <button class="option-btn" onclick="checkOption(this,'q1_4','3k + 1','3k + 1')">3k + 1</button>
+      <button class="option-btn" onclick="checkOption(this,'q1_4','k + 3 + 1','3k + 1')">k + 3 + 1</button>
+    </div>
+    <div class="feedback" id="fb_q1_4"></div>
+  </div>
+
+  <div class="quiz-card" id="q1_5">
+    <div class="quiz-number">Zadanie 5</div>
+    <div class="quiz-question">Jak zapiszesz: „<span class="highlight">iloraz</span> liczby <em>m</em> i liczby 3"?</div>
+    <div class="quiz-options">
+      <button class="option-btn" onclick="checkOption(this,'q1_5','3m','m : 3')">3m</button>
+      <button class="option-btn" onclick="checkOption(this,'q1_5','m − 3','m : 3')">m − 3</button>
+      <button class="option-btn" onclick="checkOption(this,'q1_5','m : 3','m : 3')">m : 3</button>
+      <button class="option-btn" onclick="checkOption(this,'q1_5','3 : m','m : 3')">3 : m</button>
+    </div>
+    <div class="feedback" id="fb_q1_5"></div>
+  </div>
+
+  <div class="quiz-card" id="q1_6">
+    <div class="quiz-number">Zadanie 6</div>
+    <div class="quiz-question">Bilet kosztuje <em>b</em> złotych. Kupuję <span class="highlight">4 bilety</span> i dostaję <span class="highlight">zniżkę 5 zł</span>. Ile płacę?</div>
+    <div class="quiz-options">
+      <button class="option-btn" onclick="checkOption(this,'q1_6','4 + b − 5','4b − 5')">4 + b − 5</button>
+      <button class="option-btn" onclick="checkOption(this,'q1_6','4b + 5','4b − 5')">4b + 5</button>
+      <button class="option-btn" onclick="checkOption(this,'q1_6','4b − 5','4b − 5')">4b − 5</button>
+      <button class="option-btn" onclick="checkOption(this,'q1_6','b − 5 · 4','4b − 5')">b − 5 · 4</button>
+    </div>
+    <div class="feedback" id="fb_q1_6"></div>
+  </div>
+
+  <button class="reset-btn" onclick="resetQuiz('quiz1',6,'score1')">🔄 Zacznij od nowa</button>
+</div>
+
+<!-- QUIZ 2: Obliczanie -->
+<div id="quiz2" class="section">
+  <div class="score-bar">
+    <span class="score-label">🔢 Obliczanie wartości</span>
+    <span class="score-val" id="score2">0 / 5</span>
+  </div>
+
+  <div class="quiz-card" id="q2_1">
+    <div class="quiz-number">Zadanie 1</div>
+    <div class="quiz-question">Oblicz wartość wyrażenia <span class="formula">3a + 2</span> dla <span class="highlight">a = 4</span></div>
+    <div class="input-wrap">
+      <input class="quiz-input" id="in_q2_1" type="number" placeholder="Twoja odpowiedź...">
+      <button class="check-btn" onclick="checkInput('q2_1',14,'score2',5)">Sprawdź</button>
+    </div>
+    <div class="feedback" id="fb_q2_1"></div>
+  </div>
+
+  <div class="quiz-card" id="q2_2">
+    <div class="quiz-number">Zadanie 2</div>
+    <div class="quiz-question">Oblicz wartość wyrażenia <span class="formula">2x − y</span> dla <span class="highlight">x = 5, y = 3</span></div>
+    <div class="input-wrap">
+      <input class="quiz-input" id="in_q2_2" type="number" placeholder="Twoja odpowiedź...">
+      <button class="check-btn" onclick="checkInput('q2_2',7,'score2',5)">Sprawdź</button>
+    </div>
+    <div class="feedback" id="fb_q2_2"></div>
+  </div>
+
+  <div class="quiz-card" id="q2_3">
+    <div class="quiz-number">Zadanie 3</div>
+    <div class="quiz-question">Oblicz wartość wyrażenia <span class="formula">4(n + 2)</span> dla <span class="highlight">n = 3</span></div>
+    <div class="input-wrap">
+      <input class="quiz-input" id="in_q2_3" type="number" placeholder="Twoja odpowiedź...">
+      <button class="check-btn" onclick="checkInput('q2_3',20,'score2',5)">Sprawdź</button>
+    </div>
+    <div class="feedback" id="fb_q2_3"></div>
+  </div>
+
+  <div class="quiz-card" id="q2_4">
+    <div class="quiz-number">Zadanie 4</div>
+    <div class="quiz-question">Oblicz wartość wyrażenia <span class="formula">a² + 3a</span> dla <span class="highlight">a = 2</span></div>
+    <div class="input-wrap">
+      <input class="quiz-input" id="in_q2_4" type="number" placeholder="Twoja odpowiedź...">
+      <button class="check-btn" onclick="checkInput('q2_4',10,'score2',5)">Sprawdź</button>
+    </div>
+    <div class="feedback" id="fb_q2_4"></div>
+  </div>
+
+  <div class="quiz-card" id="q2_5">
+    <div class="quiz-number">Zadanie 5</div>
+    <div class="quiz-question">Oblicz wartość wyrażenia <span class="formula">5m : 2 + 3</span> dla <span class="highlight">m = 4</span></div>
+    <div class="input-wrap">
+      <input class="quiz-input" id="in_q2_5" type="number" placeholder="Twoja odpowiedź...">
+      <button class="check-btn" onclick="checkInput('q2_5',13,'score2',5)">Sprawdź</button>
+    </div>
+    <div class="feedback" id="fb_q2_5"></div>
+  </div>
+
+  <button class="reset-btn" onclick="resetQuiz('quiz2',5,'score2')">🔄 Zacznij od nowa</button>
+</div>
+
+<!-- QUIZ 3: Upraszczanie -->
+<div id="quiz3" class="section">
+  <div class="score-bar">
+    <span class="score-label">✨ Upraszczanie wyrażeń</span>
+    <span class="score-val" id="score3">0 / 6</span>
+  </div>
+
+  <div class="quiz-card" id="q3_1">
+    <div class="quiz-number">Zadanie 1</div>
+    <div class="quiz-question">Uprość wyrażenie: <span class="formula">3a + 5a</span></div>
+    <div class="quiz-options">
+      <button class="option-btn" onclick="checkOption(this,'q3_1','8a','8a')">8a</button>
+      <button class="option-btn" onclick="checkOption(this,'q3_1','15a','8a')">15a</button>
+      <button class="option-btn" onclick="checkOption(this,'q3_1','8','8a')">8</button>
+      <button class="option-btn" onclick="checkOption(this,'q3_1','35a','8a')">35a</button>
+    </div>
+    <div class="feedback" id="fb_q3_1"></div>
+  </div>
+
+  <div class="quiz-card" id="q3_2">
+    <div class="quiz-number">Zadanie 2</div>
+    <div class="quiz-question">Uprość wyrażenie: <span class="formula">4x + 3 + 2x − 1</span></div>
+    <div class="quiz-options">
+      <button class="option-btn" onclick="checkOption(this,'q3_2','6x + 4','6x + 2')">6x + 4</button>
+      <button class="option-btn" onclick="checkOption(this,'q3_2','6x + 2','6x + 2')">6x + 2</button>
+      <button class="option-btn" onclick="checkOption(this,'q3_2','4x + 2','6x + 2')">4x + 2</button>
+      <button class="option-btn" onclick="checkOption(this,'q3_2','6x − 2','6x + 2')">6x − 2</button>
+    </div>
+    <div class="feedback" id="fb_q3_2"></div>
+  </div>
+
+  <div class="quiz-card" id="q3_3">
+    <div class="quiz-number">Zadanie 3</div>
+    <div class="quiz-question">Uprość wyrażenie: <span class="formula">5a + 3b + 2a − b</span></div>
+    <div class="quiz-options">
+      <button class="option-btn" onclick="checkOption(this,'q3_3','7a + 2b','7a + 2b')">7a + 2b</button>
+      <button class="option-btn" onclick="checkOption(this,'q3_3','7a + 4b','7a + 2b')">7a + 4b</button>
+      <button class="option-btn" onclick="checkOption(this,'q3_3','10ab','7a + 2b')">10ab</button>
+      <button class="option-btn" onclick="checkOption(this,'q3_3','7a − 2b','7a + 2b')">7a − 2b</button>
+    </div>
+    <div class="feedback" id="fb_q3_3"></div>
+  </div>
+
+  <div class="quiz-card" id="q3_4">
+    <div class="quiz-number">Zadanie 4</div>
+    <div class="quiz-question">Które wyrażenie jest uproszczoną postacią <span class="formula">9n − 4n + 6</span>?</div>
+    <div class="quiz-options">
+      <button class="option-btn" onclick="checkOption(this,'q3_4','5n + 6','5n + 6')">5n + 6</button>
+      <button class="option-btn" onclick="checkOption(this,'q3_4','13n + 6','5n + 6')">13n + 6</button>
+      <button class="option-btn" onclick="checkOption(this,'q3_4','5n − 6','5n + 6')">5n − 6</button>
+      <button class="option-btn" onclick="checkOption(this,'q3_4','9n + 2','5n + 6')">9n + 2</button>
+    </div>
+    <div class="feedback" id="fb_q3_4"></div>
+  </div>
+
+  <div class="quiz-card" id="q3_5">
+    <div class="quiz-number">Zadanie 5</div>
+    <div class="quiz-question">Uprość: <span class="formula">2a + 3b + a − 2b + 4</span></div>
+    <div class="quiz-options">
+      <button class="option-btn" onclick="checkOption(this,'q3_5','3a + b + 4','3a + b + 4')">3a + b + 4</button>
+      <button class="option-btn" onclick="checkOption(this,'q3_5','3a + 5b + 4','3a + b + 4')">3a + 5b + 4</button>
+      <button class="option-btn" onclick="checkOption(this,'q3_5','2a + b + 4','3a + b + 4')">2a + b + 4</button>
+      <button class="option-btn" onclick="checkOption(this,'q3_5','3a − b + 4','3a + b + 4')">3a − b + 4</button>
+    </div>
+    <div class="feedback" id="fb_q3_5"></div>
+  </div>
+
+  <div class="quiz-card" id="q3_6">
+    <div class="quiz-number">Zadanie 6 ⭐</div>
+    <div class="quiz-question">Czy wyrażenie <span class="formula">3a + 2b</span> można jeszcze uprościć?</div>
+    <div class="quiz-options">
+      <button class="option-btn" onclick="checkOption(this,'q3_6','Tak – wynik to 5ab','Nie – wyrazy są różne')">Tak – wynik to 5ab</button>
+      <button class="option-btn" onclick="checkOption(this,'q3_6','Tak – wynik to 5a','Nie – wyrazy są różne')">Tak – wynik to 5a</button>
+      <button class="option-btn" onclick="checkOption(this,'q3_6','Nie – wyrazy są różne','Nie – wyrazy są różne')">Nie – wyrazy są różne (a i b to różne litery)</button>
+      <button class="option-btn" onclick="checkOption(this,'q3_6','Tak – wynik to 6ab','Nie – wyrazy są różne')">Tak – wynik to 6ab</button>
+    </div>
+    <div class="feedback" id="fb_q3_6"></div>
+  </div>
+
+  <button class="reset-btn" onclick="resetQuiz('quiz3',6,'score3')">🔄 Zacznij od nowa</button>
+</div>
+
+<script>
+  const scores = { score1: 0, score2: 0, score3: 0 };
+  const answered = {};
+
+  function showTab(id) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    event.target.classList.add('active');
+  }
+
+  function checkOption(btn, cardId, chosen, correct) {
+    if (answered[cardId]) return;
+    answered[cardId] = true;
+    const card = document.getElementById(cardId);
+    const fb = document.getElementById('fb_' + cardId);
+    const btns = card.querySelectorAll('.option-btn');
+    btns.forEach(b => b.disabled = true);
+
+    if (chosen === correct) {
+      btn.classList.add('selected-correct');
+      card.classList.add('correct');
+      fb.textContent = '✅ Brawo! Poprawna odpowiedź!';
+      fb.className = 'feedback correct';
+      // find score id
+      const scoreId = findScoreId(cardId);
+      scores[scoreId]++;
+      updateScore(scoreId, getMax(scoreId));
+    } else {
+      btn.classList.add('selected-wrong');
+      card.classList.add('wrong');
+      fb.textContent = '❌ Nie tym razem. Poprawna odpowiedź: ' + correct;
+      fb.className = 'feedback wrong';
+      // show correct
+      btns.forEach(b => {
+        if (b.textContent.trim() === correct || b.textContent.trim().startsWith(correct)) {
+          b.classList.add('show-correct');
+        }
+      });
+    }
+  }
+
+  function checkInput(cardId, correct, scoreId, max) {
+    if (answered[cardId]) return;
+    const input = document.getElementById('in_' + cardId);
+    const val = parseFloat(input.value);
+    const fb = document.getElementById('fb_' + cardId);
+    const btn = input.nextElementSibling;
+    answered[cardId] = true;
+    btn.disabled = true;
+    input.disabled = true;
+
+    if (val === correct) {
+      input.classList.add('correct');
+      fb.textContent = '✅ Brawo! Poprawna odpowiedź: ' + correct;
+      fb.className = 'feedback correct';
+      scores[scoreId]++;
+      updateScore(scoreId, max);
+    } else {
+      input.classList.add('wrong');
+      fb.textContent = '❌ Błąd. Poprawna odpowiedź: ' + correct;
+      fb.className = 'feedback wrong';
+      document.getElementById(cardId).classList.add('wrong');
+    }
+  }
+
+  function findScoreId(cardId) {
+    if (cardId.startsWith('q1')) return 'score1';
+    if (cardId.startsWith('q2')) return 'score2';
+    return 'score3';
+  }
+
+  function getMax(scoreId) {
+    if (scoreId === 'score1') return 6;
+    if (scoreId === 'score2') return 5;
+    return 6;
+  }
+
+  function updateScore(scoreId, max) {
+    document.getElementById(scoreId).textContent = scores[scoreId] + ' / ' + max;
+  }
+
+  function resetQuiz(sectionId, max, scoreId) {
+    const section = document.getElementById(sectionId);
+    const cards = section.querySelectorAll('.quiz-card');
+    cards.forEach(card => {
+      card.classList.remove('correct', 'wrong');
+      card.querySelectorAll('.option-btn').forEach(b => {
+        b.disabled = false;
+        b.classList.remove('selected-correct', 'selected-wrong', 'show-correct');
+      });
+      card.querySelectorAll('.quiz-input').forEach(i => {
+        i.value = '';
+        i.disabled = false;
+        i.classList.remove('correct', 'wrong');
+      });
+      card.querySelectorAll('.check-btn').forEach(b => b.disabled = false);
+      const fb = card.querySelector('.feedback');
+      if (fb) { fb.className = 'feedback'; fb.textContent = ''; }
+      delete answered[card.id];
+    });
+    scores[scoreId] = 0;
+    updateScore(scoreId, max);
+  }
+</script>
+</body>
+</html>
