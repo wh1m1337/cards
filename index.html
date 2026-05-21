@@ -1,812 +1,503 @@
 <!DOCTYPE html>
-<html lang="pl">
+<html lang="uk">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Wyrażenia Algebraiczne – Trener Varvarы</title>
+<title>English Quiz · Варвара</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Nunito+Sans:wght@400;600&display=swap" rel="stylesheet">
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Space+Mono:wght@400;700&display=swap');
-
   :root {
-    --bg: #0f0f1a;
-    --card: #1a1a2e;
-    --card2: #16213e;
-    --accent: #e94560;
-    --accent2: #0f3460;
-    --gold: #f5a623;
-    --green: #2ecc71;
-    --blue: #3498db;
-    --purple: #9b59b6;
-    --text: #eaeaea;
-    --muted: #888;
-    --border: #2a2a4a;
+    --bg: #f0f4ff;
+    --card: #ffffff;
+    --border: #e2e8f4;
+    --text: #1a1f36;
+    --muted: #6b7494;
+    --blue-bg: #dbeafe;
+    --blue: #2563eb;
+    --blue-dark: #1d4ed8;
+    --green-bg: #dcfce7;
+    --green: #16a34a;
+    --green-dark: #15803d;
+    --red-bg: #fee2e2;
+    --red: #dc2626;
+    --amber-bg: #fef9c3;
+    --amber: #ca8a04;
+    --radius: 14px;
+    --radius-sm: 9px;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
 
   body {
+    font-family: 'Nunito Sans', sans-serif;
     background: var(--bg);
     color: var(--text);
-    font-family: 'Nunito', sans-serif;
     min-height: 100vh;
-    padding: 0 0 60px;
+    background-image: radial-gradient(circle at 20% 20%, #c7d7ff 0%, transparent 50%),
+                      radial-gradient(circle at 80% 80%, #d4f0e8 0%, transparent 50%);
   }
 
-  /* HEADER */
-  .header {
-    background: linear-gradient(135deg, #e94560 0%, #0f3460 100%);
-    padding: 28px 20px 22px;
+  .page {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 24px 16px 60px;
+  }
+
+  /* TOP HEADER */
+  .top-header {
     text-align: center;
-    position: relative;
-    overflow: hidden;
+    margin-bottom: 28px;
   }
-  .header::before {
-    content: '';
-    position: absolute; inset: 0;
-    background: repeating-linear-gradient(45deg, transparent, transparent 20px, rgba(255,255,255,.03) 20px, rgba(255,255,255,.03) 40px);
-  }
-  .header h1 {
-    font-size: 1.6rem;
-    font-weight: 900;
-    letter-spacing: -0.5px;
-    position: relative;
-  }
-  .header p {
-    font-size: 0.85rem;
-    opacity: .8;
-    margin-top: 4px;
-    position: relative;
-  }
-
-  /* SCORE BAR */
-  .scorebar {
-    display: flex;
-    justify-content: center;
-    gap: 12px;
-    padding: 14px 16px;
-    background: var(--card2);
-    border-bottom: 1px solid var(--border);
-    flex-wrap: wrap;
-  }
-  .score-chip {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 20px;
-    padding: 5px 14px;
-    font-size: 0.78rem;
+  .top-header .badge {
+    display: inline-block;
+    background: var(--blue);
+    color: white;
+    font-family: 'Nunito', sans-serif;
     font-weight: 700;
-    display: flex;
-    align-items: center;
-    gap: 6px;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 5px 14px;
+    border-radius: 99px;
+    margin-bottom: 12px;
   }
-  .score-chip .num { color: var(--gold); font-family: 'Space Mono', monospace; font-size: 1rem; }
+  .top-header h1 {
+    font-family: 'Nunito', sans-serif;
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--text);
+    line-height: 1.2;
+    margin-bottom: 6px;
+  }
+  .top-header p {
+    font-size: 14px;
+    color: var(--muted);
+  }
 
   /* TABS */
   .tabs {
     display: flex;
-    overflow-x: auto;
-    background: var(--card2);
-    border-bottom: 2px solid var(--border);
-    scrollbar-width: none;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+    background: var(--card);
+    padding: 6px;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
   }
-  .tabs::-webkit-scrollbar { display: none; }
   .tab {
-    flex: none;
-    padding: 12px 18px;
-    font-size: 0.78rem;
-    font-weight: 800;
-    color: var(--muted);
-    cursor: pointer;
-    border-bottom: 3px solid transparent;
-    transition: all .2s;
-    white-space: nowrap;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-  }
-  .tab.active { color: var(--accent); border-bottom-color: var(--accent); }
-
-  /* SECTION */
-  .section { display: none; padding: 16px; }
-  .section.active { display: block; }
-
-  /* THEORY CARD */
-  .theory-block {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 14px;
-    padding: 18px;
-    margin-bottom: 14px;
-  }
-  .theory-block h3 {
-    font-size: 0.9rem;
-    font-weight: 900;
-    color: var(--gold);
-    margin-bottom: 10px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .theory-block p { font-size: 0.85rem; line-height: 1.6; color: #ccc; margin-bottom: 8px; }
-  .theory-block .example {
-    background: var(--accent2);
-    border-left: 3px solid var(--blue);
-    border-radius: 8px;
-    padding: 10px 14px;
-    font-family: 'Space Mono', monospace;
-    font-size: 0.8rem;
-    margin-top: 8px;
-    line-height: 1.8;
-  }
-  .theory-block .tip {
-    background: rgba(245,166,35,.1);
-    border: 1px solid rgba(245,166,35,.3);
-    border-radius: 8px;
+    flex: 1;
+    min-width: 120px;
     padding: 8px 12px;
-    font-size: 0.78rem;
-    color: var(--gold);
-    margin-top: 10px;
-  }
-
-  /* QUIZ CARD */
-  .quiz-card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 14px;
-    padding: 18px;
-    margin-bottom: 14px;
-    transition: border-color .3s;
-  }
-  .quiz-card.correct { border-color: var(--green); }
-  .quiz-card.wrong { border-color: var(--accent); }
-
-  .quiz-num {
-    font-size: 0.65rem;
-    font-weight: 900;
-    color: var(--muted);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-bottom: 8px;
-  }
-  .quiz-q {
-    font-size: 0.92rem;
-    font-weight: 700;
-    line-height: 1.5;
-    margin-bottom: 14px;
-    color: #f0f0f0;
-  }
-  .quiz-q .math {
-    font-family: 'Space Mono', monospace;
-    color: var(--blue);
-    background: rgba(52,152,219,.1);
-    padding: 1px 5px;
-    border-radius: 4px;
-  }
-
-  /* OPTIONS */
-  .options { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-  .opt {
-    background: var(--card2);
-    border: 2px solid var(--border);
-    border-radius: 10px;
-    padding: 10px 12px;
-    font-size: 0.82rem;
+    border-radius: var(--radius-sm);
+    border: none;
+    font-family: 'Nunito', sans-serif;
+    font-size: 13px;
     font-weight: 700;
     cursor: pointer;
-    transition: all .2s;
-    font-family: 'Space Mono', monospace;
+    background: transparent;
+    color: var(--muted);
+    transition: all 0.18s;
     text-align: center;
   }
-  .opt:hover { border-color: var(--blue); background: rgba(52,152,219,.1); }
-  .opt.selected-correct { border-color: var(--green); background: rgba(46,204,113,.15); color: var(--green); }
-  .opt.selected-wrong { border-color: var(--accent); background: rgba(233,69,96,.15); color: var(--accent); }
-  .opt.reveal-correct { border-color: var(--green); background: rgba(46,204,113,.15); color: var(--green); }
-  .opt.disabled { pointer-events: none; opacity: .5; }
+  .tab:hover { background: var(--bg); color: var(--text); }
+  .tab.active { background: var(--blue); color: white; }
 
-  /* TEXT INPUT */
-  .input-row { display: flex; gap: 8px; }
-  .quiz-input {
-    flex: 1;
-    background: var(--card2);
-    border: 2px solid var(--border);
-    border-radius: 10px;
-    padding: 10px 14px;
-    color: var(--text);
-    font-family: 'Space Mono', monospace;
-    font-size: 0.88rem;
-    outline: none;
-    transition: border-color .2s;
+  /* CARD */
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px;
+    margin-bottom: 16px;
+    animation: fadeUp 0.25s ease;
   }
-  .quiz-input:focus { border-color: var(--blue); }
-  .quiz-input.correct { border-color: var(--green); }
-  .quiz-input.wrong { border-color: var(--accent); }
-  .check-btn {
-    background: var(--accent);
-    color: white;
-    border: none;
-    border-radius: 10px;
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* THEORY */
+  .theory-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  .theory-box {
+    padding: 14px;
+    border-radius: var(--radius-sm);
+    border: 1.5px solid;
+  }
+  .theory-box.blue { background: var(--blue-bg); border-color: #93c5fd; }
+  .theory-box.green { background: var(--green-bg); border-color: #86efac; }
+  .theory-box h3 {
+    font-family: 'Nunito', sans-serif;
+    font-size: 13px;
+    font-weight: 800;
+    margin-bottom: 8px;
+  }
+  .theory-box.blue h3 { color: var(--blue-dark); }
+  .theory-box.green h3 { color: var(--green-dark); }
+  .theory-box ul { list-style: none; font-size: 13px; line-height: 1.9; }
+  .theory-box.blue ul { color: #1e40af; }
+  .theory-box.green ul { color: #166534; }
+  .theory-box ul li::before { content: "→ "; opacity: 0.5; }
+
+  .example-strip {
+    background: #f8faff;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 12px 16px;
+    font-size: 14px;
+    line-height: 2;
+  }
+  .ex-pp { color: var(--blue-dark); font-style: italic; }
+  .ex-ps { color: var(--green-dark); font-style: italic; }
+
+  .since-for-card {
+    background: var(--amber-bg);
+    border: 1.5px solid #fde047;
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    margin-top: 16px;
+  }
+  .sf-title {
+    background: #fef08a;
     padding: 10px 16px;
-    font-weight: 900;
-    font-size: 0.82rem;
-    cursor: pointer;
-    transition: opacity .2s;
+    font-family: 'Nunito', sans-serif;
+    font-size: 13px;
+    font-weight: 800;
+    color: #713f12;
+    border-bottom: 1px solid #fde047;
   }
-  .check-btn:hover { opacity: .85; }
-
-  /* FEEDBACK */
-  .feedback {
-    margin-top: 10px;
-    font-size: 0.8rem;
-    font-weight: 700;
-    padding: 8px 12px;
-    border-radius: 8px;
-    display: none;
-  }
-  .feedback.correct { display: block; background: rgba(46,204,113,.15); color: var(--green); }
-  .feedback.wrong { display: block; background: rgba(233,69,96,.15); color: #ff6b84; }
-
-  /* STEP HINT */
-  .step-hint {
-    margin-top: 8px;
-    font-size: 0.75rem;
-    color: var(--muted);
-    font-style: italic;
-  }
-
-  /* SECTION TITLE */
-  .section-title {
-    font-size: 0.72rem;
-    font-weight: 900;
-    color: var(--accent);
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    margin: 18px 0 10px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .section-title::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: var(--border);
-  }
+  .sf-body { display: grid; grid-template-columns: 1fr 1fr; }
+  .sf-col { padding: 14px 16px; font-size: 13px; line-height: 2; }
+  .sf-col:first-child { border-right: 1px solid #fde047; }
+  .sf-col strong { display: block; font-weight: 800; margin-bottom: 4px; font-size: 14px; }
+  .sf-col:first-child strong { color: #dc2626; }
+  .sf-col:last-child strong { color: #1d4ed8; }
+  .sf-col span { display: block; color: #78350f; }
 
   /* PROGRESS */
-  .progress-bar {
-    height: 3px;
-    background: var(--border);
-    border-radius: 2px;
-    margin-bottom: 16px;
-    overflow: hidden;
+  .progress-wrap { margin-bottom: 14px; }
+  .progress-bar { height: 6px; background: var(--border); border-radius: 99px; overflow: hidden; }
+  .progress-fill { height: 100%; background: linear-gradient(90deg, var(--blue), #60a5fa); border-radius: 99px; transition: width 0.4s ease; }
+  .score-row { display: flex; gap: 16px; margin-top: 8px; font-size: 13px; color: var(--muted); }
+  .score-row b { color: var(--text); }
+
+  /* QUESTION CARD */
+  .q-label { font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; font-weight: 600; }
+  .q-text { font-family: 'Nunito', sans-serif; font-size: 18px; font-weight: 700; color: var(--text); line-height: 1.5; margin-bottom: 6px; }
+  .q-hint { font-size: 13px; color: var(--muted); margin-bottom: 16px; font-style: italic; }
+
+  .opts { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .opt {
+    padding: 11px 14px;
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-sm);
+    font-family: 'Nunito', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    background: var(--card);
+    color: var(--text);
+    text-align: left;
+    transition: all 0.15s;
   }
-  .progress-fill {
-    height: 100%;
-    background: linear-gradient(90deg, var(--accent), var(--gold));
-    border-radius: 2px;
-    transition: width .4s;
+  .opt:hover:not(:disabled) { border-color: var(--blue); background: var(--blue-bg); color: var(--blue-dark); }
+  .opt.highlight { background: var(--green-bg); border-color: var(--green); color: var(--green-dark); }
+  .opt.wrong { background: var(--red-bg); border-color: var(--red); color: #991b1b; }
+
+  .feedback {
+    margin-top: 14px;
+    padding: 12px 16px;
+    border-radius: var(--radius-sm);
+    font-size: 14px;
+    line-height: 1.7;
+    animation: fadeUp 0.2s ease;
+  }
+  .feedback.ok { background: var(--green-bg); color: #14532d; border: 1px solid #86efac; }
+  .feedback.no { background: var(--red-bg); color: #7f1d1d; border: 1px solid #fca5a5; }
+  .rule-box {
+    margin-top: 8px;
+    background: white;
+    border-radius: 8px;
+    padding: 10px 12px;
+    font-size: 13px;
+    line-height: 1.7;
+    color: #1e3a8a;
+    border: 1px solid #bfdbfe;
   }
 
-  /* BADGE */
-  .badge {
-    display: inline-block;
-    background: var(--accent2);
-    color: var(--blue);
-    font-size: 0.65rem;
-    font-weight: 900;
-    padding: 2px 8px;
-    border-radius: 20px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    margin-left: 6px;
+  .nav-row { display: flex; justify-content: flex-end; margin-top: 14px; }
+  .btn {
+    padding: 10px 24px;
+    border-radius: var(--radius-sm);
+    border: none;
+    font-family: 'Nunito', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.15s;
   }
-  .badge.hard { background: rgba(233,69,96,.2); color: var(--accent); }
+  .btn-primary { background: var(--blue); color: white; }
+  .btn-primary:hover { background: var(--blue-dark); transform: translateY(-1px); }
+  .btn-sec { background: var(--card); color: var(--text); border: 1.5px solid var(--border); }
+  .btn-sec:hover { background: var(--bg); }
+
+  /* RESULT */
+  .result { text-align: center; padding: 10px 0 16px; }
+  .result .emoji { font-size: 48px; margin-bottom: 8px; }
+  .result .big-score { font-family: 'Nunito', sans-serif; font-size: 52px; font-weight: 800; color: var(--blue); line-height: 1; margin: 10px 0; }
+  .result .msg { font-size: 16px; color: var(--muted); margin-bottom: 20px; }
+  .result-btns { display: flex; gap: 8px; justify-content: center; }
+
+  /* MISTAKES */
+  .mistakes-section { margin-top: 20px; text-align: left; }
+  .mistakes-title { font-family: 'Nunito', sans-serif; font-size: 15px; font-weight: 800; margin-bottom: 12px; }
+  .mistake-card {
+    background: #fff5f5;
+    border: 1.5px solid #fca5a5;
+    border-radius: var(--radius-sm);
+    padding: 14px 16px;
+    margin-bottom: 10px;
+  }
+  .m-q { font-weight: 700; font-size: 14px; margin-bottom: 4px; color: #7f1d1d; }
+  .m-wrong { font-size: 13px; color: #991b1b; margin-bottom: 4px; }
+  .m-correct { display: inline-block; background: var(--green-bg); color: #14532d; font-size: 13px; font-weight: 700; padding: 3px 10px; border-radius: 6px; margin-bottom: 8px; }
+  .m-rule { font-size: 13px; color: #1e40af; background: var(--blue-bg); padding: 8px 12px; border-radius: 8px; line-height: 1.7; }
+
+  /* MOBILE */
+  @media (max-width: 480px) {
+    .theory-grid { grid-template-columns: 1fr; }
+    .sf-body { grid-template-columns: 1fr; }
+    .sf-col:first-child { border-right: none; border-bottom: 1px solid #fde047; }
+    .opts { grid-template-columns: 1fr; }
+    .tab { font-size: 12px; min-width: 90px; }
+    .top-header h1 { font-size: 22px; }
+    .result .big-score { font-size: 40px; }
+  }
 </style>
 </head>
 <body>
+<div class="page">
 
-<div class="header">
-  <h1>📐 Wyrażenia Algebraiczne</h1>
-  <p>Trener Varvary · klasa 6 · nowa kartkówka</p>
-</div>
-
-<div class="scorebar">
-  <div class="score-chip">📝 Zapisywanie <span class="num" id="sc1">0/0</span></div>
-  <div class="score-chip">🔢 Obliczanie <span class="num" id="sc2">0/0</span></div>
-  <div class="score-chip">✂️ Upraszczanie <span class="num" id="sc3">0/0</span></div>
-</div>
-
-<div class="tabs">
-  <div class="tab active" onclick="showTab(0)">📖 Teoria</div>
-  <div class="tab" onclick="showTab(1)">📝 Zapisywanie</div>
-  <div class="tab" onclick="showTab(2)">🔢 Obliczanie</div>
-  <div class="tab" onclick="showTab(3)">✂️ Upraszczanie</div>
-</div>
-
-<!-- ============ TEORIA ============ -->
-<div class="section active" id="tab0">
-
-  <div class="theory-block">
-    <h3>📝 Zapisywanie wyrażeń</h3>
-    <p>Zamieniamy słowa na symbole matematyczne:</p>
-    <div class="example">
-      „o 6 większa od x"  →  x + 6<br>
-      „o s mniejsza od n"  →  n − s<br>
-      „9 razy mniejsza od y"  →  y : 9  lub  y/9<br>
-      „4 razy większa od (2−x)"  →  4 · (2−x)<br>
-    </div>
-    <div class="tip">⚠️ PUŁAPKA: „4 razy większa od 2−x" = 4·(2−x), NIE 4·2−x! Nawiasy!</div>
+  <div class="top-header">
+    <div class="badge">6th grade · English</div>
+    <h1>Present Perfect &amp;<br>Past Simple</h1>
+    <p>Підготовка до карткóвки · Since / For · Варвара</p>
   </div>
 
-  <div class="theory-block">
-    <h3>✂️ Upraszczanie (zbieranie wyrazów podobnych)</h3>
-    <p>Możemy dodawać/odejmować tylko wyrazy z TĄ SAMĄ literą i potęgą:</p>
-    <div class="example">
-      2x + 4x = 6x  ✓<br>
-      2a − 5a = −3a  ✓<br>
-      3y + y − 2y = 2y  ✓  (pamiętaj: y = 1y)<br>
-      4z + 0,6z = 4,6z  ✓<br>
-      −3x + 2x + 5x = 4x  ✓  (kolejność nie ma znaczenia!)<br>
-    </div>
-    <div class="tip">🔑 Wyrazów z różnymi literami (np. 3x i 2y) NIE łączymy!</div>
-  </div>
-
-  <div class="theory-block">
-    <h3>🔢 Obliczanie wartości wyrażenia</h3>
-    <p>Wstawiamy podane liczby zamiast liter i obliczamy krok po kroku:</p>
-    <div class="example">
-      3x + 4  dla x = −4:<br>
-      = 3·(−4) + 4<br>
-      = −12 + 4<br>
-      = −8  ✓<br><br>
-      −8 − 2y  dla y = 5:<br>
-      = −8 − 2·5<br>
-      = −8 − 10<br>
-      = −18  ✓<br><br>
-      2x + 3y − 6  dla x=−3, y=2:<br>
-      = 2·(−3) + 3·2 − 6<br>
-      = −6 + 6 − 6<br>
-      = −6  ✓<br><br>
-      (1/3)·a·(a−2)  dla a=9:<br>
-      = (1/3)·9·(9−2)<br>
-      = 3·7<br>
-      = 21  ✓
-    </div>
-    <div class="tip">⚠️ Ujemna liczba w nawiasie: 3·(−4) = −12, nie +12!</div>
-  </div>
-
-  <div class="theory-block">
-    <h3>🚫 Najczęstsze błędy Varvarы z poprzedniej kartkówki</h3>
-    <div class="example">
-      ❌  (−1/3)·18 = 6  →  ✓ = −6  (znak!)<br>
-      ❌  2·(−3) + 3·2 − 6 = −6+6−6 = 0  →  ✓ = −6<br>
-      ❌  (1/3)·9·7 = 28  →  ✓ (1/3)·9 = 3, potem 3·7 = 21<br>
-      ❌  4·(2−x) zapisane bez nawiasów
-    </div>
-  </div>
-
-</div>
-
-<!-- ============ ZAPISYWANIE ============ -->
-<div class="section" id="tab1">
-  <div class="progress-bar"><div class="progress-fill" id="prog1" style="width:0%"></div></div>
-
-  <div class="section-title">Wybierz poprawne wyrażenie</div>
-
-  <!-- Q1 -->
-  <div class="quiz-card" id="c1_1">
-    <div class="quiz-num">Zadanie 1 / 8</div>
-    <div class="quiz-q">Liczba o <span class="math">6</span> większa od liczby <span class="math">x</span>:</div>
-    <div class="options">
-      <div class="opt" onclick="chooseOpt(this,'c1_1','A','B')">A. 6x</div>
-      <div class="opt" onclick="chooseOpt(this,'c1_1','B','B')">B. x + 6</div>
-      <div class="opt" onclick="chooseOpt(this,'c1_1','C','B')">C. x − 6</div>
-      <div class="opt" onclick="chooseOpt(this,'c1_1','D','B')">D. 6 : x</div>
-    </div>
-    <div class="feedback" id="fb_c1_1"></div>
-  </div>
-
-  <!-- Q2 -->
-  <div class="quiz-card" id="c1_2">
-    <div class="quiz-num">Zadanie 2 / 8</div>
-    <div class="quiz-q">Liczba o <span class="math">s</span> mniejsza od liczby <span class="math">n</span>:</div>
-    <div class="options">
-      <div class="opt" onclick="chooseOpt(this,'c1_2','A','B')">A. s − n</div>
-      <div class="opt" onclick="chooseOpt(this,'c1_2','B','B')">B. n − s</div>
-      <div class="opt" onclick="chooseOpt(this,'c1_2','C','B')">C. n + s</div>
-      <div class="opt" onclick="chooseOpt(this,'c1_2','D','B')">D. n : s</div>
-    </div>
-    <div class="feedback" id="fb_c1_2"></div>
-  </div>
-
-  <!-- Q3 -->
-  <div class="quiz-card" id="c1_3">
-    <div class="quiz-num">Zadanie 3 / 8</div>
-    <div class="quiz-q">Liczba <span class="math">9</span> razy mniejsza od liczby <span class="math">y</span>:</div>
-    <div class="options">
-      <div class="opt" onclick="chooseOpt(this,'c1_3','A','C')">A. 9y</div>
-      <div class="opt" onclick="chooseOpt(this,'c1_3','B','C')">B. y − 9</div>
-      <div class="opt" onclick="chooseOpt(this,'c1_3','C','C')">C. y : 9</div>
-      <div class="opt" onclick="chooseOpt(this,'c1_3','D','C')">D. 9 : y</div>
-    </div>
-    <div class="feedback" id="fb_c1_3"></div>
-  </div>
-
-  <!-- Q4 TRAP -->
-  <div class="quiz-card" id="c1_4">
-    <div class="quiz-num">Zadanie 4 / 8 <span class="badge hard">⚡ pułapka</span></div>
-    <div class="quiz-q">Liczba <span class="math">4</span> razy większa od liczby <span class="math">2 − x</span>:</div>
-    <div class="options">
-      <div class="opt" onclick="chooseOpt(this,'c1_4','A','B')">A. 4 · 2 − x</div>
-      <div class="opt" onclick="chooseOpt(this,'c1_4','B','B')">B. 4(2 − x)</div>
-      <div class="opt" onclick="chooseOpt(this,'c1_4','C','B')">C. 4 + 2 − x</div>
-      <div class="opt" onclick="chooseOpt(this,'c1_4','D','B')">D. 2 − 4x</div>
-    </div>
-    <div class="feedback" id="fb_c1_4"></div>
-  </div>
-
-  <!-- Q5 -->
-  <div class="quiz-card" id="c1_5">
-    <div class="quiz-num">Zadanie 5 / 8</div>
-    <div class="quiz-q">Liczba o <span class="math">3</span> mniejsza od <span class="math">p</span>:</div>
-    <div class="options">
-      <div class="opt" onclick="chooseOpt(this,'c1_5','A','B')">A. 3 − p</div>
-      <div class="opt" onclick="chooseOpt(this,'c1_5','B','B')">B. p − 3</div>
-      <div class="opt" onclick="chooseOpt(this,'c1_5','C','B')">C. p + 3</div>
-      <div class="opt" onclick="chooseOpt(this,'c1_5','D','B')">D. p : 3</div>
-    </div>
-    <div class="feedback" id="fb_c1_5"></div>
-  </div>
-
-  <!-- Q6 TRAP -->
-  <div class="quiz-card" id="c1_6">
-    <div class="quiz-num">Zadanie 6 / 8 <span class="badge hard">⚡ pułapka</span></div>
-    <div class="quiz-q">Liczba <span class="math">5</span> razy większa od sumy <span class="math">a + b</span>:</div>
-    <div class="options">
-      <div class="opt" onclick="chooseOpt(this,'c1_6','A','C')">A. 5a + b</div>
-      <div class="opt" onclick="chooseOpt(this,'c1_6','B','C')">B. 5a + 5b + 5</div>
-      <div class="opt" onclick="chooseOpt(this,'c1_6','C','C')">C. 5(a + b)</div>
-      <div class="opt" onclick="chooseOpt(this,'c1_6','D','C')">D. a + 5b</div>
-    </div>
-    <div class="feedback" id="fb_c1_6"></div>
-  </div>
-
-  <!-- Q7 -->
-  <div class="quiz-card" id="c1_7">
-    <div class="quiz-num">Zadanie 7 / 8</div>
-    <div class="quiz-q">Zapisz wyrażenie: iloczyn liczby <span class="math">3</span> i liczby <span class="math">n</span>, zmniejszony o <span class="math">7</span>:</div>
-    <div class="options">
-      <div class="opt" onclick="chooseOpt(this,'c1_7','A','A')">A. 3n − 7</div>
-      <div class="opt" onclick="chooseOpt(this,'c1_7','B','A')">B. 3 + n − 7</div>
-      <div class="opt" onclick="chooseOpt(this,'c1_7','C','A')">C. 3(n − 7)</div>
-      <div class="opt" onclick="chooseOpt(this,'c1_7','D','A')">D. 7 − 3n</div>
-    </div>
-    <div class="feedback" id="fb_c1_7"></div>
-  </div>
-
-  <!-- Q8 -->
-  <div class="quiz-card" id="c1_8">
-    <div class="quiz-num">Zadanie 8 / 8</div>
-    <div class="quiz-q">Połowa sumy <span class="math">x</span> i <span class="math">10</span>:</div>
-    <div class="options">
-      <div class="opt" onclick="chooseOpt(this,'c1_8','A','B')">A. x/2 + 10</div>
-      <div class="opt" onclick="chooseOpt(this,'c1_8','B','B')">B. (x + 10)/2</div>
-      <div class="opt" onclick="chooseOpt(this,'c1_8','C','B')">C. 2(x + 10)</div>
-      <div class="opt" onclick="chooseOpt(this,'c1_8','D','B')">D. x + 5</div>
-    </div>
-    <div class="feedback" id="fb_c1_8"></div>
-  </div>
-
-</div>
-
-<!-- ============ OBLICZANIE ============ -->
-<div class="section" id="tab2">
-  <div class="progress-bar"><div class="progress-fill" id="prog2" style="width:0%"></div></div>
-
-  <div class="section-title">Oblicz wartość — wpisz wynik</div>
-
-  <!-- Q1 -->
-  <div class="quiz-card" id="c2_1">
-    <div class="quiz-num">Zadanie 1 / 7</div>
-    <div class="quiz-q"><span class="math">3x + 4</span> dla <span class="math">x = −4</span></div>
-    <div class="step-hint">Krok: 3·(−4) + 4 = ? + 4 = ?</div>
-    <div class="input-row">
-      <input class="quiz-input" id="in2_1" placeholder="wpisz wynik" type="text">
-      <button class="check-btn" onclick="checkInput('in2_1','c2_1','fb2_1',-8,'sc2',7)">✓</button>
-    </div>
-    <div class="feedback" id="fb2_1"></div>
-  </div>
-
-  <!-- Q2 -->
-  <div class="quiz-card" id="c2_2">
-    <div class="quiz-num">Zadanie 2 / 7</div>
-    <div class="quiz-q"><span class="math">−8 − 2y</span> dla <span class="math">y = 5</span></div>
-    <div class="step-hint">Krok: −8 − 2·5 = −8 − ? = ?</div>
-    <div class="input-row">
-      <input class="quiz-input" id="in2_2" placeholder="wpisz wynik" type="text">
-      <button class="check-btn" onclick="checkInput('in2_2','c2_2','fb2_2',-18,'sc2',7)">✓</button>
-    </div>
-    <div class="feedback" id="fb2_2"></div>
-  </div>
-
-  <!-- Q3 TRAP -->
-  <div class="quiz-card" id="c2_3">
-    <div class="quiz-num">Zadanie 3 / 7 <span class="badge hard">⚡ trudne</span></div>
-    <div class="quiz-q"><span class="math">2x + 3y − 6</span> dla <span class="math">x = −3</span>, <span class="math">y = 2</span></div>
-    <div class="step-hint">Krok: 2·(−3) + 3·2 − 6 = −6 + ? − 6 = ?</div>
-    <div class="input-row">
-      <input class="quiz-input" id="in2_3" placeholder="wpisz wynik" type="text">
-      <button class="check-btn" onclick="checkInput('in2_3','c2_3','fb2_3',-6,'sc2',7)">✓</button>
-    </div>
-    <div class="feedback" id="fb2_3"></div>
-  </div>
-
-  <!-- Q4 TRAP -->
-  <div class="quiz-card" id="c2_4">
-    <div class="quiz-num">Zadanie 4 / 7 <span class="badge hard">⚡ trudne</span></div>
-    <div class="quiz-q"><span class="math">(1/3)·a·(a−2)</span> dla <span class="math">a = 9</span></div>
-    <div class="step-hint">Krok: (1/3)·9·(9−2) = 3·? = ?</div>
-    <div class="input-row">
-      <input class="quiz-input" id="in2_4" placeholder="wpisz wynik" type="text">
-      <button class="check-btn" onclick="checkInput('in2_4','c2_4','fb2_4',21,'sc2',7)">✓</button>
-    </div>
-    <div class="feedback" id="fb2_4"></div>
-  </div>
-
-  <!-- Q5 -->
-  <div class="quiz-card" id="c2_5">
-    <div class="quiz-num">Zadanie 5 / 7</div>
-    <div class="quiz-q"><span class="math">5a − 3</span> dla <span class="math">a = −2</span></div>
-    <div class="step-hint">Krok: 5·(−2) − 3 = ? − 3 = ?</div>
-    <div class="input-row">
-      <input class="quiz-input" id="in2_5" placeholder="wpisz wynik" type="text">
-      <button class="check-btn" onclick="checkInput('in2_5','c2_5','fb2_5',-13,'sc2',7)">✓</button>
-    </div>
-    <div class="feedback" id="fb2_5"></div>
-  </div>
-
-  <!-- Q6 -->
-  <div class="quiz-card" id="c2_6">
-    <div class="quiz-num">Zadanie 6 / 7</div>
-    <div class="quiz-q"><span class="math">(−1/3)·18</span></div>
-    <div class="step-hint">Uwaga na znak! (−1/3)·18 = ?</div>
-    <div class="input-row">
-      <input class="quiz-input" id="in2_6" placeholder="wpisz wynik" type="text">
-      <button class="check-btn" onclick="checkInput('in2_6','c2_6','fb2_6',-6,'sc2',7)">✓</button>
-    </div>
-    <div class="feedback" id="fb2_6"></div>
-  </div>
-
-  <!-- Q7 -->
-  <div class="quiz-card" id="c2_7">
-    <div class="quiz-num">Zadanie 7 / 7</div>
-    <div class="quiz-q"><span class="math">4(n − 3)</span> dla <span class="math">n = 5</span></div>
-    <div class="step-hint">Krok: 4·(5−3) = 4·? = ?</div>
-    <div class="input-row">
-      <input class="quiz-input" id="in2_7" placeholder="wpisz wynik" type="text">
-      <button class="check-btn" onclick="checkInput('in2_7','c2_7','fb2_7',8,'sc2',7)">✓</button>
-    </div>
-    <div class="feedback" id="fb2_7"></div>
-  </div>
-
-</div>
-
-<!-- ============ UPRASZCZANIE ============ -->
-<div class="section" id="tab3">
-  <div class="progress-bar"><div class="progress-fill" id="prog3" style="width:0%"></div></div>
-
-  <div class="section-title">Zapisz w prostszej postaci</div>
-
-  <!-- Q1 -->
-  <div class="quiz-card" id="c3_1">
-    <div class="quiz-num">Zadanie 1 / 8</div>
-    <div class="quiz-q">Uprość: <span class="math">2x + 4x</span></div>
-    <div class="options">
-      <div class="opt" onclick="chooseOpt(this,'c3_1','A','A')">A. 6x</div>
-      <div class="opt" onclick="chooseOpt(this,'c3_1','B','A')">B. 8x</div>
-      <div class="opt" onclick="chooseOpt(this,'c3_1','C','A')">C. 6x²</div>
-      <div class="opt" onclick="chooseOpt(this,'c3_1','D','A')">D. 2x·4x</div>
-    </div>
-    <div class="feedback" id="fb_c3_1"></div>
-  </div>
-
-  <!-- Q2 -->
-  <div class="quiz-card" id="c3_2">
-    <div class="quiz-num">Zadanie 2 / 8</div>
-    <div class="quiz-q">Uprość: <span class="math">2a − 5a</span></div>
-    <div class="options">
-      <div class="opt" onclick="chooseOpt(this,'c3_2','A','C')">A. 3a</div>
-      <div class="opt" onclick="chooseOpt(this,'c3_2','B','C')">B. 7a</div>
-      <div class="opt" onclick="chooseOpt(this,'c3_2','C','C')">C. −3a</div>
-      <div class="opt" onclick="chooseOpt(this,'c3_2','D','C')">D. −7a</div>
-    </div>
-    <div class="feedback" id="fb_c3_2"></div>
-  </div>
-
-  <!-- Q3 -->
-  <div class="quiz-card" id="c3_3">
-    <div class="quiz-num">Zadanie 3 / 8</div>
-    <div class="quiz-q">Uprość: <span class="math">3y + y − 2y</span></div>
-    <div class="options">
-      <div class="opt" onclick="chooseOpt(this,'c3_3','A','B')">A. 3y</div>
-      <div class="opt" onclick="chooseOpt(this,'c3_3','B','B')">B. 2y</div>
-      <div class="opt" onclick="chooseOpt(this,'c3_3','C','B')">C. 4y</div>
-      <div class="opt" onclick="chooseOpt(this,'c3_3','D','B')">D. 0</div>
-    </div>
-    <div class="feedback" id="fb_c3_3"></div>
-  </div>
-
-  <!-- Q4 -->
-  <div class="quiz-card" id="c3_4">
-    <div class="quiz-num">Zadanie 4 / 8</div>
-    <div class="quiz-q">Uprość: <span class="math">4z + 0,6z</span></div>
-    <div class="options">
-      <div class="opt" onclick="chooseOpt(this,'c3_4','A','C')">A. 4,6</div>
-      <div class="opt" onclick="chooseOpt(this,'c3_4','B','C')">B. 40,6z</div>
-      <div class="opt" onclick="chooseOpt(this,'c3_4','C','C')">C. 4,6z</div>
-      <div class="opt" onclick="chooseOpt(this,'c3_4','D','C')">D. 4z · 0,6z</div>
-    </div>
-    <div class="feedback" id="fb_c3_4"></div>
-  </div>
-
-  <!-- Q5 TRAP -->
-  <div class="quiz-card" id="c3_5">
-    <div class="quiz-num">Zadanie 5 / 8 <span class="badge hard">⚡ pułapka</span></div>
-    <div class="quiz-q">Uprość: <span class="math">−3x + 2x + 5x</span></div>
-    <div class="options">
-      <div class="opt" onclick="chooseOpt(this,'c3_5','A','B')">A. 10x</div>
-      <div class="opt" onclick="chooseOpt(this,'c3_5','B','B')">B. 4x</div>
-      <div class="opt" onclick="chooseOpt(this,'c3_5','C','B')">C. 0x</div>
-      <div class="opt" onclick="chooseOpt(this,'c3_5','D','B')">D. −4x</div>
-    </div>
-    <div class="feedback" id="fb_c3_5"></div>
-  </div>
-
-  <!-- Q6 TRAP different letters -->
-  <div class="quiz-card" id="c3_6">
-    <div class="quiz-num">Zadanie 6 / 8 <span class="badge hard">⚡ pułapka</span></div>
-    <div class="quiz-q">Uprość: <span class="math">3x + 2y − x</span></div>
-    <div class="options">
-      <div class="opt" onclick="chooseOpt(this,'c3_6','A','C')">A. 4xy</div>
-      <div class="opt" onclick="chooseOpt(this,'c3_6','B','C')">B. 5xy − x</div>
-      <div class="opt" onclick="chooseOpt(this,'c3_6','C','C')">C. 2x + 2y</div>
-      <div class="opt" onclick="chooseOpt(this,'c3_6','D','C')">D. 4x + 2y</div>
-    </div>
-    <div class="feedback" id="fb_c3_6"></div>
-  </div>
-
-  <!-- Q7 -->
-  <div class="quiz-card" id="c3_7">
-    <div class="quiz-num">Zadanie 7 / 8</div>
-    <div class="quiz-q">Uprość: <span class="math">5n − 2n + n</span></div>
-    <div class="options">
-      <div class="opt" onclick="chooseOpt(this,'c3_7','A','B')">A. 3n</div>
-      <div class="opt" onclick="chooseOpt(this,'c3_7','B','B')">B. 4n</div>
-      <div class="opt" onclick="chooseOpt(this,'c3_7','C','B')">C. 8n</div>
-      <div class="opt" onclick="chooseOpt(this,'c3_7','D','B')">D. 6n</div>
-    </div>
-    <div class="feedback" id="fb_c3_7"></div>
-  </div>
-
-  <!-- Q8 -->
-  <div class="quiz-card" id="c3_8">
-    <div class="quiz-num">Zadanie 8 / 8</div>
-    <div class="quiz-q">Uprość: <span class="math">a + 3a − 2a + a</span></div>
-    <div class="options">
-      <div class="opt" onclick="chooseOpt(this,'c3_8','A','C')">A. 5a</div>
-      <div class="opt" onclick="chooseOpt(this,'c3_8','B','C')">B. 6a</div>
-      <div class="opt" onclick="chooseOpt(this,'c3_8','C','C')">C. 3a</div>
-      <div class="opt" onclick="chooseOpt(this,'c3_8','D','C')">D. 7a</div>
-    </div>
-    <div class="feedback" id="fb_c3_8"></div>
-  </div>
+  <div class="tabs" id="tabs"></div>
+  <div id="content"></div>
 
 </div>
 
 <script>
-  // TAB
-  function showTab(i) {
-    document.querySelectorAll('.section').forEach((s,j) => s.classList.toggle('active', i===j));
-    document.querySelectorAll('.tab').forEach((t,j) => t.classList.toggle('active', i===j));
+const THEORY_HTML = `
+<div class="card">
+  <div class="theory-grid">
+    <div class="theory-box blue">
+      <h3>Present Perfect</h3>
+      <ul>
+        <li>Look! результат видно ЗАРАЗ</li>
+        <li>досвід у житті (ever/never)</li>
+        <li>з since / for</li>
+        <li>just, already, yet</li>
+      </ul>
+    </div>
+    <div class="theory-box green">
+      <h3>Past Simple</h3>
+      <ul>
+        <li>конкретний час у минулому</li>
+        <li>yesterday, ago, last week</li>
+        <li>in 2020, on Monday</li>
+        <li>дія закінчилась, час відомий</li>
+      </ul>
+    </div>
+  </div>
+  <div class="example-strip">
+    <div class="ex-pp">Look! I <b>have broken</b> my arm. → рука зламана, бачимо зараз</div>
+    <div class="ex-ps">I <b>broke</b> my arm yesterday. → це сталось вчора (конкретний час)</div>
+  </div>
+  <div class="since-for-card">
+    <div class="sf-title">Since vs For (тільки з Present Perfect)</div>
+    <div class="sf-body">
+      <div class="sf-col">
+        <strong>SINCE = з якого часу</strong>
+        <span>since Monday</span>
+        <span>since 2020</span>
+        <span>since I was a child</span>
+        <span>since last summer</span>
+      </div>
+      <div class="sf-col">
+        <strong>FOR = протягом скількох</strong>
+        <span>for 3 days</span>
+        <span>for two years</span>
+        <span>for a long time</span>
+        <span>for ages</span>
+      </div>
+    </div>
+  </div>
+</div>
+<div style="display:flex;gap:8px;margin-top:4px">
+  <button class="btn btn-primary" onclick="initSet('pp_ps')">Почати тест →</button>
+</div>`;
+
+const SETS = {
+  theory: null,
+  pp_ps: [
+    { q: 'Look! She ___ her key. (lose)', opts: ['lost','has lost','loses','losing'], a: 1, hint: 'Look! = бачимо результат зараз', rule: 'Look! / Oh no! → Present Perfect, бо ми бачимо результат прямо зараз. She has lost = ключ загублений (і ми це бачимо).' },
+    { q: 'I ___ my homework an hour ago. (finish)', opts: ['have finished','finished','finish','had finished'], a: 1, hint: '"an hour ago" = конкретний час у минулому', rule: 'ago, yesterday, last…, in [рік] → Past Simple. Час конкретний → Past Simple. I finished an hour ago.' },
+    { q: '___ you ever ___ sushi? (eat)', opts: ['Did … eat','Have … eaten','Do … eat','Are … eating'], a: 1, hint: '"ever" + досвід у житті', rule: '"Ever" запитує про досвід у житті → Present Perfect. Have you ever eaten sushi?' },
+    { q: 'She ___ in Warsaw since 2019. (live)', opts: ['lived','lives','has lived','was living'], a: 2, hint: '"since" → Present Perfect', rule: 'Since + рік/момент → Present Perfect. She has lived here since 2019 = вона живе тут з 2019 (і досі).' },
+    { q: 'We ___ this film last Friday. (see)', opts: ['have seen','saw','seen','see'], a: 1, hint: '"last Friday" = конкретний час', rule: 'Last Friday / yesterday / in 2020 → Past Simple. We saw the film last Friday.' },
+    { q: 'He has already ___ the email. (send)', opts: ['send','sended','sent','sending'], a: 2, hint: 'have/has + 3-я форма (past participle)', rule: 'Present Perfect = have/has + past participle. Send → sent (неправильне дієслово!).' },
+    { q: 'Look! Tom ___ his leg! (break)', opts: ['broke','has broken','breaks','broken'], a: 1, hint: 'Look! = результат видно зараз', rule: 'Look! → Present Perfect. Tom has broken his leg = нога зламана (бачимо зараз). Порівняй: He broke his leg in 2020 → Past Simple.' },
+    { q: 'I ___ my bike when I was ten. (buy)', opts: ["haven't bought",'bought','have bought','buy'], a: 1, hint: '"when I was ten" = конкретний вік у минулому', rule: '"When I was…" → Past Simple, бо вказано конкретний час у минулому.' },
+  ],
+  since_for: [
+    { q: 'I have known her ___ five years.', opts: ['since','for','ago','in'], a: 1, hint: 'five years = тривалість (скільки?)', rule: 'FOR + тривалість: for five years, for two months, for a long time. Питання: How long?' },
+    { q: 'She has been ill ___ Monday.', opts: ['for','in','since','during'], a: 2, hint: 'Monday = конкретний момент початку', rule: 'SINCE + момент початку: since Monday, since 3 o\'clock, since last year. Питання: Since when?' },
+    { q: 'We haven\'t eaten ___ this morning.', opts: ['for','since','from','ago'], a: 1, hint: '"this morning" = конкретний момент', rule: 'SINCE + конкретний момент (this morning, yesterday, last week). We haven\'t eaten since this morning.' },
+    { q: 'They\'ve been friends ___ ages.', opts: ['since','for','during','from'], a: 1, hint: '"ages" = тривалість (довгий час)', rule: 'FOR + тривалість: for ages, for a long time, for 20 years. "Ages" = дуже довго.' },
+    { q: 'He has worked here ___ he was 20.', opts: ['for','since','in','during'], a: 1, hint: '"he was 20" = момент у минулому', rule: 'SINCE + підрядне речення (since he was young, since she arrived). He has worked here since he was 20.' },
+    { q: 'I haven\'t seen you ___ a long time!', opts: ['since','for','during','from'], a: 1, hint: '"a long time" = тривалість', rule: 'FOR a long time = протягом довгого часу. I haven\'t seen you for a long time!' },
+    { q: 'My parents have been married ___ 1998.', opts: ['for','in','since','during'], a: 2, hint: '1998 = конкретний рік (початок)', rule: 'SINCE + рік/дата. They have been married since 1998 = одружені з 1998 року.' },
+    { q: 'She has studied English ___ three months.', opts: ['since','for','in','from'], a: 1, hint: '"three months" = тривалість', rule: 'FOR + кількість часу: for three months, for a week, for 10 minutes.' },
+  ],
+  mixed: [
+    { q: 'Oops! I ___ the window! (break)', opts: ['broke','have broken','breaking','broken'], a: 1, hint: 'Oops! = бачимо наслідок зараз', rule: 'Oops! / Look! / Oh no! → Present Perfect. I have broken = вікно зламане (і бачимо це).' },
+    { q: 'She ___ her bike last summer. (break)', opts: ['has broken','broken','broke','breaks'], a: 2, hint: '"last summer" = конкретний час', rule: 'Last summer → Past Simple. She broke her bike last summer. Немає зв\'язку з теперішнім.' },
+    { q: 'They haven\'t called ___ two days.', opts: ['since','for','in','ago'], a: 1, hint: 'two days = тривалість', rule: 'FOR + тривалість. They haven\'t called for two days = два дні вже не дзвонять.' },
+    { q: 'I have lived here ___ I was born.', opts: ['for','since','in','during'], a: 1, hint: '"I was born" = момент початку', rule: 'SINCE + момент (since I was born, since she arrived). I have lived here since I was born.' },
+    { q: 'He ___ in London for 5 years, then moved. (live)', opts: ['has lived','lived','lives','is living'], a: 1, hint: 'Дія закінчилась — він вже переїхав', rule: 'Якщо дія закінчилась → Past Simple. He lived in London for 5 years (then moved). Порівняй: He HAS lived here for 5 years (і досі живе).' },
+    { q: '___ you ___ your keys? I can\'t find them! (lose)', opts: ['Did … lose','Have … lost','Do … lose','Are … losing'], a: 1, hint: 'Я шукаю їх ЗАРАЗ — результат важливий', rule: 'Present Perfect коли результат важливий зараз. Have you lost your keys? = де вони (хочу знайти зараз).' },
+    { q: 'I ___ born in Kyiv ___ 2014. (be)', opts: ['was … in','have been … since','was … since','am … in'], a: 0, hint: 'Народження = Past Simple + in + рік', rule: 'I was born → Past Simple (конкретна дія в минулому). З роком народження завжди "in": born in 2014.' },
+    { q: 'How long ___ you ___ English? (study)', opts: ['did … study','have … studied','do … study','are … studying'], a: 1, hint: '"How long" з since/for → Present Perfect', rule: '"How long have you…?" → Present Perfect. Питаємо про тривалість дії, яка ще триває.' },
+  ]
+};
+
+const SET_LABELS = {
+  theory: '📖 Теорія',
+  pp_ps: 'PP vs Past',
+  since_for: 'Since / For',
+  mixed: '🔀 Змішане'
+};
+
+let currentSet = 'theory';
+let qList = [], qi = 0, sel = null, score = 0, mistakes = [];
+
+function shuffle(arr) { return [...arr].sort(() => Math.random() - 0.5); }
+
+function initSet(id) {
+  currentSet = id;
+  if (id !== 'theory') {
+    qList = shuffle(SETS[id]);
+    qi = 0; sel = null; score = 0; mistakes = [];
   }
+  renderTabs();
+  render();
+}
 
-  // SCORES
-  const scores = { sc1:{c:0,t:0}, sc2:{c:0,t:0}, sc3:{c:0,t:0} };
+function renderTabs() {
+  document.getElementById('tabs').innerHTML = Object.keys(SET_LABELS).map(id =>
+    `<button class="tab${id === currentSet ? ' active' : ''}" onclick="initSet('${id}')">${SET_LABELS[id]}</button>`
+  ).join('');
+}
 
-  function updateScore(id) {
-    const s = scores[id];
-    document.getElementById(id).textContent = s.c + '/' + s.t;
-  }
+function render() {
+  const c = document.getElementById('content');
+  if (currentSet === 'theory') { c.innerHTML = THEORY_HTML; return; }
+  if (qi >= qList.length) { renderResult(); return; }
 
-  function updateProgress(progId, done, total) {
-    document.getElementById(progId).style.width = (done/total*100) + '%';
-  }
+  const q = qList[qi];
+  const total = qList.length;
+  const pct = Math.round((qi / total) * 100);
 
-  // MCQ
-  const tab1Done = {}, tab3Done = {};
+  const optsHTML = q.opts.map((o, i) => {
+    let cls = 'opt';
+    if (sel !== null) {
+      if (i === q.a) cls += ' highlight';
+      else if (i === sel && sel !== q.a) cls += ' wrong';
+    }
+    return `<button class="${cls}" onclick="choose(${i})" ${sel !== null ? 'disabled' : ''}>${o}</button>`;
+  }).join('');
 
-  function chooseOpt(el, cardId, chosen, correct) {
-    const isTab1 = cardId.startsWith('c1_');
-    const doneMap = isTab1 ? tab1Done : tab3Done;
-    const scoreId = isTab1 ? 'sc1' : 'sc3';
-    const progId  = isTab1 ? 'prog1' : 'prog3';
-    const total   = 8;
-
-    if (doneMap[cardId]) return;
-    doneMap[cardId] = true;
-
-    const card = document.getElementById(cardId);
-    const opts = card.querySelectorAll('.opt');
-    const fb   = document.getElementById('fb_' + cardId);
-
-    opts.forEach(o => o.classList.add('disabled'));
-
-    scores[scoreId].t++;
-
-    if (chosen === correct) {
-      el.classList.add('selected-correct');
-      fb.textContent = '✅ Świetnie! Poprawna odpowiedź.';
-      fb.className = 'feedback correct';
-      scores[scoreId].c++;
+  let fb = '';
+  if (sel !== null) {
+    if (sel === q.a) {
+      fb = `<div class="feedback ok">✓ Правильно! <div class="rule-box">${q.rule}</div></div>`;
     } else {
-      el.classList.add('selected-wrong');
-      // reveal correct
-      opts.forEach(o => {
-        if (o.textContent.startsWith(correct + '.')) o.classList.add('reveal-correct');
-      });
-      fb.textContent = '❌ Błąd. Poprawna: ' + correct;
-      fb.className = 'feedback wrong';
+      fb = `<div class="feedback no">✗ Правильна відповідь: <strong>${q.opts[q.a]}</strong><div class="rule-box">${q.rule}</div></div>`;
     }
-    card.classList.add(chosen === correct ? 'correct' : 'wrong');
-    updateScore(scoreId);
-    updateProgress(progId, scores[scoreId].t, total);
   }
 
-  // TEXT INPUT
-  const done2 = {};
+  c.innerHTML = `
+    <div class="progress-wrap">
+      <div class="progress-bar"><div class="progress-fill" style="width:${pct}%"></div></div>
+      <div class="score-row">
+        <span>Питання <b>${qi + 1} / ${total}</b></span>
+        <span>Правильно <b style="color:var(--green)">${score}</b></span>
+        <span>Помилки <b style="color:var(--red)">${mistakes.length}</b></span>
+      </div>
+    </div>
+    <div class="card">
+      <div class="q-label">Оберіть правильний варіант</div>
+      <div class="q-text">${q.q}</div>
+      <div class="q-hint">💡 ${q.hint}</div>
+      <div class="opts">${optsHTML}</div>
+      ${fb}
+    </div>
+    <div class="nav-row">${sel !== null ? `<button class="btn btn-primary" onclick="nextQ()">Далі →</button>` : ''}</div>`;
+}
 
-  function checkInput(inputId, cardId, fbId, correct, scoreId, total) {
-    if (done2[cardId]) return;
+function choose(i) {
+  if (sel !== null) return;
+  sel = i;
+  const q = qList[qi];
+  if (i === q.a) score++;
+  else mistakes.push({ q: q.q, wrong: q.opts[i], correct: q.opts[q.a], rule: q.rule });
+  render();
+}
 
-    const input = document.getElementById(inputId);
-    const fb = document.getElementById(fbId);
-    const card = document.getElementById(cardId);
-    const raw = input.value.trim();
+function nextQ() { qi++; sel = null; render(); }
 
-    // extract last number from string (handles "−8 − 10 = −18")
-    const nums = raw.replace(/−/g,'-').match(/-?\d+(\.\d+)?/g);
-    if (!nums) {
-      fb.textContent = '⚠️ Wpisz wynik liczbowy.';
-      fb.className = 'feedback wrong';
-      fb.style.display = 'block';
-      return;
-    }
-    const val = parseFloat(nums[nums.length - 1]);
+function renderResult() {
+  const total = qList.length;
+  const pct = Math.round((score / total) * 100);
+  const emoji = pct >= 80 ? '🎉' : pct >= 60 ? '👍' : '📚';
+  const msg = pct >= 80 ? 'Варвара готова до карткóвки!' : pct >= 60 ? 'Непогано! Повтори помилки ще раз.' : 'Ще раз прочитай теорію і спробуй знову.';
 
-    done2[cardId] = true;
-    scores[scoreId].t++;
+  const mHTML = mistakes.length ? `
+    <div class="mistakes-section">
+      <div class="mistakes-title">Розбір помилок:</div>
+      ${mistakes.map(m => `
+        <div class="mistake-card">
+          <div class="m-q">${m.q}</div>
+          <div class="m-wrong">Ти відповіла: <b>${m.wrong}</b></div>
+          <div class="m-correct">✓ Правильно: ${m.correct}</div>
+          <div class="m-rule">${m.rule}</div>
+        </div>`).join('')}
+    </div>` : '';
 
-    if (Math.abs(val - correct) < 0.01) {
-      input.classList.add('correct');
-      fb.textContent = '✅ Brawo! Wynik: ' + correct;
-      fb.className = 'feedback correct';
-      card.classList.add('correct');
-      scores[scoreId].c++;
-    } else {
-      input.classList.add('wrong');
-      fb.textContent = '❌ Błąd. Poprawna odpowiedź: ' + correct;
-      fb.className = 'feedback wrong';
-      card.classList.add('wrong');
-    }
-    updateScore(scoreId);
-    updateProgress('prog2', scores[scoreId].t, total);
-  }
+  document.getElementById('content').innerHTML = `
+    <div class="card">
+      <div class="result">
+        <div class="emoji">${emoji}</div>
+        <div class="big-score">${score}/${total}</div>
+        <div class="msg">${msg}</div>
+        <div class="result-btns">
+          <button class="btn btn-sec" onclick="initSet('theory')">📖 Теорія</button>
+          <button class="btn btn-primary" onclick="initSet('${currentSet}')">Ще раз ↺</button>
+        </div>
+        ${mHTML}
+      </div>
+    </div>`;
+}
 
-  // Enter key for inputs
-  document.querySelectorAll('.quiz-input').forEach(inp => {
-    inp.addEventListener('keydown', e => {
-      if (e.key === 'Enter') inp.nextElementSibling.click();
-    });
-  });
+initSet('theory');
 </script>
 </body>
 </html>
