@@ -3,415 +3,658 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>English Quiz · Варвара</title>
-<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Nunito+Sans:wght@400;600&display=swap" rel="stylesheet">
+<title>Matematyka · Równania · Варвара</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Nunito+Sans:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --bg: #f0f4ff;
-    --card: #ffffff;
-    --border: #e2e8f4;
-    --text: #1a1f36;
-    --muted: #6b7494;
-    --blue-bg: #dbeafe;
-    --blue: #2563eb;
-    --blue-dark: #1d4ed8;
-    --green-bg: #dcfce7;
-    --green: #16a34a;
-    --green-dark: #15803d;
-    --red-bg: #fee2e2;
-    --red: #dc2626;
-    --amber-bg: #fef9c3;
-    --amber: #ca8a04;
-    --radius: 14px;
-    --radius-sm: 9px;
-  }
+:root {
+  --bg: #f5f0ff;
+  --card: #ffffff;
+  --border: #e4daf8;
+  --text: #1e1535;
+  --muted: #7b6e9e;
+  --purple: #7c3aed;
+  --purple-light: #ede9fe;
+  --purple-dark: #5b21b6;
+  --green: #059669;
+  --green-bg: #d1fae5;
+  --red: #dc2626;
+  --red-bg: #fee2e2;
+  --amber: #d97706;
+  --amber-bg: #fef3c7;
+  --blue: #2563eb;
+  --blue-bg: #dbeafe;
+  --teal: #0891b2;
+  --teal-bg: #cffafe;
+  --radius: 16px;
+  --radius-sm: 10px;
+  --shadow: 0 2px 16px rgba(124,58,237,0.08);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Nunito Sans', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  background-image:
+    radial-gradient(ellipse at 10% 0%, #ddd6fe 0%, transparent 55%),
+    radial-gradient(ellipse at 90% 100%, #c7f2e8 0%, transparent 55%);
+}
+.page { max-width: 660px; margin: 0 auto; padding: 24px 16px 72px; }
 
-  * { box-sizing: border-box; margin: 0; padding: 0; }
+/* HEADER */
+.hero { text-align: center; margin-bottom: 28px; }
+.hero .chip {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: var(--purple); color: white;
+  font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 11px;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 5px 14px; border-radius: 99px; margin-bottom: 14px;
+}
+.hero h1 {
+  font-family: 'Nunito', sans-serif; font-size: 30px; font-weight: 900;
+  color: var(--text); line-height: 1.15; margin-bottom: 6px;
+}
+.hero h1 span { color: var(--purple); }
+.hero p { font-size: 14px; color: var(--muted); }
 
-  body {
-    font-family: 'Nunito Sans', sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    min-height: 100vh;
-    background-image: radial-gradient(circle at 20% 20%, #c7d7ff 0%, transparent 50%),
-                      radial-gradient(circle at 80% 80%, #d4f0e8 0%, transparent 50%);
-  }
+/* TABS */
+.tabs {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 4px; background: var(--card);
+  padding: 5px; border-radius: var(--radius);
+  border: 1px solid var(--border); margin-bottom: 20px;
+  box-shadow: var(--shadow);
+}
+.tab {
+  padding: 9px 6px; border-radius: var(--radius-sm); border: none;
+  font-family: 'Nunito', sans-serif; font-size: 12px; font-weight: 700;
+  cursor: pointer; background: transparent; color: var(--muted);
+  transition: all 0.18s; text-align: center; line-height: 1.3;
+}
+.tab:hover { background: var(--bg); color: var(--text); }
+.tab.active { background: var(--purple); color: white; box-shadow: 0 2px 8px rgba(124,58,237,0.3); }
 
-  .page {
-    max-width: 640px;
-    margin: 0 auto;
-    padding: 24px 16px 60px;
-  }
+/* CARD */
+.card {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 20px; margin-bottom: 14px;
+  box-shadow: var(--shadow); animation: fadeUp 0.22s ease;
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.card-title {
+  font-family: 'Nunito', sans-serif; font-size: 16px; font-weight: 800;
+  color: var(--text); margin-bottom: 14px; display: flex; align-items: center; gap: 8px;
+}
+.card-title .icon { font-size: 18px; }
 
-  /* TOP HEADER */
-  .top-header {
-    text-align: center;
-    margin-bottom: 28px;
-  }
-  .top-header .badge {
-    display: inline-block;
-    background: var(--blue);
-    color: white;
-    font-family: 'Nunito', sans-serif;
-    font-weight: 700;
-    font-size: 11px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    padding: 5px 14px;
-    border-radius: 99px;
-    margin-bottom: 12px;
-  }
-  .top-header h1 {
-    font-family: 'Nunito', sans-serif;
-    font-size: 28px;
-    font-weight: 800;
-    color: var(--text);
-    line-height: 1.2;
-    margin-bottom: 6px;
-  }
-  .top-header p {
-    font-size: 14px;
-    color: var(--muted);
-  }
+/* THEORY */
+.rules-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 14px; }
+.rule-box { padding: 14px; border-radius: var(--radius-sm); border: 1.5px solid; }
+.rule-box.purple { background: var(--purple-light); border-color: #c4b5fd; }
+.rule-box.teal   { background: var(--teal-bg);    border-color: #67e8f9; }
+.rule-box.amber  { background: var(--amber-bg);   border-color: #fcd34d; }
+.rule-box.green  { background: var(--green-bg);   border-color: #6ee7b7; }
+.rule-box h3 {
+  font-family: 'Nunito', sans-serif; font-size: 12px; font-weight: 800;
+  text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 8px;
+}
+.rule-box.purple h3 { color: var(--purple-dark); }
+.rule-box.teal h3   { color: var(--teal); }
+.rule-box.amber h3  { color: var(--amber); }
+.rule-box.green h3  { color: var(--green); }
+.rule-box ul { list-style: none; font-size: 13px; line-height: 1.9; }
+.rule-box.purple ul { color: #4c1d95; }
+.rule-box.teal ul   { color: #164e63; }
+.rule-box.amber ul  { color: #78350f; }
+.rule-box.green ul  { color: #064e3b; }
+.rule-box ul li::before { content: "• "; opacity: 0.5; }
 
-  /* TABS */
-  .tabs {
-    display: flex;
-    gap: 6px;
-    flex-wrap: wrap;
-    margin-bottom: 20px;
-    background: var(--card);
-    padding: 6px;
-    border-radius: var(--radius);
-    border: 1px solid var(--border);
-  }
-  .tab {
-    flex: 1;
-    min-width: 120px;
-    padding: 8px 12px;
-    border-radius: var(--radius-sm);
-    border: none;
-    font-family: 'Nunito', sans-serif;
-    font-size: 13px;
-    font-weight: 700;
-    cursor: pointer;
-    background: transparent;
-    color: var(--muted);
-    transition: all 0.18s;
-    text-align: center;
-  }
-  .tab:hover { background: var(--bg); color: var(--text); }
-  .tab.active { background: var(--blue); color: white; }
+.formula-strip {
+  background: var(--purple-light); border: 1.5px solid #c4b5fd;
+  border-radius: var(--radius-sm); padding: 14px 16px; margin-bottom: 14px;
+  font-size: 14px; line-height: 2.1;
+}
+.formula-strip strong { color: var(--purple-dark); font-weight: 800; }
 
-  /* CARD */
-  .card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 20px;
-    margin-bottom: 16px;
-    animation: fadeUp 0.25s ease;
-  }
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(8px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
+.steps-list { display: flex; flex-direction: column; gap: 8px; }
+.step-item {
+  display: flex; gap: 12px; align-items: flex-start;
+  background: var(--bg); border-radius: var(--radius-sm);
+  padding: 10px 14px; border: 1px solid var(--border);
+}
+.step-num {
+  width: 26px; height: 26px; border-radius: 50%; background: var(--purple);
+  color: white; font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 13px;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.step-text { font-size: 13px; line-height: 1.6; color: var(--text); padding-top: 3px; }
+.step-text em { color: var(--purple-dark); font-style: normal; font-weight: 700; }
 
-  /* THEORY */
-  .theory-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-    margin-bottom: 16px;
-  }
-  .theory-box {
-    padding: 14px;
-    border-radius: var(--radius-sm);
-    border: 1.5px solid;
-  }
-  .theory-box.blue { background: var(--blue-bg); border-color: #93c5fd; }
-  .theory-box.green { background: var(--green-bg); border-color: #86efac; }
-  .theory-box h3 {
-    font-family: 'Nunito', sans-serif;
-    font-size: 13px;
-    font-weight: 800;
-    margin-bottom: 8px;
-  }
-  .theory-box.blue h3 { color: var(--blue-dark); }
-  .theory-box.green h3 { color: var(--green-dark); }
-  .theory-box ul { list-style: none; font-size: 13px; line-height: 1.9; }
-  .theory-box.blue ul { color: #1e40af; }
-  .theory-box.green ul { color: #166534; }
-  .theory-box ul li::before { content: "→ "; opacity: 0.5; }
+/* GLOSSARY */
+.gloss-search {
+  width: 100%; padding: 10px 14px; border-radius: var(--radius-sm);
+  border: 1.5px solid var(--border); font-family: 'Nunito Sans', sans-serif;
+  font-size: 14px; background: var(--bg); color: var(--text);
+  margin-bottom: 14px; outline: none;
+}
+.gloss-search:focus { border-color: var(--purple); }
+.gloss-cats { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 14px; }
+.gloss-cat {
+  padding: 5px 12px; border-radius: 99px; border: 1.5px solid var(--border);
+  font-family: 'Nunito', sans-serif; font-size: 12px; font-weight: 700;
+  cursor: pointer; background: var(--card); color: var(--muted); transition: all 0.15s;
+}
+.gloss-cat.active { background: var(--purple); color: white; border-color: var(--purple); }
+.gloss-grid { display: flex; flex-direction: column; gap: 6px; }
+.gloss-item {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 0;
+  border-radius: var(--radius-sm); overflow: hidden;
+  border: 1px solid var(--border); transition: transform 0.15s;
+}
+.gloss-item:hover { transform: translateX(2px); }
+.gloss-pl {
+  padding: 10px 14px; background: var(--purple-light);
+  font-family: 'Nunito', sans-serif; font-weight: 700; font-size: 14px; color: var(--purple-dark);
+}
+.gloss-pl small { display: block; font-size: 11px; color: var(--muted); font-weight: 400; margin-top: 1px; }
+.gloss-uk {
+  padding: 10px 14px; background: var(--card);
+  font-size: 14px; color: var(--text); border-left: 1px solid var(--border);
+}
+.gloss-uk small { display: block; font-size: 12px; color: var(--muted); margin-top: 1px; font-style: italic; }
+.gloss-tag {
+  font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em;
+  padding: 2px 7px; border-radius: 99px; display: inline-block; margin-top: 3px;
+}
+.tag-rownanie { background: var(--purple-light); color: var(--purple-dark); }
+.tag-dzialania { background: var(--blue-bg); color: var(--blue); }
+.tag-liczby { background: var(--green-bg); color: var(--green); }
+.tag-porownania { background: var(--amber-bg); color: var(--amber); }
+.tag-inne { background: #f1f5f9; color: #475569; }
 
-  .example-strip {
-    background: #f8faff;
-    border: 1px solid var(--border);
-    border-radius: var(--radius-sm);
-    padding: 12px 16px;
-    font-size: 14px;
-    line-height: 2;
-  }
-  .ex-pp { color: var(--blue-dark); font-style: italic; }
-  .ex-ps { color: var(--green-dark); font-style: italic; }
+/* WORKED EXAMPLES */
+.example-card {
+  background: var(--bg); border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm); overflow: hidden; margin-bottom: 12px;
+}
+.example-header {
+  background: var(--purple); color: white; padding: 10px 16px;
+  font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 14px;
+}
+.example-body { padding: 14px 16px; }
+.task-text {
+  font-size: 14px; line-height: 1.8; color: var(--text);
+  background: white; border-radius: 8px; padding: 10px 14px;
+  border: 1px solid var(--border); margin-bottom: 12px;
+}
+.task-text .kw { color: var(--purple-dark); font-weight: 700; }
+.solution-step {
+  display: flex; gap: 10px; margin-bottom: 8px; align-items: flex-start;
+}
+.sol-num {
+  width: 22px; height: 22px; border-radius: 50%; background: var(--purple);
+  color: white; font-size: 11px; font-weight: 800; font-family: 'Nunito', sans-serif;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px;
+}
+.sol-text { font-size: 13px; line-height: 1.7; }
+.sol-math {
+  font-family: 'Nunito', sans-serif; font-weight: 700;
+  background: var(--purple-light); color: var(--purple-dark);
+  padding: 2px 8px; border-radius: 6px; font-size: 13px; display: inline-block; margin: 2px 0;
+}
+.answer-box {
+  background: var(--green-bg); border: 1.5px solid #6ee7b7;
+  border-radius: 8px; padding: 10px 14px; margin-top: 10px;
+  font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 14px; color: #064e3b;
+}
 
-  .since-for-card {
-    background: var(--amber-bg);
-    border: 1.5px solid #fde047;
-    border-radius: var(--radius-sm);
-    overflow: hidden;
-    margin-top: 16px;
-  }
-  .sf-title {
-    background: #fef08a;
-    padding: 10px 16px;
-    font-family: 'Nunito', sans-serif;
-    font-size: 13px;
-    font-weight: 800;
-    color: #713f12;
-    border-bottom: 1px solid #fde047;
-  }
-  .sf-body { display: grid; grid-template-columns: 1fr 1fr; }
-  .sf-col { padding: 14px 16px; font-size: 13px; line-height: 2; }
-  .sf-col:first-child { border-right: 1px solid #fde047; }
-  .sf-col strong { display: block; font-weight: 800; margin-bottom: 4px; font-size: 14px; }
-  .sf-col:first-child strong { color: #dc2626; }
-  .sf-col:last-child strong { color: #1d4ed8; }
-  .sf-col span { display: block; color: #78350f; }
+/* QUIZ */
+.progress-wrap { margin-bottom: 14px; }
+.progress-bar { height: 7px; background: var(--border); border-radius: 99px; overflow: hidden; }
+.progress-fill { height: 100%; background: linear-gradient(90deg, var(--purple), #a78bfa); border-radius: 99px; transition: width 0.4s ease; }
+.score-row { display: flex; gap: 16px; margin-top: 8px; font-size: 13px; color: var(--muted); }
+.score-row b { color: var(--text); }
 
-  /* PROGRESS */
-  .progress-wrap { margin-bottom: 14px; }
-  .progress-bar { height: 6px; background: var(--border); border-radius: 99px; overflow: hidden; }
-  .progress-fill { height: 100%; background: linear-gradient(90deg, var(--blue), #60a5fa); border-radius: 99px; transition: width 0.4s ease; }
-  .score-row { display: flex; gap: 16px; margin-top: 8px; font-size: 13px; color: var(--muted); }
-  .score-row b { color: var(--text); }
+.q-label { font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; font-weight: 600; }
+.q-text { font-family: 'Nunito', sans-serif; font-size: 17px; font-weight: 700; line-height: 1.5; margin-bottom: 6px; }
+.q-task {
+  background: var(--bg); border: 1px solid var(--border);
+  border-radius: var(--radius-sm); padding: 12px 14px;
+  font-size: 14px; line-height: 1.8; margin-bottom: 14px; color: var(--text);
+}
+.q-task .kw { color: var(--purple-dark); font-weight: 700; }
+.q-hint { font-size: 13px; color: var(--muted); font-style: italic; margin-bottom: 14px; }
 
-  /* QUESTION CARD */
-  .q-label { font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; font-weight: 600; }
-  .q-text { font-family: 'Nunito', sans-serif; font-size: 18px; font-weight: 700; color: var(--text); line-height: 1.5; margin-bottom: 6px; }
-  .q-hint { font-size: 13px; color: var(--muted); margin-bottom: 16px; font-style: italic; }
+.opts { display: flex; flex-direction: column; gap: 8px; }
+.opt {
+  padding: 12px 16px; border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-family: 'Nunito', sans-serif; font-size: 15px; font-weight: 600;
+  cursor: pointer; background: var(--card); color: var(--text);
+  text-align: left; transition: all 0.15s;
+}
+.opt:hover:not(:disabled) { border-color: var(--purple); background: var(--purple-light); }
+.opt.highlight { background: var(--green-bg); border-color: #6ee7b7; color: #064e3b; }
+.opt.wrong { background: var(--red-bg); border-color: #fca5a5; color: #7f1d1d; }
 
-  .opts { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-  .opt {
-    padding: 11px 14px;
-    border: 1.5px solid var(--border);
-    border-radius: var(--radius-sm);
-    font-family: 'Nunito', sans-serif;
-    font-size: 15px;
-    font-weight: 600;
-    cursor: pointer;
-    background: var(--card);
-    color: var(--text);
-    text-align: left;
-    transition: all 0.15s;
-  }
-  .opt:hover:not(:disabled) { border-color: var(--blue); background: var(--blue-bg); color: var(--blue-dark); }
-  .opt.highlight { background: var(--green-bg); border-color: var(--green); color: var(--green-dark); }
-  .opt.wrong { background: var(--red-bg); border-color: var(--red); color: #991b1b; }
+.feedback {
+  margin-top: 14px; padding: 14px 16px;
+  border-radius: var(--radius-sm); font-size: 14px; line-height: 1.7;
+  animation: fadeUp 0.2s ease;
+}
+.feedback.ok { background: var(--green-bg); color: #064e3b; border: 1px solid #6ee7b7; }
+.feedback.no { background: var(--red-bg); color: #7f1d1d; border: 1px solid #fca5a5; }
+.sol-reveal {
+  margin-top: 10px; background: white; border-radius: 8px;
+  padding: 10px 14px; font-size: 13px; line-height: 1.8;
+  color: #1e1b4b; border: 1px solid #c4b5fd;
+}
+.sol-reveal .math { color: var(--purple-dark); font-weight: 700; font-family: 'Nunito', sans-serif; }
 
-  .feedback {
-    margin-top: 14px;
-    padding: 12px 16px;
-    border-radius: var(--radius-sm);
-    font-size: 14px;
-    line-height: 1.7;
-    animation: fadeUp 0.2s ease;
-  }
-  .feedback.ok { background: var(--green-bg); color: #14532d; border: 1px solid #86efac; }
-  .feedback.no { background: var(--red-bg); color: #7f1d1d; border: 1px solid #fca5a5; }
-  .rule-box {
-    margin-top: 8px;
-    background: white;
-    border-radius: 8px;
-    padding: 10px 12px;
-    font-size: 13px;
-    line-height: 1.7;
-    color: #1e3a8a;
-    border: 1px solid #bfdbfe;
-  }
+.nav-row { display: flex; justify-content: flex-end; margin-top: 14px; }
+.btn {
+  padding: 10px 24px; border-radius: var(--radius-sm); border: none;
+  font-family: 'Nunito', sans-serif; font-size: 15px; font-weight: 800;
+  cursor: pointer; transition: all 0.15s;
+}
+.btn-primary { background: var(--purple); color: white; box-shadow: 0 2px 10px rgba(124,58,237,0.3); }
+.btn-primary:hover { background: var(--purple-dark); transform: translateY(-1px); }
+.btn-sec { background: var(--card); color: var(--text); border: 1.5px solid var(--border); }
+.btn-sec:hover { background: var(--bg); }
 
-  .nav-row { display: flex; justify-content: flex-end; margin-top: 14px; }
-  .btn {
-    padding: 10px 24px;
-    border-radius: var(--radius-sm);
-    border: none;
-    font-family: 'Nunito', sans-serif;
-    font-size: 15px;
-    font-weight: 700;
-    cursor: pointer;
-    transition: all 0.15s;
-  }
-  .btn-primary { background: var(--blue); color: white; }
-  .btn-primary:hover { background: var(--blue-dark); transform: translateY(-1px); }
-  .btn-sec { background: var(--card); color: var(--text); border: 1.5px solid var(--border); }
-  .btn-sec:hover { background: var(--bg); }
+/* RESULT */
+.result { text-align: center; padding: 8px 0 16px; }
+.result .emoji { font-size: 52px; margin-bottom: 8px; }
+.result .stars { font-size: 28px; letter-spacing: 4px; margin-bottom: 8px; }
+.result .big-score { font-family: 'Nunito', sans-serif; font-size: 56px; font-weight: 900; color: var(--purple); line-height: 1; margin: 8px 0; }
+.result .msg { font-size: 16px; color: var(--muted); margin-bottom: 20px; }
+.result-btns { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
+.mistake-card {
+  background: #fff5f5; border: 1.5px solid #fca5a5;
+  border-radius: var(--radius-sm); padding: 14px 16px; margin-bottom: 10px; text-align: left;
+}
+.m-q { font-weight: 700; font-size: 14px; margin-bottom: 4px; color: #7f1d1d; }
+.m-wrong { font-size: 13px; color: #991b1b; margin-bottom: 4px; }
+.m-correct { display: inline-block; background: var(--green-bg); color: #064e3b; font-size: 13px; font-weight: 700; padding: 3px 10px; border-radius: 6px; margin-bottom: 8px; }
+.m-rule { font-size: 13px; color: #1e1b4b; background: var(--purple-light); padding: 10px 12px; border-radius: 8px; line-height: 1.8; }
 
-  /* RESULT */
-  .result { text-align: center; padding: 10px 0 16px; }
-  .result .emoji { font-size: 48px; margin-bottom: 8px; }
-  .result .big-score { font-family: 'Nunito', sans-serif; font-size: 52px; font-weight: 800; color: var(--blue); line-height: 1; margin: 10px 0; }
-  .result .msg { font-size: 16px; color: var(--muted); margin-bottom: 20px; }
-  .result-btns { display: flex; gap: 8px; justify-content: center; }
-
-  /* MISTAKES */
-  .mistakes-section { margin-top: 20px; text-align: left; }
-  .mistakes-title { font-family: 'Nunito', sans-serif; font-size: 15px; font-weight: 800; margin-bottom: 12px; }
-  .mistake-card {
-    background: #fff5f5;
-    border: 1.5px solid #fca5a5;
-    border-radius: var(--radius-sm);
-    padding: 14px 16px;
-    margin-bottom: 10px;
-  }
-  .m-q { font-weight: 700; font-size: 14px; margin-bottom: 4px; color: #7f1d1d; }
-  .m-wrong { font-size: 13px; color: #991b1b; margin-bottom: 4px; }
-  .m-correct { display: inline-block; background: var(--green-bg); color: #14532d; font-size: 13px; font-weight: 700; padding: 3px 10px; border-radius: 6px; margin-bottom: 8px; }
-  .m-rule { font-size: 13px; color: #1e40af; background: var(--blue-bg); padding: 8px 12px; border-radius: 8px; line-height: 1.7; }
-
-  /* MOBILE */
-  @media (max-width: 480px) {
-    .theory-grid { grid-template-columns: 1fr; }
-    .sf-body { grid-template-columns: 1fr; }
-    .sf-col:first-child { border-right: none; border-bottom: 1px solid #fde047; }
-    .opts { grid-template-columns: 1fr; }
-    .tab { font-size: 12px; min-width: 90px; }
-    .top-header h1 { font-size: 22px; }
-    .result .big-score { font-size: 40px; }
-  }
+/* MOBILE */
+@media (max-width: 500px) {
+  .rules-grid { grid-template-columns: 1fr; }
+  .tabs { grid-template-columns: repeat(2, 1fr); }
+  .gloss-item { grid-template-columns: 1fr; }
+  .gloss-uk { border-left: none; border-top: 1px solid var(--border); }
+  .hero h1 { font-size: 24px; }
+}
 </style>
 </head>
 <body>
 <div class="page">
 
-  <div class="top-header">
-    <div class="badge">6th grade · English</div>
-    <h1>Present Perfect &amp;<br>Past Simple</h1>
-    <p>Підготовка до карткóвки · Since / For · Варвара</p>
-  </div>
-
-  <div class="tabs" id="tabs"></div>
-  <div id="content"></div>
-
+<div class="hero">
+  <div class="chip">📐 Matematyka · 6 клас</div>
+  <h1>Równania —<br><span>Рівняння</span></h1>
+  <p>Теорія · Словник · Приклади · Тест · Варвара</p>
 </div>
 
+<div class="tabs" id="tabs"></div>
+<div id="content"></div>
+
+</div>
 <script>
-const THEORY_HTML = `
-<div class="card">
-  <div class="theory-grid">
-    <div class="theory-box blue">
-      <h3>Present Perfect</h3>
-      <ul>
-        <li>Look! результат видно ЗАРАЗ</li>
-        <li>досвід у житті (ever/never)</li>
-        <li>з since / for</li>
-        <li>just, already, yet</li>
-      </ul>
-    </div>
-    <div class="theory-box green">
-      <h3>Past Simple</h3>
-      <ul>
-        <li>конкретний час у минулому</li>
-        <li>yesterday, ago, last week</li>
-        <li>in 2020, on Monday</li>
-        <li>дія закінчилась, час відомий</li>
-      </ul>
-    </div>
-  </div>
-  <div class="example-strip">
-    <div class="ex-pp">Look! I <b>have broken</b> my arm. → рука зламана, бачимо зараз</div>
-    <div class="ex-ps">I <b>broke</b> my arm yesterday. → це сталось вчора (конкретний час)</div>
-  </div>
-  <div class="since-for-card">
-    <div class="sf-title">Since vs For (тільки з Present Perfect)</div>
-    <div class="sf-body">
-      <div class="sf-col">
-        <strong>SINCE = з якого часу</strong>
-        <span>since Monday</span>
-        <span>since 2020</span>
-        <span>since I was a child</span>
-        <span>since last summer</span>
-      </div>
-      <div class="sf-col">
-        <strong>FOR = протягом скількох</strong>
-        <span>for 3 days</span>
-        <span>for two years</span>
-        <span>for a long time</span>
-        <span>for ages</span>
-      </div>
-    </div>
-  </div>
-</div>
-<div style="display:flex;gap:8px;margin-top:4px">
-  <button class="btn btn-primary" onclick="initSet('pp_ps')">Почати тест →</button>
-</div>`;
+// ─── DATA ─────────────────────────────────────────────────────────────────────
 
-const SETS = {
-  theory: null,
-  pp_ps: [
-    { q: 'Look! She ___ her key. (lose)', opts: ['lost','has lost','loses','losing'], a: 1, hint: 'Look! = бачимо результат зараз', rule: 'Look! / Oh no! → Present Perfect, бо ми бачимо результат прямо зараз. She has lost = ключ загублений (і ми це бачимо).' },
-    { q: 'I ___ my homework an hour ago. (finish)', opts: ['have finished','finished','finish','had finished'], a: 1, hint: '"an hour ago" = конкретний час у минулому', rule: 'ago, yesterday, last…, in [рік] → Past Simple. Час конкретний → Past Simple. I finished an hour ago.' },
-    { q: '___ you ever ___ sushi? (eat)', opts: ['Did … eat','Have … eaten','Do … eat','Are … eating'], a: 1, hint: '"ever" + досвід у житті', rule: '"Ever" запитує про досвід у житті → Present Perfect. Have you ever eaten sushi?' },
-    { q: 'She ___ in Warsaw since 2019. (live)', opts: ['lived','lives','has lived','was living'], a: 2, hint: '"since" → Present Perfect', rule: 'Since + рік/момент → Present Perfect. She has lived here since 2019 = вона живе тут з 2019 (і досі).' },
-    { q: 'We ___ this film last Friday. (see)', opts: ['have seen','saw','seen','see'], a: 1, hint: '"last Friday" = конкретний час', rule: 'Last Friday / yesterday / in 2020 → Past Simple. We saw the film last Friday.' },
-    { q: 'He has already ___ the email. (send)', opts: ['send','sended','sent','sending'], a: 2, hint: 'have/has + 3-я форма (past participle)', rule: 'Present Perfect = have/has + past participle. Send → sent (неправильне дієслово!).' },
-    { q: 'Look! Tom ___ his leg! (break)', opts: ['broke','has broken','breaks','broken'], a: 1, hint: 'Look! = результат видно зараз', rule: 'Look! → Present Perfect. Tom has broken his leg = нога зламана (бачимо зараз). Порівняй: He broke his leg in 2020 → Past Simple.' },
-    { q: 'I ___ my bike when I was ten. (buy)', opts: ["haven't bought",'bought','have bought','buy'], a: 1, hint: '"when I was ten" = конкретний вік у минулому', rule: '"When I was…" → Past Simple, бо вказано конкретний час у минулому.' },
-  ],
-  since_for: [
-    { q: 'I have known her ___ five years.', opts: ['since','for','ago','in'], a: 1, hint: 'five years = тривалість (скільки?)', rule: 'FOR + тривалість: for five years, for two months, for a long time. Питання: How long?' },
-    { q: 'She has been ill ___ Monday.', opts: ['for','in','since','during'], a: 2, hint: 'Monday = конкретний момент початку', rule: 'SINCE + момент початку: since Monday, since 3 o\'clock, since last year. Питання: Since when?' },
-    { q: 'We haven\'t eaten ___ this morning.', opts: ['for','since','from','ago'], a: 1, hint: '"this morning" = конкретний момент', rule: 'SINCE + конкретний момент (this morning, yesterday, last week). We haven\'t eaten since this morning.' },
-    { q: 'They\'ve been friends ___ ages.', opts: ['since','for','during','from'], a: 1, hint: '"ages" = тривалість (довгий час)', rule: 'FOR + тривалість: for ages, for a long time, for 20 years. "Ages" = дуже довго.' },
-    { q: 'He has worked here ___ he was 20.', opts: ['for','since','in','during'], a: 1, hint: '"he was 20" = момент у минулому', rule: 'SINCE + підрядне речення (since he was young, since she arrived). He has worked here since he was 20.' },
-    { q: 'I haven\'t seen you ___ a long time!', opts: ['since','for','during','from'], a: 1, hint: '"a long time" = тривалість', rule: 'FOR a long time = протягом довгого часу. I haven\'t seen you for a long time!' },
-    { q: 'My parents have been married ___ 1998.', opts: ['for','in','since','during'], a: 2, hint: '1998 = конкретний рік (початок)', rule: 'SINCE + рік/дата. They have been married since 1998 = одружені з 1998 року.' },
-    { q: 'She has studied English ___ three months.', opts: ['since','for','in','from'], a: 1, hint: '"three months" = тривалість', rule: 'FOR + кількість часу: for three months, for a week, for 10 minutes.' },
-  ],
-  mixed: [
-    { q: 'Oops! I ___ the window! (break)', opts: ['broke','have broken','breaking','broken'], a: 1, hint: 'Oops! = бачимо наслідок зараз', rule: 'Oops! / Look! / Oh no! → Present Perfect. I have broken = вікно зламане (і бачимо це).' },
-    { q: 'She ___ her bike last summer. (break)', opts: ['has broken','broken','broke','breaks'], a: 2, hint: '"last summer" = конкретний час', rule: 'Last summer → Past Simple. She broke her bike last summer. Немає зв\'язку з теперішнім.' },
-    { q: 'They haven\'t called ___ two days.', opts: ['since','for','in','ago'], a: 1, hint: 'two days = тривалість', rule: 'FOR + тривалість. They haven\'t called for two days = два дні вже не дзвонять.' },
-    { q: 'I have lived here ___ I was born.', opts: ['for','since','in','during'], a: 1, hint: '"I was born" = момент початку', rule: 'SINCE + момент (since I was born, since she arrived). I have lived here since I was born.' },
-    { q: 'He ___ in London for 5 years, then moved. (live)', opts: ['has lived','lived','lives','is living'], a: 1, hint: 'Дія закінчилась — він вже переїхав', rule: 'Якщо дія закінчилась → Past Simple. He lived in London for 5 years (then moved). Порівняй: He HAS lived here for 5 years (і досі живе).' },
-    { q: '___ you ___ your keys? I can\'t find them! (lose)', opts: ['Did … lose','Have … lost','Do … lose','Are … losing'], a: 1, hint: 'Я шукаю їх ЗАРАЗ — результат важливий', rule: 'Present Perfect коли результат важливий зараз. Have you lost your keys? = де вони (хочу знайти зараз).' },
-    { q: 'I ___ born in Kyiv ___ 2014. (be)', opts: ['was … in','have been … since','was … since','am … in'], a: 0, hint: 'Народження = Past Simple + in + рік', rule: 'I was born → Past Simple (конкретна дія в минулому). З роком народження завжди "in": born in 2014.' },
-    { q: 'How long ___ you ___ English? (study)', opts: ['did … study','have … studied','do … study','are … studying'], a: 1, hint: '"How long" з since/for → Present Perfect', rule: '"How long have you…?" → Present Perfect. Питаємо про тривалість дії, яка ще триває.' },
-  ]
+const GLOSSARY = [
+  // Рівняння
+  { pl: 'równanie', uk: 'рівняння', ex: 'x + 3 = 10', cat: 'rownanie' },
+  { pl: 'rozwiąż równanie', uk: 'розв\'яжи рівняння', ex: 'знайди x', cat: 'rownanie' },
+  { pl: 'zapisz równanie', uk: 'запиши рівняння', ex: 'склади рівняння з умови', cat: 'rownanie' },
+  { pl: 'niewiadoma', uk: 'невідома (x)', ex: 'x — те що шукаємо', cat: 'rownanie' },
+  { pl: 'sprawdź', uk: 'перевір', ex: 'підстав відповідь назад', cat: 'rownanie' },
+  { pl: 'prawa strona / lewa strona', uk: 'права сторона / ліва сторона', ex: '2x + 1 | = | 9', cat: 'rownanie' },
+  { pl: 'obie strony', uk: 'обидві сторони', ex: 'додай до обох сторін', cat: 'rownanie' },
+  // Дії
+  { pl: 'suma', uk: 'сума (результат додавання)', ex: 'suma 3 i 5 = 8', cat: 'dzialania' },
+  { pl: 'różnica', uk: 'різниця (результат віднімання)', ex: 'różnica 10 i 3 = 7', cat: 'dzialania' },
+  { pl: 'iloczyn', uk: 'добуток (результат множення)', ex: 'iloczyn 4 i 5 = 20', cat: 'dzialania' },
+  { pl: 'iloraz', uk: 'частка (результат ділення)', ex: 'iloraz 12 i 3 = 4', cat: 'dzialania' },
+  { pl: 'dodawanie', uk: 'додавання', ex: '3 + 5', cat: 'dzialania' },
+  { pl: 'odejmowanie', uk: 'віднімання', ex: '10 − 3', cat: 'dzialania' },
+  { pl: 'mnożenie', uk: 'множення', ex: '4 × 5', cat: 'dzialania' },
+  { pl: 'dzielenie', uk: 'ділення', ex: '12 ÷ 3', cat: 'dzialania' },
+  { pl: 'dwukrotność', uk: 'подвійна кількість (×2)', ex: 'dwukrotność x = 2x', cat: 'dzialania' },
+  { pl: 'trzykrotność', uk: 'потрійна кількість (×3)', ex: 'trzykrotność x = 3x', cat: 'dzialania' },
+  { pl: 'połowa', uk: 'половина (÷2)', ex: 'połowa x = x/2', cat: 'dzialania' },
+  // Порівняння
+  { pl: 'o … większy od', uk: 'більший на…', ex: 'o 3 większy od x = x + 3', cat: 'porownania' },
+  { pl: 'o … mniejszy od', uk: 'менший на…', ex: 'o 5 mniejszy od x = x − 5', cat: 'porownania' },
+  { pl: 'razy większy / cięższy', uk: 'у … разів більший/важчий', ex: '2 razy cięższy = ×2', cat: 'porownania' },
+  { pl: 'razy mniejszy', uk: 'у … разів менший', ex: '4 razy mniejszy od x = x ÷ 4', cat: 'porownania' },
+  { pl: 'jest równa / wynosi', uk: 'дорівнює', ex: 'suma jest równa 20 → = 20', cat: 'porownania' },
+  { pl: 'razem', uk: 'разом, всього', ex: 'razem = сума всіх', cat: 'porownania' },
+  { pl: 'ile', uk: 'скільки', ex: 'ile wpłynęło? = скільки надійшло?', cat: 'porownania' },
+  { pl: 'ile razy', uk: 'у скільки разів', ex: 'ile razy więcej?', cat: 'porownania' },
+  // Числа
+  { pl: 'liczba', uk: 'число', ex: 'liczba x', cat: 'liczby' },
+  { pl: 'liczba całkowita', uk: 'ціле число', ex: '…−2, −1, 0, 1, 2…', cat: 'liczby' },
+  { pl: 'liczba naturalna', uk: 'натуральне число', ex: '1, 2, 3, 4…', cat: 'liczby' },
+  { pl: 'dorosły / dorosłych', uk: 'дорослий / дорослих', ex: 'x dorosłych = x дорослих', cat: 'liczby' },
+  { pl: 'dziecko / dzieci', uk: 'дитина / дітей', ex: 'y dzieci = y дітей', cat: 'liczby' },
+  { pl: 'bilet normalny', uk: 'квиток за повною ціною', ex: '10 zł', cat: 'liczby' },
+  { pl: 'bilet ulgowy', uk: 'квиток зі знижкою', ex: '5 zł (для дітей)', cat: 'liczby' },
+  { pl: 'kasa', uk: 'каса (місце оплати)', ex: 'wpłynęło do kasy = надійшло до каси', cat: 'liczby' },
+  // Інше
+  { pl: 'ze sprzedaży', uk: 'від продажу', ex: 'zysk ze sprzedaży = прибуток від продажу', cat: 'inne' },
+  { pl: 'tego dnia', uk: 'того дня', ex: 'wpłynęło tego dnia = надійшло того дня', cat: 'inne' },
+  { pl: 'obliczenia', uk: 'обчислення, підрахунки', ex: 'zapisz obliczenia = запиши підрахунки', cat: 'inne' },
+  { pl: 'odpowiedź', uk: 'відповідь', ex: 'zapisz odpowiedź = запиши відповідь', cat: 'inne' },
+  { pl: 'wystawę obejrzało', uk: 'виставку відвідало', ex: '= прийшло подивитись', cat: 'inne' },
+  { pl: 'wpłynęło', uk: 'надійшло (про гроші)', ex: 'до каси надійшло', cat: 'inne' },
+  { pl: 'ważą razem', uk: 'важать разом', ex: 'трьох слонів маса разом', cat: 'inne' },
+  { pl: 'najmniejszy / największy', uk: 'найменший / найбільший', ex: 'najlżejszy слон', cat: 'inne' },
+  { pl: 'średni', uk: 'середній', ex: 'середній за розміром/масою', cat: 'inne' },
+  { pl: 'potrzebne', uk: 'необхідні, потрібні', ex: 'zapisz potrzebne obliczenia', cat: 'inne' },
+];
+
+const WORKED = [
+  {
+    title: 'Завдання 8 — Wystawa fotografii',
+    task: 'W sobotę wystawę fotografii obejrzało <span class="kw">x</span> dorosłych i <span class="kw">y</span> dzieci. Bilet normalny kosztuje 10 zł, ulgowy 5 zł. Ile pieniędzy wpłynęło do kasy?',
+    steps: [
+      { num: 1, text: '<em>Читаємо умову:</em> x дорослих по 10 zł, y дітей по 5 zł.' },
+      { num: 2, text: '<em>Складаємо вираз:</em> дорослі заплатили <span class="sol-math">10x</span>, діти — <span class="sol-math">5y</span>' },
+      { num: 3, text: '<em>Загальна сума:</em> <span class="sol-math">10x + 5y</span>' },
+      { num: 4, text: '<em>Перевірка:</em> якщо x=20 і y=30, то 10·20 + 5·30 = 200 + 150 = <span class="sol-math">350 zł</span>' },
+    ],
+    answer: 'Wyrażenie: 10x + 5y (złotych)'
+  },
+  {
+    title: 'Завдання 9a — Записати та розв\'язати рівняння',
+    task: 'Suma liczby <span class="kw">o 2 większej od x</span> i <span class="kw">dwukrotności liczby x</span> jest równa 20.',
+    steps: [
+      { num: 1, text: '<em>"liczba o 2 większa od x"</em> → <span class="sol-math">x + 2</span>' },
+      { num: 2, text: '<em>"dwukrotność liczby x"</em> → <span class="sol-math">2x</span>' },
+      { num: 3, text: '<em>"suma … jest równa 20"</em> → рівняння: <span class="sol-math">(x + 2) + 2x = 20</span>' },
+      { num: 4, text: 'Розкриваємо дужки: <span class="sol-math">x + 2 + 2x = 20</span>' },
+      { num: 5, text: 'Збираємо x: <span class="sol-math">3x + 2 = 20</span>' },
+      { num: 6, text: 'Переносимо 2: <span class="sol-math">3x = 18</span>' },
+      { num: 7, text: 'Ділимо на 3: <span class="sol-math">x = 6</span>' },
+      { num: 8, text: 'Перевірка: (6+2) + 2·6 = 8 + 12 = <span class="sol-math">20 ✓</span>' },
+    ],
+    answer: 'x = 6'
+  },
+  {
+    title: 'Завдання 9b — Записати та розв\'язати рівняння',
+    task: 'Liczba <span class="kw">4 razy mniejsza od liczby o 5 mniejszej od x</span> jest równa 10.',
+    steps: [
+      { num: 1, text: '<em>"liczba o 5 mniejsza od x"</em> → <span class="sol-math">x − 5</span>' },
+      { num: 2, text: '<em>"4 razy mniejsza od (x−5)"</em> → <span class="sol-math">(x − 5) ÷ 4</span>' },
+      { num: 3, text: '<em>"jest równa 10"</em> → рівняння: <span class="sol-math">(x − 5) / 4 = 10</span>' },
+      { num: 4, text: 'Множимо обидві сторони на 4: <span class="sol-math">x − 5 = 40</span>' },
+      { num: 5, text: 'Переносимо −5: <span class="sol-math">x = 45</span>' },
+      { num: 6, text: 'Перевірка: (45−5)/4 = 40/4 = <span class="sol-math">10 ✓</span>' },
+    ],
+    answer: 'x = 45'
+  },
+  {
+    title: 'Завдання 10 — Три слони',
+    task: 'Trzy słonie ważą razem 8,4 t. <span class="kw">Największy</span> słoń jest <span class="kw">dwa razy cięższy od najmniejszego</span>, a <span class="kw">średni</span> jest <span class="kw">o 1,2 t cięższy od najmniejszego</span>. Ile ważą razem dwa mniejsze słonie?',
+    steps: [
+      { num: 1, text: 'Нехай найменший = <span class="sol-math">x</span>' },
+      { num: 2, text: 'Найбільший = <span class="sol-math">2x</span> (dwa razy cięższy)' },
+      { num: 3, text: 'Середній = <span class="sol-math">x + 1,2</span> (o 1,2 t cięższy)' },
+      { num: 4, text: 'Разом: <span class="sol-math">x + 2x + (x + 1,2) = 8,4</span>' },
+      { num: 5, text: 'Спрощуємо: <span class="sol-math">4x + 1,2 = 8,4</span>' },
+      { num: 6, text: '<span class="sol-math">4x = 7,2</span>, отже <span class="sol-math">x = 1,8 t</span>' },
+      { num: 7, text: 'Два менших = найменший + середній = <span class="sol-math">1,8 + (1,8 + 1,2) = 1,8 + 3,0 = 4,8 t</span>' },
+    ],
+    answer: 'Два менших слони важать разом 4,8 t'
+  },
+];
+
+const QUIZ = [
+  {
+    q: 'Як перекласти: "suma liczby o 3 większej od x i liczby x"?',
+    task: null,
+    opts: ['x + x + 3', '(x + 3) + x', 'x · 3 + x', '3x − x'],
+    a: 1, hint: '"o 3 większa od x" = x + 3; suma = додавання',
+    sol: '"Liczba o 3 większa od x" = x + 3. "Suma (x+3) i x" = (x + 3) + x = 2x + 3.'
+  },
+  {
+    q: 'Rozwiąż równanie:',
+    task: '2x + 4 = 16',
+    opts: ['x = 6', 'x = 10', 'x = 7', 'x = 8'],
+    a: 0, hint: 'Спочатку відніми 4 з обох сторін',
+    sol: '2x + 4 = 16 → 2x = 16 − 4 = 12 → x = 12 ÷ 2 = 6. Перевірка: 2·6 + 4 = 16 ✓'
+  },
+  {
+    q: 'Що означає "dwukrotność x"?',
+    task: null,
+    opts: ['x + 2', 'x ÷ 2', '2x', 'x − 2'],
+    a: 2, hint: 'dwu- = два, krotność = кратність',
+    sol: '"Dwukrotność x" = 2x. Так само: trzykrotność = 3x, czterokrotność = 4x.'
+  },
+  {
+    q: 'Виберіть правильне рівняння для умови:',
+    task: '"Liczba 4 razy mniejsza od x jest równa 5."',
+    opts: ['x − 4 = 5', 'x · 4 = 5', 'x / 4 = 5', '4 − x = 5'],
+    a: 2, hint: '"4 razy mniejsza" = поділена на 4',
+    sol: '"4 razy mniejsza od x" = x ÷ 4. "Jest równa 5" → x / 4 = 5 → x = 20.'
+  },
+  {
+    q: 'Розв\'яжи рівняння:',
+    task: '(x + 2) + 2x = 20',
+    opts: ['x = 5', 'x = 6', 'x = 8', 'x = 4'],
+    a: 1, hint: 'Збери x: 3x + 2 = 20',
+    sol: 'x + 2 + 2x = 20 → 3x + 2 = 20 → 3x = 18 → x = 6. Перевірка: (6+2)+12 = 20 ✓'
+  },
+  {
+    q: 'Що означає "o 1,2 t cięższy od najmniejszego"?',
+    task: 'Якщо найменший = x, то середній = ?',
+    opts: ['1,2x', 'x · 1,2', 'x + 1,2', 'x − 1,2'],
+    a: 2, hint: '"o … cięższy" = більший НА …',
+    sol: '"O 1,2 t cięższy" = важить на 1,2 більше. Якщо найменший = x, то середній = x + 1,2.'
+  },
+  {
+    q: 'Виставу відвідали x дорослих (квиток 10 zł) і y дітей (квиток 5 zł). Скільки грошей у касі?',
+    task: null,
+    opts: ['10 + x + 5 + y', '10x · 5y', '10x + 5y', '(10 + 5)(x + y)'],
+    a: 2, hint: 'Дорослі: 10·x, діти: 5·y — окремо!',
+    sol: 'Кожен дорослий платить 10 zł → разом 10x. Кожна дитина 5 zł → разом 5y. Сума: 10x + 5y.'
+  },
+  {
+    q: 'Розв\'яжи рівняння:',
+    task: '(x − 5) / 4 = 10',
+    opts: ['x = 35', 'x = 40', 'x = 45', 'x = 50'],
+    a: 2, hint: 'Спочатку помнож обидві сторони на 4',
+    sol: '(x−5)/4 = 10 → x−5 = 40 → x = 45. Перевірка: (45−5)/4 = 40/4 = 10 ✓'
+  },
+  {
+    q: 'Три слони: найменший = x, найбільший = 2x, середній = x+1,2. Яке рівняння?',
+    task: 'Разом 8,4 т.',
+    opts: ['x + 2x + 1,2 = 8,4', 'x + 2x + (x + 1,2) = 8,4', '3x + 1,2x = 8,4', '4x = 8,4'],
+    a: 1, hint: 'Склади всіх трьох: x + 2x + (x+1,2)',
+    sol: 'Найменший x + найбільший 2x + середній (x+1,2) = 8,4. Тобто 4x + 1,2 = 8,4 → x = 1,8 t.'
+  },
+  {
+    q: 'Яке польське слово означає "різниця" (результат віднімання)?',
+    task: null,
+    opts: ['suma', 'iloczyn', 'różnica', 'iloraz'],
+    a: 2, hint: 'suma=+, różnica=−, iloczyn=×, iloraz=÷',
+    sol: 'Suma (+), różnica (−), iloczyn (×), iloraz (÷). Треба запам\'ятати всі чотири!'
+  },
+];
+
+// ─── STATE ────────────────────────────────────────────────────────────────────
+let currentTab = 'theory';
+let glossFilter = 'all';
+let glossSearch = '';
+let qi = 0, sel = null, score = 0, mistakes = [];
+let qList = [];
+
+const TABS = [
+  { id: 'theory',    label: '📖 Теорія' },
+  { id: 'glossary',  label: '📚 Словник' },
+  { id: 'examples',  label: '✏️ Приклади' },
+  { id: 'quiz',      label: '🧮 Тест' },
+];
+
+const CAT_LABELS = {
+  all: 'Всі',
+  rownanie: 'Рівняння',
+  dzialania: 'Дії',
+  porownania: 'Порівняння',
+  liczby: 'Числа',
+  inne: 'Інше',
 };
-
-const SET_LABELS = {
-  theory: '📖 Теорія',
-  pp_ps: 'PP vs Past',
-  since_for: 'Since / For',
-  mixed: '🔀 Змішане'
-};
-
-let currentSet = 'theory';
-let qList = [], qi = 0, sel = null, score = 0, mistakes = [];
 
 function shuffle(arr) { return [...arr].sort(() => Math.random() - 0.5); }
 
-function initSet(id) {
-  currentSet = id;
-  if (id !== 'theory') {
-    qList = shuffle(SETS[id]);
+function initTab(id) {
+  currentTab = id;
+  if (id === 'quiz') {
+    qList = shuffle(QUIZ);
     qi = 0; sel = null; score = 0; mistakes = [];
   }
-  renderTabs();
-  render();
+  renderTabs(); render();
 }
 
 function renderTabs() {
-  document.getElementById('tabs').innerHTML = Object.keys(SET_LABELS).map(id =>
-    `<button class="tab${id === currentSet ? ' active' : ''}" onclick="initSet('${id}')">${SET_LABELS[id]}</button>`
+  document.getElementById('tabs').innerHTML = TABS.map(t =>
+    `<button class="tab${t.id === currentTab ? ' active' : ''}" onclick="initTab('${t.id}')">${t.label}</button>`
   ).join('');
 }
 
-function render() {
-  const c = document.getElementById('content');
-  if (currentSet === 'theory') { c.innerHTML = THEORY_HTML; return; }
-  if (qi >= qList.length) { renderResult(); return; }
+// ─── THEORY ──────────────────────────────────────────────────────────────────
+function renderTheory() {
+  return `
+<div class="card">
+  <div class="card-title"><span class="icon">📐</span>Що таке рівняння?</div>
+  <div class="rules-grid">
+    <div class="rule-box purple">
+      <h3>Рівняння</h3>
+      <ul>
+        <li>Вираз з невідомою x</li>
+        <li>Ліва = права сторона</li>
+        <li>Треба знайти x</li>
+        <li>x + 3 = 10</li>
+      </ul>
+    </div>
+    <div class="rule-box teal">
+      <h3>Перевірка</h3>
+      <ul>
+        <li>Підставь x назад</li>
+        <li>Ліва = права?</li>
+        <li>x=7: 7+3=10 ✓</li>
+        <li>x=5: 5+3=8 ✗</li>
+      </ul>
+    </div>
+    <div class="rule-box amber">
+      <h3>Текстова умова → рівняння</h3>
+      <ul>
+        <li>o N większy od x → x+N</li>
+        <li>o N mniejszy od x → x−N</li>
+        <li>N razy większy → Nx</li>
+        <li>N razy mniejszy → x/N</li>
+      </ul>
+    </div>
+    <div class="rule-box green">
+      <h3>Ключові слова</h3>
+      <ul>
+        <li>suma → +</li>
+        <li>różnica → −</li>
+        <li>iloczyn → ×</li>
+        <li>iloraz → ÷</li>
+      </ul>
+    </div>
+  </div>
 
+  <div class="formula-strip">
+    <strong>dwukrotność x</strong> = 2x &nbsp;|&nbsp;
+    <strong>trzykrotność x</strong> = 3x &nbsp;|&nbsp;
+    <strong>połowa x</strong> = x÷2<br>
+    <strong>jest równa / wynosi</strong> = дорівнює = знак <strong>=</strong>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title"><span class="icon">🪜</span>Кроки розв'язання рівняння</div>
+  <div class="steps-list">
+    <div class="step-item"><div class="step-num">1</div><div class="step-text"><em>Читай уважно</em> — знайди ключові слова: suma, dwukrotność, o … większy</div></div>
+    <div class="step-item"><div class="step-num">2</div><div class="step-text"><em>Познач невідому</em> — нехай x = те що шукаємо</div></div>
+    <div class="step-item"><div class="step-num">3</div><div class="step-text"><em>Склади рівняння</em> — перепиши умову математично</div></div>
+    <div class="step-item"><div class="step-num">4</div><div class="step-text"><em>Розкрий дужки</em> — якщо є: (x + 2) + 2x = x + 2 + 2x</div></div>
+    <div class="step-item"><div class="step-num">5</div><div class="step-text"><em>Збери x</em> — всі x на одну сторону: 3x + 2 = 20</div></div>
+    <div class="step-item"><div class="step-num">6</div><div class="step-text"><em>Ізолюй x</em> — перенеси числа: 3x = 18, x = 6</div></div>
+    <div class="step-item"><div class="step-num">7</div><div class="step-text"><em>Перевір!</em> — підстав x назад в рівняння</div></div>
+  </div>
+</div>
+<div style="margin-top:4px">
+  <button class="btn btn-primary" onclick="initTab('glossary')">📚 Словник →</button>
+</div>`;
+}
+
+// ─── GLOSSARY ────────────────────────────────────────────────────────────────
+function renderGlossary() {
+  const cats = ['all', ...Object.keys(CAT_LABELS).filter(k => k !== 'all')];
+  const filtered = GLOSSARY.filter(g => {
+    const matchCat = glossFilter === 'all' || g.cat === glossFilter;
+    const matchSearch = !glossSearch ||
+      g.pl.toLowerCase().includes(glossSearch) ||
+      g.uk.toLowerCase().includes(glossSearch);
+    return matchCat && matchSearch;
+  });
+
+  return `
+<div class="card">
+  <div class="card-title"><span class="icon">📚</span>Словник математичних термінів</div>
+  <input class="gloss-search" type="text" placeholder="🔍 Шукай по-польськи або по-українськи…"
+    value="${glossSearch}" oninput="glossSearch=this.value.toLowerCase();render()" />
+  <div class="gloss-cats">
+    ${cats.map(c => `<button class="gloss-cat${glossFilter===c?' active':''}" onclick="glossFilter='${c}';render()">${CAT_LABELS[c]||c}</button>`).join('')}
+  </div>
+  <div class="gloss-grid">
+    ${filtered.length === 0 ? '<div style="color:var(--muted);font-size:14px;padding:10px">Нічого не знайдено</div>' :
+      filtered.map(g => `
+      <div class="gloss-item">
+        <div class="gloss-pl">
+          ${g.pl}
+          <small>${g.ex}</small>
+          <span class="gloss-tag tag-${g.cat}">${CAT_LABELS[g.cat]||g.cat}</span>
+        </div>
+        <div class="gloss-uk">
+          ${g.uk}
+        </div>
+      </div>`).join('')}
+  </div>
+</div>`;
+}
+
+// ─── WORKED EXAMPLES ─────────────────────────────────────────────────────────
+function renderExamples() {
+  return WORKED.map(w => `
+<div class="example-card">
+  <div class="example-header">${w.title}</div>
+  <div class="example-body">
+    <div class="task-text">${w.task}</div>
+    <div style="display:flex;flex-direction:column;gap:7px">
+      ${w.steps.map(s => `
+        <div class="solution-step">
+          <div class="sol-num">${s.num}</div>
+          <div class="sol-text">${s.text}</div>
+        </div>`).join('')}
+    </div>
+    <div class="answer-box">✅ Відповідь: ${w.answer}</div>
+  </div>
+</div>`).join('') + `<div style="margin-top:4px"><button class="btn btn-primary" onclick="initTab('quiz')">🧮 Перейти до тесту →</button></div>`;
+}
+
+// ─── QUIZ ────────────────────────────────────────────────────────────────────
+function renderQuiz() {
+  if (qi >= qList.length) return renderResult();
   const q = qList[qi];
   const total = qList.length;
   const pct = Math.round((qi / total) * 100);
@@ -428,29 +671,62 @@ function render() {
   let fb = '';
   if (sel !== null) {
     if (sel === q.a) {
-      fb = `<div class="feedback ok">✓ Правильно! <div class="rule-box">${q.rule}</div></div>`;
+      fb = `<div class="feedback ok">✓ Правильно! <div class="sol-reveal">${q.sol}</div></div>`;
     } else {
-      fb = `<div class="feedback no">✗ Правильна відповідь: <strong>${q.opts[q.a]}</strong><div class="rule-box">${q.rule}</div></div>`;
+      fb = `<div class="feedback no">✗ Правильна відповідь: <strong>${q.opts[q.a]}</strong><div class="sol-reveal">${q.sol}</div></div>`;
     }
   }
 
-  c.innerHTML = `
-    <div class="progress-wrap">
-      <div class="progress-bar"><div class="progress-fill" style="width:${pct}%"></div></div>
-      <div class="score-row">
-        <span>Питання <b>${qi + 1} / ${total}</b></span>
-        <span>Правильно <b style="color:var(--green)">${score}</b></span>
-        <span>Помилки <b style="color:var(--red)">${mistakes.length}</b></span>
-      </div>
+  return `
+<div class="progress-wrap">
+  <div class="progress-bar"><div class="progress-fill" style="width:${pct}%"></div></div>
+  <div class="score-row">
+    <span>Питання <b>${qi+1}/${total}</b></span>
+    <span>✅ <b style="color:var(--green)">${score}</b></span>
+    <span>❌ <b style="color:var(--red)">${mistakes.length}</b></span>
+  </div>
+</div>
+<div class="card">
+  <div class="q-label">Обери правильну відповідь</div>
+  <div class="q-text">${q.q}</div>
+  ${q.task ? `<div class="q-task">${q.task}</div>` : ''}
+  <div class="q-hint">💡 ${q.hint}</div>
+  <div class="opts">${optsHTML}</div>
+  ${fb}
+</div>
+<div class="nav-row">${sel !== null ? `<button class="btn btn-primary" onclick="nextQ()">Далі →</button>` : ''}</div>`;
+}
+
+function renderResult() {
+  const total = qList.length;
+  const pct = Math.round((score / total) * 100);
+  const emoji = pct >= 80 ? '🎉' : pct >= 60 ? '👍' : '📚';
+  const stars = pct >= 100 ? '⭐⭐⭐' : pct >= 80 ? '⭐⭐' : pct >= 60 ? '⭐' : '';
+  const msg = pct >= 80 ? 'Варвара, ти молодець!' : pct >= 60 ? 'Непогано! Повтори помилки.' : 'Ще раз подивись приклади і спробуй знову.';
+
+  const mHTML = mistakes.length ? `
+    <div style="margin-top:20px;text-align:left">
+      <div style="font-family:'Nunito',sans-serif;font-size:15px;font-weight:800;margin-bottom:12px">Розбір помилок:</div>
+      ${mistakes.map(m => `
+        <div class="mistake-card">
+          <div class="m-q">${m.q}${m.task ? '<br><em style="font-weight:400">' + m.task + '</em>' : ''}</div>
+          <div class="m-wrong">Ти відповіла: <b>${m.wrong}</b></div>
+          <div class="m-correct">✓ Правильно: ${m.correct}</div>
+          <div class="m-rule">${m.rule}</div>
+        </div>`).join('')}
+    </div>` : '';
+
+  return `<div class="card"><div class="result">
+    <div class="emoji">${emoji}</div>
+    <div class="stars">${stars}</div>
+    <div class="big-score">${score}/${total}</div>
+    <div class="msg">${msg}</div>
+    <div class="result-btns">
+      <button class="btn btn-sec" onclick="initTab('examples')">✏️ Приклади</button>
+      <button class="btn btn-primary" onclick="initTab('quiz')">Ще раз ↺</button>
     </div>
-    <div class="card">
-      <div class="q-label">Оберіть правильний варіант</div>
-      <div class="q-text">${q.q}</div>
-      <div class="q-hint">💡 ${q.hint}</div>
-      <div class="opts">${optsHTML}</div>
-      ${fb}
-    </div>
-    <div class="nav-row">${sel !== null ? `<button class="btn btn-primary" onclick="nextQ()">Далі →</button>` : ''}</div>`;
+    ${mHTML}
+  </div></div>`;
 }
 
 function choose(i) {
@@ -458,46 +734,20 @@ function choose(i) {
   sel = i;
   const q = qList[qi];
   if (i === q.a) score++;
-  else mistakes.push({ q: q.q, wrong: q.opts[i], correct: q.opts[q.a], rule: q.rule });
+  else mistakes.push({ q: q.q, task: q.task, wrong: q.opts[i], correct: q.opts[q.a], rule: q.sol });
   render();
 }
-
 function nextQ() { qi++; sel = null; render(); }
 
-function renderResult() {
-  const total = qList.length;
-  const pct = Math.round((score / total) * 100);
-  const emoji = pct >= 80 ? '🎉' : pct >= 60 ? '👍' : '📚';
-  const msg = pct >= 80 ? 'Варвара готова до карткóвки!' : pct >= 60 ? 'Непогано! Повтори помилки ще раз.' : 'Ще раз прочитай теорію і спробуй знову.';
-
-  const mHTML = mistakes.length ? `
-    <div class="mistakes-section">
-      <div class="mistakes-title">Розбір помилок:</div>
-      ${mistakes.map(m => `
-        <div class="mistake-card">
-          <div class="m-q">${m.q}</div>
-          <div class="m-wrong">Ти відповіла: <b>${m.wrong}</b></div>
-          <div class="m-correct">✓ Правильно: ${m.correct}</div>
-          <div class="m-rule">${m.rule}</div>
-        </div>`).join('')}
-    </div>` : '';
-
-  document.getElementById('content').innerHTML = `
-    <div class="card">
-      <div class="result">
-        <div class="emoji">${emoji}</div>
-        <div class="big-score">${score}/${total}</div>
-        <div class="msg">${msg}</div>
-        <div class="result-btns">
-          <button class="btn btn-sec" onclick="initSet('theory')">📖 Теорія</button>
-          <button class="btn btn-primary" onclick="initSet('${currentSet}')">Ще раз ↺</button>
-        </div>
-        ${mHTML}
-      </div>
-    </div>`;
+function render() {
+  const c = document.getElementById('content');
+  if (currentTab === 'theory')   c.innerHTML = renderTheory();
+  else if (currentTab === 'glossary') c.innerHTML = renderGlossary();
+  else if (currentTab === 'examples') c.innerHTML = renderExamples();
+  else c.innerHTML = renderQuiz();
 }
 
-initSet('theory');
+initTab('theory');
 </script>
 </body>
 </html>
