@@ -3,291 +3,175 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Matematyka · Równania · Варвара</title>
-<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Nunito+Sans:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<title>Historia · Річна контрольна · Варвара</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
 <style>
-:root {
-  --bg: #f5f0ff;
-  --card: #ffffff;
-  --border: #e4daf8;
-  --text: #1e1535;
-  --muted: #7b6e9e;
-  --purple: #7c3aed;
-  --purple-light: #ede9fe;
-  --purple-dark: #5b21b6;
-  --green: #059669;
-  --green-bg: #d1fae5;
-  --red: #dc2626;
-  --red-bg: #fee2e2;
-  --amber: #d97706;
-  --amber-bg: #fef3c7;
-  --blue: #2563eb;
-  --blue-bg: #dbeafe;
-  --teal: #0891b2;
-  --teal-bg: #cffafe;
-  --radius: 16px;
-  --radius-sm: 10px;
-  --shadow: 0 2px 16px rgba(124,58,237,0.08);
+:root{
+  --ink:#1a1208;
+  --parch:#fdf6e3;
+  --parch2:#f5ead0;
+  --border:#d4b896;
+  --muted:#8a7560;
+  --gold:#b8860b;
+  --gold-light:#fef3c7;
+  --gold-bright:#f59e0b;
+  --red:#9b1c1c;
+  --red-bg:#fef2f2;
+  --blue:#1e3a8a;
+  --blue-bg:#eff6ff;
+  --green:#166534;
+  --green-bg:#f0fdf4;
+  --teal:#0f766e;
+  --teal-bg:#f0fdfa;
+  --r:14px;--rs:9px;
+  --shadow:0 4px 24px rgba(26,18,8,.10);
 }
-* { box-sizing: border-box; margin: 0; padding: 0; }
-body {
-  font-family: 'Nunito Sans', sans-serif;
-  background: var(--bg);
-  color: var(--text);
-  min-height: 100vh;
-  background-image:
-    radial-gradient(ellipse at 10% 0%, #ddd6fe 0%, transparent 55%),
-    radial-gradient(ellipse at 90% 100%, #c7f2e8 0%, transparent 55%);
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Source Sans 3',sans-serif;background:var(--parch);color:var(--ink);min-height:100vh;
+  background-image:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23c8a96e' fill-opacity='0.07'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
 }
-.page { max-width: 660px; margin: 0 auto; padding: 24px 16px 72px; }
+.page{max-width:700px;margin:0 auto;padding:24px 16px 80px}
 
-/* HEADER */
-.hero { text-align: center; margin-bottom: 28px; }
-.hero .chip {
-  display: inline-flex; align-items: center; gap: 6px;
-  background: var(--purple); color: white;
-  font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 11px;
-  letter-spacing: 0.1em; text-transform: uppercase;
-  padding: 5px 14px; border-radius: 99px; margin-bottom: 14px;
-}
-.hero h1 {
-  font-family: 'Nunito', sans-serif; font-size: 30px; font-weight: 900;
-  color: var(--text); line-height: 1.15; margin-bottom: 6px;
-}
-.hero h1 span { color: var(--purple); }
-.hero p { font-size: 14px; color: var(--muted); }
+/* HERO */
+.hero{text-align:center;padding:32px 0 28px;border-bottom:2px solid var(--border);margin-bottom:28px}
+.hero .ornament{font-size:28px;letter-spacing:12px;color:var(--gold);margin-bottom:10px}
+.hero h1{font-family:'Playfair Display',serif;font-size:32px;font-weight:900;color:var(--ink);line-height:1.15;margin-bottom:8px}
+.hero h1 em{color:var(--gold);font-style:normal}
+.hero p{font-size:14px;color:var(--muted)}
+.hero .badge{display:inline-block;background:var(--gold);color:white;font-size:11px;font-weight:600;
+  letter-spacing:.08em;text-transform:uppercase;padding:4px 14px;border-radius:99px;margin-bottom:16px}
 
-/* TABS */
-.tabs {
-  display: grid; grid-template-columns: repeat(4, 1fr);
-  gap: 4px; background: var(--card);
-  padding: 5px; border-radius: var(--radius);
-  border: 1px solid var(--border); margin-bottom: 20px;
-  box-shadow: var(--shadow);
+/* TOPIC SELECTOR */
+.topic-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:22px}
+.topic-btn{
+  padding:14px 12px;border:2px solid var(--border);border-radius:var(--r);
+  background:white;cursor:pointer;text-align:left;transition:all .18s;
+  font-family:'Source Sans 3',sans-serif;box-shadow:var(--shadow);
 }
-.tab {
-  padding: 9px 6px; border-radius: var(--radius-sm); border: none;
-  font-family: 'Nunito', sans-serif; font-size: 12px; font-weight: 700;
-  cursor: pointer; background: transparent; color: var(--muted);
-  transition: all 0.18s; text-align: center; line-height: 1.3;
-}
-.tab:hover { background: var(--bg); color: var(--text); }
-.tab.active { background: var(--purple); color: white; box-shadow: 0 2px 8px rgba(124,58,237,0.3); }
+.topic-btn:hover{border-color:var(--gold-bright);background:var(--gold-light);transform:translateY(-2px)}
+.topic-btn.active{border-color:var(--gold);background:var(--gold-light);box-shadow:0 0 0 3px rgba(184,134,11,.15)}
+.topic-btn .t-num{font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+.topic-btn .t-name{font-family:'Playfair Display',serif;font-size:14px;font-weight:700;color:var(--ink);line-height:1.3}
+.topic-btn .t-era{font-size:12px;color:var(--muted);margin-top:3px}
+.topic-btn.active .t-num,.topic-btn.active .t-era{color:var(--gold)}
 
-/* CARD */
-.card {
-  background: var(--card); border: 1px solid var(--border);
-  border-radius: var(--radius); padding: 20px; margin-bottom: 14px;
-  box-shadow: var(--shadow); animation: fadeUp 0.22s ease;
-}
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(10px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-.card-title {
-  font-family: 'Nunito', sans-serif; font-size: 16px; font-weight: 800;
-  color: var(--text); margin-bottom: 14px; display: flex; align-items: center; gap: 8px;
-}
-.card-title .icon { font-size: 18px; }
+/* INNER TABS */
+.inner-tabs{display:flex;gap:6px;margin-bottom:18px;background:white;padding:5px;border-radius:var(--r);border:1px solid var(--border)}
+.itab{flex:1;padding:8px 6px;border-radius:var(--rs);border:none;font-family:'Source Sans 3',sans-serif;
+  font-size:12px;font-weight:600;cursor:pointer;background:transparent;color:var(--muted);transition:all .18s;text-align:center}
+.itab:hover{background:var(--parch2);color:var(--ink)}
+.itab.active{background:var(--gold);color:white}
 
-/* THEORY */
-.rules-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 14px; }
-.rule-box { padding: 14px; border-radius: var(--radius-sm); border: 1.5px solid; }
-.rule-box.purple { background: var(--purple-light); border-color: #c4b5fd; }
-.rule-box.teal   { background: var(--teal-bg);    border-color: #67e8f9; }
-.rule-box.amber  { background: var(--amber-bg);   border-color: #fcd34d; }
-.rule-box.green  { background: var(--green-bg);   border-color: #6ee7b7; }
-.rule-box h3 {
-  font-family: 'Nunito', sans-serif; font-size: 12px; font-weight: 800;
-  text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 8px;
-}
-.rule-box.purple h3 { color: var(--purple-dark); }
-.rule-box.teal h3   { color: var(--teal); }
-.rule-box.amber h3  { color: var(--amber); }
-.rule-box.green h3  { color: var(--green); }
-.rule-box ul { list-style: none; font-size: 13px; line-height: 1.9; }
-.rule-box.purple ul { color: #4c1d95; }
-.rule-box.teal ul   { color: #164e63; }
-.rule-box.amber ul  { color: #78350f; }
-.rule-box.green ul  { color: #064e3b; }
-.rule-box ul li::before { content: "• "; opacity: 0.5; }
+/* CARDS */
+.card{background:white;border:1px solid var(--border);border-radius:var(--r);padding:20px;margin-bottom:14px;box-shadow:var(--shadow);animation:up .22s ease}
+@keyframes up{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.card-h{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:var(--ink);margin-bottom:14px;display:flex;align-items:center;gap:8px}
 
-.formula-strip {
-  background: var(--purple-light); border: 1.5px solid #c4b5fd;
-  border-radius: var(--radius-sm); padding: 14px 16px; margin-bottom: 14px;
-  font-size: 14px; line-height: 2.1;
-}
-.formula-strip strong { color: var(--purple-dark); font-weight: 800; }
+/* KEY FACTS */
+.facts-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px}
+.fact-box{padding:12px 14px;border-radius:var(--rs);border:1.5px solid}
+.fact-box.gold{background:var(--gold-light);border-color:#fcd34d}
+.fact-box.red{background:var(--red-bg);border-color:#fca5a5}
+.fact-box.blue{background:var(--blue-bg);border-color:#93c5fd}
+.fact-box.green{background:var(--green-bg);border-color:#86efac}
+.fact-box.teal{background:var(--teal-bg);border-color:#5eead4}
+.fact-box h3{font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;margin-bottom:7px}
+.fact-box.gold h3{color:var(--gold)}
+.fact-box.red h3{color:var(--red)}
+.fact-box.blue h3{color:var(--blue)}
+.fact-box.green h3{color:var(--green)}
+.fact-box.teal h3{color:var(--teal)}
+.fact-box ul{list-style:none;font-size:13px;line-height:1.9}
+.fact-box.gold ul{color:#78350f}
+.fact-box.red ul{color:#7f1d1d}
+.fact-box.blue ul{color:#1e3a8a}
+.fact-box.green ul{color:#14532d}
+.fact-box.teal ul{color:#134e4a}
+.fact-box ul li::before{content:"→ ";opacity:.5}
 
-.steps-list { display: flex; flex-direction: column; gap: 8px; }
-.step-item {
-  display: flex; gap: 12px; align-items: flex-start;
-  background: var(--bg); border-radius: var(--radius-sm);
-  padding: 10px 14px; border: 1px solid var(--border);
-}
-.step-num {
-  width: 26px; height: 26px; border-radius: 50%; background: var(--purple);
-  color: white; font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 13px;
-  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
-}
-.step-text { font-size: 13px; line-height: 1.6; color: var(--text); padding-top: 3px; }
-.step-text em { color: var(--purple-dark); font-style: normal; font-weight: 700; }
+/* TIMELINE */
+.timeline{position:relative;padding-left:28px}
+.timeline::before{content:'';position:absolute;left:9px;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,var(--gold),var(--border))}
+.tl-item{position:relative;margin-bottom:14px}
+.tl-dot{position:absolute;left:-23px;top:4px;width:12px;height:12px;border-radius:50%;background:var(--gold);border:2px solid white;box-shadow:0 0 0 2px var(--gold)}
+.tl-year{font-family:'Playfair Display',serif;font-size:13px;font-weight:700;color:var(--gold);margin-bottom:2px}
+.tl-text{font-size:13px;line-height:1.6;color:var(--ink)}
+.tl-text strong{color:var(--red);font-weight:700}
 
-/* GLOSSARY */
-.gloss-search {
-  width: 100%; padding: 10px 14px; border-radius: var(--radius-sm);
-  border: 1.5px solid var(--border); font-family: 'Nunito Sans', sans-serif;
-  font-size: 14px; background: var(--bg); color: var(--text);
-  margin-bottom: 14px; outline: none;
-}
-.gloss-search:focus { border-color: var(--purple); }
-.gloss-cats { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 14px; }
-.gloss-cat {
-  padding: 5px 12px; border-radius: 99px; border: 1.5px solid var(--border);
-  font-family: 'Nunito', sans-serif; font-size: 12px; font-weight: 700;
-  cursor: pointer; background: var(--card); color: var(--muted); transition: all 0.15s;
-}
-.gloss-cat.active { background: var(--purple); color: white; border-color: var(--purple); }
-.gloss-grid { display: flex; flex-direction: column; gap: 6px; }
-.gloss-item {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 0;
-  border-radius: var(--radius-sm); overflow: hidden;
-  border: 1px solid var(--border); transition: transform 0.15s;
-}
-.gloss-item:hover { transform: translateX(2px); }
-.gloss-pl {
-  padding: 10px 14px; background: var(--purple-light);
-  font-family: 'Nunito', sans-serif; font-weight: 700; font-size: 14px; color: var(--purple-dark);
-}
-.gloss-pl small { display: block; font-size: 11px; color: var(--muted); font-weight: 400; margin-top: 1px; }
-.gloss-uk {
-  padding: 10px 14px; background: var(--card);
-  font-size: 14px; color: var(--text); border-left: 1px solid var(--border);
-}
-.gloss-uk small { display: block; font-size: 12px; color: var(--muted); margin-top: 1px; font-style: italic; }
-.gloss-tag {
-  font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em;
-  padding: 2px 7px; border-radius: 99px; display: inline-block; margin-top: 3px;
-}
-.tag-rownanie { background: var(--purple-light); color: var(--purple-dark); }
-.tag-dzialania { background: var(--blue-bg); color: var(--blue); }
-.tag-liczby { background: var(--green-bg); color: var(--green); }
-.tag-porownania { background: var(--amber-bg); color: var(--amber); }
-.tag-inne { background: #f1f5f9; color: #475569; }
+/* PEOPLE */
+.people-grid{display:flex;flex-direction:column;gap:8px}
+.person{display:flex;gap:12px;align-items:flex-start;background:var(--parch2);border-radius:var(--rs);padding:10px 14px;border:1px solid var(--border)}
+.person-ico{font-size:22px;flex-shrink:0}
+.person-name{font-family:'Playfair Display',serif;font-size:14px;font-weight:700;color:var(--ink);margin-bottom:2px}
+.person-role{font-size:12px;color:var(--muted);font-style:italic;margin-bottom:3px}
+.person-fact{font-size:13px;line-height:1.5;color:var(--ink)}
 
-/* WORKED EXAMPLES */
-.example-card {
-  background: var(--bg); border: 1.5px solid var(--border);
-  border-radius: var(--radius-sm); overflow: hidden; margin-bottom: 12px;
+/* FLASHCARDS */
+.fc-info{font-size:13px;color:var(--muted);margin-bottom:14px;text-align:center}
+.flashcard{
+  perspective:1000px;width:100%;min-height:180px;cursor:pointer;margin-bottom:12px;
 }
-.example-header {
-  background: var(--purple); color: white; padding: 10px 16px;
-  font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 14px;
+.fc-inner{
+  position:relative;width:100%;min-height:180px;
+  transform-style:preserve-3d;transition:transform .5s;border-radius:var(--r);
 }
-.example-body { padding: 14px 16px; }
-.task-text {
-  font-size: 14px; line-height: 1.8; color: var(--text);
-  background: white; border-radius: 8px; padding: 10px 14px;
-  border: 1px solid var(--border); margin-bottom: 12px;
+.flashcard.flipped .fc-inner{transform:rotateY(180deg)}
+.fc-front,.fc-back{
+  position:absolute;width:100%;min-height:180px;backface-visibility:hidden;
+  border-radius:var(--r);padding:24px 20px;display:flex;flex-direction:column;justify-content:center;
+  border:2px solid var(--border);box-shadow:var(--shadow);
 }
-.task-text .kw { color: var(--purple-dark); font-weight: 700; }
-.solution-step {
-  display: flex; gap: 10px; margin-bottom: 8px; align-items: flex-start;
-}
-.sol-num {
-  width: 22px; height: 22px; border-radius: 50%; background: var(--purple);
-  color: white; font-size: 11px; font-weight: 800; font-family: 'Nunito', sans-serif;
-  display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px;
-}
-.sol-text { font-size: 13px; line-height: 1.7; }
-.sol-math {
-  font-family: 'Nunito', sans-serif; font-weight: 700;
-  background: var(--purple-light); color: var(--purple-dark);
-  padding: 2px 8px; border-radius: 6px; font-size: 13px; display: inline-block; margin: 2px 0;
-}
-.answer-box {
-  background: var(--green-bg); border: 1.5px solid #6ee7b7;
-  border-radius: 8px; padding: 10px 14px; margin-top: 10px;
-  font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 14px; color: #064e3b;
-}
+.fc-front{background:white;text-align:center}
+.fc-back{background:var(--gold-light);transform:rotateY(180deg);border-color:var(--gold)}
+.fc-front .fc-q{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:var(--ink);line-height:1.4;margin-bottom:10px}
+.fc-front .fc-tap{font-size:12px;color:var(--muted)}
+.fc-back .fc-a{font-size:15px;line-height:1.7;color:var(--ink)}
+.fc-back .fc-a strong{color:var(--red);font-weight:700}
+.fc-nav{display:flex;justify-content:space-between;align-items:center;margin-top:6px}
+.fc-count{font-size:13px;color:var(--muted)}
 
 /* QUIZ */
-.progress-wrap { margin-bottom: 14px; }
-.progress-bar { height: 7px; background: var(--border); border-radius: 99px; overflow: hidden; }
-.progress-fill { height: 100%; background: linear-gradient(90deg, var(--purple), #a78bfa); border-radius: 99px; transition: width 0.4s ease; }
-.score-row { display: flex; gap: 16px; margin-top: 8px; font-size: 13px; color: var(--muted); }
-.score-row b { color: var(--text); }
-
-.q-label { font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; font-weight: 600; }
-.q-text { font-family: 'Nunito', sans-serif; font-size: 17px; font-weight: 700; line-height: 1.5; margin-bottom: 6px; }
-.q-task {
-  background: var(--bg); border: 1px solid var(--border);
-  border-radius: var(--radius-sm); padding: 12px 14px;
-  font-size: 14px; line-height: 1.8; margin-bottom: 14px; color: var(--text);
-}
-.q-task .kw { color: var(--purple-dark); font-weight: 700; }
-.q-hint { font-size: 13px; color: var(--muted); font-style: italic; margin-bottom: 14px; }
-
-.opts { display: flex; flex-direction: column; gap: 8px; }
-.opt {
-  padding: 12px 16px; border: 1.5px solid var(--border);
-  border-radius: var(--radius-sm);
-  font-family: 'Nunito', sans-serif; font-size: 15px; font-weight: 600;
-  cursor: pointer; background: var(--card); color: var(--text);
-  text-align: left; transition: all 0.15s;
-}
-.opt:hover:not(:disabled) { border-color: var(--purple); background: var(--purple-light); }
-.opt.highlight { background: var(--green-bg); border-color: #6ee7b7; color: #064e3b; }
-.opt.wrong { background: var(--red-bg); border-color: #fca5a5; color: #7f1d1d; }
-
-.feedback {
-  margin-top: 14px; padding: 14px 16px;
-  border-radius: var(--radius-sm); font-size: 14px; line-height: 1.7;
-  animation: fadeUp 0.2s ease;
-}
-.feedback.ok { background: var(--green-bg); color: #064e3b; border: 1px solid #6ee7b7; }
-.feedback.no { background: var(--red-bg); color: #7f1d1d; border: 1px solid #fca5a5; }
-.sol-reveal {
-  margin-top: 10px; background: white; border-radius: 8px;
-  padding: 10px 14px; font-size: 13px; line-height: 1.8;
-  color: #1e1b4b; border: 1px solid #c4b5fd;
-}
-.sol-reveal .math { color: var(--purple-dark); font-weight: 700; font-family: 'Nunito', sans-serif; }
-
-.nav-row { display: flex; justify-content: flex-end; margin-top: 14px; }
-.btn {
-  padding: 10px 24px; border-radius: var(--radius-sm); border: none;
-  font-family: 'Nunito', sans-serif; font-size: 15px; font-weight: 800;
-  cursor: pointer; transition: all 0.15s;
-}
-.btn-primary { background: var(--purple); color: white; box-shadow: 0 2px 10px rgba(124,58,237,0.3); }
-.btn-primary:hover { background: var(--purple-dark); transform: translateY(-1px); }
-.btn-sec { background: var(--card); color: var(--text); border: 1.5px solid var(--border); }
-.btn-sec:hover { background: var(--bg); }
+.prog-bar{height:6px;background:var(--parch2);border-radius:99px;margin-bottom:10px;overflow:hidden}
+.prog-fill{height:100%;background:linear-gradient(90deg,var(--gold),var(--gold-bright));border-radius:99px;transition:width .4s}
+.score-row{display:flex;gap:14px;font-size:13px;color:var(--muted);margin-bottom:14px}
+.score-row b{color:var(--ink)}
+.q-label{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:7px;font-weight:600}
+.q-text{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;line-height:1.5;margin-bottom:8px}
+.q-hint{font-size:13px;color:var(--muted);font-style:italic;margin-bottom:14px}
+.opts{display:flex;flex-direction:column;gap:7px}
+.opt{padding:11px 16px;border:1.5px solid var(--border);border-radius:var(--rs);
+  font-family:'Source Sans 3',sans-serif;font-size:14px;font-weight:600;
+  cursor:pointer;background:white;color:var(--ink);text-align:left;transition:all .15s}
+.opt:hover:not(:disabled){border-color:var(--gold-bright);background:var(--gold-light)}
+.opt.ok{background:var(--green-bg);border-color:#6ee7b7;color:#14532d}
+.opt.no{background:var(--red-bg);border-color:#fca5a5;color:#7f1d1d}
+.feedback{margin-top:12px;padding:12px 16px;border-radius:var(--rs);font-size:14px;line-height:1.7;animation:up .2s ease}
+.feedback.ok{background:var(--green-bg);color:#14532d;border:1px solid #6ee7b7}
+.feedback.no{background:var(--red-bg);color:#7f1d1d;border:1px solid #fca5a5}
+.expl{margin-top:8px;background:white;border-radius:8px;padding:10px 13px;font-size:13px;color:var(--blue);line-height:1.7;border:1px solid #bfdbfe}
+.nav-row{display:flex;justify-content:flex-end;margin-top:12px}
+.btn{padding:10px 22px;border-radius:var(--rs);border:none;font-family:'Source Sans 3',sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:all .15s}
+.btn-gold{background:var(--gold);color:white;box-shadow:0 2px 10px rgba(184,134,11,.3)}
+.btn-gold:hover{background:#a16207;transform:translateY(-1px)}
+.btn-sec{background:white;color:var(--ink);border:1.5px solid var(--border)}
+.btn-sec:hover{background:var(--parch2)}
 
 /* RESULT */
-.result { text-align: center; padding: 8px 0 16px; }
-.result .emoji { font-size: 52px; margin-bottom: 8px; }
-.result .stars { font-size: 28px; letter-spacing: 4px; margin-bottom: 8px; }
-.result .big-score { font-family: 'Nunito', sans-serif; font-size: 56px; font-weight: 900; color: var(--purple); line-height: 1; margin: 8px 0; }
-.result .msg { font-size: 16px; color: var(--muted); margin-bottom: 20px; }
-.result-btns { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
-.mistake-card {
-  background: #fff5f5; border: 1.5px solid #fca5a5;
-  border-radius: var(--radius-sm); padding: 14px 16px; margin-bottom: 10px; text-align: left;
-}
-.m-q { font-weight: 700; font-size: 14px; margin-bottom: 4px; color: #7f1d1d; }
-.m-wrong { font-size: 13px; color: #991b1b; margin-bottom: 4px; }
-.m-correct { display: inline-block; background: var(--green-bg); color: #064e3b; font-size: 13px; font-weight: 700; padding: 3px 10px; border-radius: 6px; margin-bottom: 8px; }
-.m-rule { font-size: 13px; color: #1e1b4b; background: var(--purple-light); padding: 10px 12px; border-radius: 8px; line-height: 1.8; }
+.result{text-align:center;padding:10px 0 20px}
+.result .big{font-family:'Playfair Display',serif;font-size:60px;font-weight:900;color:var(--gold);line-height:1}
+.result .msg{font-size:16px;color:var(--muted);margin:10px 0 20px}
+.result-btns{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+.mistake-card{background:#fff9f0;border:1.5px solid #fcd34d;border-radius:var(--rs);padding:14px;margin-bottom:10px;text-align:left}
+.m-q{font-family:'Playfair Display',serif;font-weight:700;font-size:14px;margin-bottom:4px;color:var(--ink)}
+.m-w{font-size:13px;color:var(--red);margin-bottom:4px}
+.m-c{display:inline-block;background:var(--green-bg);color:#14532d;font-size:13px;font-weight:700;padding:3px 10px;border-radius:6px;margin-bottom:7px}
+.m-rule{font-size:13px;color:var(--blue);background:var(--blue-bg);padding:8px 12px;border-radius:8px;line-height:1.7}
 
-/* MOBILE */
-@media (max-width: 500px) {
-  .rules-grid { grid-template-columns: 1fr; }
-  .tabs { grid-template-columns: repeat(2, 1fr); }
-  .gloss-item { grid-template-columns: 1fr; }
-  .gloss-uk { border-left: none; border-top: 1px solid var(--border); }
-  .hero h1 { font-size: 24px; }
+@media(max-width:500px){
+  .facts-grid{grid-template-columns:1fr}
+  .topic-grid{grid-template-columns:1fr}
+  .hero h1{font-size:24px}
+  .result .big{font-size:44px}
 }
 </style>
 </head>
@@ -295,459 +179,438 @@ body {
 <div class="page">
 
 <div class="hero">
-  <div class="chip">📐 Matematyka · 6 клас</div>
-  <h1>Równania —<br><span>Рівняння</span></h1>
-  <p>Теорія · Словник · Приклади · Тест · Варвара</p>
+  <div class="badge">📜 Historia · 6 клас</div>
+  <div class="ornament">✦ ✦ ✦</div>
+  <h1>Річна контрольна —<br><em>Oświecenie i Rewolucje</em></h1>
+  <p>Теорія · Хронологія · Постаті · Флешкарти · Тест · Варвара</p>
 </div>
 
-<div class="tabs" id="tabs"></div>
+<div id="topic-grid" class="topic-grid"></div>
+<div class="inner-tabs" id="inner-tabs"></div>
 <div id="content"></div>
 
 </div>
 <script>
-// ─── DATA ─────────────────────────────────────────────────────────────────────
+// ═══════════════════════════════════════════════════════════ DATA
 
-const GLOSSARY = [
-  // Рівняння
-  { pl: 'równanie', uk: 'рівняння', ex: 'x + 3 = 10', cat: 'rownanie' },
-  { pl: 'rozwiąż równanie', uk: 'розв\'яжи рівняння', ex: 'знайди x', cat: 'rownanie' },
-  { pl: 'zapisz równanie', uk: 'запиши рівняння', ex: 'склади рівняння з умови', cat: 'rownanie' },
-  { pl: 'niewiadoma', uk: 'невідома (x)', ex: 'x — те що шукаємо', cat: 'rownanie' },
-  { pl: 'sprawdź', uk: 'перевір', ex: 'підстав відповідь назад', cat: 'rownanie' },
-  { pl: 'prawa strona / lewa strona', uk: 'права сторона / ліва сторона', ex: '2x + 1 | = | 9', cat: 'rownanie' },
-  { pl: 'obie strony', uk: 'обидві сторони', ex: 'додай до обох сторін', cat: 'rownanie' },
-  // Дії
-  { pl: 'suma', uk: 'сума (результат додавання)', ex: 'suma 3 i 5 = 8', cat: 'dzialania' },
-  { pl: 'różnica', uk: 'різниця (результат віднімання)', ex: 'różnica 10 i 3 = 7', cat: 'dzialania' },
-  { pl: 'iloczyn', uk: 'добуток (результат множення)', ex: 'iloczyn 4 i 5 = 20', cat: 'dzialania' },
-  { pl: 'iloraz', uk: 'частка (результат ділення)', ex: 'iloraz 12 i 3 = 4', cat: 'dzialania' },
-  { pl: 'dodawanie', uk: 'додавання', ex: '3 + 5', cat: 'dzialania' },
-  { pl: 'odejmowanie', uk: 'віднімання', ex: '10 − 3', cat: 'dzialania' },
-  { pl: 'mnożenie', uk: 'множення', ex: '4 × 5', cat: 'dzialania' },
-  { pl: 'dzielenie', uk: 'ділення', ex: '12 ÷ 3', cat: 'dzialania' },
-  { pl: 'dwukrotność', uk: 'подвійна кількість (×2)', ex: 'dwukrotność x = 2x', cat: 'dzialania' },
-  { pl: 'trzykrotność', uk: 'потрійна кількість (×3)', ex: 'trzykrotność x = 3x', cat: 'dzialania' },
-  { pl: 'połowa', uk: 'половина (÷2)', ex: 'połowa x = x/2', cat: 'dzialania' },
-  // Порівняння
-  { pl: 'o … większy od', uk: 'більший на…', ex: 'o 3 większy od x = x + 3', cat: 'porownania' },
-  { pl: 'o … mniejszy od', uk: 'менший на…', ex: 'o 5 mniejszy od x = x − 5', cat: 'porownania' },
-  { pl: 'razy większy / cięższy', uk: 'у … разів більший/важчий', ex: '2 razy cięższy = ×2', cat: 'porownania' },
-  { pl: 'razy mniejszy', uk: 'у … разів менший', ex: '4 razy mniejszy od x = x ÷ 4', cat: 'porownania' },
-  { pl: 'jest równa / wynosi', uk: 'дорівнює', ex: 'suma jest równa 20 → = 20', cat: 'porownania' },
-  { pl: 'razem', uk: 'разом, всього', ex: 'razem = сума всіх', cat: 'porownania' },
-  { pl: 'ile', uk: 'скільки', ex: 'ile wpłynęło? = скільки надійшло?', cat: 'porownania' },
-  { pl: 'ile razy', uk: 'у скільки разів', ex: 'ile razy więcej?', cat: 'porownania' },
-  // Числа
-  { pl: 'liczba', uk: 'число', ex: 'liczba x', cat: 'liczby' },
-  { pl: 'liczba całkowita', uk: 'ціле число', ex: '…−2, −1, 0, 1, 2…', cat: 'liczby' },
-  { pl: 'liczba naturalna', uk: 'натуральне число', ex: '1, 2, 3, 4…', cat: 'liczby' },
-  { pl: 'dorosły / dorosłych', uk: 'дорослий / дорослих', ex: 'x dorosłych = x дорослих', cat: 'liczby' },
-  { pl: 'dziecko / dzieci', uk: 'дитина / дітей', ex: 'y dzieci = y дітей', cat: 'liczby' },
-  { pl: 'bilet normalny', uk: 'квиток за повною ціною', ex: '10 zł', cat: 'liczby' },
-  { pl: 'bilet ulgowy', uk: 'квиток зі знижкою', ex: '5 zł (для дітей)', cat: 'liczby' },
-  { pl: 'kasa', uk: 'каса (місце оплати)', ex: 'wpłynęło do kasy = надійшло до каси', cat: 'liczby' },
-  // Інше
-  { pl: 'ze sprzedaży', uk: 'від продажу', ex: 'zysk ze sprzedaży = прибуток від продажу', cat: 'inne' },
-  { pl: 'tego dnia', uk: 'того дня', ex: 'wpłynęło tego dnia = надійшло того дня', cat: 'inne' },
-  { pl: 'obliczenia', uk: 'обчислення, підрахунки', ex: 'zapisz obliczenia = запиши підрахунки', cat: 'inne' },
-  { pl: 'odpowiedź', uk: 'відповідь', ex: 'zapisz odpowiedź = запиши відповідь', cat: 'inne' },
-  { pl: 'wystawę obejrzało', uk: 'виставку відвідало', ex: '= прийшло подивитись', cat: 'inne' },
-  { pl: 'wpłynęło', uk: 'надійшло (про гроші)', ex: 'до каси надійшло', cat: 'inne' },
-  { pl: 'ważą razem', uk: 'важать разом', ex: 'трьох слонів маса разом', cat: 'inne' },
-  { pl: 'najmniejszy / największy', uk: 'найменший / найбільший', ex: 'najlżejszy слон', cat: 'inne' },
-  { pl: 'średni', uk: 'середній', ex: 'середній за розміром/масою', cat: 'inne' },
-  { pl: 'potrzebne', uk: 'необхідні, потрібні', ex: 'zapisz potrzebne obliczenia', cat: 'inne' },
+const TOPICS = [
+  {
+    id:'osw', num:'Temat 1', era:'XVIII wiek',
+    name:'Kultura Oświecenia',
+    icon:'💡',
+    color:'gold',
+    summary:'Epoka rozumu — filozofowie głosili prawa człowieka, wolność i równość. Powstały encyklopedie, gazety, salony literackie.',
+    facts:[
+      {type:'gold',title:'Główne idee',items:['Rozum ponad wiarą i tradycją','Wolność, równość, tolerancja','Prawa naturalne człowieka','Postęp i edukacja dla wszystkich']},
+      {type:'blue',title:'Skąd się wzięło?',items:['Anglia XVII w. — J. Locke','Francja XVIII w. — Voltaire','Encyclopédie — Denis Diderot','Salony literackie w Paryżu']},
+      {type:'red',title:'Ważne słowa',items:['oświecenie = Enlightenment','filozofowie (philosophes)','encyklopedyści','tolerancja religijna']},
+      {type:'green',title:'Skutki',items:['Reformy państw europejskich','Inspiracja rewolucji USA i Francji','Rozdzielenie Kościoła od państwa','Powszechne szkolnictwo']},
+    ],
+    timeline:[
+      {y:'1689',t:'John Locke — <strong>prawa naturalne</strong>: życie, wolność, własność'},
+      {y:'1748',t:'Montesquieu — <strong>trójpodział władzy</strong> (Duch praw)'},
+      {y:'1751–1772',t:'<strong>Wielka Encyklopedia</strong> Diderota i d\'Alemberta — 28 tomów'},
+      {y:'1762',t:'Rousseau — <strong>umowa społeczna</strong>: władza pochodzi od ludu'},
+      {y:'ok. 1770',t:'Szczyt Oświecenia — salony, gazety, reformy'},
+    ],
+    people:[
+      {ico:'🧠',name:'John Locke',role:'Anglia, 1632–1704',fact:'Ojciec liberalizmu. Głosił, że ludzie mają naturalne prawa: życie, wolność i własność. Rząd istnieje, by je chronić.'},
+      {ico:'✍️',name:'Voltaire',role:'Francja, 1694–1778',fact:'Walczył o tolerancję religijną i wolność słowa. Krytykował Kościół i absolutyzm. Słynna zasada: "Nie zgadzam się z tobą, ale bronię twego prawa do mówienia."'},
+      {ico:'⚖️',name:'Montesquieu',role:'Francja, 1689–1755',fact:'Wymyślił trójpodział władzy: ustawodawcza, wykonawcza, sądownicza. To podstawa każdej demokracji do dziś.'},
+      {ico:'📖',name:'Jean-Jacques Rousseau',role:'Genewa, 1712–1778',fact:'Głosił, że władza pochodzi od ludu (umowa społeczna). Inspirował Rewolucję Francuską. "Człowiek rodzi się wolny, a wszędzie jest w kajdanach."'},
+      {ico:'📚',name:'Denis Diderot',role:'Francja, 1713–1784',fact:'Główny redaktor Wielkiej Encyklopedii — pierwszego dzieła zebrającego całą wiedzę ludzką. 28 tomów, 20 lat pracy.'},
+    ],
+    flashcards:[
+      {q:'Co to jest "oświecenie"?',a:'Europejski ruch intelektualny XVIII w., który stawiał <strong>rozum</strong> ponad wiarę i tradycję. Głosił prawa człowieka, tolerancję i postęp.'},
+      {q:'Jakie prawa naturalne wymienił John Locke?',a:'<strong>Życie, wolność i własność.</strong> Rząd istnieje po to, by je chronić — jeśli tego nie robi, lud ma prawo go obalić.'},
+      {q:'Na czym polega trójpodział władzy Montesquieu?',a:'Władza powinna być podzielona na trzy niezależne części: <strong>ustawodawczą</strong> (tworzy prawa), <strong>wykonawczą</strong> (rządzi) i <strong>sądowniczą</strong> (sądzi).'},
+      {q:'Co to była Wielka Encyklopedia?',a:'Dzieło Diderota i d\'Alemberta (1751–1772) — <strong>28 tomów</strong> zebranych wiedzy z wszystkich dziedzin nauki. Symbol oświecenia.'},
+      {q:'Co głosił Rousseau w "Umowie społecznej"?',a:'Władza pochodzi od <strong>ludu</strong>. Ludzie dobrowolnie tworzą społeczeństwo (umowę). Jeśli rząd narusza prawa ludu — można go obalić.'},
+    ],
+  },
+
+  {
+    id:'abs', num:'Temat 2', era:'XVIII wiek',
+    name:'Absolutyzm oświecony (Prusy, Austria, Rosja)',
+    icon:'👑',
+    color:'red',
+    summary:'Monarchowie połączyli nieograniczoną władzę z ideami oświecenia — reformowali państwa "z góry", ale wolności politycznych nie dawali.',
+    facts:[
+      {type:'blue',title:'Czym był?',items:['Absolutna władza monarchy','+ reformy inspirowane oświeceniem','Bez parlamentu i wolnych wyborów','"Wszystko dla ludu, nic przez lud"']},
+      {type:'gold',title:'3 państwa',items:['Prusy — Fryderyk II Wielki','Austria — Maria Teresa + Józef II','Rosja — Katarzyna II Wielka']},
+      {type:'red',title:'Reformy',items:['Rozbudowa armii i biurokracji','Reforma szkolnictwa','Kodyfikacja prawa','Zniesienie tortur (Prusy, Austria)']},
+      {type:'green',title:'Prusy szczegółowo',items:['Potęga militarna Europy','Tolerancja religijna','"Jestem pierwszym sługą państwa"','Podbój Śląska (1740)']},
+    ],
+    timeline:[
+      {y:'1740',t:'<strong>Fryderyk II</strong> królem Prus — podbija Śląsk od Austrii'},
+      {y:'1740–1780',t:'<strong>Maria Teresa</strong> rządzi Austrią — reformy oświaty, likwidacja poddaństwa'},
+      {y:'1762–1796',t:'<strong>Katarzyna II</strong> — carica Rosji, powiększa terytorium'},
+      {y:'1772',t:'<strong>I rozbiór Polski</strong> — Prusy, Austria i Rosja razem zabierają ziemie'},
+      {y:'1780–1790',t:'<strong>Józef II</strong> (Austria) — radykalne reformy, znosi poddaństwo chłopów'},
+    ],
+    people:[
+      {ico:'⚔️',name:'Fryderyk II Wielki',role:'Prusy, 1740–1786',fact:'Zbudował najpotężniejszą armię Europy. Tolerancja religijna, reforma sądownictwa, "Jestem pierwszym sługą państwa." Podbił Śląsk.'},
+      {ico:'👸',name:'Maria Teresa',role:'Austria, 1740–1780',fact:'Pierwsza kobieta na tronie Habsburgów. Reformy szkolnictwa, obowiązkowa edukacja, ograniczenie pańszczyzny. Matka 16 dzieci.'},
+      {ico:'🦅',name:'Józef II',role:'Austria, 1780–1790',fact:'Syn Marii Teresy. Najbardziej radykalny — zniósł poddaństwo chłopów, tolerancja religijna, kasata klasztorów. Reformy zbyt szybkie → bunty.'},
+      {ico:'👑',name:'Katarzyna II Wielka',role:'Rosja, 1762–1796',fact:'Niemka, która rządziła Rosją. Korespondowała z Wolterem i Diderot. Rozszerzyła terytorium o Ukrainę i Krym. Uczestniczyła w rozbiorach Polski.'},
+    ],
+    flashcards:[
+      {q:'Co to jest absolutyzm oświecony?',a:'System rządów, w którym monarcha ma <strong>nieograniczoną władzę</strong>, ale wprowadza reformy inspirowane oświeceniem. Hasło: <strong>"Wszystko dla ludu, nic przez lud."</strong>'},
+      {q:'Jakie były główne reformy absolutystów oświeconych?',a:'Reforma <strong>szkolnictwa</strong> (obowiązkowa edukacja), kodyfikacja <strong>prawa</strong>, zniesienie <strong>tortur</strong>, tolerancja <strong>religijna</strong>, rozbudowa armii i administracji.'},
+      {q:'Kim był Fryderyk II Wielki?',a:'Król Prus (1740–1786). Zbudował potęgę militarną Prus, podbił Śląsk. Hasło: <strong>"Jestem pierwszym sługą państwa."</strong> Tolerancja religijna, reforma prawa.'},
+      {q:'Co to był I rozbiór Polski (1772)?',a:'Prusy, Austria i Rosja <strong>razem zabrały</strong> część ziem Rzeczypospolitej Polskiej. To był pierwszy z trzech rozbiorów (1772, 1793, 1795).'},
+      {q:'Dlaczego Józef II był wyjątkowy?',a:'Zniósł <strong>poddaństwo chłopów</strong> w Austrii — jako pierwszy monarcha w Europie Środkowej. Również kasował klasztory i wprowadzał tolerancję religijną. Zbyt szybkie reformy wywołały bunty.'},
+    ],
+  },
+
+  {
+    id:'usa', num:'Temat 3', era:'1775–1783',
+    name:'Powstanie Stanów Zjednoczonych',
+    icon:'🦅',
+    color:'blue',
+    summary:'13 kolonii brytyjskich w Ameryce zbuntowało się przeciwko Anglii, ogłosiło niepodległość i stworzyło pierwsze nowoczesne państwo demokratyczne.',
+    facts:[
+      {type:'blue',title:'Przyczyny rewolucji',items:['"Podatki bez reprezentacji!"','Ustawa stemplowa (1765)','Herbatka bostońska (1773)','Idee oświecenia — wolność i równość']},
+      {type:'red',title:'Kluczowe daty',items:['1775 — wybuch wojny','4 VII 1776 — Deklaracja','1781 — Yorktown (koniec walk)','1783 — traktat paryski (uznanie)']},
+      {type:'gold',title:'Deklaracja Niepodległości',items:['Autor: Thomas Jefferson','Podpisana 4 lipca 1776','Wszyscy ludzie są równi','Prawa: życie, wolność, szczęście']},
+      {type:'green',title:'Nowe państwo',items:['Republika federalna','Konstytucja 1787','Prezydent + Kongres + Sąd','Bill of Rights — 1791']},
+    ],
+    timeline:[
+      {y:'1765',t:'<strong>Ustawa stemplowa</strong> — Anglia nakłada podatki. Koloniści protestują: "No taxation without representation!"'},
+      {y:'1773',t:'<strong>Herbatka bostońska</strong> — koloniści wrzucają angielską herbatę do morza w proteście'},
+      {y:'1775',t:'Bitwa pod Lexington — <strong>wybuch wojny o niepodległość</strong>'},
+      {y:'4 VII 1776',t:'<strong>Deklaracja Niepodległości</strong> — 13 kolonii ogłasza wolność'},
+      {y:'1781',t:'Bitwa pod Yorktown — <strong>kapitulacja Anglii</strong>, koniec walk'},
+      {y:'1783',t:'<strong>Traktat paryski</strong> — Wielka Brytania uznaje USA'},
+      {y:'1787',t:'<strong>Konstytucja USA</strong> — pierwsza na świecie'},
+      {y:'1789',t:'George Washington — <strong>pierwszy prezydent</strong> USA'},
+    ],
+    people:[
+      {ico:'✍️',name:'Thomas Jefferson',role:'USA, 1743–1826',fact:'Autor Deklaracji Niepodległości. Napisał, że "wszyscy ludzie są równi" i mają prawo do "życia, wolności i dążenia do szczęścia." 3. prezydent USA.'},
+      {ico:'⚔️',name:'George Washington',role:'USA, 1732–1799',fact:'Dowódca armii kolonistów podczas wojny, potem pierwszy prezydent USA (1789). Symbol republiki — odmówił zostania królem.'},
+      {ico:'🧪',name:'Benjamin Franklin',role:'USA, 1706–1790',fact:'Wynalazca piorunochronu, dyplomata. Przekonał Francję do wsparcia kolonistów. Jeden z Ojców Założycieli USA.'},
+      {ico:'🌍',name:'Tadeusz Kościuszko',role:'Polska/USA, 1746–1817',fact:'Polski inżynier wojskowy, który walczył po stronie kolonistów. Budował fortyfikacje. Bohater dwóch narodów — polskiego i amerykańskiego.'},
+    ],
+    flashcards:[
+      {q:'Dlaczego koloniści zbuntowali się przeciwko Anglii?',a:'Anglia nakładała podatki (ustawa stemplowa), ale koloniści nie mieli swoich przedstawicieli w parlamencie. Hasło: <strong>"No taxation without representation!"</strong> (Podatki bez reprezentacji!).'},
+      {q:'Co to była "Herbatka bostońska"?',a:'W 1773 roku koloniści przebrali się za Indian i wrzucili do morza w Bostonie <strong>herbatę z angielskich statków</strong> — w proteście przeciwko podatkowi na herbatę.'},
+      {q:'Co ogłaszała Deklaracja Niepodległości (4 VII 1776)?',a:'Że <strong>wszyscy ludzie są równi</strong> i mają naturalne prawa: <strong>życie, wolność i dążenie do szczęścia</strong>. 13 kolonii ogłosiło się wolnym państwem — USA.'},
+      {q:'Jakie znaczenie ma data 4 lipca 1776?',a:'Podpisanie <strong>Deklaracji Niepodległości USA</strong>. Do dziś 4 lipca jest narodowym świętem Stanów Zjednoczonych — Dniem Niepodległości.'},
+      {q:'Na czym polega trójpodział władzy w USA?',a:'Konstytucja z 1787 podzieliła władzę na: <strong>Prezydent</strong> (wykonawcza), <strong>Kongres</strong> (ustawodawcza), <strong>Sąd Najwyższy</strong> (sądownicza). Żadna nie może dominować.'},
+    ],
+  },
+
+  {
+    id:'rew', num:'Temat 4', era:'1789–1792',
+    name:'Wielka Rewolucja Francuska',
+    icon:'🔴',
+    color:'red',
+    summary:'Lud Francji obalił monarchię absolutną, zdobył Bastylię i ogłosił prawa człowieka. Hasło: Wolność, Równość, Braterstwo.',
+    facts:[
+      {type:'red',title:'Przyczyny',items:['Bankructwo państwa (długi po wojnach)','Głód — brak chleba, klęska urodzaju','3 stany: szlachta/kler vs. lud','Idee oświecenia — wolność i równość']},
+      {type:'gold',title:'14 VII 1789',items:['Szturm na Bastylię','Symbol tyranii i ucisku','Symboliczny — więźniów tylko 7','Dziś święto narodowe Francji!']},
+      {type:'blue',title:'Stany Generalne',items:['3 stany = 3 grupy społeczne','I — duchowieństwo (kler)','II — szlachta','III — mieszczanie i chłopi (lud)']},
+      {type:'green',title:'Deklaracja Praw',items:['26 VIII 1789','Wolność, równość, własność','Władza pochodzi od narodu','Wzorowana na USA']},
+    ],
+    timeline:[
+      {y:'V 1789',t:'Ludwik XVI zwołuje <strong>Stany Generalne</strong> — kryzys finansowy'},
+      {y:'VI 1789',t:'Stan trzeci tworzy <strong>Zgromadzenie Narodowe</strong> — buntuje się'},
+      {y:'14 VII 1789',t:'<strong>Szturm na Bastylię</strong> — początek Rewolucji! Paryż się buntuje'},
+      {y:'VIII 1789',t:'<strong>Deklaracja Praw Człowieka i Obywatela</strong> — "Liberté, Égalité, Fraternité"'},
+      {y:'X 1789',t:'Kobiety maszerują do Wersalu — Ludwik XVI przeniesiony do Paryża'},
+      {y:'1791',t:'<strong>Konstytucja Francji</strong> — monarchia konstytucyjna'},
+      {y:'VI 1791',t:'Ucieczka Ludwika XVI — schwytany w Varennes, kompromitacja'},
+    ],
+    people:[
+      {ico:'👑',name:'Ludwik XVI',role:'Król Francji, 1774–1792',fact:'Słaby król, który nie mógł opanować kryzysu. Zwołał Stany Generalne — co wywołało rewolucję. Próbował uciec z Francji (Varennes). Zgilotynowany w 1793.'},
+      {ico:'👸',name:'Maria Antonina',role:'Królowa Francji, 1755–1793',fact:'Austriaczka, żona Ludwika XVI. Symbolicznie oskarżana o rozrzutność ("niech jedzą ciastka"). Zgilotynowana w 1793. W rzeczywistości nie powiedziała tego zdania.'},
+      {ico:'⚡',name:'Maximilien Robespierre',role:'Rewolucjonista, 1758–1794',fact:'Lider jakobinów. Podczas "terroru" kazał gilotynować tysiące. Sam zgilotynowany w 1794 — ofiarom Terror się skończył.'},
+      {ico:'🗣️',name:'Georges Danton',role:'Rewolucjonista, 1759–1794',fact:'Jeden z liderów rewolucji. Domagał się umiaru wobec terroru — za co sam poszedł pod gilotynę z rozkazu Robespierre\'a.'},
+    ],
+    flashcards:[
+      {q:'Kiedy i dlaczego wybuchła Rewolucja Francuska?',a:'W <strong>1789</strong> roku. Przyczyny: bankructwo Francji, głód ludu, niesprawiedliwy podział podatków (szlachta nie płaciła), idee oświecenia o wolności i równości.'},
+      {q:'Co to były "trzy stany" we Francji?',a:'I stan — <strong>duchowieństwo</strong> (kler); II stan — <strong>szlachta</strong>; III stan — <strong>reszta</strong> (mieszczanie, chłopi, lud). Pierwszy i drugi nie płacili podatków.'},
+      {q:'Co się wydarzyło 14 lipca 1789?',a:'<strong>Szturm na Bastylię</strong> — paryski lud zdobył więzienie-twierdzę, symbol tyranii królewskiej. To symbol początku Rewolucji. Dziś 14 lipca to <strong>święto narodowe Francji</strong>.'},
+      {q:'Co ogłaszała Deklaracja Praw Człowieka i Obywatela?',a:'Że wszyscy ludzie mają prawa: <strong>wolność, równość, własność, bezpieczeństwo</strong>. Władza pochodzi od narodu. Przyjęta 26 sierpnia 1789. Hasło: <strong>"Liberté, Égalité, Fraternité"</strong>.'},
+      {q:'Co to był "terror" jakobinów?',a:'Okres 1793–1794, gdy Robespierre i jakobini gilotynowali tysiące "wrogów rewolucji". Zginęło ok. <strong>17 000 osób</strong>. Skończył się, gdy zgilotynowano samego Robespierre\'a.'},
+    ],
+  },
+
+  {
+    id:'rep', num:'Temat 5', era:'1792–1799',
+    name:'Francja republiką — od gilotyny do Napoleona',
+    icon:'⚔️',
+    color:'teal',
+    summary:'Po obaleniu monarchii Francja stała się republiką — przez terror jakobinów, Dyrektoriat, aż do zamachu Napoleona Bonaparte w 1799.',
+    facts:[
+      {type:'red',title:'Etapy po 1792',items:['1792 — ogłoszenie republiki','1793–1794 — terror jakobinów','1794 — gilotyna Robespierre\'a','1795–1799 — Dyrektoriat']},
+      {type:'gold',title:'Napoleon Bonaparte',items:['Korsykański oficer, gen. 1796','Kampania włoska i egipska','Zamach 18 Brumaire\'a 1799','Koniec Republiki → Konsulat']},
+      {type:'blue',title:'Gilotyna — symbol',items:['Wynaleziona przez dr Guillotina','"Humanitarna" metoda egzekucji','Symbol terroru rewolucji','Zgilotynowano Ludwika XVI (1793)']},
+      {type:'green',title:'Skutki rewolucji',items:['Koniec feudalizmu we Francji','Równość wobec prawa','Prawa człowieka — wzór dla świata','Inspiracja dla innych narodów']},
+    ],
+    timeline:[
+      {y:'IX 1792',t:'<strong>Francja ogłoszona republiką</strong> — koniec monarchii'},
+      {y:'I 1793',t:'<strong>Gilotyna Ludwika XVI</strong> — król skazany na śmierć'},
+      {y:'1793–1794',t:'<strong>Terror jakobinów</strong> — Robespierre rządzi gilotiną'},
+      {y:'VII 1794',t:'<strong>Thermidor</strong> — Robespierre zgilotynowany, terror się kończy'},
+      {y:'1795–1799',t:'<strong>Dyrektoriat</strong> — słaby rząd 5 dyrektorów, chaos'},
+      {y:'1796–1797',t:'Napoleon — błyskotliwa <strong>kampania włoska</strong>, sława bohatera'},
+      {y:'1798–1799',t:'Napoleon — kampania egipska, podbój i klęska'},
+      {y:'9–10 XI 1799',t:'<strong>Zamach 18 Brumaire\'a</strong> — Napoleon przejmuje władzę, koniec republiki'},
+    ],
+    people:[
+      {ico:'⚡',name:'Maximilien Robespierre',role:'"Niekorumpowany", 1758–1794',fact:'Lider terroru. Posyłał na gilotynę wszystkich, w tym dawnych przyjaciół. W lipcu 1794 został aresztowany i zgilotynowany — Terror się skończył.'},
+      {ico:'🎖️',name:'Napoleon Bonaparte',role:'Korsyka/Francja, 1769–1821',fact:'Genialny generał z Korsyki. Kampanie włoska i egipska. W 1799 zamachu 18 Brumaire\'a obalił Dyrektoriat. Został Konsulem, potem Cesarzem Francuzów (1804).'},
+      {ico:'👑',name:'Ludwik XVI',role:'Król → więzień, 1754–1793',fact:'Zgilotynowany 21 stycznia 1793 na placu w Paryżu. Pierwsze w historii stracenie panującego monarchy przez własny lud. Jego śmierć zszokowała całą Europę.'},
+    ],
+    flashcards:[
+      {q:'Kiedy Francja stała się republiką?',a:'We <strong>wrześniu 1792</strong> roku. Po pojmaniu Ludwika XVI i zwołaniu Konwentu Narodowego ogłoszono Pierwszą Republikę Francuską.'},
+      {q:'Co to był "terror jakobiński"?',a:'Okres 1793–1794, gdy Robespierre i Komitet Ocalenia Publicznego gilotynowali tysiące "wrogów rewolucji". Zginęło ok. 17 000 osób. Skończył się zamachem <strong>Thermidora</strong> — gilotiną Robespierre\'a.'},
+      {q:'Kim był Napoleon Bonaparte przed zamachem?',a:'Genialnym generałem armii republiki. Zyskał sławę podczas <strong>kampanii włoskiej</strong> (1796–1797), gdzie pokonał Austriaków. Potem kampania egipska (1798).'},
+      {q:'Co to był zamach 18 Brumaire\'a?',a:'9–10 listopada 1799 roku Napoleon obalił słaby rząd Dyrektoriatu. Przejął władzę jako <strong>Pierwszy Konsul</strong>. To koniec Republiki i początek ery Napoleona.'},
+      {q:'Jakie były główne skutki Rewolucji Francuskiej dla świata?',a:'Koniec <strong>feudalizmu</strong>, równość wobec prawa, <strong>prawa człowieka</strong> jako wzór dla świata, zniesienie przywilejów szlachty i kleru, inspiracja dla narodów całej Europy i Ameryki Łacińskiej.'},
+    ],
+  },
 ];
 
-const WORKED = [
-  {
-    title: 'Завдання 8 — Wystawa fotografii',
-    task: 'W sobotę wystawę fotografii obejrzało <span class="kw">x</span> dorosłych i <span class="kw">y</span> dzieci. Bilet normalny kosztuje 10 zł, ulgowy 5 zł. Ile pieniędzy wpłynęło do kasy?',
-    steps: [
-      { num: 1, text: '<em>Читаємо умову:</em> x дорослих по 10 zł, y дітей по 5 zł.' },
-      { num: 2, text: '<em>Складаємо вираз:</em> дорослі заплатили <span class="sol-math">10x</span>, діти — <span class="sol-math">5y</span>' },
-      { num: 3, text: '<em>Загальна сума:</em> <span class="sol-math">10x + 5y</span>' },
-      { num: 4, text: '<em>Перевірка:</em> якщо x=20 і y=30, то 10·20 + 5·30 = 200 + 150 = <span class="sol-math">350 zł</span>' },
-    ],
-    answer: 'Wyrażenie: 10x + 5y (złotych)'
-  },
-  {
-    title: 'Завдання 9a — Записати та розв\'язати рівняння',
-    task: 'Suma liczby <span class="kw">o 2 większej od x</span> i <span class="kw">dwukrotności liczby x</span> jest równa 20.',
-    steps: [
-      { num: 1, text: '<em>"liczba o 2 większa od x"</em> → <span class="sol-math">x + 2</span>' },
-      { num: 2, text: '<em>"dwukrotność liczby x"</em> → <span class="sol-math">2x</span>' },
-      { num: 3, text: '<em>"suma … jest równa 20"</em> → рівняння: <span class="sol-math">(x + 2) + 2x = 20</span>' },
-      { num: 4, text: 'Розкриваємо дужки: <span class="sol-math">x + 2 + 2x = 20</span>' },
-      { num: 5, text: 'Збираємо x: <span class="sol-math">3x + 2 = 20</span>' },
-      { num: 6, text: 'Переносимо 2: <span class="sol-math">3x = 18</span>' },
-      { num: 7, text: 'Ділимо на 3: <span class="sol-math">x = 6</span>' },
-      { num: 8, text: 'Перевірка: (6+2) + 2·6 = 8 + 12 = <span class="sol-math">20 ✓</span>' },
-    ],
-    answer: 'x = 6'
-  },
-  {
-    title: 'Завдання 9b — Записати та розв\'язати рівняння',
-    task: 'Liczba <span class="kw">4 razy mniejsza od liczby o 5 mniejszej od x</span> jest równa 10.',
-    steps: [
-      { num: 1, text: '<em>"liczba o 5 mniejsza od x"</em> → <span class="sol-math">x − 5</span>' },
-      { num: 2, text: '<em>"4 razy mniejsza od (x−5)"</em> → <span class="sol-math">(x − 5) ÷ 4</span>' },
-      { num: 3, text: '<em>"jest równa 10"</em> → рівняння: <span class="sol-math">(x − 5) / 4 = 10</span>' },
-      { num: 4, text: 'Множимо обидві сторони на 4: <span class="sol-math">x − 5 = 40</span>' },
-      { num: 5, text: 'Переносимо −5: <span class="sol-math">x = 45</span>' },
-      { num: 6, text: 'Перевірка: (45−5)/4 = 40/4 = <span class="sol-math">10 ✓</span>' },
-    ],
-    answer: 'x = 45'
-  },
-  {
-    title: 'Завдання 10 — Три слони',
-    task: 'Trzy słonie ważą razem 8,4 t. <span class="kw">Największy</span> słoń jest <span class="kw">dwa razy cięższy od najmniejszego</span>, a <span class="kw">średni</span> jest <span class="kw">o 1,2 t cięższy od najmniejszego</span>. Ile ważą razem dwa mniejsze słonie?',
-    steps: [
-      { num: 1, text: 'Нехай найменший = <span class="sol-math">x</span>' },
-      { num: 2, text: 'Найбільший = <span class="sol-math">2x</span> (dwa razy cięższy)' },
-      { num: 3, text: 'Середній = <span class="sol-math">x + 1,2</span> (o 1,2 t cięższy)' },
-      { num: 4, text: 'Разом: <span class="sol-math">x + 2x + (x + 1,2) = 8,4</span>' },
-      { num: 5, text: 'Спрощуємо: <span class="sol-math">4x + 1,2 = 8,4</span>' },
-      { num: 6, text: '<span class="sol-math">4x = 7,2</span>, отже <span class="sol-math">x = 1,8 t</span>' },
-      { num: 7, text: 'Два менших = найменший + середній = <span class="sol-math">1,8 + (1,8 + 1,2) = 1,8 + 3,0 = 4,8 t</span>' },
-    ],
-    answer: 'Два менших слони важать разом 4,8 t'
-  },
+// ═══════════════════════════════════════════════════════════ QUIZ DATA
+
+const ALL_QUIZ = [
+  // OŚWIECENIE
+  {tid:'osw',q:'Jakie prawa naturalne wg Locke\'a ma każdy człowiek?',opts:['Wolność, równość, braterstwo','Życie, wolność i własność','Praca, edukacja, szczęście','Wiara, nadzieja, miłość'],a:1,hint:'Locke = liberalizm, 3 prawa',expl:'John Locke wymienił 3 prawa naturalne: <strong>życie, wolność i własność</strong>. Rząd istnieje po to, by je chronić.'},
+  {tid:'osw',q:'Co to była Wielka Encyklopedia?',opts:['Podręcznik do historii','28-tomowe dzieło zebranych wiedzy','Zbiór praw królewskich','Gazeta oświeceniowa'],a:1,hint:'Diderot, 1751–1772, 28 tomów',expl:'Wielka Encyklopedia Diderota i d\'Alemberta (1751–1772) — <strong>28 tomów</strong> zebranych wiedzy ze wszystkich dziedzin. Symbol oświecenia.'},
+  {tid:'osw',q:'Kto wymyślił trójpodział władzy?',opts:['Voltaire','Rousseau','Montesquieu','Locke'],a:2,hint:'"Duch praw" — 1748',expl:'<strong>Montesquieu</strong> w dziele "Duch praw" (1748) opisał trójpodział władzy na: ustawodawczą, wykonawczą i sądowniczą.'},
+  {tid:'osw',q:'Co głosił Rousseau w "Umowie społecznej"?',opts:['Prawa szlachty','Władza pochodzi od ludu','Trójpodział władzy','Wolność handlu'],a:1,hint:'Umowa społeczna = lud',expl:'Rousseau głosił, że <strong>władza pochodzi od ludu</strong>. Ludzie tworzą "umowę społeczną" — jeśli rząd jej nie przestrzega, można go obalić.'},
+  // ABSOLUTYZM
+  {tid:'abs',q:'Jakie było hasło absolutyzmu oświeconego?',opts:['"Wolność, równość, braterstwo"','"Wszystko dla ludu, nic przez lud"','"Bóg, honor, ojczyzna"','"Jeden za wszystkich"'],a:1,hint:'Monarcha reformuje, ale sam rządzi',expl:'<strong>"Wszystko dla ludu, nic przez lud"</strong> — monarcha sam wprowadza reformy, ale nie daje ludowi władzy politycznej.'},
+  {tid:'abs',q:'Kto był "oświeconym absolutystą" w Prusach?',opts:['Józef II','Katarzyna II','Fryderyk II Wielki','Ludwik XVI'],a:2,hint:'Prusy, Śląsk, "pierwszy sługa"',expl:'<strong>Fryderyk II Wielki</strong> — król Prus (1740–1786). Podbił Śląsk, zbudował potęgę militarną, reformował sądownictwo. "Jestem pierwszym sługą państwa."'},
+  {tid:'abs',q:'Czym był I rozbiór Polski (1772)?',opts:['Polska dobrowolnie oddała ziemie','Prusy, Austria i Rosja zabrały część ziem Polski','Polska podpisała sojusz z Rosją','Polska pokonała Prusy'],a:1,hint:'Trzy państwa, jeden rok — 1772',expl:'W 1772 roku <strong>Prusy, Austria i Rosja</strong> razem zabrały część terytorium Rzeczypospolitej Polskiej. Był to I z trzech rozbiorów (1772, 1793, 1795).'},
+  {tid:'abs',q:'Co Józef II (Austria) zrobił jako pierwszy w Europie Środkowej?',opts:['Zbudował kanał Dunajski','Zniósł poddaństwo chłopów','Wprowadził gilotyną','Odkrył Amerykę'],a:1,hint:'Chłopi, wolność, Austria',expl:'<strong>Józef II</strong> (1780–1790) jako pierwszy monarcha w Europie Środkowej <strong>zniósł poddaństwo chłopów</strong> w Austrii. Reformy były tak radykalne, że wywołały bunty.'},
+  // USA
+  {tid:'usa',q:'Co oznaczało hasło "No taxation without representation"?',opts:['Nie płaćcie podatków','Podatki bez naszych przedstawicieli w parlamencie są niesprawiedliwe','Anglia nie ma prawa do kolonii','Chcemy własnego króla'],a:1,hint:'Koloniści, parlament, podatki',expl:'Koloniści protestowali: Anglia nakłada <strong>podatki</strong>, ale kolonie nie mają swoich <strong>przedstawicieli w parlamencie</strong> — to niesprawiedliwe.'},
+  {tid:'usa',q:'Kiedy podpisano Deklarację Niepodległości USA?',opts:['4 lipca 1775','14 lipca 1789','4 lipca 1776','17 września 1787'],a:2,hint:'4 lipca — święto USA do dziś',expl:'<strong>4 lipca 1776</strong> — data podpisania Deklaracji Niepodległości USA. Do dziś 4 lipca to Święto Niepodległości Stanów Zjednoczonych.'},
+  {tid:'usa',q:'Kto był autorem Deklaracji Niepodległości?',opts:['George Washington','Benjamin Franklin','Thomas Jefferson','Alexander Hamilton'],a:2,hint:'Późniejszy 3. prezydent USA',expl:'<strong>Thomas Jefferson</strong> napisał Deklarację Niepodległości. Napisał słynne zdanie: "Wszyscy ludzie są stworzeni równymi" i mają prawo do "życia, wolności i dążenia do szczęścia."'},
+  {tid:'usa',q:'Co to była "Herbatka bostońska"?',opts:['Konferencja dyplomatyczna w Bostonie','Koloniści wrzucili angielską herbatę do morza','Bitwa w porcie bostońskim','Podpisanie traktatu pokojowego'],a:1,hint:'1773, morze, protest',expl:'W 1773 roku koloniści przebrali się za Indian i <strong>wrzucili angielską herbatę do morza</strong> w Bostonie — w proteście przeciwko podatkowi na herbatę.'},
+  // REWOLUCJA
+  {tid:'rew',q:'Co się wydarzyło 14 lipca 1789 roku?',opts:['Ogłoszenie Deklaracji Praw','Szturm na Bastylię','Egzekucja Ludwika XVI','Uchwalenie Konstytucji'],a:1,hint:'Symbol rewolucji, święto Francji',expl:'<strong>Szturm na Bastylię</strong> — lud Paryża zdobył więzienie-twierdzę. Symbol obalenia tyranii. Do dziś 14 lipca to <strong>święto narodowe Francji</strong>.'},
+  {tid:'rew',q:'Co ogłaszała "Liberté, Égalité, Fraternité"?',opts:['Hasło armii','Hasło Rewolucji Francuskiej','Tytuł konstytucji','Hymn Francji'],a:1,hint:'3 słowa, 3 wartości',expl:'"<strong>Liberté, Égalité, Fraternité</strong>" = Wolność, Równość, Braterstwo — hasło Rewolucji Francuskiej, dziś oficjalne motto Republiki Francuskiej.'},
+  {tid:'rew',q:'Dlaczego wybuchła Rewolucja Francuska?',opts:['Atak Anglii na Francję','Głód, długi państwa, niesprawiedliwe podatki i idee oświecenia','Śmierć Ludwika XVI','Zabójstwo króla'],a:1,hint:'4 przyczyny: ekonomia + głód + podatki + idee',expl:'Rewolucja wybuchła z powodu: <strong>bankructwa</strong> Francji, <strong>głodu</strong> ludu, niesprawiedliwości systemu trzech stanów (szlachta nie płaciła podatków) i idei oświecenia o wolności.'},
+  {tid:'rew',q:'Kim byli "jakobini"?',opts:['Król i jego dworzanie','Radykalni rewolucjoniści prowadzący terror','Umiarkowani monarchiści','Chłopi z Normandii'],a:1,hint:'Robespierre, terror, gilotyna',expl:'<strong>Jakobini</strong> — radykalny klub rewolucyjny pod wodzą Robespierre\'a. W 1793–1794 prowadzili "terror" — gilotynowali tysiące "wrogów rewolucji."'},
+  // REPUBLIKA
+  {tid:'rep',q:'Kiedy Francja stała się oficjalnie republiką?',opts:['14 lipca 1789','4 lipca 1776','Wrzesień 1792','Styczeń 1793'],a:2,hint:'Po aresztowaniu Ludwika XVI',expl:'We <strong>wrześniu 1792</strong> Konwent Narodowy ogłosił Pierwszą Republikę Francuską — koniec monarchii. W styczniu 1793 zgilotynowano Ludwika XVI.'},
+  {tid:'rep',q:'Co to był zamach "18 Brumaire\'a"?',opts:['Obalenie Robespierre\'a','Atak na Bastylię','Napoleon przejął władzę obalając Dyrektoriat','Ogłoszenie Republiki'],a:2,hint:'Napoleon, 1799, koniec Dyrektoriatu',expl:'9–10 listopada 1799 roku (18 Brumaire\'a wg kalendarza rewolucyjnego) <strong>Napoleon Bonaparte</strong> obalił Dyrektoriat i przejął władzę jako Pierwszy Konsul. Koniec Republiki.'},
+  {tid:'rep',q:'Jak zakończył się "terror jakobiński"?',opts:['Napoleon obalił Robespierre\'a','Robespierre sam zrezygnował','Robespierre został aresztowany i zgilotynowany','Interwencja Austrii'],a:2,hint:'Thermidor 1794 — kara dla kata',expl:'W lipcu 1794 (Thermidor) Robespierre został <strong>aresztowany przez dawnych współpracowników</strong> i zgilotynowany. Ironicznie — sam zginął na gilotynie, którą tak chętnie stosował.'},
+  {tid:'rep',q:'Jakie były główne skutki Rewolucji Francuskiej dla Europy?',opts:['Wzmocnienie monarchii absolutnych','Koniec feudalizmu, prawa człowieka, równość wobec prawa','Powrót do średniowiecza','Wzmocnienie Kościoła'],a:1,hint:'Feudalizm, prawa, równość',expl:'Rewolucja Francuska zakończyła <strong>feudalizm</strong>, wprowadziła <strong>równość wobec prawa</strong>, upowszechniła <strong>prawa człowieka</strong> i stała się inspiracją dla całej Europy i Ameryki Łacińskiej.'},
 ];
 
-const QUIZ = [
-  {
-    q: 'Як перекласти: "suma liczby o 3 większej od x i liczby x"?',
-    task: null,
-    opts: ['x + x + 3', '(x + 3) + x', 'x · 3 + x', '3x − x'],
-    a: 1, hint: '"o 3 większa od x" = x + 3; suma = додавання',
-    sol: '"Liczba o 3 większa od x" = x + 3. "Suma (x+3) i x" = (x + 3) + x = 2x + 3.'
-  },
-  {
-    q: 'Rozwiąż równanie:',
-    task: '2x + 4 = 16',
-    opts: ['x = 6', 'x = 10', 'x = 7', 'x = 8'],
-    a: 0, hint: 'Спочатку відніми 4 з обох сторін',
-    sol: '2x + 4 = 16 → 2x = 16 − 4 = 12 → x = 12 ÷ 2 = 6. Перевірка: 2·6 + 4 = 16 ✓'
-  },
-  {
-    q: 'Що означає "dwukrotność x"?',
-    task: null,
-    opts: ['x + 2', 'x ÷ 2', '2x', 'x − 2'],
-    a: 2, hint: 'dwu- = два, krotność = кратність',
-    sol: '"Dwukrotność x" = 2x. Так само: trzykrotność = 3x, czterokrotność = 4x.'
-  },
-  {
-    q: 'Виберіть правильне рівняння для умови:',
-    task: '"Liczba 4 razy mniejsza od x jest równa 5."',
-    opts: ['x − 4 = 5', 'x · 4 = 5', 'x / 4 = 5', '4 − x = 5'],
-    a: 2, hint: '"4 razy mniejsza" = поділена на 4',
-    sol: '"4 razy mniejsza od x" = x ÷ 4. "Jest równa 5" → x / 4 = 5 → x = 20.'
-  },
-  {
-    q: 'Розв\'яжи рівняння:',
-    task: '(x + 2) + 2x = 20',
-    opts: ['x = 5', 'x = 6', 'x = 8', 'x = 4'],
-    a: 1, hint: 'Збери x: 3x + 2 = 20',
-    sol: 'x + 2 + 2x = 20 → 3x + 2 = 20 → 3x = 18 → x = 6. Перевірка: (6+2)+12 = 20 ✓'
-  },
-  {
-    q: 'Що означає "o 1,2 t cięższy od najmniejszego"?',
-    task: 'Якщо найменший = x, то середній = ?',
-    opts: ['1,2x', 'x · 1,2', 'x + 1,2', 'x − 1,2'],
-    a: 2, hint: '"o … cięższy" = більший НА …',
-    sol: '"O 1,2 t cięższy" = важить на 1,2 більше. Якщо найменший = x, то середній = x + 1,2.'
-  },
-  {
-    q: 'Виставу відвідали x дорослих (квиток 10 zł) і y дітей (квиток 5 zł). Скільки грошей у касі?',
-    task: null,
-    opts: ['10 + x + 5 + y', '10x · 5y', '10x + 5y', '(10 + 5)(x + y)'],
-    a: 2, hint: 'Дорослі: 10·x, діти: 5·y — окремо!',
-    sol: 'Кожен дорослий платить 10 zł → разом 10x. Кожна дитина 5 zł → разом 5y. Сума: 10x + 5y.'
-  },
-  {
-    q: 'Розв\'яжи рівняння:',
-    task: '(x − 5) / 4 = 10',
-    opts: ['x = 35', 'x = 40', 'x = 45', 'x = 50'],
-    a: 2, hint: 'Спочатку помнож обидві сторони на 4',
-    sol: '(x−5)/4 = 10 → x−5 = 40 → x = 45. Перевірка: (45−5)/4 = 40/4 = 10 ✓'
-  },
-  {
-    q: 'Три слони: найменший = x, найбільший = 2x, середній = x+1,2. Яке рівняння?',
-    task: 'Разом 8,4 т.',
-    opts: ['x + 2x + 1,2 = 8,4', 'x + 2x + (x + 1,2) = 8,4', '3x + 1,2x = 8,4', '4x = 8,4'],
-    a: 1, hint: 'Склади всіх трьох: x + 2x + (x+1,2)',
-    sol: 'Найменший x + найбільший 2x + середній (x+1,2) = 8,4. Тобто 4x + 1,2 = 8,4 → x = 1,8 t.'
-  },
-  {
-    q: 'Яке польське слово означає "різниця" (результат віднімання)?',
-    task: null,
-    opts: ['suma', 'iloczyn', 'różnica', 'iloraz'],
-    a: 2, hint: 'suma=+, różnica=−, iloczyn=×, iloraz=÷',
-    sol: 'Suma (+), różnica (−), iloczyn (×), iloraz (÷). Треба запам\'ятати всі чотири!'
-  },
-];
-
-// ─── STATE ────────────────────────────────────────────────────────────────────
+// ═══════════════════════════════════════════════════════════ STATE
+let currentTopic = TOPICS[0];
 let currentTab = 'theory';
-let glossFilter = 'all';
-let glossSearch = '';
-let qi = 0, sel = null, score = 0, mistakes = [];
-let qList = [];
+let fcIndex = 0; let fcFlipped = false;
+let qi = 0, sel = null, score = 0, mistakes = [], qList = [];
 
-const TABS = [
-  { id: 'theory',    label: '📖 Теорія' },
-  { id: 'glossary',  label: '📚 Словник' },
-  { id: 'examples',  label: '✏️ Приклади' },
-  { id: 'quiz',      label: '🧮 Тест' },
+const INNER_TABS = [
+  {id:'theory',label:'📖 Teoria'},
+  {id:'timeline',label:'📅 Chronologia'},
+  {id:'people',label:'👤 Postacie'},
+  {id:'flash',label:'🃏 Fiszki'},
+  {id:'quiz',label:'✏️ Test'},
 ];
 
-const CAT_LABELS = {
-  all: 'Всі',
-  rownanie: 'Рівняння',
-  dzialania: 'Дії',
-  porownania: 'Порівняння',
-  liczby: 'Числа',
-  inne: 'Інше',
-};
-
-function shuffle(arr) { return [...arr].sort(() => Math.random() - 0.5); }
-
-function initTab(id) {
-  currentTab = id;
-  if (id === 'quiz') {
-    qList = shuffle(QUIZ);
-    qi = 0; sel = null; score = 0; mistakes = [];
-  }
-  renderTabs(); render();
+function setTopic(id){
+  currentTopic = TOPICS.find(t=>t.id===id);
+  currentTab='theory'; fcIndex=0; fcFlipped=false;
+  qi=0;sel=null;score=0;mistakes=[];
+  qList=[...ALL_QUIZ.filter(q=>q.tid===id)].sort(()=>Math.random()-.5);
+  renderTopics(); renderInnerTabs(); render();
+}
+function setTab(id){
+  currentTab=id; fcIndex=0; fcFlipped=false;
+  if(id==='quiz'){qi=0;sel=null;score=0;mistakes=[];qList=[...ALL_QUIZ.filter(q=>q.tid===currentTopic.id)].sort(()=>Math.random()-.5);}
+  renderInnerTabs(); render();
 }
 
-function renderTabs() {
-  document.getElementById('tabs').innerHTML = TABS.map(t =>
-    `<button class="tab${t.id === currentTab ? ' active' : ''}" onclick="initTab('${t.id}')">${t.label}</button>`
-  ).join('');
+function renderTopics(){
+  document.getElementById('topic-grid').innerHTML=TOPICS.map(t=>`
+    <button class="topic-btn${t.id===currentTopic.id?' active':''}" onclick="setTopic('${t.id}')">
+      <div class="t-num">${t.icon} ${t.num}</div>
+      <div class="t-name">${t.name}</div>
+      <div class="t-era">${t.era}</div>
+    </button>`).join('');
+}
+function renderInnerTabs(){
+  document.getElementById('inner-tabs').innerHTML=INNER_TABS.map(t=>`
+    <button class="itab${t.id===currentTab?' active':''}" onclick="setTab('${t.id}')">${t.label}</button>`).join('');
 }
 
-// ─── THEORY ──────────────────────────────────────────────────────────────────
-function renderTheory() {
+// ═══════════════════════════════════════════════════════════ RENDERS
+
+function renderTheory(){
+  const t=currentTopic;
+  const colClass={gold:'gold',red:'red',blue:'blue',green:'green',teal:'teal'};
+  const factsHTML=t.facts.map(f=>`
+    <div class="fact-box ${colClass[f.type]||'gold'}">
+      <h3>${f.title}</h3>
+      <ul>${f.items.map(i=>`<li>${i}</li>`).join('')}</ul>
+    </div>`).join('');
   return `
 <div class="card">
-  <div class="card-title"><span class="icon">📐</span>Що таке рівняння?</div>
-  <div class="rules-grid">
-    <div class="rule-box purple">
-      <h3>Рівняння</h3>
-      <ul>
-        <li>Вираз з невідомою x</li>
-        <li>Ліва = права сторона</li>
-        <li>Треба знайти x</li>
-        <li>x + 3 = 10</li>
-      </ul>
-    </div>
-    <div class="rule-box teal">
-      <h3>Перевірка</h3>
-      <ul>
-        <li>Підставь x назад</li>
-        <li>Ліва = права?</li>
-        <li>x=7: 7+3=10 ✓</li>
-        <li>x=5: 5+3=8 ✗</li>
-      </ul>
-    </div>
-    <div class="rule-box amber">
-      <h3>Текстова умова → рівняння</h3>
-      <ul>
-        <li>o N większy od x → x+N</li>
-        <li>o N mniejszy od x → x−N</li>
-        <li>N razy większy → Nx</li>
-        <li>N razy mniejszy → x/N</li>
-      </ul>
-    </div>
-    <div class="rule-box green">
-      <h3>Ключові слова</h3>
-      <ul>
-        <li>suma → +</li>
-        <li>różnica → −</li>
-        <li>iloczyn → ×</li>
-        <li>iloraz → ÷</li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="formula-strip">
-    <strong>dwukrotność x</strong> = 2x &nbsp;|&nbsp;
-    <strong>trzykrotność x</strong> = 3x &nbsp;|&nbsp;
-    <strong>połowa x</strong> = x÷2<br>
-    <strong>jest równa / wynosi</strong> = дорівнює = знак <strong>=</strong>
-  </div>
-</div>
-
-<div class="card">
-  <div class="card-title"><span class="icon">🪜</span>Кроки розв'язання рівняння</div>
-  <div class="steps-list">
-    <div class="step-item"><div class="step-num">1</div><div class="step-text"><em>Читай уважно</em> — знайди ключові слова: suma, dwukrotność, o … większy</div></div>
-    <div class="step-item"><div class="step-num">2</div><div class="step-text"><em>Познач невідому</em> — нехай x = те що шукаємо</div></div>
-    <div class="step-item"><div class="step-num">3</div><div class="step-text"><em>Склади рівняння</em> — перепиши умову математично</div></div>
-    <div class="step-item"><div class="step-num">4</div><div class="step-text"><em>Розкрий дужки</em> — якщо є: (x + 2) + 2x = x + 2 + 2x</div></div>
-    <div class="step-item"><div class="step-num">5</div><div class="step-text"><em>Збери x</em> — всі x на одну сторону: 3x + 2 = 20</div></div>
-    <div class="step-item"><div class="step-num">6</div><div class="step-text"><em>Ізолюй x</em> — перенеси числа: 3x = 18, x = 6</div></div>
-    <div class="step-item"><div class="step-num">7</div><div class="step-text"><em>Перевір!</em> — підстав x назад в рівняння</div></div>
-  </div>
+  <div class="card-h">${t.icon} ${t.name}</div>
+  <p style="font-size:14px;color:var(--muted);margin-bottom:14px;line-height:1.6">${t.summary}</p>
+  <div class="facts-grid">${factsHTML}</div>
 </div>
 <div style="margin-top:4px">
-  <button class="btn btn-primary" onclick="initTab('glossary')">📚 Словник →</button>
+  <button class="btn btn-gold" onclick="setTab('timeline')">📅 Chronologia →</button>
 </div>`;
 }
 
-// ─── GLOSSARY ────────────────────────────────────────────────────────────────
-function renderGlossary() {
-  const cats = ['all', ...Object.keys(CAT_LABELS).filter(k => k !== 'all')];
-  const filtered = GLOSSARY.filter(g => {
-    const matchCat = glossFilter === 'all' || g.cat === glossFilter;
-    const matchSearch = !glossSearch ||
-      g.pl.toLowerCase().includes(glossSearch) ||
-      g.uk.toLowerCase().includes(glossSearch);
-    return matchCat && matchSearch;
-  });
-
+function renderTimeline(){
+  const t=currentTopic;
   return `
 <div class="card">
-  <div class="card-title"><span class="icon">📚</span>Словник математичних термінів</div>
-  <input class="gloss-search" type="text" placeholder="🔍 Шукай по-польськи або по-українськи…"
-    value="${glossSearch}" oninput="glossSearch=this.value.toLowerCase();render()" />
-  <div class="gloss-cats">
-    ${cats.map(c => `<button class="gloss-cat${glossFilter===c?' active':''}" onclick="glossFilter='${c}';render()">${CAT_LABELS[c]||c}</button>`).join('')}
+  <div class="card-h">📅 Chronologia — ${t.name}</div>
+  <div class="timeline">
+    ${t.timeline.map(item=>`
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-year">${item.y}</div>
+        <div class="tl-text">${item.t}</div>
+      </div>`).join('')}
   </div>
-  <div class="gloss-grid">
-    ${filtered.length === 0 ? '<div style="color:var(--muted);font-size:14px;padding:10px">Нічого не знайдено</div>' :
-      filtered.map(g => `
-      <div class="gloss-item">
-        <div class="gloss-pl">
-          ${g.pl}
-          <small>${g.ex}</small>
-          <span class="gloss-tag tag-${g.cat}">${CAT_LABELS[g.cat]||g.cat}</span>
-        </div>
-        <div class="gloss-uk">
-          ${g.uk}
+</div>`;
+}
+
+function renderPeople(){
+  const t=currentTopic;
+  return `
+<div class="card">
+  <div class="card-h">👤 Ważne postacie — ${t.name}</div>
+  <div class="people-grid">
+    ${t.people.map(p=>`
+      <div class="person">
+        <div class="person-ico">${p.ico}</div>
+        <div>
+          <div class="person-name">${p.name}</div>
+          <div class="person-role">${p.role}</div>
+          <div class="person-fact">${p.fact}</div>
         </div>
       </div>`).join('')}
   </div>
 </div>`;
 }
 
-// ─── WORKED EXAMPLES ─────────────────────────────────────────────────────────
-function renderExamples() {
-  return WORKED.map(w => `
-<div class="example-card">
-  <div class="example-header">${w.title}</div>
-  <div class="example-body">
-    <div class="task-text">${w.task}</div>
-    <div style="display:flex;flex-direction:column;gap:7px">
-      ${w.steps.map(s => `
-        <div class="solution-step">
-          <div class="sol-num">${s.num}</div>
-          <div class="sol-text">${s.text}</div>
-        </div>`).join('')}
+function renderFlash(){
+  const cards=currentTopic.flashcards;
+  const c=cards[fcIndex];
+  return `
+<div class="card">
+  <div class="card-h">🃏 Fiszki — ${currentTopic.name}</div>
+  <div class="fc-info">Kliknij kartę, by zobaczyć odpowiedź · ${fcIndex+1} z ${cards.length}</div>
+  <div class="flashcard${fcFlipped?' flipped':''}" onclick="flipCard()">
+    <div class="fc-inner">
+      <div class="fc-front">
+        <div class="fc-q">${c.q}</div>
+        <div class="fc-tap">👆 Kliknij, by zobaczyć odpowiedź</div>
+      </div>
+      <div class="fc-back">
+        <div class="fc-a">${c.a}</div>
+      </div>
     </div>
-    <div class="answer-box">✅ Відповідь: ${w.answer}</div>
   </div>
-</div>`).join('') + `<div style="margin-top:4px"><button class="btn btn-primary" onclick="initTab('quiz')">🧮 Перейти до тесту →</button></div>`;
+  <div class="fc-nav">
+    <button class="btn btn-sec" onclick="fcNav(-1)" ${fcIndex===0?'disabled':''}>← Poprzednia</button>
+    <span class="fc-count">${fcIndex+1} / ${cards.length}</span>
+    <button class="btn btn-gold" onclick="fcNav(1)" ${fcIndex===cards.length-1?'disabled':''}>Następna →</button>
+  </div>
+</div>`;
 }
 
-// ─── QUIZ ────────────────────────────────────────────────────────────────────
-function renderQuiz() {
-  if (qi >= qList.length) return renderResult();
-  const q = qList[qi];
-  const total = qList.length;
-  const pct = Math.round((qi / total) * 100);
+function flipCard(){fcFlipped=!fcFlipped;render();}
+function fcNav(d){fcIndex+=d;fcFlipped=false;render();}
 
-  const optsHTML = q.opts.map((o, i) => {
-    let cls = 'opt';
-    if (sel !== null) {
-      if (i === q.a) cls += ' highlight';
-      else if (i === sel && sel !== q.a) cls += ' wrong';
-    }
-    return `<button class="${cls}" onclick="choose(${i})" ${sel !== null ? 'disabled' : ''}>${o}</button>`;
+function renderQuiz(){
+  if(qi>=qList.length) return renderResult();
+  const q=qList[qi];
+  const total=qList.length;
+  const pct=Math.round((qi/total)*100);
+  const optsHTML=q.opts.map((o,i)=>{
+    let cls='opt';
+    if(sel!==null){if(i===q.a)cls+=' ok';else if(i===sel&&sel!==q.a)cls+=' no';}
+    return `<button class="${cls}" onclick="choose(${i})" ${sel!==null?'disabled':''}>${o}</button>`;
   }).join('');
-
-  let fb = '';
-  if (sel !== null) {
-    if (sel === q.a) {
-      fb = `<div class="feedback ok">✓ Правильно! <div class="sol-reveal">${q.sol}</div></div>`;
-    } else {
-      fb = `<div class="feedback no">✗ Правильна відповідь: <strong>${q.opts[q.a]}</strong><div class="sol-reveal">${q.sol}</div></div>`;
-    }
+  let fb='';
+  if(sel!==null){
+    if(sel===q.a)fb=`<div class="feedback ok">✓ Правильно! <div class="expl">${q.expl}</div></div>`;
+    else fb=`<div class="feedback no">✗ Правильna: <strong>${q.opts[q.a]}</strong><div class="expl">${q.expl}</div></div>`;
   }
-
   return `
-<div class="progress-wrap">
-  <div class="progress-bar"><div class="progress-fill" style="width:${pct}%"></div></div>
-  <div class="score-row">
-    <span>Питання <b>${qi+1}/${total}</b></span>
-    <span>✅ <b style="color:var(--green)">${score}</b></span>
-    <span>❌ <b style="color:var(--red)">${mistakes.length}</b></span>
-  </div>
+<div class="prog-bar"><div class="prog-fill" style="width:${pct}%"></div></div>
+<div class="score-row">
+  <span>Pytanie <b>${qi+1}/${total}</b></span>
+  <span>✅ <b style="color:var(--green)">${score}</b></span>
+  <span>❌ <b style="color:var(--red)">${mistakes.length}</b></span>
 </div>
 <div class="card">
-  <div class="q-label">Обери правильну відповідь</div>
+  <div class="q-label">Pytanie ${qi+1}</div>
   <div class="q-text">${q.q}</div>
-  ${q.task ? `<div class="q-task">${q.task}</div>` : ''}
   <div class="q-hint">💡 ${q.hint}</div>
   <div class="opts">${optsHTML}</div>
   ${fb}
 </div>
-<div class="nav-row">${sel !== null ? `<button class="btn btn-primary" onclick="nextQ()">Далі →</button>` : ''}</div>`;
+<div class="nav-row">${sel!==null?`<button class="btn btn-gold" onclick="nextQ()">Dalej →</button>`:''}</div>`;
 }
 
-function renderResult() {
-  const total = qList.length;
-  const pct = Math.round((score / total) * 100);
-  const emoji = pct >= 80 ? '🎉' : pct >= 60 ? '👍' : '📚';
-  const stars = pct >= 100 ? '⭐⭐⭐' : pct >= 80 ? '⭐⭐' : pct >= 60 ? '⭐' : '';
-  const msg = pct >= 80 ? 'Варвара, ти молодець!' : pct >= 60 ? 'Непогано! Повтори помилки.' : 'Ще раз подивись приклади і спробуй знову.';
-
-  const mHTML = mistakes.length ? `
+function renderResult(){
+  const total=qList.length;
+  const pct=Math.round((score/total)*100);
+  const emoji=pct>=80?'🎉':pct>=60?'👍':'📚';
+  const stars=pct>=100?'⭐⭐⭐':pct>=80?'⭐⭐':pct>=60?'⭐':'';
+  const msg=pct>=80?'Warwara jest gotowa!':pct>=60?'Dobrze! Powtórz błędy.':'Przeczytaj teorię jeszcze raz.';
+  const mHTML=mistakes.length?`
     <div style="margin-top:20px;text-align:left">
-      <div style="font-family:'Nunito',sans-serif;font-size:15px;font-weight:800;margin-bottom:12px">Розбір помилок:</div>
-      ${mistakes.map(m => `
+      <div style="font-family:'Playfair Display',serif;font-size:16px;font-weight:700;margin-bottom:12px">Błędy do powtórzenia:</div>
+      ${mistakes.map(m=>`
         <div class="mistake-card">
-          <div class="m-q">${m.q}${m.task ? '<br><em style="font-weight:400">' + m.task + '</em>' : ''}</div>
-          <div class="m-wrong">Ти відповіла: <b>${m.wrong}</b></div>
-          <div class="m-correct">✓ Правильно: ${m.correct}</div>
+          <div class="m-q">${m.q}</div>
+          <div class="m-w">Ти відповіла: <b>${m.wrong}</b></div>
+          <div class="m-c">✓ ${m.correct}</div>
           <div class="m-rule">${m.rule}</div>
         </div>`).join('')}
-    </div>` : '';
-
+    </div>`:'';
   return `<div class="card"><div class="result">
-    <div class="emoji">${emoji}</div>
-    <div class="stars">${stars}</div>
-    <div class="big-score">${score}/${total}</div>
+    <div style="font-size:48px">${emoji}</div>
+    <div style="font-size:28px;margin:6px 0">${stars}</div>
+    <div class="big">${score}/${total}</div>
     <div class="msg">${msg}</div>
     <div class="result-btns">
-      <button class="btn btn-sec" onclick="initTab('examples')">✏️ Приклади</button>
-      <button class="btn btn-primary" onclick="initTab('quiz')">Ще раз ↺</button>
+      <button class="btn btn-sec" onclick="setTab('theory')">📖 Teoria</button>
+      <button class="btn btn-sec" onclick="setTab('flash')">🃏 Fiszki</button>
+      <button class="btn btn-gold" onclick="setTab('quiz')">Spróbuj ponownie ↺</button>
     </div>
     ${mHTML}
   </div></div>`;
 }
 
-function choose(i) {
-  if (sel !== null) return;
-  sel = i;
-  const q = qList[qi];
-  if (i === q.a) score++;
-  else mistakes.push({ q: q.q, task: q.task, wrong: q.opts[i], correct: q.opts[q.a], rule: q.sol });
+function choose(i){
+  if(sel!==null)return;
+  sel=i;
+  const q=qList[qi];
+  if(i===q.a)score++;
+  else mistakes.push({q:q.q,wrong:q.opts[i],correct:q.opts[q.a],rule:q.expl});
   render();
 }
-function nextQ() { qi++; sel = null; render(); }
+function nextQ(){qi++;sel=null;render();}
 
-function render() {
-  const c = document.getElementById('content');
-  if (currentTab === 'theory')   c.innerHTML = renderTheory();
-  else if (currentTab === 'glossary') c.innerHTML = renderGlossary();
-  else if (currentTab === 'examples') c.innerHTML = renderExamples();
-  else c.innerHTML = renderQuiz();
+function render(){
+  const c=document.getElementById('content');
+  if(currentTab==='theory')   c.innerHTML=renderTheory();
+  else if(currentTab==='timeline')c.innerHTML=renderTimeline();
+  else if(currentTab==='people')  c.innerHTML=renderPeople();
+  else if(currentTab==='flash')   c.innerHTML=renderFlash();
+  else c.innerHTML=renderQuiz();
 }
 
-initTab('theory');
+setTopic('osw');
 </script>
 </body>
 </html>
