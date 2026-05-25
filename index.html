@@ -3,175 +3,202 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Historia · Річна контрольна · Варвара</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<title>Biologia · Ryby, Płazy, Gady · Варвара</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&family=DM+Sans:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
 <style>
 :root{
-  --ink:#1a1208;
-  --parch:#fdf6e3;
-  --parch2:#f5ead0;
-  --border:#d4b896;
-  --muted:#8a7560;
-  --gold:#b8860b;
-  --gold-light:#fef3c7;
-  --gold-bright:#f59e0b;
-  --red:#9b1c1c;
-  --red-bg:#fef2f2;
-  --blue:#1e3a8a;
-  --blue-bg:#eff6ff;
-  --green:#166534;
-  --green-bg:#f0fdf4;
-  --teal:#0f766e;
-  --teal-bg:#f0fdfa;
-  --r:14px;--rs:9px;
-  --shadow:0 4px 24px rgba(26,18,8,.10);
+  --bg:#f0faf4;
+  --card:#ffffff;
+  --border:#c8e6d0;
+  --ink:#0d2b1a;
+  --muted:#5a7a67;
+  --teal:#0d9488;--teal-bg:#f0fdfa;--teal-b:#99f6e4;
+  --blue:#1d6fa4;--blue-bg:#eff8ff;--blue-b:#93c5fd;
+  --amber:#b45309;--amber-bg:#fffbeb;--amber-b:#fcd34d;
+  --red:#b91c1c;--red-bg:#fff1f2;--red-b:#fca5a5;
+  --green:#15803d;--green-bg:#f0fdf4;--green-b:#86efac;
+  --purple:#7c3aed;--purple-bg:#f5f3ff;--purple-b:#c4b5fd;
+  --r:16px;--rs:10px;
+  --sh:0 4px 20px rgba(13,43,26,.08);
 }
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Source Sans 3',sans-serif;background:var(--parch);color:var(--ink);min-height:100vh;
-  background-image:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23c8a96e' fill-opacity='0.07'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+body{
+  font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);min-height:100vh;
+  background-image:
+    radial-gradient(ellipse at 5% 10%,#bbf7d0 0%,transparent 45%),
+    radial-gradient(ellipse at 95% 90%,#bae6fd 0%,transparent 45%);
 }
 .page{max-width:700px;margin:0 auto;padding:24px 16px 80px}
 
 /* HERO */
-.hero{text-align:center;padding:32px 0 28px;border-bottom:2px solid var(--border);margin-bottom:28px}
-.hero .ornament{font-size:28px;letter-spacing:12px;color:var(--gold);margin-bottom:10px}
-.hero h1{font-family:'Playfair Display',serif;font-size:32px;font-weight:900;color:var(--ink);line-height:1.15;margin-bottom:8px}
-.hero h1 em{color:var(--gold);font-style:normal}
+.hero{text-align:center;padding:28px 0 24px;margin-bottom:24px}
+.hero .badge{display:inline-flex;align-items:center;gap:6px;background:var(--teal);color:#fff;
+  font-family:'Outfit',sans-serif;font-weight:700;font-size:11px;letter-spacing:.1em;
+  text-transform:uppercase;padding:5px 16px;border-radius:99px;margin-bottom:14px}
+.hero h1{font-family:'Outfit',sans-serif;font-size:30px;font-weight:900;line-height:1.15;margin-bottom:6px}
+.hero h1 span{color:var(--teal)}
 .hero p{font-size:14px;color:var(--muted)}
-.hero .badge{display:inline-block;background:var(--gold);color:white;font-size:11px;font-weight:600;
-  letter-spacing:.08em;text-transform:uppercase;padding:4px 14px;border-radius:99px;margin-bottom:16px}
 
-/* TOPIC SELECTOR */
-.topic-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:22px}
-.topic-btn{
-  padding:14px 12px;border:2px solid var(--border);border-radius:var(--r);
-  background:white;cursor:pointer;text-align:left;transition:all .18s;
-  font-family:'Source Sans 3',sans-serif;box-shadow:var(--shadow);
+/* GROUP TABS */
+.group-tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:18px}
+.gtab{
+  padding:14px 10px;border:2px solid var(--border);border-radius:var(--r);
+  background:white;cursor:pointer;text-align:center;transition:all .18s;
+  font-family:'Outfit',sans-serif;box-shadow:var(--sh);
 }
-.topic-btn:hover{border-color:var(--gold-bright);background:var(--gold-light);transform:translateY(-2px)}
-.topic-btn.active{border-color:var(--gold);background:var(--gold-light);box-shadow:0 0 0 3px rgba(184,134,11,.15)}
-.topic-btn .t-num{font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
-.topic-btn .t-name{font-family:'Playfair Display',serif;font-size:14px;font-weight:700;color:var(--ink);line-height:1.3}
-.topic-btn .t-era{font-size:12px;color:var(--muted);margin-top:3px}
-.topic-btn.active .t-num,.topic-btn.active .t-era{color:var(--gold)}
+.gtab:hover{transform:translateY(-2px)}
+.gtab .g-ico{font-size:26px;margin-bottom:6px}
+.gtab .g-name{font-size:13px;font-weight:800;color:var(--ink);line-height:1.3}
+.gtab .g-sub{font-size:11px;color:var(--muted);margin-top:2px}
+.gtab.fish.active{border-color:var(--blue);background:var(--blue-bg)}
+.gtab.amphibian.active{border-color:var(--teal);background:var(--teal-bg)}
+.gtab.reptile.active{border-color:var(--amber);background:var(--amber-bg)}
 
 /* INNER TABS */
-.inner-tabs{display:flex;gap:6px;margin-bottom:18px;background:white;padding:5px;border-radius:var(--r);border:1px solid var(--border)}
-.itab{flex:1;padding:8px 6px;border-radius:var(--rs);border:none;font-family:'Source Sans 3',sans-serif;
-  font-size:12px;font-weight:600;cursor:pointer;background:transparent;color:var(--muted);transition:all .18s;text-align:center}
-.itab:hover{background:var(--parch2);color:var(--ink)}
-.itab.active{background:var(--gold);color:white}
+.itabs{display:flex;gap:5px;background:white;padding:5px;border-radius:var(--r);
+  border:1px solid var(--border);margin-bottom:18px}
+.itab{flex:1;padding:8px 4px;border-radius:var(--rs);border:none;
+  font-family:'Outfit',sans-serif;font-size:12px;font-weight:700;
+  cursor:pointer;background:transparent;color:var(--muted);transition:all .18s;text-align:center}
+.itab:hover{background:var(--bg);color:var(--ink)}
+.itab.active.fish{background:var(--blue);color:white}
+.itab.active.amphibian{background:var(--teal);color:white}
+.itab.active.reptile{background:var(--amber);color:white}
 
-/* CARDS */
-.card{background:white;border:1px solid var(--border);border-radius:var(--r);padding:20px;margin-bottom:14px;box-shadow:var(--shadow);animation:up .22s ease}
+/* CARD */
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);
+  padding:20px;margin-bottom:14px;box-shadow:var(--sh);animation:up .22s ease}
 @keyframes up{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
-.card-h{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:var(--ink);margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.card-h{font-family:'Outfit',sans-serif;font-size:18px;font-weight:800;margin-bottom:14px;
+  display:flex;align-items:center;gap:8px}
 
-/* KEY FACTS */
-.facts-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px}
-.fact-box{padding:12px 14px;border-radius:var(--rs);border:1.5px solid}
-.fact-box.gold{background:var(--gold-light);border-color:#fcd34d}
-.fact-box.red{background:var(--red-bg);border-color:#fca5a5}
-.fact-box.blue{background:var(--blue-bg);border-color:#93c5fd}
-.fact-box.green{background:var(--green-bg);border-color:#86efac}
-.fact-box.teal{background:var(--teal-bg);border-color:#5eead4}
-.fact-box h3{font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;margin-bottom:7px}
-.fact-box.gold h3{color:var(--gold)}
-.fact-box.red h3{color:var(--red)}
-.fact-box.blue h3{color:var(--blue)}
-.fact-box.green h3{color:var(--green)}
-.fact-box.teal h3{color:var(--teal)}
-.fact-box ul{list-style:none;font-size:13px;line-height:1.9}
-.fact-box.gold ul{color:#78350f}
-.fact-box.red ul{color:#7f1d1d}
-.fact-box.blue ul{color:#1e3a8a}
-.fact-box.green ul{color:#14532d}
-.fact-box.teal ul{color:#134e4a}
-.fact-box ul li::before{content:"→ ";opacity:.5}
+/* FACTS GRID */
+.fg{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:14px}
+.fb{padding:12px 14px;border-radius:var(--rs);border:1.5px solid}
+.fb.teal{background:var(--teal-bg);border-color:var(--teal-b)}
+.fb.blue{background:var(--blue-bg);border-color:var(--blue-b)}
+.fb.amber{background:var(--amber-bg);border-color:var(--amber-b)}
+.fb.red{background:var(--red-bg);border-color:var(--red-b)}
+.fb.green{background:var(--green-bg);border-color:var(--green-b)}
+.fb.purple{background:var(--purple-bg);border-color:var(--purple-b)}
+.fb h3{font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;margin-bottom:7px}
+.fb.teal h3{color:var(--teal)}.fb.blue h3{color:var(--blue)}.fb.amber h3{color:var(--amber)}
+.fb.red h3{color:var(--red)}.fb.green h3{color:var(--green)}.fb.purple h3{color:var(--purple)}
+.fb ul{list-style:none;font-size:13px;line-height:1.9}
+.fb.teal ul{color:#134e4a}.fb.blue ul{color:#1e3a8a}.fb.amber ul{color:#78350f}
+.fb.red ul{color:#7f1d1d}.fb.green ul{color:#14532d}.fb.purple ul{color:#4c1d95}
+.fb ul li::before{content:"→ ";opacity:.45}
 
-/* TIMELINE */
-.timeline{position:relative;padding-left:28px}
-.timeline::before{content:'';position:absolute;left:9px;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,var(--gold),var(--border))}
-.tl-item{position:relative;margin-bottom:14px}
-.tl-dot{position:absolute;left:-23px;top:4px;width:12px;height:12px;border-radius:50%;background:var(--gold);border:2px solid white;box-shadow:0 0 0 2px var(--gold)}
-.tl-year{font-family:'Playfair Display',serif;font-size:13px;font-weight:700;color:var(--gold);margin-bottom:2px}
-.tl-text{font-size:13px;line-height:1.6;color:var(--ink)}
-.tl-text strong{color:var(--red);font-weight:700}
+/* COMPARE TABLE */
+.ctable{width:100%;border-collapse:collapse;font-size:13px;margin-bottom:10px}
+.ctable th{background:var(--ink);color:white;padding:9px 12px;font-family:'Outfit',sans-serif;font-weight:700;font-size:12px;text-align:left}
+.ctable th:first-child{border-radius:var(--rs) 0 0 0}
+.ctable th:last-child{border-radius:0 var(--rs) 0 0}
+.ctable td{padding:9px 12px;border-bottom:1px solid var(--border);vertical-align:top;line-height:1.5}
+.ctable tr:nth-child(even) td{background:#f8fffe}
+.ctable tr:last-child td{border-bottom:none}
+.ctable .label{font-weight:600;color:var(--ink)}
+.ctable .fish-c{color:var(--blue)}.ctable .amp-c{color:var(--teal)}.ctable .rep-c{color:var(--amber)}
 
-/* PEOPLE */
-.people-grid{display:flex;flex-direction:column;gap:8px}
-.person{display:flex;gap:12px;align-items:flex-start;background:var(--parch2);border-radius:var(--rs);padding:10px 14px;border:1px solid var(--border)}
-.person-ico{font-size:22px;flex-shrink:0}
-.person-name{font-family:'Playfair Display',serif;font-size:14px;font-weight:700;color:var(--ink);margin-bottom:2px}
-.person-role{font-size:12px;color:var(--muted);font-style:italic;margin-bottom:3px}
-.person-fact{font-size:13px;line-height:1.5;color:var(--ink)}
+/* BODY PARTS */
+.body-grid{display:flex;flex-direction:column;gap:7px}
+.body-item{display:flex;gap:12px;align-items:flex-start;
+  background:var(--bg);border-radius:var(--rs);padding:10px 14px;border:1px solid var(--border)}
+.body-ico{font-size:20px;flex-shrink:0}
+.body-name{font-family:'Outfit',sans-serif;font-size:14px;font-weight:700;margin-bottom:2px}
+.body-desc{font-size:13px;line-height:1.5;color:var(--ink)}
+.body-pl{font-size:12px;color:var(--muted);font-style:italic}
+
+/* EXAMPLES */
+.ex-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+.ex-card{background:var(--bg);border:1.5px solid var(--border);border-radius:var(--rs);padding:12px 14px;text-align:center}
+.ex-ico{font-size:28px;margin-bottom:4px}
+.ex-name{font-family:'Outfit',sans-serif;font-size:13px;font-weight:800;color:var(--ink)}
+.ex-pl{font-size:12px;color:var(--muted)}
+.ex-fact{font-size:12px;color:var(--ink);margin-top:4px;line-height:1.5}
+
+/* SIGNIFICANCE */
+.sig-item{display:flex;gap:10px;align-items:flex-start;margin-bottom:10px}
+.sig-ico{font-size:18px;flex-shrink:0;margin-top:1px}
+.sig-text{font-size:14px;line-height:1.6}
+.sig-text strong{color:var(--green)}
 
 /* FLASHCARDS */
-.fc-info{font-size:13px;color:var(--muted);margin-bottom:14px;text-align:center}
-.flashcard{
-  perspective:1000px;width:100%;min-height:180px;cursor:pointer;margin-bottom:12px;
-}
-.fc-inner{
-  position:relative;width:100%;min-height:180px;
-  transform-style:preserve-3d;transition:transform .5s;border-radius:var(--r);
-}
+.fc-wrap{margin-bottom:14px}
+.fc-meta{text-align:center;font-size:13px;color:var(--muted);margin-bottom:12px}
+.flashcard{perspective:1000px;width:100%;min-height:175px;cursor:pointer;margin-bottom:10px}
+.fc-inner{position:relative;width:100%;min-height:175px;transform-style:preserve-3d;transition:transform .48s;border-radius:var(--r)}
 .flashcard.flipped .fc-inner{transform:rotateY(180deg)}
 .fc-front,.fc-back{
-  position:absolute;width:100%;min-height:180px;backface-visibility:hidden;
-  border-radius:var(--r);padding:24px 20px;display:flex;flex-direction:column;justify-content:center;
-  border:2px solid var(--border);box-shadow:var(--shadow);
+  position:absolute;width:100%;min-height:175px;backface-visibility:hidden;
+  border-radius:var(--r);padding:22px 20px;display:flex;flex-direction:column;
+  justify-content:center;border:2px solid var(--border);box-shadow:var(--sh);
 }
 .fc-front{background:white;text-align:center}
-.fc-back{background:var(--gold-light);transform:rotateY(180deg);border-color:var(--gold)}
-.fc-front .fc-q{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:var(--ink);line-height:1.4;margin-bottom:10px}
-.fc-front .fc-tap{font-size:12px;color:var(--muted)}
-.fc-back .fc-a{font-size:15px;line-height:1.7;color:var(--ink)}
-.fc-back .fc-a strong{color:var(--red);font-weight:700}
-.fc-nav{display:flex;justify-content:space-between;align-items:center;margin-top:6px}
-.fc-count{font-size:13px;color:var(--muted)}
+.fc-back{transform:rotateY(180deg)}
+.fc-back.fish{background:var(--blue-bg);border-color:var(--blue-b)}
+.fc-back.amphibian{background:var(--teal-bg);border-color:var(--teal-b)}
+.fc-back.reptile{background:var(--amber-bg);border-color:var(--amber-b)}
+.fc-q{font-family:'Outfit',sans-serif;font-size:17px;font-weight:800;line-height:1.4;margin-bottom:8px}
+.fc-tap{font-size:12px;color:var(--muted)}
+.fc-a{font-size:14px;line-height:1.75}
+.fc-a strong{color:var(--teal)}
+.fc-nav{display:flex;justify-content:space-between;align-items:center}
+.fc-count{font-size:13px;color:var(--muted);font-weight:600}
 
 /* QUIZ */
-.prog-bar{height:6px;background:var(--parch2);border-radius:99px;margin-bottom:10px;overflow:hidden}
-.prog-fill{height:100%;background:linear-gradient(90deg,var(--gold),var(--gold-bright));border-radius:99px;transition:width .4s}
+.prog-bar{height:6px;background:var(--border);border-radius:99px;margin-bottom:10px;overflow:hidden}
+.prog-fill{height:100%;border-radius:99px;transition:width .4s}
+.fish-prog{background:linear-gradient(90deg,var(--blue),#60a5fa)}
+.amphibian-prog{background:linear-gradient(90deg,var(--teal),#2dd4bf)}
+.reptile-prog{background:linear-gradient(90deg,var(--amber),#fcd34d)}
 .score-row{display:flex;gap:14px;font-size:13px;color:var(--muted);margin-bottom:14px}
 .score-row b{color:var(--ink)}
 .q-label{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:7px;font-weight:600}
-.q-text{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;line-height:1.5;margin-bottom:8px}
-.q-hint{font-size:13px;color:var(--muted);font-style:italic;margin-bottom:14px}
+.q-text{font-family:'Outfit',sans-serif;font-size:17px;font-weight:800;line-height:1.5;margin-bottom:8px}
+.q-hint{font-size:13px;color:var(--muted);font-style:italic;margin-bottom:12px}
 .opts{display:flex;flex-direction:column;gap:7px}
 .opt{padding:11px 16px;border:1.5px solid var(--border);border-radius:var(--rs);
-  font-family:'Source Sans 3',sans-serif;font-size:14px;font-weight:600;
+  font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;
   cursor:pointer;background:white;color:var(--ink);text-align:left;transition:all .15s}
-.opt:hover:not(:disabled){border-color:var(--gold-bright);background:var(--gold-light)}
-.opt.ok{background:var(--green-bg);border-color:#6ee7b7;color:#14532d}
-.opt.no{background:var(--red-bg);border-color:#fca5a5;color:#7f1d1d}
+.opt:hover:not(:disabled){border-color:var(--teal);background:var(--teal-bg)}
+.opt.ok{background:var(--green-bg);border-color:var(--green-b);color:#14532d}
+.opt.no{background:var(--red-bg);border-color:var(--red-b);color:#7f1d1d}
 .feedback{margin-top:12px;padding:12px 16px;border-radius:var(--rs);font-size:14px;line-height:1.7;animation:up .2s ease}
-.feedback.ok{background:var(--green-bg);color:#14532d;border:1px solid #6ee7b7}
-.feedback.no{background:var(--red-bg);color:#7f1d1d;border:1px solid #fca5a5}
-.expl{margin-top:8px;background:white;border-radius:8px;padding:10px 13px;font-size:13px;color:var(--blue);line-height:1.7;border:1px solid #bfdbfe}
+.feedback.ok{background:var(--green-bg);color:#14532d;border:1px solid var(--green-b)}
+.feedback.no{background:var(--red-bg);color:#7f1d1d;border:1px solid var(--red-b)}
+.expl-box{margin-top:8px;background:white;border-radius:8px;padding:10px 13px;
+  font-size:13px;line-height:1.7;border:1px solid var(--border)}
 .nav-row{display:flex;justify-content:flex-end;margin-top:12px}
-.btn{padding:10px 22px;border-radius:var(--rs);border:none;font-family:'Source Sans 3',sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:all .15s}
-.btn-gold{background:var(--gold);color:white;box-shadow:0 2px 10px rgba(184,134,11,.3)}
-.btn-gold:hover{background:#a16207;transform:translateY(-1px)}
+.btn{padding:10px 22px;border-radius:var(--rs);border:none;
+  font-family:'Outfit',sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:all .15s}
+.btn-fish{background:var(--blue);color:white}
+.btn-fish:hover{background:#1553a0}
+.btn-amp{background:var(--teal);color:white}
+.btn-amp:hover{background:#0f766e}
+.btn-rep{background:var(--amber);color:white}
+.btn-rep:hover{background:#92400e}
 .btn-sec{background:white;color:var(--ink);border:1.5px solid var(--border)}
-.btn-sec:hover{background:var(--parch2)}
+.btn-sec:hover{background:var(--bg)}
 
 /* RESULT */
 .result{text-align:center;padding:10px 0 20px}
-.result .big{font-family:'Playfair Display',serif;font-size:60px;font-weight:900;color:var(--gold);line-height:1}
+.result .big{font-family:'Outfit',sans-serif;font-size:58px;font-weight:900;color:var(--teal);line-height:1}
 .result .msg{font-size:16px;color:var(--muted);margin:10px 0 20px}
 .result-btns{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
-.mistake-card{background:#fff9f0;border:1.5px solid #fcd34d;border-radius:var(--rs);padding:14px;margin-bottom:10px;text-align:left}
-.m-q{font-family:'Playfair Display',serif;font-weight:700;font-size:14px;margin-bottom:4px;color:var(--ink)}
-.m-w{font-size:13px;color:var(--red);margin-bottom:4px}
-.m-c{display:inline-block;background:var(--green-bg);color:#14532d;font-size:13px;font-weight:700;padding:3px 10px;border-radius:6px;margin-bottom:7px}
-.m-rule{font-size:13px;color:var(--blue);background:var(--blue-bg);padding:8px 12px;border-radius:8px;line-height:1.7}
+.mk{background:#fffbeb;border:1.5px solid var(--amber-b);border-radius:var(--rs);padding:13px;margin-bottom:9px;text-align:left}
+.mk-q{font-weight:700;font-size:14px;margin-bottom:4px}
+.mk-w{font-size:13px;color:var(--red);margin-bottom:4px}
+.mk-c{display:inline-block;background:var(--green-bg);color:#14532d;font-size:13px;font-weight:700;padding:3px 10px;border-radius:6px;margin-bottom:7px}
+.mk-r{font-size:13px;color:var(--blue);background:var(--blue-bg);padding:8px 12px;border-radius:8px;line-height:1.7}
+
+/* COMPARE TAB */
+.compare-note{font-size:13px;color:var(--muted);margin-bottom:12px;font-style:italic}
 
 @media(max-width:500px){
-  .facts-grid{grid-template-columns:1fr}
-  .topic-grid{grid-template-columns:1fr}
-  .hero h1{font-size:24px}
-  .result .big{font-size:44px}
+  .fg{grid-template-columns:1fr}.group-tabs{grid-template-columns:1fr}
+  .ex-grid{grid-template-columns:1fr}.hero h1{font-size:24px}
+  .result .big{font-size:42px}
 }
 </style>
 </head>
@@ -179,357 +206,309 @@ body{font-family:'Source Sans 3',sans-serif;background:var(--parch);color:var(--
 <div class="page">
 
 <div class="hero">
-  <div class="badge">📜 Historia · 6 клас</div>
-  <div class="ornament">✦ ✦ ✦</div>
-  <h1>Річна контрольна —<br><em>Oświecenie i Rewolucje</em></h1>
-  <p>Теорія · Хронологія · Постаті · Флешкарти · Тест · Варвара</p>
+  <div class="badge">🔬 Biologia · 6 клас</div>
+  <h1>Kręgowce —<br><span>Ryby · Płazy · Gady</span></h1>
+  <p>Теорія · Будова · Приклади · Фішки · Тест · Варвара</p>
 </div>
 
-<div id="topic-grid" class="topic-grid"></div>
-<div class="inner-tabs" id="inner-tabs"></div>
+<div class="group-tabs" id="group-tabs"></div>
+<div class="itabs" id="itabs"></div>
 <div id="content"></div>
 
 </div>
 <script>
-// ═══════════════════════════════════════════════════════════ DATA
+// ══════════════════════════════════════════════════ DATA
 
-const TOPICS = [
+const GROUPS = [
   {
-    id:'osw', num:'Temat 1', era:'XVIII wiek',
-    name:'Kultura Oświecenia',
-    icon:'💡',
-    color:'gold',
-    summary:'Epoka rozumu — filozofowie głosili prawa człowieka, wolność i równość. Powstały encyklopedie, gazety, salony literackie.',
+    id:'fish', cls:'fish', ico:'🐟', name:'Ryby', sub:'Кісткові та хрящові',
+    color:'blue', btnCls:'btn-fish',
+    summary:'Ryby to kręgowce żyjące wyłącznie w wodzie. Mają łuski, skrzela i płetwy. Są zmiennocieplne — temperatura ich ciała zależy od otoczenia.',
     facts:[
-      {type:'gold',title:'Główne idee',items:['Rozum ponad wiarą i tradycją','Wolność, równość, tolerancja','Prawa naturalne człowieka','Postęp i edukacja dla wszystkich']},
-      {type:'blue',title:'Skąd się wzięło?',items:['Anglia XVII w. — J. Locke','Francja XVIII w. — Voltaire','Encyclopédie — Denis Diderot','Salony literackie w Paryżu']},
-      {type:'red',title:'Ważne słowa',items:['oświecenie = Enlightenment','filozofowie (philosophes)','encyklopedyści','tolerancja religijna']},
-      {type:'green',title:'Skutki',items:['Reformy państw europejskich','Inspiracja rewolucji USA i Francji','Rozdzielenie Kościoła od państwa','Powszechne szkolnictwo']},
+      {t:'blue',h:'Cechy ogólne',i:['Żyją tylko w wodzie','Oddychają skrzelami','Mają łuski i płetwy','Zmiennocieplne (zimnokrwiste)','Serce dwukomorowe']},
+      {t:'teal',h:'Szkielet',i:['Ryby kostne — szkielet kostny','Ryby chrzęstne — szkielet chrzęstny','Kręgosłup u obu','Żebra (u większości)','Płetwy zamiast kończyn']},
+      {t:'green',h:'Rozmnażanie',i:['Rozdzielnopłciowe','Ikra (jajeczka) w wodzie','Zapłodnienie zewnętrzne (większość)','Larwy = narybek','Brak opieki nad potomstwem (zwykle)']},
+      {t:'red',h:'Podział',i:['Ryby kostne — 95% gatunków','Ryby chrzęstne — rekiny, płaszczki','Ryby dwudyszne — wyjątek','Morskie vs słodkowodne','Ok. 33 000 gatunków na świecie']},
     ],
-    timeline:[
-      {y:'1689',t:'John Locke — <strong>prawa naturalne</strong>: życie, wolność, własność'},
-      {y:'1748',t:'Montesquieu — <strong>trójpodział władzy</strong> (Duch praw)'},
-      {y:'1751–1772',t:'<strong>Wielka Encyklopedia</strong> Diderota i d\'Alemberta — 28 tomów'},
-      {y:'1762',t:'Rousseau — <strong>umowa społeczna</strong>: władza pochodzi od ludu'},
-      {y:'ok. 1770',t:'Szczyt Oświecenia — salony, gazety, reformy'},
+    body:[
+      {ico:'👁️',name:'Linia boczna',pl:'linia naboczna',desc:'Narząd czucia — wyczuwa drgania i prądy wody. Unikalny dla ryb i płazów.'},
+      {ico:'🫁',name:'Skrzela',pl:'skrzela',desc:'Narząd oddechowy — wyciągają tlen rozpuszczony w wodzie. Zamiast płuc.'},
+      {ico:'💨',name:'Pęcherz pławny',pl:'pęcherz pławny',desc:'Narząd hydrostatyczny — reguluje głębokość pływania bez wysiłku.'},
+      {ico:'🐠',name:'Łuski',pl:'łuski',desc:'Ochrona ciała. Rosną przez całe życie — po łuskach można określić wiek ryby!'},
+      {ico:'🏊',name:'Płetwy',pl:'płetwy',desc:'Zamiast kończyn. Grzbietowa (stabilność), ogonowa (napęd), piersiowe i brzuszne (sterowność).'},
+      {ico:'❤️',name:'Serce dwukomorowe',pl:'serce',desc:'Jedna komora + jeden przedsionek. Krew okrąża ciało raz (1 obieg).'},
     ],
-    people:[
-      {ico:'🧠',name:'John Locke',role:'Anglia, 1632–1704',fact:'Ojciec liberalizmu. Głosił, że ludzie mają naturalne prawa: życie, wolność i własność. Rząd istnieje, by je chronić.'},
-      {ico:'✍️',name:'Voltaire',role:'Francja, 1694–1778',fact:'Walczył o tolerancję religijną i wolność słowa. Krytykował Kościół i absolutyzm. Słynna zasada: "Nie zgadzam się z tobą, ale bronię twego prawa do mówienia."'},
-      {ico:'⚖️',name:'Montesquieu',role:'Francja, 1689–1755',fact:'Wymyślił trójpodział władzy: ustawodawcza, wykonawcza, sądownicza. To podstawa każdej demokracji do dziś.'},
-      {ico:'📖',name:'Jean-Jacques Rousseau',role:'Genewa, 1712–1778',fact:'Głosił, że władza pochodzi od ludu (umowa społeczna). Inspirował Rewolucję Francuską. "Człowiek rodzi się wolny, a wszędzie jest w kajdanach."'},
-      {ico:'📚',name:'Denis Diderot',role:'Francja, 1713–1784',fact:'Główny redaktor Wielkiej Encyklopedii — pierwszego dzieła zebrającego całą wiedzę ludzką. 28 tomów, 20 lat pracy.'},
+    examples:[
+      {ico:'🐟',name:'Karp',pl:'karp (Cyprinus carpio)',fact:'Ryba hodowlana, do 30 kg. Symbol wigilii w Polsce.'},
+      {ico:'🐡',name:'Okoń',pl:'okoń (Perca fluviatilis)',fact:'Drapieżna ryba słodkowodna z charakterystycznymi paskami.'},
+      {ico:'🦈',name:'Rekin',pl:'rekin',fact:'Ryba chrzęstna, drapieżnik oceanów. Szkielet z chrząstki.'},
+      {ico:'🐠',name:'Śledź',pl:'śledź (Clupea harengus)',fact:'Ryba morska, bardzo ważna gospodarczo dla Polski.'},
+      {ico:'🐟',name:'Łosoś',pl:'łosoś (Salmo salar)',fact:'Wędrowna — żyje w morzu, ale tarło odbywa w rzekach.'},
+      {ico:'🦑',name:'Płaszczka',pl:'płaszczka (Raja)',fact:'Ryba chrzęstna, spłaszczone ciało, żyje na dnie.'},
+    ],
+    significance:[
+      {ico:'🍽️',text:'<strong>Pokarm</strong> — jeden z głównych źródeł białka dla ludzi na świecie (rybołówstwo, akwakultura)'},
+      {ico:'🏭',text:'<strong>Gospodarka</strong> — rybołówstwo morskie i słodkowodne, hodowle ryb (karpia, łososia, pstrąga)'},
+      {ico:'🔬',text:'<strong>Nauka</strong> — modele badań biologicznych, genetycznych, medycznych'},
+      {ico:'🌊',text:'<strong>Ekosystem</strong> — kluczowe ogniwo w łańcuchu pokarmowym ekosystemów wodnych'},
+      {ico:'🎣',text:'<strong>Wędkarstwo</strong> — sport i rekreacja, ważna część kultury'},
     ],
     flashcards:[
-      {q:'Co to jest "oświecenie"?',a:'Europejski ruch intelektualny XVIII w., który stawiał <strong>rozum</strong> ponad wiarę i tradycję. Głosił prawa człowieka, tolerancję i postęp.'},
-      {q:'Jakie prawa naturalne wymienił John Locke?',a:'<strong>Życie, wolność i własność.</strong> Rząd istnieje po to, by je chronić — jeśli tego nie robi, lud ma prawo go obalić.'},
-      {q:'Na czym polega trójpodział władzy Montesquieu?',a:'Władza powinna być podzielona na trzy niezależne części: <strong>ustawodawczą</strong> (tworzy prawa), <strong>wykonawczą</strong> (rządzi) i <strong>sądowniczą</strong> (sądzi).'},
-      {q:'Co to była Wielka Encyklopedia?',a:'Dzieło Diderota i d\'Alemberta (1751–1772) — <strong>28 tomów</strong> zebranych wiedzy z wszystkich dziedzin nauki. Symbol oświecenia.'},
-      {q:'Co głosił Rousseau w "Umowie społecznej"?',a:'Władza pochodzi od <strong>ludu</strong>. Ludzie dobrowolnie tworzą społeczeństwo (umowę). Jeśli rząd narusza prawa ludu — można go obalić.'},
+      {q:'Jak oddychają ryby?',a:'Ryby oddychają <strong>skrzelami</strong> — wyciągają tlen rozpuszczony w wodzie. Woda przepływa przez jamę skrzelową, a tlen przechodzi do krwi.'},
+      {q:'Co to jest linia boczna u ryb?',a:'<strong>Linia boczna (naboczna)</strong> — narząd czucia wzdłuż boków ciała. Wyczuwa drgania i ruchy wody. Ryby używają jej jak "szóstego zmysłu."'},
+      {q:'Czym różnią się ryby kostne od chrzęstnych?',a:'Ryby kostne mają <strong>szkielet kostny</strong> (np. karp, okoń) — 95% gatunków. Ryby chrzęstne mają <strong>szkielet z chrząstki</strong> (np. rekin, płaszczka).'},
+      {q:'Co to jest pęcherz pławny?',a:'Narząd <strong>hydrostatyczny</strong> — worek wypełniony gazem. Pozwala rybie utrzymywać głębokość w wodzie bez ciągłego wysiłku.'},
+      {q:'Jak ryby się rozmnażają?',a:'Większość ryb składa <strong>ikrę</strong> (jajeczka) w wodzie. Zapłodnienie zewnętrzne — samiec polewa ikrę nasieniem. Z jaj wylęgają się larwy — <strong>narybek</strong>.'},
+      {q:'Dlaczego ryby są zmiennocieplne?',a:'Ich temperatura ciała <strong>zależy od temperatury otoczenia</strong> — wody. Nie wytwarzają własnego ciepła. Dlatego zimą ryby są mało aktywne.'},
+      {q:'Podaj 3 przykłady ryb słodkowodnych.',a:'<strong>Karp, okoń, szczupak, leszcz, karaś</strong> — żyją w rzekach i jeziorach. W Polsce najważniejszy hodowlany to karp.'},
+      {q:'Jakie znaczenie mają ryby dla człowieka?',a:'<strong>Pokarm</strong> (ważne źródło białka), <strong>gospodarka</strong> (rybołówstwo, hodowla), <strong>nauka</strong> (badania), <strong>wędkarstwo</strong> (rekreacja).'},
+    ],
+    quiz:[
+      {q:'Czym oddychają ryby?',opts:['Płucami','Skrzelami','Skórą','Płucami i skrzelami'],a:1,hint:'Narząd w wodzie = skrzela',expl:'Ryby oddychają <strong>skrzelami</strong> — wyciągają tlen rozpuszczony w wodzie. Skrzela to odpowiednik płuc zwierząt lądowych.'},
+      {q:'Co to jest linia boczna?',opts:['Wzór na łuskach','Narząd czucia drgań w wodzie','Linia tłuszczu pod skórą','Szlak migracyjny ryb'],a:1,hint:'Wzdłuż boków ciała — wyczuwa...',expl:'<strong>Linia boczna (naboczna)</strong> — narząd zmysłu wyczuwający drgania i prądy wody. Unikalny dla ryb i płazów.'},
+      {q:'Jakie serce mają ryby?',opts:['Czterokomorowe','Trójkomorowe','Dwukomorowe','Jednokomorowe'],a:2,hint:'Mniej komór niż u ssaków',expl:'Ryby mają serce <strong>dwukomorowe</strong> (1 przedsionek + 1 komora). Krew krąży jednym obiegiem.'},
+      {q:'Czym różni się rekin od karpia?',opts:['Rekin żyje w słodkiej wodzie','Rekin ma szkielet z chrząstki, karp kostny','Karp jest większy','Rekin ma płetwy, karp nie'],a:1,hint:'Kostny vs chrzęstny',expl:'Rekin to <strong>ryba chrzęstna</strong> — szkielet z chrząstki. Karp to <strong>ryba kostna</strong> — szkielet kostny. To główny podział ryb.'},
+      {q:'Co to jest ikra?',opts:['Narząd ryby','Jajeczka ryby','Rodzaj łuski','Pokarm ryb'],a:1,hint:'Rozmnażanie ryb',expl:'<strong>Ikra</strong> to jajeczka (jaja) ryb składane w wodzie. Z ikry wylęgają się larwy — narybek. Zapłodnienie u większości ryb jest zewnętrzne.'},
     ],
   },
 
   {
-    id:'abs', num:'Temat 2', era:'XVIII wiek',
-    name:'Absolutyzm oświecony (Prusy, Austria, Rosja)',
-    icon:'👑',
-    color:'red',
-    summary:'Monarchowie połączyli nieograniczoną władzę z ideami oświecenia — reformowali państwa "z góry", ale wolności politycznych nie dawali.',
+    id:'amphibian', cls:'amphibian', ico:'🐸', name:'Płazy', sub:'Wodno-lądowe',
+    color:'teal', btnCls:'btn-amp',
+    summary:'Płazy to pierwsze kręgowce, które wyszły na ląd — ale nie oderwały się całkowicie od wody. Żyją na pograniczu dwóch środowisk. Larwy żyją w wodzie, dorosłe — na lądzie i w wodzie.',
     facts:[
-      {type:'blue',title:'Czym był?',items:['Absolutna władza monarchy','+ reformy inspirowane oświeceniem','Bez parlamentu i wolnych wyborów','"Wszystko dla ludu, nic przez lud"']},
-      {type:'gold',title:'3 państwa',items:['Prusy — Fryderyk II Wielki','Austria — Maria Teresa + Józef II','Rosja — Katarzyna II Wielka']},
-      {type:'red',title:'Reformy',items:['Rozbudowa armii i biurokracji','Reforma szkolnictwa','Kodyfikacja prawa','Zniesienie tortur (Prusy, Austria)']},
-      {type:'green',title:'Prusy szczegółowo',items:['Potęga militarna Europy','Tolerancja religijna','"Jestem pierwszym sługą państwa"','Podbój Śląska (1740)']},
+      {t:'teal',h:'Cechy ogólne',i:['Dwa środowiska życia','Larwy: skrzela (w wodzie)','Dorosłe: płuca + skóra','Zmiennocieplne','Skóra naga, wilgotna, bez łusek']},
+      {t:'blue',h:'Oddychanie',i:['Larwy — skrzelami','Dorosłe — płucami','Przez skórę (cały czas!)','Skóra musi być wilgotna','Dlatego żyją blisko wody']},
+      {t:'green',h:'Rozmnażanie',i:['Ikra w wodzie (jak ryby)','Kijanki = larwy w wodzie','Metamorfoza → dorosły','Zapłodnienie zewnętrzne','Samce kumkają by przyciągnąć samice']},
+      {t:'red',h:'Budowa',i:['Serce trójkomorowe','Dwie pary kończyn','Brak pazurów i łusek','Język przyklejony do przodu','Powieki — ważna innowacja!']},
+      {t:'amber',h:'Podział',i:['Płazy ogoniaste — salamandry, traszki','Płazy bezogonowe — żaby, ropuchy','Płazy beznożne — tropikalne','Ok. 8 000 gatunków','Najliczniejsze: bezogonowe']},
+      {t:'purple',h:'Ciekawostki',i:['Żaby zasypiają zimą (hibernacja)','Ropuchy mają suchszą skórę niż żaby','Traszki mogą regenerować kończyny','Drzewołazy są trujące','Axolotl nigdy nie przechodzi metamorfozy']},
     ],
-    timeline:[
-      {y:'1740',t:'<strong>Fryderyk II</strong> królem Prus — podbija Śląsk od Austrii'},
-      {y:'1740–1780',t:'<strong>Maria Teresa</strong> rządzi Austrią — reformy oświaty, likwidacja poddaństwa'},
-      {y:'1762–1796',t:'<strong>Katarzyna II</strong> — carica Rosji, powiększa terytorium'},
-      {y:'1772',t:'<strong>I rozbiór Polski</strong> — Prusy, Austria i Rosja razem zabierają ziemie'},
-      {y:'1780–1790',t:'<strong>Józef II</strong> (Austria) — radykalne reformy, znosi poddaństwo chłopów'},
+    body:[
+      {ico:'🫁',name:'Płuca',pl:'płuca',desc:'Dorosłe płazy oddychają płucami — ale są one prymitywne, dlatego wspomagają je skórą.'},
+      {ico:'🫀',name:'Serce trójkomorowe',pl:'serce trójkomorowe',desc:'2 przedsionki + 1 komora. Krew utlenowana miesza się z nieutlenowaną — mniej wydajne niż u gadów.'},
+      {ico:'🌿',name:'Skóra naga i wilgotna',pl:'skóra',desc:'Bez łusek! Pokryta śluzem. Oddycha przez nią tlen i CO₂. Musi być stale wilgotna — dlatego płazy giną w wysuszeniu.'},
+      {ico:'👅',name:'Język',pl:'język',desc:'Przymocowany do przodu jamy ustnej (nie do tyłu jak u nas!). Szybko wyrzucany, chwyta owady.'},
+      {ico:'👁️',name:'Powieki',pl:'powieki',desc:'Płazy jako pierwsze kręgowce rozwinęły powieki — ochrona oczu na lądzie. Ryby ich nie mają.'},
+      {ico:'🐾',name:'Dwie pary kończyn',pl:'kończyny',desc:'Cztery nogi — innowacja ewolucyjna dla życia na lądzie. U ryb były płetwy, u płazów — nogi.'},
     ],
-    people:[
-      {ico:'⚔️',name:'Fryderyk II Wielki',role:'Prusy, 1740–1786',fact:'Zbudował najpotężniejszą armię Europy. Tolerancja religijna, reforma sądownictwa, "Jestem pierwszym sługą państwa." Podbił Śląsk.'},
-      {ico:'👸',name:'Maria Teresa',role:'Austria, 1740–1780',fact:'Pierwsza kobieta na tronie Habsburgów. Reformy szkolnictwa, obowiązkowa edukacja, ograniczenie pańszczyzny. Matka 16 dzieci.'},
-      {ico:'🦅',name:'Józef II',role:'Austria, 1780–1790',fact:'Syn Marii Teresy. Najbardziej radykalny — zniósł poddaństwo chłopów, tolerancja religijna, kasata klasztorów. Reformy zbyt szybkie → bunty.'},
-      {ico:'👑',name:'Katarzyna II Wielka',role:'Rosja, 1762–1796',fact:'Niemka, która rządziła Rosją. Korespondowała z Wolterem i Diderot. Rozszerzyła terytorium o Ukrainę i Krym. Uczestniczyła w rozbiorach Polski.'},
+    examples:[
+      {ico:'🐸',name:'Żaba trawna',pl:'żaba trawna (Rana temporaria)',fact:'Najpospolitszy płaz w Polsce. Kumka wiosną przy stawach.'},
+      {ico:'🦎',name:'Traszka zwyczajna',pl:'traszka zwyczajna (Lissotriton vulgaris)',fact:'Płaz ogoniasty. Samiec ma charakterystyczny grzebień w sezonie.'},
+      {ico:'🐊',name:'Salamandra',pl:'salamandra plamista (Salamandra salamandra)',fact:'Żółto-czarne wzory. Wylęga żywe larwy, nie składa ikry!'},
+      {ico:'🐸',name:'Ropucha szara',pl:'ropucha szara (Bufo bufo)',fact:'Sucha, brodawkowana skóra. Żyje dalej od wody niż żaby.'},
+      {ico:'🌳',name:'Rzekotka',pl:'rzekotka drzewna (Hyla arborea)',fact:'Zielona, wspina się na drzewa dzięki przylgom na palcach.'},
+      {ico:'🦎',name:'Axolotl',pl:'aksolotl (Ambystoma mexicanum)',fact:'Nigdy nie przechodzi metamorfozy — całe życie w stadium larwy!'},
+    ],
+    significance:[
+      {ico:'🦟',text:'<strong>Regulacja owadów</strong> — żaby i ropuchy zjadają ogromne ilości komarów, much, ślimaków — naturalna ochrona roślin'},
+      {ico:'💊',text:'<strong>Medycyna</strong> — substancje ze skóry płazów używane w badaniach farmaceutycznych (antybiotyki, leki przeciwbólowe)'},
+      {ico:'🔬',text:'<strong>Biologia</strong> — modelowe organizmy do badań nad metamorfozą, regeneracją i genetyką'},
+      {ico:'⚠️',text:'<strong>Wskaźnik środowiska</strong> — płazy są wrażliwe na zanieczyszczenia; ich zanik sygnalizuje degradację ekosystemu'},
+      {ico:'🌿',text:'<strong>Łańcuch pokarmowy</strong> — ważne ogniwo: zjadają owady, same są pokarmem węży, bocianów, czapli'},
     ],
     flashcards:[
-      {q:'Co to jest absolutyzm oświecony?',a:'System rządów, w którym monarcha ma <strong>nieograniczoną władzę</strong>, ale wprowadza reformy inspirowane oświeceniem. Hasło: <strong>"Wszystko dla ludu, nic przez lud."</strong>'},
-      {q:'Jakie były główne reformy absolutystów oświeconych?',a:'Reforma <strong>szkolnictwa</strong> (obowiązkowa edukacja), kodyfikacja <strong>prawa</strong>, zniesienie <strong>tortur</strong>, tolerancja <strong>religijna</strong>, rozbudowa armii i administracji.'},
-      {q:'Kim był Fryderyk II Wielki?',a:'Król Prus (1740–1786). Zbudował potęgę militarną Prus, podbił Śląsk. Hasło: <strong>"Jestem pierwszym sługą państwa."</strong> Tolerancja religijna, reforma prawa.'},
-      {q:'Co to był I rozbiór Polski (1772)?',a:'Prusy, Austria i Rosja <strong>razem zabrały</strong> część ziem Rzeczypospolitej Polskiej. To był pierwszy z trzech rozbiorów (1772, 1793, 1795).'},
-      {q:'Dlaczego Józef II był wyjątkowy?',a:'Zniósł <strong>poddaństwo chłopów</strong> w Austrii — jako pierwszy monarcha w Europie Środkowej. Również kasował klasztory i wprowadzał tolerancję religijną. Zbyt szybkie reformy wywołały bunty.'},
+      {q:'Dlaczego płazy są "wodno-lądowe"?',a:'Bo są związane z <strong>oboma środowiskami</strong>: larwy (kijanki) żyją w wodzie i oddychają skrzelami; dorosłe wychodzą na ląd, ale wracają do wody do rozmnażania i muszą mieć wilgotną skórę.'},
+      {q:'Co to jest metamorfoza u płazów?',a:'Przemiana kijanki (larwy) w dorosłego płaza. Kijanka ma skrzela i ogon → traci je, wykształca <strong>płuca i 4 kończyny</strong>. Trwa kilka tygodni.'},
+      {q:'Czym oddychają dorosłe płazy?',a:'<strong>Płucami i skórą jednocześnie!</strong> Skóra musi być wilgotna, by móc przez nią oddychać. Dlatego płazy nigdy nie odeszły całkowicie od wody.'},
+      {q:'Jakie serce mają płazy i co to oznacza?',a:'Serce <strong>trójkomorowe</strong> — 2 przedsionki + 1 komora. Krew utlenowana miesza się z nieutlenowaną w komorze — mniej wydajne niż u ptaków i ssaków.'},
+      {q:'Czym różni się żaba od ropuchy?',a:'<strong>Żaba</strong> — skóra gładka, wilgotna, długie nogi, dobra skokaczka, żyje bliżej wody. <strong>Ropucha</strong> — skóra sucha, brodawkowana, krótsze nogi, wolniej się porusza, może żyć dalej od wody.'},
+      {q:'Jak płazy się rozmnażają?',a:'Składają <strong>ikrę</strong> w wodzie (jak ryby). Samce przywabiają samice kumkaniem. Z ikry wylęgają się kijanki. Po metamorfozie kijanki stają się dorosłymi płazami.'},
+      {q:'Dlaczego płazy są wskaźnikiem czystości środowiska?',a:'Płazy mają <strong>nagą, wilgotną skórę</strong>, przez którą pochłaniają substancje z wody i powietrza. Są bardzo wrażliwe na zanieczyszczenia — ich znikanie oznacza zanieczyszczenie środowiska.'},
+    ],
+    quiz:[
+      {q:'Czym oddychają dorosłe płazy?',opts:['Tylko skrzelami','Tylko płucami','Płucami i skórą','Skrzelami i skórą'],a:2,hint:'Dwa sposoby jednocześnie',expl:'Dorosłe płazy oddychają <strong>płucami i skórą</strong> jednocześnie. Płuca są prymitywne, więc skóra jest bardzo ważna. Musi być stale wilgotna!'},
+      {q:'Co to jest kijanka?',opts:['Dorosła żaba','Larwa płaza','Gatunek ryby','Jajeczko płaza'],a:1,hint:'Stadium przed metamorfozą',expl:'<strong>Kijanka</strong> to larwa płaza — żyje w wodzie, oddycha skrzelami, ma ogon. Po metamorfozie przekształca się w dorosłego płaza z płucami i kończynami.'},
+      {q:'Ile komór ma serce płaza?',opts:['Dwie','Trzy','Cztery','Jedną'],a:1,hint:'Więcej niż ryba, mniej niż ssak',expl:'Płazy mają serce <strong>trójkomorowe</strong> — 2 przedsionki i 1 komora. Postęp względem ryb (2 komory), ale mniej wydajne niż u gadów, ptaków i ssaków.'},
+      {q:'Czym różni się żaba od ropuchy?',opts:['Żaba jest większa','Żaba ma gładką skórę, ropucha brodawkowaną i suchszą','Ropucha żyje w wodzie','Ropucha ma skrzela'],a:1,hint:'Patrz na skórę',expl:'<strong>Żaba</strong> — skóra gładka, wilgotna, długie nogi. <strong>Ropucha</strong> — skóra sucha, brodawkowana, bardziej niezależna od wody.'},
+      {q:'Dlaczego płazy muszą żyć blisko wody?',opts:['Jedzą tylko ryby','Skóra musi być stale wilgotna + rozmnażanie w wodzie','Boją się słońca','Nie mają kończyn'],a:1,hint:'Skóra + rozmnażanie',expl:'Płazy muszą być blisko wody z dwóch powodów: 1) <strong>skóra musi być wilgotna</strong> do oddychania; 2) składają <strong>ikrę w wodzie</strong> i tam żyją kijanki.'},
+      {q:'Które zwierzę to płaz ogoniasty?',opts:['Żaba trawna','Ropucha szara','Traszka zwyczajna','Rzekotka drzewna'],a:2,hint:'Ogoniasty = ma ogon w dorosłości',expl:'<strong>Traszka</strong> to płaz ogoniasty — zachowuje ogon w dorosłości. Żaba i ropucha to płazy bezogonowe (tracą ogon przy metamorfozie).'},
     ],
   },
 
   {
-    id:'usa', num:'Temat 3', era:'1775–1783',
-    name:'Powstanie Stanów Zjednoczonych',
-    icon:'🦅',
-    color:'blue',
-    summary:'13 kolonii brytyjskich w Ameryce zbuntowało się przeciwko Anglii, ogłosiło niepodległość i stworzyło pierwsze nowoczesne państwo demokratyczne.',
+    id:'reptile', cls:'reptile', ico:'🦎', name:'Gady', sub:'Kręgowce lądowe',
+    color:'amber', btnCls:'btn-rep',
+    summary:'Gady jako pierwsze kręgowce całkowicie opanowały ląd. Mają łuski, sucha skórę i składają jaja z twardą osłoną — nie muszą wracać do wody. Zmiennocieplne.',
     facts:[
-      {type:'blue',title:'Przyczyny rewolucji',items:['"Podatki bez reprezentacji!"','Ustawa stemplowa (1765)','Herbatka bostońska (1773)','Idee oświecenia — wolność i równość']},
-      {type:'red',title:'Kluczowe daty',items:['1775 — wybuch wojny','4 VII 1776 — Deklaracja','1781 — Yorktown (koniec walk)','1783 — traktat paryski (uznanie)']},
-      {type:'gold',title:'Deklaracja Niepodległości',items:['Autor: Thomas Jefferson','Podpisana 4 lipca 1776','Wszyscy ludzie są równi','Prawa: życie, wolność, szczęście']},
-      {type:'green',title:'Nowe państwo',items:['Republika federalna','Konstytucja 1787','Prezydent + Kongres + Sąd','Bill of Rights — 1791']},
+      {t:'amber',h:'Cechy ogólne',i:['Pierwsze prawdziwe kręgowce lądowe','Łuski rogowe — sucha skóra','Zmiennocieplne (regulują ciepło słońcem)','Jaja z twardą osłoną (owodniowe)','Serce trójkomorowe (4 u krokodyli)']},
+      {t:'red',h:'Oddychanie i skóra',i:['Tylko płucami (nie skórą!)','Skóra sucha, łuskowata','Nie przepuszcza wody','Dlatego mogą żyć na pustyni','Zrzucają skórę (linienie)']},
+      {t:'green',h:'Rozmnażanie',i:['Jaja owodniowe — z osłoną','Zapłodnienie wewnętrzne','Brak metamorfozy','Młode podobne do dorosłych','Brak stadium larwalnego']},
+      {t:'blue',h:'Podział',i:['Łuskonośne — jaszczurki i węże','Żółwie — pancerz kostny','Krokodyle — serce 4-komorowe','Dinozaury — wymarłe gady','Ok. 11 000 gatunków']},
+      {t:'teal',h:'Adaptacje do lądu',i:['Sucha skóra — brak wysuszenia','Jaja owodniowe — niezależność od wody','Płuca wydajne','Mocniejsze kończyny (u większości)','Nerki — oszczędzają wodę']},
+      {t:'purple',h:'Ciekawostki',i:['Kameleony zmieniają kolor','Węże czują ciepło wargami','Żółwie żyją ponad 200 lat','Gekony chodzą po suficie','Krokodyl ma 4-komorowe serce — jak ssak']},
     ],
-    timeline:[
-      {y:'1765',t:'<strong>Ustawa stemplowa</strong> — Anglia nakłada podatki. Koloniści protestują: "No taxation without representation!"'},
-      {y:'1773',t:'<strong>Herbatka bostońska</strong> — koloniści wrzucają angielską herbatę do morza w proteście'},
-      {y:'1775',t:'Bitwa pod Lexington — <strong>wybuch wojny o niepodległość</strong>'},
-      {y:'4 VII 1776',t:'<strong>Deklaracja Niepodległości</strong> — 13 kolonii ogłasza wolność'},
-      {y:'1781',t:'Bitwa pod Yorktown — <strong>kapitulacja Anglii</strong>, koniec walk'},
-      {y:'1783',t:'<strong>Traktat paryski</strong> — Wielka Brytania uznaje USA'},
-      {y:'1787',t:'<strong>Konstytucja USA</strong> — pierwsza na świecie'},
-      {y:'1789',t:'George Washington — <strong>pierwszy prezydent</strong> USA'},
+    body:[
+      {ico:'🐍',name:'Łuski rogowe',pl:'łuski',desc:'Twarda, sucha osłona z keratyny (jak nasze paznokcie). Chroni przed wysychaniem. Gady je zrzucają (linieją) — skóra rośnie od środka.'},
+      {ico:'🥚',name:'Jajo owodniowe',pl:'jajo owodniowe',desc:'Rewolucja ewolucyjna! Jajo z osłoną i błonami chroniącymi zarodek. Nie musi być złożone w wodzie — gady mogą żyć i rozmnażać się w głębi lądu.'},
+      {ico:'🫁',name:'Wydajne płuca',pl:'płuca',desc:'Tylko płuca — nie skóra. Bardziej rozwinięte niż u płazów, choć mniej niż u ssaków.'},
+      {ico:'🫀',name:'Serce trójkomorowe',pl:'serce',desc:'Jak u płazów — 2 przedsionki + 1 komora. Wyjątek: krokodyle mają serce 4-komorowe jak ssaki!'},
+      {ico:'👅',name:'Język dwudzielny',pl:'język',desc:'U węży i jaszczurek — rozwidlony, służy do wyczuwania zapachów. Wysuwa się i "wącha" powietrze.'},
+      {ico:'☀️',name:'Termoregulacja',pl:'regulacja temperatury',desc:'Gady nie produkują własnego ciepła — grzeją się na słońcu (ektotermy). Rano nieaktywne, po nagrzaniu — aktywne.'},
     ],
-    people:[
-      {ico:'✍️',name:'Thomas Jefferson',role:'USA, 1743–1826',fact:'Autor Deklaracji Niepodległości. Napisał, że "wszyscy ludzie są równi" i mają prawo do "życia, wolności i dążenia do szczęścia." 3. prezydent USA.'},
-      {ico:'⚔️',name:'George Washington',role:'USA, 1732–1799',fact:'Dowódca armii kolonistów podczas wojny, potem pierwszy prezydent USA (1789). Symbol republiki — odmówił zostania królem.'},
-      {ico:'🧪',name:'Benjamin Franklin',role:'USA, 1706–1790',fact:'Wynalazca piorunochronu, dyplomata. Przekonał Francję do wsparcia kolonistów. Jeden z Ojców Założycieli USA.'},
-      {ico:'🌍',name:'Tadeusz Kościuszko',role:'Polska/USA, 1746–1817',fact:'Polski inżynier wojskowy, który walczył po stronie kolonistów. Budował fortyfikacje. Bohater dwóch narodów — polskiego i amerykańskiego.'},
+    examples:[
+      {ico:'🦎',name:'Jaszczurka zwinka',pl:'jaszczurka zwinka (Lacerta agilis)',fact:'Najpospolitszy gad w Polsce. Odrzuca ogon gdy zagrożona (autotomia).'},
+      {ico:'🐍',name:'Zaskroniec',pl:'zaskroniec zwyczajny (Natrix natrix)',fact:'Niejadowity wąż z żółtymi plamami za głową. Najczęstszy wąż w Polsce.'},
+      {ico:'🐍',name:'Żmija',pl:'żmija zygzakowata (Vipera berus)',fact:'Jedyny jadowity wąż w Polsce! Zygzak na grzbiecie. Unika ludzi.'},
+      {ico:'🐊',name:'Krokodyl',pl:'krokodyl nilowy (Crocodylus niloticus)',fact:'Największy drapieżnik Afryki. Ma serce 4-komorowe jak ssaki!'},
+      {ico:'🐢',name:'Żółw',pl:'żółw błotny (Emys orbicularis)',fact:'Jedyny dziko żyjący żółw w Polsce. Zagrożony wyginięciem.'},
+      {ico:'🦎',name:'Kameleon',pl:'kameleon (Chamaeleo)',fact:'Zmienia kolor skóry (komunikacja i kamuflaż). Każde oko porusza się niezależnie!'},
+    ],
+    significance:[
+      {ico:'🌿',text:'<strong>Łańcuch pokarmowy</strong> — węże regulują populację gryzoni, jaszczurki zjadają owady'},
+      {ico:'💊',text:'<strong>Medycyna</strong> — jad węży używany do produkcji antytoksyn i leków (np. na nadciśnienie)'},
+      {ico:'👜',text:'<strong>Przemysł</strong> — skóra krokodyli i węży (kontrowersyjne — zagraża gatunkom!)'},
+      {ico:'🔬',text:'<strong>Nauka</strong> — badania nad termoregulacją, regeneracją, długowiecznością żółwi'},
+      {ico:'⚠️',text:'<strong>Zagrożenie</strong> — wiele gatunków gadów jest zagrożonych wyginięciem przez utratę siedlisk i kłusownictwo'},
     ],
     flashcards:[
-      {q:'Dlaczego koloniści zbuntowali się przeciwko Anglii?',a:'Anglia nakładała podatki (ustawa stemplowa), ale koloniści nie mieli swoich przedstawicieli w parlamencie. Hasło: <strong>"No taxation without representation!"</strong> (Podatki bez reprezentacji!).'},
-      {q:'Co to była "Herbatka bostońska"?',a:'W 1773 roku koloniści przebrali się za Indian i wrzucili do morza w Bostonie <strong>herbatę z angielskich statków</strong> — w proteście przeciwko podatkowi na herbatę.'},
-      {q:'Co ogłaszała Deklaracja Niepodległości (4 VII 1776)?',a:'Że <strong>wszyscy ludzie są równi</strong> i mają naturalne prawa: <strong>życie, wolność i dążenie do szczęścia</strong>. 13 kolonii ogłosiło się wolnym państwem — USA.'},
-      {q:'Jakie znaczenie ma data 4 lipca 1776?',a:'Podpisanie <strong>Deklaracji Niepodległości USA</strong>. Do dziś 4 lipca jest narodowym świętem Stanów Zjednoczonych — Dniem Niepodległości.'},
-      {q:'Na czym polega trójpodział władzy w USA?',a:'Konstytucja z 1787 podzieliła władzę na: <strong>Prezydent</strong> (wykonawcza), <strong>Kongres</strong> (ustawodawcza), <strong>Sąd Najwyższy</strong> (sądownicza). Żadna nie może dominować.'},
+      {q:'Dlaczego gady są "prawdziwymi" kręgowcami lądowymi?',a:'Bo całkowicie uniezależniły się od wody: 1) <strong>sucha łuskowata skóra</strong> — nie wysychają; 2) <strong>jaja owodniowe</strong> — składają je na lądzie; 3) <strong>oddychają tylko płucami</strong> — nie potrzebują wilgotnej skóry.'},
+      {q:'Co to jest jajo owodniowe?',a:'Jajo z <strong>twardą lub skórzastą osłoną</strong> i błonami chroniącymi zarodek. Zawiera zapas wody i pokarmu. Może być złożone na lądzie — wielka ewolucyjna innowacja!'},
+      {q:'Czym różnią się gady od płazów w oddychaniu?',a:'Gady oddychają <strong>tylko płucami</strong> — skóra sucha i łuskowata nie przepuszcza gazów. Płazy oddychają płucami <strong>i skórą</strong>, dlatego skóra musi być wilgotna.'},
+      {q:'Dlaczego gady grzeją się na słońcu?',a:'Gady są <strong>zmiennocieplne (ektotermy)</strong> — nie produkują własnego ciepła. Regulują temperaturę ciała przez zachowanie: grzeją się na słońcu, chowają w cieniu gdy za gorąco.'},
+      {q:'Które z gadów ma serce 4-komorowe?',a:'<strong>Krokodyle!</strong> To wyjątek wśród gadów. Wszystkie inne gady mają serce trójkomorowe. Serce 4-komorowe mają też ptaki i ssaki.'},
+      {q:'Co to jest autotomia u jaszczurek?',a:'<strong>Odrzucanie ogona</strong> w sytuacji zagrożenia. Ogon się odrywa i wije, odwracając uwagę drapieżnika. Jaszczurce odrasta nowy ogon (z chrząstki).'},
+      {q:'Podaj różnicę między zaskrońcem a żmiją.',a:'<strong>Zaskroniec</strong> — niejadowity, żółte plamy za głową, pływa w wodzie. <strong>Żmija zygzakowata</strong> — jadowita, wzór zygzak na grzbiecie, jedyny jadowity wąż w Polsce.'},
     ],
-  },
-
-  {
-    id:'rew', num:'Temat 4', era:'1789–1792',
-    name:'Wielka Rewolucja Francuska',
-    icon:'🔴',
-    color:'red',
-    summary:'Lud Francji obalił monarchię absolutną, zdobył Bastylię i ogłosił prawa człowieka. Hasło: Wolność, Równość, Braterstwo.',
-    facts:[
-      {type:'red',title:'Przyczyny',items:['Bankructwo państwa (długi po wojnach)','Głód — brak chleba, klęska urodzaju','3 stany: szlachta/kler vs. lud','Idee oświecenia — wolność i równość']},
-      {type:'gold',title:'14 VII 1789',items:['Szturm na Bastylię','Symbol tyranii i ucisku','Symboliczny — więźniów tylko 7','Dziś święto narodowe Francji!']},
-      {type:'blue',title:'Stany Generalne',items:['3 stany = 3 grupy społeczne','I — duchowieństwo (kler)','II — szlachta','III — mieszczanie i chłopi (lud)']},
-      {type:'green',title:'Deklaracja Praw',items:['26 VIII 1789','Wolność, równość, własność','Władza pochodzi od narodu','Wzorowana na USA']},
-    ],
-    timeline:[
-      {y:'V 1789',t:'Ludwik XVI zwołuje <strong>Stany Generalne</strong> — kryzys finansowy'},
-      {y:'VI 1789',t:'Stan trzeci tworzy <strong>Zgromadzenie Narodowe</strong> — buntuje się'},
-      {y:'14 VII 1789',t:'<strong>Szturm na Bastylię</strong> — początek Rewolucji! Paryż się buntuje'},
-      {y:'VIII 1789',t:'<strong>Deklaracja Praw Człowieka i Obywatela</strong> — "Liberté, Égalité, Fraternité"'},
-      {y:'X 1789',t:'Kobiety maszerują do Wersalu — Ludwik XVI przeniesiony do Paryża'},
-      {y:'1791',t:'<strong>Konstytucja Francji</strong> — monarchia konstytucyjna'},
-      {y:'VI 1791',t:'Ucieczka Ludwika XVI — schwytany w Varennes, kompromitacja'},
-    ],
-    people:[
-      {ico:'👑',name:'Ludwik XVI',role:'Król Francji, 1774–1792',fact:'Słaby król, który nie mógł opanować kryzysu. Zwołał Stany Generalne — co wywołało rewolucję. Próbował uciec z Francji (Varennes). Zgilotynowany w 1793.'},
-      {ico:'👸',name:'Maria Antonina',role:'Królowa Francji, 1755–1793',fact:'Austriaczka, żona Ludwika XVI. Symbolicznie oskarżana o rozrzutność ("niech jedzą ciastka"). Zgilotynowana w 1793. W rzeczywistości nie powiedziała tego zdania.'},
-      {ico:'⚡',name:'Maximilien Robespierre',role:'Rewolucjonista, 1758–1794',fact:'Lider jakobinów. Podczas "terroru" kazał gilotynować tysiące. Sam zgilotynowany w 1794 — ofiarom Terror się skończył.'},
-      {ico:'🗣️',name:'Georges Danton',role:'Rewolucjonista, 1759–1794',fact:'Jeden z liderów rewolucji. Domagał się umiaru wobec terroru — za co sam poszedł pod gilotynę z rozkazu Robespierre\'a.'},
-    ],
-    flashcards:[
-      {q:'Kiedy i dlaczego wybuchła Rewolucja Francuska?',a:'W <strong>1789</strong> roku. Przyczyny: bankructwo Francji, głód ludu, niesprawiedliwy podział podatków (szlachta nie płaciła), idee oświecenia o wolności i równości.'},
-      {q:'Co to były "trzy stany" we Francji?',a:'I stan — <strong>duchowieństwo</strong> (kler); II stan — <strong>szlachta</strong>; III stan — <strong>reszta</strong> (mieszczanie, chłopi, lud). Pierwszy i drugi nie płacili podatków.'},
-      {q:'Co się wydarzyło 14 lipca 1789?',a:'<strong>Szturm na Bastylię</strong> — paryski lud zdobył więzienie-twierdzę, symbol tyranii królewskiej. To symbol początku Rewolucji. Dziś 14 lipca to <strong>święto narodowe Francji</strong>.'},
-      {q:'Co ogłaszała Deklaracja Praw Człowieka i Obywatela?',a:'Że wszyscy ludzie mają prawa: <strong>wolność, równość, własność, bezpieczeństwo</strong>. Władza pochodzi od narodu. Przyjęta 26 sierpnia 1789. Hasło: <strong>"Liberté, Égalité, Fraternité"</strong>.'},
-      {q:'Co to był "terror" jakobinów?',a:'Okres 1793–1794, gdy Robespierre i jakobini gilotynowali tysiące "wrogów rewolucji". Zginęło ok. <strong>17 000 osób</strong>. Skończył się, gdy zgilotynowano samego Robespierre\'a.'},
-    ],
-  },
-
-  {
-    id:'rep', num:'Temat 5', era:'1792–1799',
-    name:'Francja republiką — od gilotyny do Napoleona',
-    icon:'⚔️',
-    color:'teal',
-    summary:'Po obaleniu monarchii Francja stała się republiką — przez terror jakobinów, Dyrektoriat, aż do zamachu Napoleona Bonaparte w 1799.',
-    facts:[
-      {type:'red',title:'Etapy po 1792',items:['1792 — ogłoszenie republiki','1793–1794 — terror jakobinów','1794 — gilotyna Robespierre\'a','1795–1799 — Dyrektoriat']},
-      {type:'gold',title:'Napoleon Bonaparte',items:['Korsykański oficer, gen. 1796','Kampania włoska i egipska','Zamach 18 Brumaire\'a 1799','Koniec Republiki → Konsulat']},
-      {type:'blue',title:'Gilotyna — symbol',items:['Wynaleziona przez dr Guillotina','"Humanitarna" metoda egzekucji','Symbol terroru rewolucji','Zgilotynowano Ludwika XVI (1793)']},
-      {type:'green',title:'Skutki rewolucji',items:['Koniec feudalizmu we Francji','Równość wobec prawa','Prawa człowieka — wzór dla świata','Inspiracja dla innych narodów']},
-    ],
-    timeline:[
-      {y:'IX 1792',t:'<strong>Francja ogłoszona republiką</strong> — koniec monarchii'},
-      {y:'I 1793',t:'<strong>Gilotyna Ludwika XVI</strong> — król skazany na śmierć'},
-      {y:'1793–1794',t:'<strong>Terror jakobinów</strong> — Robespierre rządzi gilotiną'},
-      {y:'VII 1794',t:'<strong>Thermidor</strong> — Robespierre zgilotynowany, terror się kończy'},
-      {y:'1795–1799',t:'<strong>Dyrektoriat</strong> — słaby rząd 5 dyrektorów, chaos'},
-      {y:'1796–1797',t:'Napoleon — błyskotliwa <strong>kampania włoska</strong>, sława bohatera'},
-      {y:'1798–1799',t:'Napoleon — kampania egipska, podbój i klęska'},
-      {y:'9–10 XI 1799',t:'<strong>Zamach 18 Brumaire\'a</strong> — Napoleon przejmuje władzę, koniec republiki'},
-    ],
-    people:[
-      {ico:'⚡',name:'Maximilien Robespierre',role:'"Niekorumpowany", 1758–1794',fact:'Lider terroru. Posyłał na gilotynę wszystkich, w tym dawnych przyjaciół. W lipcu 1794 został aresztowany i zgilotynowany — Terror się skończył.'},
-      {ico:'🎖️',name:'Napoleon Bonaparte',role:'Korsyka/Francja, 1769–1821',fact:'Genialny generał z Korsyki. Kampanie włoska i egipska. W 1799 zamachu 18 Brumaire\'a obalił Dyrektoriat. Został Konsulem, potem Cesarzem Francuzów (1804).'},
-      {ico:'👑',name:'Ludwik XVI',role:'Król → więzień, 1754–1793',fact:'Zgilotynowany 21 stycznia 1793 na placu w Paryżu. Pierwsze w historii stracenie panującego monarchy przez własny lud. Jego śmierć zszokowała całą Europę.'},
-    ],
-    flashcards:[
-      {q:'Kiedy Francja stała się republiką?',a:'We <strong>wrześniu 1792</strong> roku. Po pojmaniu Ludwika XVI i zwołaniu Konwentu Narodowego ogłoszono Pierwszą Republikę Francuską.'},
-      {q:'Co to był "terror jakobiński"?',a:'Okres 1793–1794, gdy Robespierre i Komitet Ocalenia Publicznego gilotynowali tysiące "wrogów rewolucji". Zginęło ok. 17 000 osób. Skończył się zamachem <strong>Thermidora</strong> — gilotiną Robespierre\'a.'},
-      {q:'Kim był Napoleon Bonaparte przed zamachem?',a:'Genialnym generałem armii republiki. Zyskał sławę podczas <strong>kampanii włoskiej</strong> (1796–1797), gdzie pokonał Austriaków. Potem kampania egipska (1798).'},
-      {q:'Co to był zamach 18 Brumaire\'a?',a:'9–10 listopada 1799 roku Napoleon obalił słaby rząd Dyrektoriatu. Przejął władzę jako <strong>Pierwszy Konsul</strong>. To koniec Republiki i początek ery Napoleona.'},
-      {q:'Jakie były główne skutki Rewolucji Francuskiej dla świata?',a:'Koniec <strong>feudalizmu</strong>, równość wobec prawa, <strong>prawa człowieka</strong> jako wzór dla świata, zniesienie przywilejów szlachty i kleru, inspiracja dla narodów całej Europy i Ameryki Łacińskiej.'},
+    quiz:[
+      {q:'Czym gady różnią się od płazów w kontekście wody?',opts:['Gady żyją tylko w wodzie','Gady są całkowicie niezależne od wody','Gady i płazy są jednakowo zależne','Gady muszą być bliżej wody'],a:1,hint:'Łuski + jaja owodniowe',expl:'Gady są <strong>całkowicie niezależne od wody</strong>: sucha łuskowata skóra chroni przed wysychaniem, a jaja owodniowe mogą być składane na suchym lądzie.'},
+      {q:'Co to jest jajo owodniowe?',opts:['Jajo składane w wodzie','Jajo bez skorupki','Jajo z osłoną i błonami — może być złożone na lądzie','Jajo płazów'],a:2,hint:'Rewolucja ewolucyjna gadów',expl:'<strong>Jajo owodniowe</strong> ma osłonę (twardą lub skórzastą) i błony chroniące zarodek. Zawiera własny zapas wody — może być złożone daleko od wody.'},
+      {q:'Jak gady regulują temperaturę ciała?',opts:['Wytwarzają własne ciepło','Piją gorącą wodę','Grzeją się na słońcu, chłodzą w cieniu','Mają stałą temperaturę ciała'],a:2,hint:'Ektotermy = ciepło z zewnątrz',expl:'Gady są <strong>zmiennocieplne (ektotermy)</strong> — nie wytwarzają własnego ciepła. Grzeją się na słońcu (poikilotermia). Rano nieaktywne, po nagrzaniu aktywne.'},
+      {q:'Który wąż jest jadowity i żyje w Polsce?',opts:['Zaskroniec','Gniewosz plamisty','Żmija zygzakowata','Wąż Eskulapa'],a:2,hint:'Zygzak na grzbiecie',expl:'<strong>Żmija zygzakowata</strong> — jedyny jadowity wąż w Polsce. Ma wzór zygzaka na grzbiecie. Zaskroniec jest niejadowity.'},
+      {q:'Który gad ma serce 4-komorowe?',opts:['Jaszczurka','Wąż','Żółw','Krokodyl'],a:3,hint:'Wyjątek wśród gadów — jak ssaki!',expl:'<strong>Krokodyle</strong> mają serce 4-komorowe — wyjątek wśród gadów! Inne gady mają serce trójkomorowe. Serce 4-komorowe mają też ptaki i ssaki.'},
+      {q:'Co to jest autotomia?',opts:['Linienie skóry gadów','Odrzucanie ogona przez jaszczurkę','Hibernacja gadów','Zmiana koloru u kameleonów'],a:1,hint:'Obrona przed drapieżnikiem — ogon!',expl:'<strong>Autotomia</strong> — zdolność odrzucania ogona przez jaszczurki w sytuacji zagrożenia. Ogon odrywa się i wije, odwracając uwagę drapieżnika. Odrasta nowy (z chrząstki).'},
     ],
   },
 ];
 
-// ═══════════════════════════════════════════════════════════ QUIZ DATA
+// ══════════════════════════════════════════════════ STATE
+let cg = GROUPS[0];
+let ct = 'theory';
+let fcI=0,fcF=false;
+let qi=0,sel=null,score=0,mistakes=[],qList=[];
 
-const ALL_QUIZ = [
-  // OŚWIECENIE
-  {tid:'osw',q:'Jakie prawa naturalne wg Locke\'a ma każdy człowiek?',opts:['Wolność, równość, braterstwo','Życie, wolność i własność','Praca, edukacja, szczęście','Wiara, nadzieja, miłość'],a:1,hint:'Locke = liberalizm, 3 prawa',expl:'John Locke wymienił 3 prawa naturalne: <strong>życie, wolność i własność</strong>. Rząd istnieje po to, by je chronić.'},
-  {tid:'osw',q:'Co to była Wielka Encyklopedia?',opts:['Podręcznik do historii','28-tomowe dzieło zebranych wiedzy','Zbiór praw królewskich','Gazeta oświeceniowa'],a:1,hint:'Diderot, 1751–1772, 28 tomów',expl:'Wielka Encyklopedia Diderota i d\'Alemberta (1751–1772) — <strong>28 tomów</strong> zebranych wiedzy ze wszystkich dziedzin. Symbol oświecenia.'},
-  {tid:'osw',q:'Kto wymyślił trójpodział władzy?',opts:['Voltaire','Rousseau','Montesquieu','Locke'],a:2,hint:'"Duch praw" — 1748',expl:'<strong>Montesquieu</strong> w dziele "Duch praw" (1748) opisał trójpodział władzy na: ustawodawczą, wykonawczą i sądowniczą.'},
-  {tid:'osw',q:'Co głosił Rousseau w "Umowie społecznej"?',opts:['Prawa szlachty','Władza pochodzi od ludu','Trójpodział władzy','Wolność handlu'],a:1,hint:'Umowa społeczna = lud',expl:'Rousseau głosił, że <strong>władza pochodzi od ludu</strong>. Ludzie tworzą "umowę społeczną" — jeśli rząd jej nie przestrzega, można go obalić.'},
-  // ABSOLUTYZM
-  {tid:'abs',q:'Jakie było hasło absolutyzmu oświeconego?',opts:['"Wolność, równość, braterstwo"','"Wszystko dla ludu, nic przez lud"','"Bóg, honor, ojczyzna"','"Jeden za wszystkich"'],a:1,hint:'Monarcha reformuje, ale sam rządzi',expl:'<strong>"Wszystko dla ludu, nic przez lud"</strong> — monarcha sam wprowadza reformy, ale nie daje ludowi władzy politycznej.'},
-  {tid:'abs',q:'Kto był "oświeconym absolutystą" w Prusach?',opts:['Józef II','Katarzyna II','Fryderyk II Wielki','Ludwik XVI'],a:2,hint:'Prusy, Śląsk, "pierwszy sługa"',expl:'<strong>Fryderyk II Wielki</strong> — król Prus (1740–1786). Podbił Śląsk, zbudował potęgę militarną, reformował sądownictwo. "Jestem pierwszym sługą państwa."'},
-  {tid:'abs',q:'Czym był I rozbiór Polski (1772)?',opts:['Polska dobrowolnie oddała ziemie','Prusy, Austria i Rosja zabrały część ziem Polski','Polska podpisała sojusz z Rosją','Polska pokonała Prusy'],a:1,hint:'Trzy państwa, jeden rok — 1772',expl:'W 1772 roku <strong>Prusy, Austria i Rosja</strong> razem zabrały część terytorium Rzeczypospolitej Polskiej. Był to I z trzech rozbiorów (1772, 1793, 1795).'},
-  {tid:'abs',q:'Co Józef II (Austria) zrobił jako pierwszy w Europie Środkowej?',opts:['Zbudował kanał Dunajski','Zniósł poddaństwo chłopów','Wprowadził gilotyną','Odkrył Amerykę'],a:1,hint:'Chłopi, wolność, Austria',expl:'<strong>Józef II</strong> (1780–1790) jako pierwszy monarcha w Europie Środkowej <strong>zniósł poddaństwo chłopów</strong> w Austrii. Reformy były tak radykalne, że wywołały bunty.'},
-  // USA
-  {tid:'usa',q:'Co oznaczało hasło "No taxation without representation"?',opts:['Nie płaćcie podatków','Podatki bez naszych przedstawicieli w parlamencie są niesprawiedliwe','Anglia nie ma prawa do kolonii','Chcemy własnego króla'],a:1,hint:'Koloniści, parlament, podatki',expl:'Koloniści protestowali: Anglia nakłada <strong>podatki</strong>, ale kolonie nie mają swoich <strong>przedstawicieli w parlamencie</strong> — to niesprawiedliwe.'},
-  {tid:'usa',q:'Kiedy podpisano Deklarację Niepodległości USA?',opts:['4 lipca 1775','14 lipca 1789','4 lipca 1776','17 września 1787'],a:2,hint:'4 lipca — święto USA do dziś',expl:'<strong>4 lipca 1776</strong> — data podpisania Deklaracji Niepodległości USA. Do dziś 4 lipca to Święto Niepodległości Stanów Zjednoczonych.'},
-  {tid:'usa',q:'Kto był autorem Deklaracji Niepodległości?',opts:['George Washington','Benjamin Franklin','Thomas Jefferson','Alexander Hamilton'],a:2,hint:'Późniejszy 3. prezydent USA',expl:'<strong>Thomas Jefferson</strong> napisał Deklarację Niepodległości. Napisał słynne zdanie: "Wszyscy ludzie są stworzeni równymi" i mają prawo do "życia, wolności i dążenia do szczęścia."'},
-  {tid:'usa',q:'Co to była "Herbatka bostońska"?',opts:['Konferencja dyplomatyczna w Bostonie','Koloniści wrzucili angielską herbatę do morza','Bitwa w porcie bostońskim','Podpisanie traktatu pokojowego'],a:1,hint:'1773, morze, protest',expl:'W 1773 roku koloniści przebrali się za Indian i <strong>wrzucili angielską herbatę do morza</strong> w Bostonie — w proteście przeciwko podatkowi na herbatę.'},
-  // REWOLUCJA
-  {tid:'rew',q:'Co się wydarzyło 14 lipca 1789 roku?',opts:['Ogłoszenie Deklaracji Praw','Szturm na Bastylię','Egzekucja Ludwika XVI','Uchwalenie Konstytucji'],a:1,hint:'Symbol rewolucji, święto Francji',expl:'<strong>Szturm na Bastylię</strong> — lud Paryża zdobył więzienie-twierdzę. Symbol obalenia tyranii. Do dziś 14 lipca to <strong>święto narodowe Francji</strong>.'},
-  {tid:'rew',q:'Co ogłaszała "Liberté, Égalité, Fraternité"?',opts:['Hasło armii','Hasło Rewolucji Francuskiej','Tytuł konstytucji','Hymn Francji'],a:1,hint:'3 słowa, 3 wartości',expl:'"<strong>Liberté, Égalité, Fraternité</strong>" = Wolność, Równość, Braterstwo — hasło Rewolucji Francuskiej, dziś oficjalne motto Republiki Francuskiej.'},
-  {tid:'rew',q:'Dlaczego wybuchła Rewolucja Francuska?',opts:['Atak Anglii na Francję','Głód, długi państwa, niesprawiedliwe podatki i idee oświecenia','Śmierć Ludwika XVI','Zabójstwo króla'],a:1,hint:'4 przyczyny: ekonomia + głód + podatki + idee',expl:'Rewolucja wybuchła z powodu: <strong>bankructwa</strong> Francji, <strong>głodu</strong> ludu, niesprawiedliwości systemu trzech stanów (szlachta nie płaciła podatków) i idei oświecenia o wolności.'},
-  {tid:'rew',q:'Kim byli "jakobini"?',opts:['Król i jego dworzanie','Radykalni rewolucjoniści prowadzący terror','Umiarkowani monarchiści','Chłopi z Normandii'],a:1,hint:'Robespierre, terror, gilotyna',expl:'<strong>Jakobini</strong> — radykalny klub rewolucyjny pod wodzą Robespierre\'a. W 1793–1794 prowadzili "terror" — gilotynowali tysiące "wrogów rewolucji."'},
-  // REPUBLIKA
-  {tid:'rep',q:'Kiedy Francja stała się oficjalnie republiką?',opts:['14 lipca 1789','4 lipca 1776','Wrzesień 1792','Styczeń 1793'],a:2,hint:'Po aresztowaniu Ludwika XVI',expl:'We <strong>wrześniu 1792</strong> Konwent Narodowy ogłosił Pierwszą Republikę Francuską — koniec monarchii. W styczniu 1793 zgilotynowano Ludwika XVI.'},
-  {tid:'rep',q:'Co to był zamach "18 Brumaire\'a"?',opts:['Obalenie Robespierre\'a','Atak na Bastylię','Napoleon przejął władzę obalając Dyrektoriat','Ogłoszenie Republiki'],a:2,hint:'Napoleon, 1799, koniec Dyrektoriatu',expl:'9–10 listopada 1799 roku (18 Brumaire\'a wg kalendarza rewolucyjnego) <strong>Napoleon Bonaparte</strong> obalił Dyrektoriat i przejął władzę jako Pierwszy Konsul. Koniec Republiki.'},
-  {tid:'rep',q:'Jak zakończył się "terror jakobiński"?',opts:['Napoleon obalił Robespierre\'a','Robespierre sam zrezygnował','Robespierre został aresztowany i zgilotynowany','Interwencja Austrii'],a:2,hint:'Thermidor 1794 — kara dla kata',expl:'W lipcu 1794 (Thermidor) Robespierre został <strong>aresztowany przez dawnych współpracowników</strong> i zgilotynowany. Ironicznie — sam zginął na gilotynie, którą tak chętnie stosował.'},
-  {tid:'rep',q:'Jakie były główne skutki Rewolucji Francuskiej dla Europy?',opts:['Wzmocnienie monarchii absolutnych','Koniec feudalizmu, prawa człowieka, równość wobec prawa','Powrót do średniowiecza','Wzmocnienie Kościoła'],a:1,hint:'Feudalizm, prawa, równość',expl:'Rewolucja Francuska zakończyła <strong>feudalizm</strong>, wprowadziła <strong>równość wobec prawa</strong>, upowszechniła <strong>prawa człowieka</strong> i stała się inspiracją dla całej Europy i Ameryki Łacińskiej.'},
+const ITABS=[
+  {id:'theory',l:'📖 Teoria'},
+  {id:'body',l:'🔬 Budowa'},
+  {id:'examples',l:'🐾 Przykłady'},
+  {id:'significance',l:'🌍 Znaczenie'},
+  {id:'flash',l:'🃏 Fiszki'},
+  {id:'quiz',l:'✏️ Test'},
 ];
 
-// ═══════════════════════════════════════════════════════════ STATE
-let currentTopic = TOPICS[0];
-let currentTab = 'theory';
-let fcIndex = 0; let fcFlipped = false;
-let qi = 0, sel = null, score = 0, mistakes = [], qList = [];
-
-const INNER_TABS = [
-  {id:'theory',label:'📖 Teoria'},
-  {id:'timeline',label:'📅 Chronologia'},
-  {id:'people',label:'👤 Postacie'},
-  {id:'flash',label:'🃏 Fiszki'},
-  {id:'quiz',label:'✏️ Test'},
-];
-
-function setTopic(id){
-  currentTopic = TOPICS.find(t=>t.id===id);
-  currentTab='theory'; fcIndex=0; fcFlipped=false;
+function setGroup(id){
+  cg=GROUPS.find(g=>g.id===id);
+  ct='theory';fcI=0;fcF=false;
   qi=0;sel=null;score=0;mistakes=[];
-  qList=[...ALL_QUIZ.filter(q=>q.tid===id)].sort(()=>Math.random()-.5);
-  renderTopics(); renderInnerTabs(); render();
+  qList=[...cg.quiz].sort(()=>Math.random()-.5);
+  renderGroups();renderITabs();render();
 }
 function setTab(id){
-  currentTab=id; fcIndex=0; fcFlipped=false;
-  if(id==='quiz'){qi=0;sel=null;score=0;mistakes=[];qList=[...ALL_QUIZ.filter(q=>q.tid===currentTopic.id)].sort(()=>Math.random()-.5);}
-  renderInnerTabs(); render();
+  ct=id;fcI=0;fcF=false;
+  if(id==='quiz'){qi=0;sel=null;score=0;mistakes=[];qList=[...cg.quiz].sort(()=>Math.random()-.5);}
+  renderITabs();render();
 }
 
-function renderTopics(){
-  document.getElementById('topic-grid').innerHTML=TOPICS.map(t=>`
-    <button class="topic-btn${t.id===currentTopic.id?' active':''}" onclick="setTopic('${t.id}')">
-      <div class="t-num">${t.icon} ${t.num}</div>
-      <div class="t-name">${t.name}</div>
-      <div class="t-era">${t.era}</div>
+function renderGroups(){
+  document.getElementById('group-tabs').innerHTML=GROUPS.map(g=>`
+    <button class="gtab ${g.cls}${g.id===cg.id?' active':''}" onclick="setGroup('${g.id}')">
+      <div class="g-ico">${g.ico}</div>
+      <div class="g-name">${g.name}</div>
+      <div class="g-sub">${g.sub}</div>
     </button>`).join('');
 }
-function renderInnerTabs(){
-  document.getElementById('inner-tabs').innerHTML=INNER_TABS.map(t=>`
-    <button class="itab${t.id===currentTab?' active':''}" onclick="setTab('${t.id}')">${t.label}</button>`).join('');
+function renderITabs(){
+  document.getElementById('itabs').innerHTML=ITABS.map(t=>`
+    <button class="itab${ct===t.id?' active '+cg.cls:''}" onclick="setTab('${t.id}')">${t.l}</button>`).join('');
 }
 
-// ═══════════════════════════════════════════════════════════ RENDERS
+// ══════════════════════════════════════════════════ RENDERS
 
 function renderTheory(){
-  const t=currentTopic;
-  const colClass={gold:'gold',red:'red',blue:'blue',green:'green',teal:'teal'};
-  const factsHTML=t.facts.map(f=>`
-    <div class="fact-box ${colClass[f.type]||'gold'}">
-      <h3>${f.title}</h3>
-      <ul>${f.items.map(i=>`<li>${i}</li>`).join('')}</ul>
-    </div>`).join('');
-  return `
-<div class="card">
-  <div class="card-h">${t.icon} ${t.name}</div>
-  <p style="font-size:14px;color:var(--muted);margin-bottom:14px;line-height:1.6">${t.summary}</p>
-  <div class="facts-grid">${factsHTML}</div>
-</div>
-<div style="margin-top:4px">
-  <button class="btn btn-gold" onclick="setTab('timeline')">📅 Chronologia →</button>
-</div>`;
-}
-
-function renderTimeline(){
-  const t=currentTopic;
-  return `
-<div class="card">
-  <div class="card-h">📅 Chronologia — ${t.name}</div>
-  <div class="timeline">
-    ${t.timeline.map(item=>`
-      <div class="tl-item">
-        <div class="tl-dot"></div>
-        <div class="tl-year">${item.y}</div>
-        <div class="tl-text">${item.t}</div>
-      </div>`).join('')}
+  const g=cg;
+  return `<div class="card">
+    <div class="card-h">${g.ico} ${g.name} — podstawowe cechy</div>
+    <p style="font-size:14px;color:var(--muted);margin-bottom:14px;line-height:1.6">${g.summary}</p>
+    <div class="fg">${g.facts.map(f=>`
+      <div class="fb ${f.t}"><h3>${f.h}</h3>
+      <ul>${f.i.map(i=>`<li>${i}</li>`).join('')}</ul></div>`).join('')}
+    </div>
   </div>
-</div>`;
+  <div style="margin-top:4px">
+    <button class="btn ${g.btnCls}" onclick="setTab('body')">🔬 Budowa →</button>
+  </div>`;
 }
 
-function renderPeople(){
-  const t=currentTopic;
-  return `
-<div class="card">
-  <div class="card-h">👤 Ważne postacie — ${t.name}</div>
-  <div class="people-grid">
-    ${t.people.map(p=>`
-      <div class="person">
-        <div class="person-ico">${p.ico}</div>
+function renderBody(){
+  const g=cg;
+  return `<div class="card">
+    <div class="card-h">🔬 Budowa — ${g.name}</div>
+    <div class="body-grid">${g.body.map(b=>`
+      <div class="body-item">
+        <div class="body-ico">${b.ico}</div>
         <div>
-          <div class="person-name">${p.name}</div>
-          <div class="person-role">${p.role}</div>
-          <div class="person-fact">${p.fact}</div>
+          <div class="body-name">${b.name}</div>
+          <div class="body-pl">${b.pl}</div>
+          <div class="body-desc">${b.desc}</div>
         </div>
       </div>`).join('')}
-  </div>
-</div>`;
+    </div>
+  </div>`;
+}
+
+function renderExamples(){
+  const g=cg;
+  return `<div class="card">
+    <div class="card-h">🐾 Przykłady — ${g.name}</div>
+    <div class="ex-grid">${g.examples.map(e=>`
+      <div class="ex-card">
+        <div class="ex-ico">${e.ico}</div>
+        <div class="ex-name">${e.name}</div>
+        <div class="ex-pl">${e.pl}</div>
+        <div class="ex-fact">${e.fact}</div>
+      </div>`).join('')}
+    </div>
+  </div>`;
+}
+
+function renderSignificance(){
+  const g=cg;
+  return `<div class="card">
+    <div class="card-h">🌍 Znaczenie — ${g.name}</div>
+    <div>${g.significance.map(s=>`
+      <div class="sig-item">
+        <div class="sig-ico">${s.ico}</div>
+        <div class="sig-text">${s.text}</div>
+      </div>`).join('')}
+    </div>
+  </div>`;
 }
 
 function renderFlash(){
-  const cards=currentTopic.flashcards;
-  const c=cards[fcIndex];
-  return `
-<div class="card">
-  <div class="card-h">🃏 Fiszki — ${currentTopic.name}</div>
-  <div class="fc-info">Kliknij kartę, by zobaczyć odpowiedź · ${fcIndex+1} z ${cards.length}</div>
-  <div class="flashcard${fcFlipped?' flipped':''}" onclick="flipCard()">
-    <div class="fc-inner">
-      <div class="fc-front">
-        <div class="fc-q">${c.q}</div>
-        <div class="fc-tap">👆 Kliknij, by zobaczyć odpowiedź</div>
-      </div>
-      <div class="fc-back">
-        <div class="fc-a">${c.a}</div>
+  const cards=cg.flashcards;
+  const c=cards[fcI];
+  return `<div class="card">
+    <div class="card-h">🃏 Fiszki — ${cg.name}</div>
+    <div class="fc-meta">Kliknij kartę · ${fcI+1} z ${cards.length}</div>
+    <div class="flashcard${fcF?' flipped':''}" onclick="flipCard()">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-q">${c.q}</div><div class="fc-tap">👆 Kliknij — odpowiedź</div></div>
+        <div class="fc-back ${cg.cls}"><div class="fc-a">${c.a}</div></div>
       </div>
     </div>
-  </div>
-  <div class="fc-nav">
-    <button class="btn btn-sec" onclick="fcNav(-1)" ${fcIndex===0?'disabled':''}>← Poprzednia</button>
-    <span class="fc-count">${fcIndex+1} / ${cards.length}</span>
-    <button class="btn btn-gold" onclick="fcNav(1)" ${fcIndex===cards.length-1?'disabled':''}>Następna →</button>
-  </div>
-</div>`;
+    <div class="fc-nav">
+      <button class="btn btn-sec" onclick="fcNav(-1)" ${fcI===0?'disabled':''}>← Poprzednia</button>
+      <span class="fc-count">${fcI+1} / ${cards.length}</span>
+      <button class="btn ${cg.btnCls}" onclick="fcNav(1)" ${fcI===cards.length-1?'disabled':''}>Następna →</button>
+    </div>
+  </div>`;
 }
 
-function flipCard(){fcFlipped=!fcFlipped;render();}
-function fcNav(d){fcIndex+=d;fcFlipped=false;render();}
+function flipCard(){fcF=!fcF;render();}
+function fcNav(d){fcI+=d;fcF=false;render();}
 
 function renderQuiz(){
-  if(qi>=qList.length) return renderResult();
+  if(qi>=qList.length)return renderResult();
   const q=qList[qi];
   const total=qList.length;
   const pct=Math.round((qi/total)*100);
@@ -540,24 +519,25 @@ function renderQuiz(){
   }).join('');
   let fb='';
   if(sel!==null){
-    if(sel===q.a)fb=`<div class="feedback ok">✓ Правильно! <div class="expl">${q.expl}</div></div>`;
-    else fb=`<div class="feedback no">✗ Правильna: <strong>${q.opts[q.a]}</strong><div class="expl">${q.expl}</div></div>`;
+    fb=sel===q.a
+      ?`<div class="feedback ok">✓ Правильно! <div class="expl-box">${q.expl}</div></div>`
+      :`<div class="feedback no">✗ Правильna: <strong>${q.opts[q.a]}</strong><div class="expl-box">${q.expl}</div></div>`;
   }
   return `
-<div class="prog-bar"><div class="prog-fill" style="width:${pct}%"></div></div>
-<div class="score-row">
-  <span>Pytanie <b>${qi+1}/${total}</b></span>
-  <span>✅ <b style="color:var(--green)">${score}</b></span>
-  <span>❌ <b style="color:var(--red)">${mistakes.length}</b></span>
-</div>
-<div class="card">
-  <div class="q-label">Pytanie ${qi+1}</div>
-  <div class="q-text">${q.q}</div>
-  <div class="q-hint">💡 ${q.hint}</div>
-  <div class="opts">${optsHTML}</div>
-  ${fb}
-</div>
-<div class="nav-row">${sel!==null?`<button class="btn btn-gold" onclick="nextQ()">Dalej →</button>`:''}</div>`;
+  <div class="prog-bar"><div class="prog-fill ${cg.cls}-prog" style="width:${pct}%"></div></div>
+  <div class="score-row">
+    <span>Pytanie <b>${qi+1}/${total}</b></span>
+    <span>✅ <b style="color:var(--green)">${score}</b></span>
+    <span>❌ <b style="color:var(--red)">${mistakes.length}</b></span>
+  </div>
+  <div class="card">
+    <div class="q-label">Pytanie ${qi+1}</div>
+    <div class="q-text">${q.q}</div>
+    <div class="q-hint">💡 ${q.hint}</div>
+    <div class="opts">${optsHTML}</div>
+    ${fb}
+  </div>
+  <div class="nav-row">${sel!==null?`<button class="btn ${cg.btnCls}" onclick="nextQ()">Dalej →</button>`:''}</div>`;
 }
 
 function renderResult(){
@@ -565,27 +545,27 @@ function renderResult(){
   const pct=Math.round((score/total)*100);
   const emoji=pct>=80?'🎉':pct>=60?'👍':'📚';
   const stars=pct>=100?'⭐⭐⭐':pct>=80?'⭐⭐':pct>=60?'⭐':'';
-  const msg=pct>=80?'Warwara jest gotowa!':pct>=60?'Dobrze! Powtórz błędy.':'Przeczytaj teorię jeszcze raz.';
+  const msg=pct>=80?'Warwara — świetna robota!':pct>=60?'Dobrze! Powtórz błędy.':'Wróć do teorii i spróbuj ponownie.';
   const mHTML=mistakes.length?`
-    <div style="margin-top:20px;text-align:left">
-      <div style="font-family:'Playfair Display',serif;font-size:16px;font-weight:700;margin-bottom:12px">Błędy do powtórzenia:</div>
+    <div style="margin-top:18px;text-align:left">
+      <div style="font-family:'Outfit',sans-serif;font-size:15px;font-weight:800;margin-bottom:12px">Błędy do powtórzenia:</div>
       ${mistakes.map(m=>`
-        <div class="mistake-card">
-          <div class="m-q">${m.q}</div>
-          <div class="m-w">Ти відповіла: <b>${m.wrong}</b></div>
-          <div class="m-c">✓ ${m.correct}</div>
-          <div class="m-rule">${m.rule}</div>
+        <div class="mk">
+          <div class="mk-q">${m.q}</div>
+          <div class="mk-w">Ти відповіла: <b>${m.wrong}</b></div>
+          <div class="mk-c">✓ ${m.correct}</div>
+          <div class="mk-r">${m.rule}</div>
         </div>`).join('')}
     </div>`:'';
   return `<div class="card"><div class="result">
-    <div style="font-size:48px">${emoji}</div>
-    <div style="font-size:28px;margin:6px 0">${stars}</div>
+    <div style="font-size:44px">${emoji}</div>
+    <div style="font-size:26px;margin:6px 0">${stars}</div>
     <div class="big">${score}/${total}</div>
     <div class="msg">${msg}</div>
     <div class="result-btns">
       <button class="btn btn-sec" onclick="setTab('theory')">📖 Teoria</button>
       <button class="btn btn-sec" onclick="setTab('flash')">🃏 Fiszki</button>
-      <button class="btn btn-gold" onclick="setTab('quiz')">Spróbuj ponownie ↺</button>
+      <button class="btn ${cg.btnCls}" onclick="setTab('quiz')">Ponownie ↺</button>
     </div>
     ${mHTML}
   </div></div>`;
@@ -603,14 +583,15 @@ function nextQ(){qi++;sel=null;render();}
 
 function render(){
   const c=document.getElementById('content');
-  if(currentTab==='theory')   c.innerHTML=renderTheory();
-  else if(currentTab==='timeline')c.innerHTML=renderTimeline();
-  else if(currentTab==='people')  c.innerHTML=renderPeople();
-  else if(currentTab==='flash')   c.innerHTML=renderFlash();
+  if(ct==='theory')c.innerHTML=renderTheory();
+  else if(ct==='body')c.innerHTML=renderBody();
+  else if(ct==='examples')c.innerHTML=renderExamples();
+  else if(ct==='significance')c.innerHTML=renderSignificance();
+  else if(ct==='flash')c.innerHTML=renderFlash();
   else c.innerHTML=renderQuiz();
 }
 
-setTopic('osw');
+setGroup('fish');
 </script>
 </body>
 </html>
