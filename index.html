@@ -3,202 +3,150 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Biologia · Ryby, Płazy, Gady · Варвара</title>
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&family=DM+Sans:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<title>Matematyka · Річна контрольна · Варвара</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#f0faf4;
-  --card:#ffffff;
-  --border:#c8e6d0;
-  --ink:#0d2b1a;
-  --muted:#5a7a67;
-  --teal:#0d9488;--teal-bg:#f0fdfa;--teal-b:#99f6e4;
-  --blue:#1d6fa4;--blue-bg:#eff8ff;--blue-b:#93c5fd;
-  --amber:#b45309;--amber-bg:#fffbeb;--amber-b:#fcd34d;
-  --red:#b91c1c;--red-bg:#fff1f2;--red-b:#fca5a5;
-  --green:#15803d;--green-bg:#f0fdf4;--green-b:#86efac;
-  --purple:#7c3aed;--purple-bg:#f5f3ff;--purple-b:#c4b5fd;
-  --r:16px;--rs:10px;
-  --sh:0 4px 20px rgba(13,43,26,.08);
+  --bg:#fafafa;--card:#fff;--ink:#111827;--muted:#6b7280;--border:#e5e7eb;
+  --t1:#2563eb;--t1b:#dbeafe;--t1d:#1d4ed8;
+  --t2:#059669;--t2b:#d1fae5;--t2d:#065f46;
+  --t3:#7c3aed;--t3b:#ede9fe;--t3d:#5b21b6;
+  --t4:#dc2626;--t4b:#fee2e2;--t4d:#991b1b;
+  --t5:#d97706;--t5b:#fef3c7;--t5d:#92400e;
+  --t6:#0891b2;--t6b:#cffafe;--t6d:#164e63;
+  --t7:#be185d;--t7b:#fce7f3;--t7d:#9d174d;
+  --t8:#4f46e5;--t8b:#e0e7ff;--t8d:#3730a3;
+  --ok:#16a34a;--okb:#dcfce7;--err:#dc2626;--errb:#fee2e2;
+  --r:14px;--rs:8px;--sh:0 2px 12px rgba(0,0,0,.07);
 }
 *{box-sizing:border-box;margin:0;padding:0}
-body{
-  font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);min-height:100vh;
-  background-image:
-    radial-gradient(ellipse at 5% 10%,#bbf7d0 0%,transparent 45%),
-    radial-gradient(ellipse at 95% 90%,#bae6fd 0%,transparent 45%);
-}
-.page{max-width:700px;margin:0 auto;padding:24px 16px 80px}
+body{font-family:'Sora',sans-serif;background:var(--bg);color:var(--ink);min-height:100vh}
+.page{max-width:720px;margin:0 auto;padding:20px 14px 80px}
 
 /* HERO */
-.hero{text-align:center;padding:28px 0 24px;margin-bottom:24px}
-.hero .badge{display:inline-flex;align-items:center;gap:6px;background:var(--teal);color:#fff;
-  font-family:'Outfit',sans-serif;font-weight:700;font-size:11px;letter-spacing:.1em;
-  text-transform:uppercase;padding:5px 16px;border-radius:99px;margin-bottom:14px}
-.hero h1{font-family:'Outfit',sans-serif;font-size:30px;font-weight:900;line-height:1.15;margin-bottom:6px}
-.hero h1 span{color:var(--teal)}
-.hero p{font-size:14px;color:var(--muted)}
+.hero{text-align:center;padding:24px 0 20px;margin-bottom:20px;
+  background:linear-gradient(135deg,#1d4ed8 0%,#7c3aed 50%,#059669 100%);
+  border-radius:20px;color:white}
+.hero .badge{display:inline-block;background:rgba(255,255,255,.2);
+  font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  padding:4px 14px;border-radius:99px;margin-bottom:12px}
+.hero h1{font-size:26px;font-weight:800;line-height:1.2;margin-bottom:6px}
+.hero p{font-size:13px;opacity:.8}
 
-/* GROUP TABS */
-.group-tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:18px}
-.gtab{
-  padding:14px 10px;border:2px solid var(--border);border-radius:var(--r);
-  background:white;cursor:pointer;text-align:center;transition:all .18s;
-  font-family:'Outfit',sans-serif;box-shadow:var(--sh);
+/* TOPIC GRID */
+.topic-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:18px}
+.tcard{
+  padding:12px 14px;border:2px solid var(--border);border-radius:var(--r);
+  background:var(--card);cursor:pointer;transition:all .16s;box-shadow:var(--sh);
+  display:flex;align-items:center;gap:10px;
 }
-.gtab:hover{transform:translateY(-2px)}
-.gtab .g-ico{font-size:26px;margin-bottom:6px}
-.gtab .g-name{font-size:13px;font-weight:800;color:var(--ink);line-height:1.3}
-.gtab .g-sub{font-size:11px;color:var(--muted);margin-top:2px}
-.gtab.fish.active{border-color:var(--blue);background:var(--blue-bg)}
-.gtab.amphibian.active{border-color:var(--teal);background:var(--teal-bg)}
-.gtab.reptile.active{border-color:var(--amber);background:var(--amber-bg)}
+.tcard:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,.1)}
+.tcard .tc-ico{font-size:22px;flex-shrink:0}
+.tcard .tc-body{min-width:0}
+.tcard .tc-num{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:2px}
+.tcard .tc-name{font-size:13px;font-weight:700;color:var(--ink);line-height:1.3}
+.tcard.active{border-width:2px;background:var(--c-bg,#dbeafe)}
 
 /* INNER TABS */
-.itabs{display:flex;gap:5px;background:white;padding:5px;border-radius:var(--r);
-  border:1px solid var(--border);margin-bottom:18px}
-.itab{flex:1;padding:8px 4px;border-radius:var(--rs);border:none;
-  font-family:'Outfit',sans-serif;font-size:12px;font-weight:700;
-  cursor:pointer;background:transparent;color:var(--muted);transition:all .18s;text-align:center}
-.itab:hover{background:var(--bg);color:var(--ink)}
-.itab.active.fish{background:var(--blue);color:white}
-.itab.active.amphibian{background:var(--teal);color:white}
-.itab.active.reptile{background:var(--amber);color:white}
+.itabs{display:flex;gap:4px;background:var(--card);padding:4px;
+  border-radius:var(--r);border:1px solid var(--border);margin-bottom:16px;overflow-x:auto}
+.itab{flex-shrink:0;padding:7px 12px;border-radius:var(--rs);border:none;
+  font-family:'Sora',sans-serif;font-size:12px;font-weight:600;
+  cursor:pointer;background:transparent;color:var(--muted);transition:all .16s;white-space:nowrap}
+.itab:hover{background:var(--bg)}
+.itab.active{color:white}
 
 /* CARD */
 .card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);
-  padding:20px;margin-bottom:14px;box-shadow:var(--sh);animation:up .22s ease}
-@keyframes up{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
-.card-h{font-family:'Outfit',sans-serif;font-size:18px;font-weight:800;margin-bottom:14px;
-  display:flex;align-items:center;gap:8px}
+  padding:18px;margin-bottom:12px;box-shadow:var(--sh);animation:up .2s ease}
+@keyframes up{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+.card-h{font-size:16px;font-weight:800;margin-bottom:14px;display:flex;align-items:center;gap:8px}
 
-/* FACTS GRID */
-.fg{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:14px}
-.fb{padding:12px 14px;border-radius:var(--rs);border:1.5px solid}
-.fb.teal{background:var(--teal-bg);border-color:var(--teal-b)}
-.fb.blue{background:var(--blue-bg);border-color:var(--blue-b)}
-.fb.amber{background:var(--amber-bg);border-color:var(--amber-b)}
-.fb.red{background:var(--red-bg);border-color:var(--red-b)}
-.fb.green{background:var(--green-bg);border-color:var(--green-b)}
-.fb.purple{background:var(--purple-bg);border-color:var(--purple-b)}
-.fb h3{font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;margin-bottom:7px}
-.fb.teal h3{color:var(--teal)}.fb.blue h3{color:var(--blue)}.fb.amber h3{color:var(--amber)}
-.fb.red h3{color:var(--red)}.fb.green h3{color:var(--green)}.fb.purple h3{color:var(--purple)}
-.fb ul{list-style:none;font-size:13px;line-height:1.9}
-.fb.teal ul{color:#134e4a}.fb.blue ul{color:#1e3a8a}.fb.amber ul{color:#78350f}
-.fb.red ul{color:#7f1d1d}.fb.green ul{color:#14532d}.fb.purple ul{color:#4c1d95}
-.fb ul li::before{content:"→ ";opacity:.45}
+/* THEORY BLOCKS */
+.tgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
+.tbox{padding:12px 13px;border-radius:var(--rs);border:1.5px solid}
+.tbox h3{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:7px}
+.tbox ul{list-style:none;font-size:13px;line-height:2}
+.tbox ul li::before{content:"• ";opacity:.4}
 
-/* COMPARE TABLE */
-.ctable{width:100%;border-collapse:collapse;font-size:13px;margin-bottom:10px}
-.ctable th{background:var(--ink);color:white;padding:9px 12px;font-family:'Outfit',sans-serif;font-weight:700;font-size:12px;text-align:left}
-.ctable th:first-child{border-radius:var(--rs) 0 0 0}
-.ctable th:last-child{border-radius:0 var(--rs) 0 0}
-.ctable td{padding:9px 12px;border-bottom:1px solid var(--border);vertical-align:top;line-height:1.5}
-.ctable tr:nth-child(even) td{background:#f8fffe}
-.ctable tr:last-child td{border-bottom:none}
-.ctable .label{font-weight:600;color:var(--ink)}
-.ctable .fish-c{color:var(--blue)}.ctable .amp-c{color:var(--teal)}.ctable .rep-c{color:var(--amber)}
-
-/* BODY PARTS */
-.body-grid{display:flex;flex-direction:column;gap:7px}
-.body-item{display:flex;gap:12px;align-items:flex-start;
-  background:var(--bg);border-radius:var(--rs);padding:10px 14px;border:1px solid var(--border)}
-.body-ico{font-size:20px;flex-shrink:0}
-.body-name{font-family:'Outfit',sans-serif;font-size:14px;font-weight:700;margin-bottom:2px}
-.body-desc{font-size:13px;line-height:1.5;color:var(--ink)}
-.body-pl{font-size:12px;color:var(--muted);font-style:italic}
+/* FORMULA BOX */
+.formula{background:var(--c-bg,#dbeafe);border:1.5px solid var(--c,#2563eb);
+  border-radius:var(--rs);padding:14px 16px;margin-bottom:12px;font-size:14px;line-height:2}
+.formula strong{color:var(--c-d,#1d4ed8);font-weight:800}
+.math{font-family:'JetBrains Mono',monospace;background:rgba(0,0,0,.05);
+  padding:2px 7px;border-radius:5px;font-size:13px}
 
 /* EXAMPLES */
-.ex-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
-.ex-card{background:var(--bg);border:1.5px solid var(--border);border-radius:var(--rs);padding:12px 14px;text-align:center}
-.ex-ico{font-size:28px;margin-bottom:4px}
-.ex-name{font-family:'Outfit',sans-serif;font-size:13px;font-weight:800;color:var(--ink)}
-.ex-pl{font-size:12px;color:var(--muted)}
-.ex-fact{font-size:12px;color:var(--ink);margin-top:4px;line-height:1.5}
-
-/* SIGNIFICANCE */
-.sig-item{display:flex;gap:10px;align-items:flex-start;margin-bottom:10px}
-.sig-ico{font-size:18px;flex-shrink:0;margin-top:1px}
-.sig-text{font-size:14px;line-height:1.6}
-.sig-text strong{color:var(--green)}
-
-/* FLASHCARDS */
-.fc-wrap{margin-bottom:14px}
-.fc-meta{text-align:center;font-size:13px;color:var(--muted);margin-bottom:12px}
-.flashcard{perspective:1000px;width:100%;min-height:175px;cursor:pointer;margin-bottom:10px}
-.fc-inner{position:relative;width:100%;min-height:175px;transform-style:preserve-3d;transition:transform .48s;border-radius:var(--r)}
-.flashcard.flipped .fc-inner{transform:rotateY(180deg)}
-.fc-front,.fc-back{
-  position:absolute;width:100%;min-height:175px;backface-visibility:hidden;
-  border-radius:var(--r);padding:22px 20px;display:flex;flex-direction:column;
-  justify-content:center;border:2px solid var(--border);box-shadow:var(--sh);
-}
-.fc-front{background:white;text-align:center}
-.fc-back{transform:rotateY(180deg)}
-.fc-back.fish{background:var(--blue-bg);border-color:var(--blue-b)}
-.fc-back.amphibian{background:var(--teal-bg);border-color:var(--teal-b)}
-.fc-back.reptile{background:var(--amber-bg);border-color:var(--amber-b)}
-.fc-q{font-family:'Outfit',sans-serif;font-size:17px;font-weight:800;line-height:1.4;margin-bottom:8px}
-.fc-tap{font-size:12px;color:var(--muted)}
-.fc-a{font-size:14px;line-height:1.75}
-.fc-a strong{color:var(--teal)}
-.fc-nav{display:flex;justify-content:space-between;align-items:center}
-.fc-count{font-size:13px;color:var(--muted);font-weight:600}
+.ex-list{display:flex;flex-direction:column;gap:10px}
+.ex-item{background:var(--bg);border-radius:var(--rs);border:1px solid var(--border);overflow:hidden}
+.ex-q{padding:10px 14px;font-size:14px;font-weight:600;border-bottom:1px solid var(--border)}
+.ex-steps{padding:10px 14px}
+.ex-step{display:flex;gap:8px;margin-bottom:6px;font-size:13px;line-height:1.6;align-items:flex-start}
+.ex-step-n{width:20px;height:20px;border-radius:50%;background:var(--c,#2563eb);color:white;
+  font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.ex-ans{background:var(--okb);color:#14532d;font-weight:700;font-size:13px;
+  padding:7px 12px;border-radius:6px;margin-top:6px;display:inline-block}
 
 /* QUIZ */
-.prog-bar{height:6px;background:var(--border);border-radius:99px;margin-bottom:10px;overflow:hidden}
-.prog-fill{height:100%;border-radius:99px;transition:width .4s}
-.fish-prog{background:linear-gradient(90deg,var(--blue),#60a5fa)}
-.amphibian-prog{background:linear-gradient(90deg,var(--teal),#2dd4bf)}
-.reptile-prog{background:linear-gradient(90deg,var(--amber),#fcd34d)}
-.score-row{display:flex;gap:14px;font-size:13px;color:var(--muted);margin-bottom:14px}
+.prog-bar{height:5px;background:var(--border);border-radius:99px;margin-bottom:10px;overflow:hidden}
+.prog-fill{height:100%;border-radius:99px;background:var(--c,#2563eb);transition:width .4s}
+.score-row{display:flex;gap:14px;font-size:12px;color:var(--muted);margin-bottom:12px}
 .score-row b{color:var(--ink)}
-.q-label{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:7px;font-weight:600}
-.q-text{font-family:'Outfit',sans-serif;font-size:17px;font-weight:800;line-height:1.5;margin-bottom:8px}
+.q-label{font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;font-weight:700}
+.q-text{font-size:16px;font-weight:800;line-height:1.5;margin-bottom:6px}
 .q-hint{font-size:13px;color:var(--muted);font-style:italic;margin-bottom:12px}
-.opts{display:flex;flex-direction:column;gap:7px}
-.opt{padding:11px 16px;border:1.5px solid var(--border);border-radius:var(--rs);
-  font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;
-  cursor:pointer;background:white;color:var(--ink);text-align:left;transition:all .15s}
-.opt:hover:not(:disabled){border-color:var(--teal);background:var(--teal-bg)}
-.opt.ok{background:var(--green-bg);border-color:var(--green-b);color:#14532d}
-.opt.no{background:var(--red-bg);border-color:var(--red-b);color:#7f1d1d}
-.feedback{margin-top:12px;padding:12px 16px;border-radius:var(--rs);font-size:14px;line-height:1.7;animation:up .2s ease}
-.feedback.ok{background:var(--green-bg);color:#14532d;border:1px solid var(--green-b)}
-.feedback.no{background:var(--red-bg);color:#7f1d1d;border:1px solid var(--red-b)}
-.expl-box{margin-top:8px;background:white;border-radius:8px;padding:10px 13px;
-  font-size:13px;line-height:1.7;border:1px solid var(--border)}
-.nav-row{display:flex;justify-content:flex-end;margin-top:12px}
-.btn{padding:10px 22px;border-radius:var(--rs);border:none;
-  font-family:'Outfit',sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:all .15s}
-.btn-fish{background:var(--blue);color:white}
-.btn-fish:hover{background:#1553a0}
-.btn-amp{background:var(--teal);color:white}
-.btn-amp:hover{background:#0f766e}
-.btn-rep{background:var(--amber);color:white}
-.btn-rep:hover{background:#92400e}
-.btn-sec{background:white;color:var(--ink);border:1.5px solid var(--border)}
+.opts{display:flex;flex-direction:column;gap:6px}
+.opt{padding:10px 14px;border:1.5px solid var(--border);border-radius:var(--rs);
+  font-family:'Sora',sans-serif;font-size:14px;font-weight:500;
+  cursor:pointer;background:var(--card);color:var(--ink);text-align:left;transition:all .14s}
+.opt:hover:not(:disabled){border-color:var(--c,#2563eb);background:var(--c-bg,#dbeafe)}
+.opt.ok{background:var(--okb);border-color:#86efac;color:#14532d;font-weight:700}
+.opt.no{background:var(--errb);border-color:#fca5a5;color:#7f1d1d}
+.feedback{margin-top:10px;padding:11px 14px;border-radius:var(--rs);font-size:13px;line-height:1.7;animation:up .18s ease}
+.feedback.ok{background:var(--okb);color:#14532d;border:1px solid #86efac}
+.feedback.no{background:var(--errb);color:#7f1d1d;border:1px solid #fca5a5}
+.expl{margin-top:7px;background:white;border-radius:7px;padding:8px 12px;font-size:13px;color:#1e3a8a;line-height:1.7;border:1px solid #bfdbfe}
+.nav-row{display:flex;justify-content:flex-end;margin-top:10px}
+.btn{padding:9px 20px;border-radius:var(--rs);border:none;font-family:'Sora',sans-serif;
+  font-size:13px;font-weight:700;cursor:pointer;transition:all .14s}
+.btn-pri{background:var(--c,#2563eb);color:white}
+.btn-pri:hover{filter:brightness(.9);transform:translateY(-1px)}
+.btn-sec{background:var(--card);color:var(--ink);border:1.5px solid var(--border)}
 .btn-sec:hover{background:var(--bg)}
 
 /* RESULT */
-.result{text-align:center;padding:10px 0 20px}
-.result .big{font-family:'Outfit',sans-serif;font-size:58px;font-weight:900;color:var(--teal);line-height:1}
-.result .msg{font-size:16px;color:var(--muted);margin:10px 0 20px}
-.result-btns{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
-.mk{background:#fffbeb;border:1.5px solid var(--amber-b);border-radius:var(--rs);padding:13px;margin-bottom:9px;text-align:left}
-.mk-q{font-weight:700;font-size:14px;margin-bottom:4px}
-.mk-w{font-size:13px;color:var(--red);margin-bottom:4px}
-.mk-c{display:inline-block;background:var(--green-bg);color:#14532d;font-size:13px;font-weight:700;padding:3px 10px;border-radius:6px;margin-bottom:7px}
-.mk-r{font-size:13px;color:var(--blue);background:var(--blue-bg);padding:8px 12px;border-radius:8px;line-height:1.7}
+.result{text-align:center;padding:10px 0 16px}
+.result .big{font-size:54px;font-weight:800;color:var(--c,#2563eb);line-height:1}
+.result .msg{font-size:15px;color:var(--muted);margin:8px 0 18px}
+.result-btns{display:flex;gap:7px;justify-content:center;flex-wrap:wrap}
+.mk{background:#fffbeb;border:1.5px solid #fcd34d;border-radius:var(--rs);padding:12px;margin-bottom:8px;text-align:left}
+.mk-q{font-weight:700;font-size:13px;margin-bottom:4px}
+.mk-w{font-size:12px;color:var(--err);margin-bottom:3px}
+.mk-c{display:inline-block;background:var(--okb);color:#14532d;font-size:12px;font-weight:700;padding:2px 9px;border-radius:5px;margin-bottom:6px}
+.mk-r{font-size:12px;color:#1e3a8a;background:#dbeafe;padding:7px 11px;border-radius:7px;line-height:1.7}
 
-/* COMPARE TAB */
-.compare-note{font-size:13px;color:var(--muted);margin-bottom:12px;font-style:italic}
+/* FLASHCARDS */
+.fc-meta{text-align:center;font-size:13px;color:var(--muted);margin-bottom:10px}
+.flashcard{perspective:900px;width:100%;min-height:160px;cursor:pointer;margin-bottom:10px}
+.fc-inner{position:relative;width:100%;min-height:160px;transform-style:preserve-3d;transition:transform .45s;border-radius:var(--r)}
+.flashcard.flipped .fc-inner{transform:rotateY(180deg)}
+.fc-front,.fc-back{position:absolute;width:100%;min-height:160px;backface-visibility:hidden;
+  border-radius:var(--r);padding:20px;display:flex;flex-direction:column;justify-content:center;
+  border:2px solid var(--border);box-shadow:var(--sh)}
+.fc-front{background:white;text-align:center}
+.fc-back{transform:rotateY(180deg);background:var(--c-bg,#dbeafe);border-color:var(--c,#2563eb)}
+.fc-q{font-size:16px;font-weight:800;line-height:1.4;margin-bottom:7px}
+.fc-tap{font-size:12px;color:var(--muted)}
+.fc-a{font-size:14px;line-height:1.75}
+.fc-a strong{color:var(--c-d,#1d4ed8)}
+.fc-nav{display:flex;justify-content:space-between;align-items:center}
+.fc-count{font-size:12px;color:var(--muted);font-weight:600}
 
 @media(max-width:500px){
-  .fg{grid-template-columns:1fr}.group-tabs{grid-template-columns:1fr}
-  .ex-grid{grid-template-columns:1fr}.hero h1{font-size:24px}
-  .result .big{font-size:42px}
+  .topic-grid{grid-template-columns:1fr}
+  .tgrid{grid-template-columns:1fr}
+  .hero h1{font-size:20px}
+  .result .big{font-size:40px}
 }
 </style>
 </head>
@@ -206,300 +154,415 @@ body{
 <div class="page">
 
 <div class="hero">
-  <div class="badge">🔬 Biologia · 6 клас</div>
-  <h1>Kręgowce —<br><span>Ryby · Płazy · Gady</span></h1>
-  <p>Теорія · Будова · Приклади · Фішки · Тест · Варвара</p>
+  <div class="badge">📐 Matematyka · 6 клас · Річна контрольна</div>
+  <h1>Повна підготовка —<br>8 тем, всі розділи</h1>
+  <p>Теорія · Формули · Приклади · Фішки · Тест · Варвара</p>
 </div>
 
-<div class="group-tabs" id="group-tabs"></div>
+<div class="topic-grid" id="topic-grid"></div>
 <div class="itabs" id="itabs"></div>
 <div id="content"></div>
 
 </div>
 <script>
-// ══════════════════════════════════════════════════ DATA
+const C={
+  t1:{c:'#2563eb',bg:'#dbeafe',d:'#1d4ed8'},
+  t2:{c:'#059669',bg:'#d1fae5',d:'#065f46'},
+  t3:{c:'#7c3aed',bg:'#ede9fe',d:'#5b21b6'},
+  t4:{c:'#dc2626',bg:'#fee2e2',d:'#991b1b'},
+  t5:{c:'#d97706',bg:'#fef3c7',d:'#92400e'},
+  t6:{c:'#0891b2',bg:'#cffafe',d:'#164e63'},
+  t7:{c:'#be185d',bg:'#fce7f3',d:'#9d174d'},
+  t8:{c:'#4f46e5',bg:'#e0e7ff',d:'#3730a3'},
+};
 
-const GROUPS = [
-  {
-    id:'fish', cls:'fish', ico:'🐟', name:'Ryby', sub:'Кісткові та хрящові',
-    color:'blue', btnCls:'btn-fish',
-    summary:'Ryby to kręgowce żyjące wyłącznie w wodzie. Mają łuski, skrzela i płetwy. Są zmiennocieplne — temperatura ich ciała zależy od otoczenia.',
-    facts:[
-      {t:'blue',h:'Cechy ogólne',i:['Żyją tylko w wodzie','Oddychają skrzelami','Mają łuski i płetwy','Zmiennocieplne (zimnokrwiste)','Serce dwukomorowe']},
-      {t:'teal',h:'Szkielet',i:['Ryby kostne — szkielet kostny','Ryby chrzęstne — szkielet chrzęstny','Kręgosłup u obu','Żebra (u większości)','Płetwy zamiast kończyn']},
-      {t:'green',h:'Rozmnażanie',i:['Rozdzielnopłciowe','Ikra (jajeczka) w wodzie','Zapłodnienie zewnętrzne (większość)','Larwy = narybek','Brak opieki nad potomstwem (zwykle)']},
-      {t:'red',h:'Podział',i:['Ryby kostne — 95% gatunków','Ryby chrzęstne — rekiny, płaszczki','Ryby dwudyszne — wyjątek','Morskie vs słodkowodne','Ok. 33 000 gatunków na świecie']},
-    ],
-    body:[
-      {ico:'👁️',name:'Linia boczna',pl:'linia naboczna',desc:'Narząd czucia — wyczuwa drgania i prądy wody. Unikalny dla ryb i płazów.'},
-      {ico:'🫁',name:'Skrzela',pl:'skrzela',desc:'Narząd oddechowy — wyciągają tlen rozpuszczony w wodzie. Zamiast płuc.'},
-      {ico:'💨',name:'Pęcherz pławny',pl:'pęcherz pławny',desc:'Narząd hydrostatyczny — reguluje głębokość pływania bez wysiłku.'},
-      {ico:'🐠',name:'Łuski',pl:'łuski',desc:'Ochrona ciała. Rosną przez całe życie — po łuskach można określić wiek ryby!'},
-      {ico:'🏊',name:'Płetwy',pl:'płetwy',desc:'Zamiast kończyn. Grzbietowa (stabilność), ogonowa (napęd), piersiowe i brzuszne (sterowność).'},
-      {ico:'❤️',name:'Serce dwukomorowe',pl:'serce',desc:'Jedna komora + jeden przedsionek. Krew okrąża ciało raz (1 obieg).'},
-    ],
-    examples:[
-      {ico:'🐟',name:'Karp',pl:'karp (Cyprinus carpio)',fact:'Ryba hodowlana, do 30 kg. Symbol wigilii w Polsce.'},
-      {ico:'🐡',name:'Okoń',pl:'okoń (Perca fluviatilis)',fact:'Drapieżna ryba słodkowodna z charakterystycznymi paskami.'},
-      {ico:'🦈',name:'Rekin',pl:'rekin',fact:'Ryba chrzęstna, drapieżnik oceanów. Szkielet z chrząstki.'},
-      {ico:'🐠',name:'Śledź',pl:'śledź (Clupea harengus)',fact:'Ryba morska, bardzo ważna gospodarczo dla Polski.'},
-      {ico:'🐟',name:'Łosoś',pl:'łosoś (Salmo salar)',fact:'Wędrowna — żyje w morzu, ale tarło odbywa w rzekach.'},
-      {ico:'🦑',name:'Płaszczka',pl:'płaszczka (Raja)',fact:'Ryba chrzęstna, spłaszczone ciało, żyje na dnie.'},
-    ],
-    significance:[
-      {ico:'🍽️',text:'<strong>Pokarm</strong> — jeden z głównych źródeł białka dla ludzi na świecie (rybołówstwo, akwakultura)'},
-      {ico:'🏭',text:'<strong>Gospodarka</strong> — rybołówstwo morskie i słodkowodne, hodowle ryb (karpia, łososia, pstrąga)'},
-      {ico:'🔬',text:'<strong>Nauka</strong> — modele badań biologicznych, genetycznych, medycznych'},
-      {ico:'🌊',text:'<strong>Ekosystem</strong> — kluczowe ogniwo w łańcuchu pokarmowym ekosystemów wodnych'},
-      {ico:'🎣',text:'<strong>Wędkarstwo</strong> — sport i rekreacja, ważna część kultury'},
-    ],
-    flashcards:[
-      {q:'Jak oddychają ryby?',a:'Ryby oddychają <strong>skrzelami</strong> — wyciągają tlen rozpuszczony w wodzie. Woda przepływa przez jamę skrzelową, a tlen przechodzi do krwi.'},
-      {q:'Co to jest linia boczna u ryb?',a:'<strong>Linia boczna (naboczna)</strong> — narząd czucia wzdłuż boków ciała. Wyczuwa drgania i ruchy wody. Ryby używają jej jak "szóstego zmysłu."'},
-      {q:'Czym różnią się ryby kostne od chrzęstnych?',a:'Ryby kostne mają <strong>szkielet kostny</strong> (np. karp, okoń) — 95% gatunków. Ryby chrzęstne mają <strong>szkielet z chrząstki</strong> (np. rekin, płaszczka).'},
-      {q:'Co to jest pęcherz pławny?',a:'Narząd <strong>hydrostatyczny</strong> — worek wypełniony gazem. Pozwala rybie utrzymywać głębokość w wodzie bez ciągłego wysiłku.'},
-      {q:'Jak ryby się rozmnażają?',a:'Większość ryb składa <strong>ikrę</strong> (jajeczka) w wodzie. Zapłodnienie zewnętrzne — samiec polewa ikrę nasieniem. Z jaj wylęgają się larwy — <strong>narybek</strong>.'},
-      {q:'Dlaczego ryby są zmiennocieplne?',a:'Ich temperatura ciała <strong>zależy od temperatury otoczenia</strong> — wody. Nie wytwarzają własnego ciepła. Dlatego zimą ryby są mało aktywne.'},
-      {q:'Podaj 3 przykłady ryb słodkowodnych.',a:'<strong>Karp, okoń, szczupak, leszcz, karaś</strong> — żyją w rzekach i jeziorach. W Polsce najważniejszy hodowlany to karp.'},
-      {q:'Jakie znaczenie mają ryby dla człowieka?',a:'<strong>Pokarm</strong> (ważne źródło białka), <strong>gospodarka</strong> (rybołówstwo, hodowla), <strong>nauka</strong> (badania), <strong>wędkarstwo</strong> (rekreacja).'},
-    ],
-    quiz:[
-      {q:'Czym oddychają ryby?',opts:['Płucami','Skrzelami','Skórą','Płucami i skrzelami'],a:1,hint:'Narząd w wodzie = skrzela',expl:'Ryby oddychają <strong>skrzelami</strong> — wyciągają tlen rozpuszczony w wodzie. Skrzela to odpowiednik płuc zwierząt lądowych.'},
-      {q:'Co to jest linia boczna?',opts:['Wzór na łuskach','Narząd czucia drgań w wodzie','Linia tłuszczu pod skórą','Szlak migracyjny ryb'],a:1,hint:'Wzdłuż boków ciała — wyczuwa...',expl:'<strong>Linia boczna (naboczna)</strong> — narząd zmysłu wyczuwający drgania i prądy wody. Unikalny dla ryb i płazów.'},
-      {q:'Jakie serce mają ryby?',opts:['Czterokomorowe','Trójkomorowe','Dwukomorowe','Jednokomorowe'],a:2,hint:'Mniej komór niż u ssaków',expl:'Ryby mają serce <strong>dwukomorowe</strong> (1 przedsionek + 1 komora). Krew krąży jednym obiegiem.'},
-      {q:'Czym różni się rekin od karpia?',opts:['Rekin żyje w słodkiej wodzie','Rekin ma szkielet z chrząstki, karp kostny','Karp jest większy','Rekin ma płetwy, karp nie'],a:1,hint:'Kostny vs chrzęstny',expl:'Rekin to <strong>ryba chrzęstna</strong> — szkielet z chrząstki. Karp to <strong>ryba kostna</strong> — szkielet kostny. To główny podział ryb.'},
-      {q:'Co to jest ikra?',opts:['Narząd ryby','Jajeczka ryby','Rodzaj łuski','Pokarm ryb'],a:1,hint:'Rozmnażanie ryb',expl:'<strong>Ikra</strong> to jajeczka (jaja) ryb składane w wodzie. Z ikry wylęgają się larwy — narybek. Zapłodnienie u większości ryb jest zewnętrzne.'},
-    ],
-  },
+const TOPICS=[
+{id:'t1',ico:'🔢',num:'Rozd. 1',name:'Liczby naturalne i ułamki',
+theory:{
+  summary:'Podstawa całej matematyki — działania na liczbach naturalnych, ułamkach zwykłych i dziesiętnych, potęgowanie.',
+  blocks:[
+    {t:'t1',h:'Ułamki zwykłe',items:['½, ¾, ⁵⁄₈ — licznik / mianownik','Skracanie: 6/8 = 3/4','Rozszerzanie: 1/3 = 4/12','Dodawanie: wspólny mianownik','Mnożenie: licznik × licznik']},
+    {t:'t1',h:'Ułamki dziesiętne',items:['0,5 = 5/10 = 1/2','0,75 = 75/100 = 3/4','Dodawanie — wyrównaj przecinek','Mnożenie: przesuń przecinek','Dzielenie: przesuń przecinek']},
+    {t:'t1',h:'Potęgowanie',items:['aⁿ = a × a × ... (n razy)','2³ = 2×2×2 = 8','a⁰ = 1 (każda liczba!)','a¹ = a','10² = 100, 10³ = 1000']},
+    {t:'t1',h:'Rozwinięcia dziesiętne',items:['1/2 = 0,5 (skończone)','1/3 = 0,333... (nieskończone)','1/4 = 0,25 (skończone)','1/7 = 0,142857... (okresowe)','Ułamek → dzielenie licznika przez mianownik']},
+  ],
+  formulas:`<strong>Dodawanie ułamków:</strong> <span class="math">a/b + c/d = (a·d + c·b) / (b·d)</span><br>
+<strong>Mnożenie ułamków:</strong> <span class="math">a/b × c/d = (a·c) / (b·d)</span><br>
+<strong>Dzielenie ułamków:</strong> <span class="math">a/b ÷ c/d = a/b × d/c</span><br>
+<strong>Potęga:</strong> <span class="math">aⁿ = a × a × a ... (n razy)</span>`,
+},
+examples:[
+  {q:'Oblicz: 2/3 + 1/4',steps:['Wspólny mianownik: NWW(3,4) = 12','2/3 = 8/12,  1/4 = 3/12','8/12 + 3/12 = 11/12'],ans:'11/12'},
+  {q:'Oblicz: 3/5 × 2/7',steps:['Mnożymy licznik przez licznik: 3×2 = 6','Mnożymy mianownik przez mianownik: 5×7 = 35','Wynik: 6/35 (nie można skrócić)'],ans:'6/35'},
+  {q:'Oblicz: 2⁴',steps:['2⁴ = 2×2×2×2','2×2 = 4,  4×2 = 8,  8×2 = 16'],ans:'16'},
+  {q:'Zamień 3/8 na ułamek dziesiętny',steps:['Dzielimy: 3 ÷ 8','3,000 ÷ 8 = 0,375'],ans:'0,375'},
+],
+flashcards:[
+  {q:'Jak dodać ułamki o różnych mianownikach?',a:'Znajdź <strong>wspólny mianownik</strong> (NWW), rozszerz oba ułamki, dodaj liczniki. Np. 1/3 + 1/4: NWW=12, więc 4/12 + 3/12 = 7/12.'},
+  {q:'Co to jest potęgowanie?',a:'<strong>aⁿ</strong> = a mnożone n razy przez siebie. Np. 2³ = 2×2×2 = 8. Ważne: a⁰ = 1 dla każdej liczby!'},
+  {q:'Jak zamienić ułamek zwykły na dziesiętny?',a:'Podziel licznik przez mianownik. Np. 3/4: 3÷4 = <strong>0,75</strong>. Wynik może być skończony lub nieskończony (okresowy).'},
+  {q:'Jak skrócić ułamek?',a:'Podziel licznik i mianownik przez ich <strong>NWD</strong> (największy wspólny dzielnik). Np. 6/8: NWD(6,8)=2, więc 6/8 = 3/4.'},
+  {q:'Jak mnożyć ułamki?',a:'Mnożymy <strong>licznik przez licznik</strong> i <strong>mianownik przez mianownik</strong>. Np. 2/3 × 3/4 = 6/12 = 1/2. Przed mnożeniem warto skrócić!'},
+],
+quiz:[
+  {q:'Ile wynosi 1/3 + 1/6?',opts:['2/9','1/2','2/6','1/3'],a:1,hint:'Wspólny mianownik: 6',expl:'1/3 = 2/6. Więc 2/6 + 1/6 = <strong>3/6 = 1/2</strong>.'},
+  {q:'Ile wynosi 2⁵?',opts:['10','25','32','16'],a:2,hint:'2×2×2×2×2',expl:'2⁵ = 2×2×2×2×2 = 4×4×2 = <strong>32</strong>.'},
+  {q:'Jak dziesiętnie zapisujemy 1/4?',opts:['0,4','0,25','0,14','0,5'],a:1,hint:'1 ÷ 4 = ?',expl:'1 ÷ 4 = <strong>0,25</strong>. Bo 4×25 = 100, więc 1/4 = 25/100 = 0,25.'},
+  {q:'Ile wynosi 3/4 × 8/9?',opts:['11/13','2/3','24/36','1/2'],a:1,hint:'Mnóż liczniki i mianowniki, potem skróć',expl:'3/4 × 8/9 = 24/36. Skrócimy: NWD(24,36)=12, więc 24/36 = <strong>2/3</strong>.'},
+  {q:'Ile wynosi 3² + 2³?',opts:['13','17','11','15'],a:1,hint:'3²=9, 2³=8',expl:'3² = 9, 2³ = 8. Suma: 9+8 = <strong>17</strong>.'},
+]},
 
-  {
-    id:'amphibian', cls:'amphibian', ico:'🐸', name:'Płazy', sub:'Wodno-lądowe',
-    color:'teal', btnCls:'btn-amp',
-    summary:'Płazy to pierwsze kręgowce, które wyszły na ląd — ale nie oderwały się całkowicie od wody. Żyją na pograniczu dwóch środowisk. Larwy żyją w wodzie, dorosłe — na lądzie i w wodzie.',
-    facts:[
-      {t:'teal',h:'Cechy ogólne',i:['Dwa środowiska życia','Larwy: skrzela (w wodzie)','Dorosłe: płuca + skóra','Zmiennocieplne','Skóra naga, wilgotna, bez łusek']},
-      {t:'blue',h:'Oddychanie',i:['Larwy — skrzelami','Dorosłe — płucami','Przez skórę (cały czas!)','Skóra musi być wilgotna','Dlatego żyją blisko wody']},
-      {t:'green',h:'Rozmnażanie',i:['Ikra w wodzie (jak ryby)','Kijanki = larwy w wodzie','Metamorfoza → dorosły','Zapłodnienie zewnętrzne','Samce kumkają by przyciągnąć samice']},
-      {t:'red',h:'Budowa',i:['Serce trójkomorowe','Dwie pary kończyn','Brak pazurów i łusek','Język przyklejony do przodu','Powieki — ważna innowacja!']},
-      {t:'amber',h:'Podział',i:['Płazy ogoniaste — salamandry, traszki','Płazy bezogonowe — żaby, ropuchy','Płazy beznożne — tropikalne','Ok. 8 000 gatunków','Najliczniejsze: bezogonowe']},
-      {t:'purple',h:'Ciekawostki',i:['Żaby zasypiają zimą (hibernacja)','Ropuchy mają suchszą skórę niż żaby','Traszki mogą regenerować kończyny','Drzewołazy są trujące','Axolotl nigdy nie przechodzi metamorfozy']},
-    ],
-    body:[
-      {ico:'🫁',name:'Płuca',pl:'płuca',desc:'Dorosłe płazy oddychają płucami — ale są one prymitywne, dlatego wspomagają je skórą.'},
-      {ico:'🫀',name:'Serce trójkomorowe',pl:'serce trójkomorowe',desc:'2 przedsionki + 1 komora. Krew utlenowana miesza się z nieutlenowaną — mniej wydajne niż u gadów.'},
-      {ico:'🌿',name:'Skóra naga i wilgotna',pl:'skóra',desc:'Bez łusek! Pokryta śluzem. Oddycha przez nią tlen i CO₂. Musi być stale wilgotna — dlatego płazy giną w wysuszeniu.'},
-      {ico:'👅',name:'Język',pl:'język',desc:'Przymocowany do przodu jamy ustnej (nie do tyłu jak u nas!). Szybko wyrzucany, chwyta owady.'},
-      {ico:'👁️',name:'Powieki',pl:'powieki',desc:'Płazy jako pierwsze kręgowce rozwinęły powieki — ochrona oczu na lądzie. Ryby ich nie mają.'},
-      {ico:'🐾',name:'Dwie pary kończyn',pl:'kończyny',desc:'Cztery nogi — innowacja ewolucyjna dla życia na lądzie. U ryb były płetwy, u płazów — nogi.'},
-    ],
-    examples:[
-      {ico:'🐸',name:'Żaba trawna',pl:'żaba trawna (Rana temporaria)',fact:'Najpospolitszy płaz w Polsce. Kumka wiosną przy stawach.'},
-      {ico:'🦎',name:'Traszka zwyczajna',pl:'traszka zwyczajna (Lissotriton vulgaris)',fact:'Płaz ogoniasty. Samiec ma charakterystyczny grzebień w sezonie.'},
-      {ico:'🐊',name:'Salamandra',pl:'salamandra plamista (Salamandra salamandra)',fact:'Żółto-czarne wzory. Wylęga żywe larwy, nie składa ikry!'},
-      {ico:'🐸',name:'Ropucha szara',pl:'ropucha szara (Bufo bufo)',fact:'Sucha, brodawkowana skóra. Żyje dalej od wody niż żaby.'},
-      {ico:'🌳',name:'Rzekotka',pl:'rzekotka drzewna (Hyla arborea)',fact:'Zielona, wspina się na drzewa dzięki przylgom na palcach.'},
-      {ico:'🦎',name:'Axolotl',pl:'aksolotl (Ambystoma mexicanum)',fact:'Nigdy nie przechodzi metamorfozy — całe życie w stadium larwy!'},
-    ],
-    significance:[
-      {ico:'🦟',text:'<strong>Regulacja owadów</strong> — żaby i ropuchy zjadają ogromne ilości komarów, much, ślimaków — naturalna ochrona roślin'},
-      {ico:'💊',text:'<strong>Medycyna</strong> — substancje ze skóry płazów używane w badaniach farmaceutycznych (antybiotyki, leki przeciwbólowe)'},
-      {ico:'🔬',text:'<strong>Biologia</strong> — modelowe organizmy do badań nad metamorfozą, regeneracją i genetyką'},
-      {ico:'⚠️',text:'<strong>Wskaźnik środowiska</strong> — płazy są wrażliwe na zanieczyszczenia; ich zanik sygnalizuje degradację ekosystemu'},
-      {ico:'🌿',text:'<strong>Łańcuch pokarmowy</strong> — ważne ogniwo: zjadają owady, same są pokarmem węży, bocianów, czapli'},
-    ],
-    flashcards:[
-      {q:'Dlaczego płazy są "wodno-lądowe"?',a:'Bo są związane z <strong>oboma środowiskami</strong>: larwy (kijanki) żyją w wodzie i oddychają skrzelami; dorosłe wychodzą na ląd, ale wracają do wody do rozmnażania i muszą mieć wilgotną skórę.'},
-      {q:'Co to jest metamorfoza u płazów?',a:'Przemiana kijanki (larwy) w dorosłego płaza. Kijanka ma skrzela i ogon → traci je, wykształca <strong>płuca i 4 kończyny</strong>. Trwa kilka tygodni.'},
-      {q:'Czym oddychają dorosłe płazy?',a:'<strong>Płucami i skórą jednocześnie!</strong> Skóra musi być wilgotna, by móc przez nią oddychać. Dlatego płazy nigdy nie odeszły całkowicie od wody.'},
-      {q:'Jakie serce mają płazy i co to oznacza?',a:'Serce <strong>trójkomorowe</strong> — 2 przedsionki + 1 komora. Krew utlenowana miesza się z nieutlenowaną w komorze — mniej wydajne niż u ptaków i ssaków.'},
-      {q:'Czym różni się żaba od ropuchy?',a:'<strong>Żaba</strong> — skóra gładka, wilgotna, długie nogi, dobra skokaczka, żyje bliżej wody. <strong>Ropucha</strong> — skóra sucha, brodawkowana, krótsze nogi, wolniej się porusza, może żyć dalej od wody.'},
-      {q:'Jak płazy się rozmnażają?',a:'Składają <strong>ikrę</strong> w wodzie (jak ryby). Samce przywabiają samice kumkaniem. Z ikry wylęgają się kijanki. Po metamorfozie kijanki stają się dorosłymi płazami.'},
-      {q:'Dlaczego płazy są wskaźnikiem czystości środowiska?',a:'Płazy mają <strong>nagą, wilgotną skórę</strong>, przez którą pochłaniają substancje z wody i powietrza. Są bardzo wrażliwe na zanieczyszczenia — ich znikanie oznacza zanieczyszczenie środowiska.'},
-    ],
-    quiz:[
-      {q:'Czym oddychają dorosłe płazy?',opts:['Tylko skrzelami','Tylko płucami','Płucami i skórą','Skrzelami i skórą'],a:2,hint:'Dwa sposoby jednocześnie',expl:'Dorosłe płazy oddychają <strong>płucami i skórą</strong> jednocześnie. Płuca są prymitywne, więc skóra jest bardzo ważna. Musi być stale wilgotna!'},
-      {q:'Co to jest kijanka?',opts:['Dorosła żaba','Larwa płaza','Gatunek ryby','Jajeczko płaza'],a:1,hint:'Stadium przed metamorfozą',expl:'<strong>Kijanka</strong> to larwa płaza — żyje w wodzie, oddycha skrzelami, ma ogon. Po metamorfozie przekształca się w dorosłego płaza z płucami i kończynami.'},
-      {q:'Ile komór ma serce płaza?',opts:['Dwie','Trzy','Cztery','Jedną'],a:1,hint:'Więcej niż ryba, mniej niż ssak',expl:'Płazy mają serce <strong>trójkomorowe</strong> — 2 przedsionki i 1 komora. Postęp względem ryb (2 komory), ale mniej wydajne niż u gadów, ptaków i ssaków.'},
-      {q:'Czym różni się żaba od ropuchy?',opts:['Żaba jest większa','Żaba ma gładką skórę, ropucha brodawkowaną i suchszą','Ropucha żyje w wodzie','Ropucha ma skrzela'],a:1,hint:'Patrz na skórę',expl:'<strong>Żaba</strong> — skóra gładka, wilgotna, długie nogi. <strong>Ropucha</strong> — skóra sucha, brodawkowana, bardziej niezależna od wody.'},
-      {q:'Dlaczego płazy muszą żyć blisko wody?',opts:['Jedzą tylko ryby','Skóra musi być stale wilgotna + rozmnażanie w wodzie','Boją się słońca','Nie mają kończyn'],a:1,hint:'Skóra + rozmnażanie',expl:'Płazy muszą być blisko wody z dwóch powodów: 1) <strong>skóra musi być wilgotna</strong> do oddychania; 2) składają <strong>ikrę w wodzie</strong> i tam żyją kijanki.'},
-      {q:'Które zwierzę to płaz ogoniasty?',opts:['Żaba trawna','Ropucha szara','Traszka zwyczajna','Rzekotka drzewna'],a:2,hint:'Ogoniasty = ma ogon w dorosłości',expl:'<strong>Traszka</strong> to płaz ogoniasty — zachowuje ogon w dorosłości. Żaba i ropucha to płazy bezogonowe (tracą ogon przy metamorfozie).'},
-    ],
-  },
+{id:'t2',ico:'📐',num:'Rozd. 2',name:'Figury na płaszczyźnie',
+theory:{
+  summary:'Geometria płaska — proste, okręgi, trójkąty, czworokąty, kąty i ich właściwości.',
+  blocks:[
+    {t:'t2',h:'Kąty',items:['Ostry: 0°–90°','Prosty: dokładnie 90°','Rozwarty: 90°–180°','Półpełny: 180°','Pełny: 360°']},
+    {t:'t2',h:'Trójkąty',items:['Suma kątów = 180°','Równoboczny: 3 równe boki','Równoramienny: 2 równe boki','Prostokątny: jeden kąt = 90°','Twierdzenie Pitagorasa: a²+b²=c²']},
+    {t:'t2',h:'Czworokąty',items:['Suma kątów = 360°','Prostokąt: 4 kąty proste','Kwadrat: 4 równe boki + 4 kąty proste','Równoległobok: pary równoległych boków','Trapez: jedna para równoległych boków']},
+    {t:'t2',h:'Okrąg i koło',items:['Okrąg: linia (obwód)','Koło: figura (powierzchnia)','r = promień, d = średnica = 2r','Obwód okręgu = 2πr','Pole koła = πr²']},
+  ],
+  formulas:`<strong>Suma kątów trójkąta:</strong> <span class="math">α + β + γ = 180°</span><br>
+<strong>Suma kątów czworokąta:</strong> <span class="math">α + β + γ + δ = 360°</span><br>
+<strong>Twierdzenie Pitagorasa:</strong> <span class="math">a² + b² = c²</span> (c = przyprostokątna/hypotenusa)<br>
+<strong>Obwód okręgu:</strong> <span class="math">L = 2πr</span> &nbsp;|&nbsp; <strong>Pole koła:</strong> <span class="math">P = πr²</span>`,
+},
+examples:[
+  {q:'Trzeci kąt trójkąta, gdy dwa wynoszą 50° i 70°',steps:['Suma kątów trójkąta = 180°','Trzeci kąt = 180° − 50° − 70°','= 180° − 120°'],ans:'60°'},
+  {q:'Czwarty kąt czworokąta: 80°, 100°, 90°, ?',steps:['Suma kątów = 360°','? = 360° − 80° − 100° − 90°','= 360° − 270°'],ans:'90°'},
+  {q:'Obwód okręgu o promieniu r = 5 cm (π≈3,14)',steps:['L = 2 × π × r','L = 2 × 3,14 × 5','L = 31,4 cm'],ans:'L = 31,4 cm'},
+],
+flashcards:[
+  {q:'Ile wynosi suma kątów trójkąta?',a:'Zawsze <strong>180°</strong>. Jeśli znasz dwa kąty, trzeci = 180° − suma dwóch znanych.'},
+  {q:'Czym różni się okrąg od koła?',a:'<strong>Okrąg</strong> to linia (sama granica). <strong>Koło</strong> to figura — okrąg wraz z wnętrzem. Obwód = 2πr. Pole koła = πr².'},
+  {q:'Co to jest twierdzenie Pitagorasa?',a:'W trójkącie prostokątnym: <strong>a² + b² = c²</strong>, gdzie c to najdłuższy bok (przeciwprostokątna/hypotenusa), a i b to przyprostokątne.'},
+  {q:'Ile wynosi suma kątów czworokąta?',a:'Zawsze <strong>360°</strong>. Czworokąt można podzielić na dwa trójkąty: 2 × 180° = 360°.'},
+  {q:'Czym różni się prostokąt od równoległoboku?',a:'<strong>Prostokąt</strong>: 4 kąty proste (90°), przeciwległe boki równe i równoległe. <strong>Równoległobok</strong>: przeciwległe boki równoległe i równe, ale kąty NIE muszą być 90°.'},
+],
+quiz:[
+  {q:'Dwa kąty trójkąta to 45° i 65°. Ile wynosi trzeci?',opts:['60°','70°','80°','90°'],a:1,hint:'Suma = 180°',expl:'180° − 45° − 65° = <strong>70°</strong>.'},
+  {q:'Jak nazywa się kąt równy dokładnie 90°?',opts:['Ostry','Rozwarty','Półpełny','Prosty'],a:3,hint:'Kąt prosty = symbol kwadracika',expl:'Kąt <strong>prosty</strong> = dokładnie 90°. Ostry < 90°, rozwarty > 90°.'},
+  {q:'Czworokąt ma kąty 90°, 80°, 110°. Czwarty kąt?',opts:['70°','80°','90°','100°'],a:1,hint:'Suma kątów czworokąta = 360°',expl:'360° − 90° − 80° − 110° = <strong>80°</strong>.'},
+  {q:'Obwód okręgu r=3 cm (π≈3,14)?',opts:['9,42 cm','18,84 cm','6,28 cm','28,26 cm'],a:1,hint:'L = 2 × π × r',expl:'L = 2 × 3,14 × 3 = <strong>18,84 cm</strong>.'},
+  {q:'W trójkącie prostokątnym a=3, b=4. Ile wynosi c?',opts:['5','7','6','√7'],a:0,hint:'a²+b²=c², czyli 9+16=?',expl:'c² = 3²+4² = 9+16 = 25, więc c = √25 = <strong>5</strong>.'},
+]},
 
-  {
-    id:'reptile', cls:'reptile', ico:'🦎', name:'Gady', sub:'Kręgowce lądowe',
-    color:'amber', btnCls:'btn-rep',
-    summary:'Gady jako pierwsze kręgowce całkowicie opanowały ląd. Mają łuski, sucha skórę i składają jaja z twardą osłoną — nie muszą wracać do wody. Zmiennocieplne.',
-    facts:[
-      {t:'amber',h:'Cechy ogólne',i:['Pierwsze prawdziwe kręgowce lądowe','Łuski rogowe — sucha skóra','Zmiennocieplne (regulują ciepło słońcem)','Jaja z twardą osłoną (owodniowe)','Serce trójkomorowe (4 u krokodyli)']},
-      {t:'red',h:'Oddychanie i skóra',i:['Tylko płucami (nie skórą!)','Skóra sucha, łuskowata','Nie przepuszcza wody','Dlatego mogą żyć na pustyni','Zrzucają skórę (linienie)']},
-      {t:'green',h:'Rozmnażanie',i:['Jaja owodniowe — z osłoną','Zapłodnienie wewnętrzne','Brak metamorfozy','Młode podobne do dorosłych','Brak stadium larwalnego']},
-      {t:'blue',h:'Podział',i:['Łuskonośne — jaszczurki i węże','Żółwie — pancerz kostny','Krokodyle — serce 4-komorowe','Dinozaury — wymarłe gady','Ok. 11 000 gatunków']},
-      {t:'teal',h:'Adaptacje do lądu',i:['Sucha skóra — brak wysuszenia','Jaja owodniowe — niezależność od wody','Płuca wydajne','Mocniejsze kończyny (u większości)','Nerki — oszczędzają wodę']},
-      {t:'purple',h:'Ciekawostki',i:['Kameleony zmieniają kolor','Węże czują ciepło wargami','Żółwie żyją ponad 200 lat','Gekony chodzą po suficie','Krokodyl ma 4-komorowe serce — jak ssak']},
-    ],
-    body:[
-      {ico:'🐍',name:'Łuski rogowe',pl:'łuski',desc:'Twarda, sucha osłona z keratyny (jak nasze paznokcie). Chroni przed wysychaniem. Gady je zrzucają (linieją) — skóra rośnie od środka.'},
-      {ico:'🥚',name:'Jajo owodniowe',pl:'jajo owodniowe',desc:'Rewolucja ewolucyjna! Jajo z osłoną i błonami chroniącymi zarodek. Nie musi być złożone w wodzie — gady mogą żyć i rozmnażać się w głębi lądu.'},
-      {ico:'🫁',name:'Wydajne płuca',pl:'płuca',desc:'Tylko płuca — nie skóra. Bardziej rozwinięte niż u płazów, choć mniej niż u ssaków.'},
-      {ico:'🫀',name:'Serce trójkomorowe',pl:'serce',desc:'Jak u płazów — 2 przedsionki + 1 komora. Wyjątek: krokodyle mają serce 4-komorowe jak ssaki!'},
-      {ico:'👅',name:'Język dwudzielny',pl:'język',desc:'U węży i jaszczurek — rozwidlony, służy do wyczuwania zapachów. Wysuwa się i "wącha" powietrze.'},
-      {ico:'☀️',name:'Termoregulacja',pl:'regulacja temperatury',desc:'Gady nie produkują własnego ciepła — grzeją się na słońcu (ektotermy). Rano nieaktywne, po nagrzaniu — aktywne.'},
-    ],
-    examples:[
-      {ico:'🦎',name:'Jaszczurka zwinka',pl:'jaszczurka zwinka (Lacerta agilis)',fact:'Najpospolitszy gad w Polsce. Odrzuca ogon gdy zagrożona (autotomia).'},
-      {ico:'🐍',name:'Zaskroniec',pl:'zaskroniec zwyczajny (Natrix natrix)',fact:'Niejadowity wąż z żółtymi plamami za głową. Najczęstszy wąż w Polsce.'},
-      {ico:'🐍',name:'Żmija',pl:'żmija zygzakowata (Vipera berus)',fact:'Jedyny jadowity wąż w Polsce! Zygzak na grzbiecie. Unika ludzi.'},
-      {ico:'🐊',name:'Krokodyl',pl:'krokodyl nilowy (Crocodylus niloticus)',fact:'Największy drapieżnik Afryki. Ma serce 4-komorowe jak ssaki!'},
-      {ico:'🐢',name:'Żółw',pl:'żółw błotny (Emys orbicularis)',fact:'Jedyny dziko żyjący żółw w Polsce. Zagrożony wyginięciem.'},
-      {ico:'🦎',name:'Kameleon',pl:'kameleon (Chamaeleo)',fact:'Zmienia kolor skóry (komunikacja i kamuflaż). Każde oko porusza się niezależnie!'},
-    ],
-    significance:[
-      {ico:'🌿',text:'<strong>Łańcuch pokarmowy</strong> — węże regulują populację gryzoni, jaszczurki zjadają owady'},
-      {ico:'💊',text:'<strong>Medycyna</strong> — jad węży używany do produkcji antytoksyn i leków (np. na nadciśnienie)'},
-      {ico:'👜',text:'<strong>Przemysł</strong> — skóra krokodyli i węży (kontrowersyjne — zagraża gatunkom!)'},
-      {ico:'🔬',text:'<strong>Nauka</strong> — badania nad termoregulacją, regeneracją, długowiecznością żółwi'},
-      {ico:'⚠️',text:'<strong>Zagrożenie</strong> — wiele gatunków gadów jest zagrożonych wyginięciem przez utratę siedlisk i kłusownictwo'},
-    ],
-    flashcards:[
-      {q:'Dlaczego gady są "prawdziwymi" kręgowcami lądowymi?',a:'Bo całkowicie uniezależniły się od wody: 1) <strong>sucha łuskowata skóra</strong> — nie wysychają; 2) <strong>jaja owodniowe</strong> — składają je na lądzie; 3) <strong>oddychają tylko płucami</strong> — nie potrzebują wilgotnej skóry.'},
-      {q:'Co to jest jajo owodniowe?',a:'Jajo z <strong>twardą lub skórzastą osłoną</strong> i błonami chroniącymi zarodek. Zawiera zapas wody i pokarmu. Może być złożone na lądzie — wielka ewolucyjna innowacja!'},
-      {q:'Czym różnią się gady od płazów w oddychaniu?',a:'Gady oddychają <strong>tylko płucami</strong> — skóra sucha i łuskowata nie przepuszcza gazów. Płazy oddychają płucami <strong>i skórą</strong>, dlatego skóra musi być wilgotna.'},
-      {q:'Dlaczego gady grzeją się na słońcu?',a:'Gady są <strong>zmiennocieplne (ektotermy)</strong> — nie produkują własnego ciepła. Regulują temperaturę ciała przez zachowanie: grzeją się na słońcu, chowają w cieniu gdy za gorąco.'},
-      {q:'Które z gadów ma serce 4-komorowe?',a:'<strong>Krokodyle!</strong> To wyjątek wśród gadów. Wszystkie inne gady mają serce trójkomorowe. Serce 4-komorowe mają też ptaki i ssaki.'},
-      {q:'Co to jest autotomia u jaszczurek?',a:'<strong>Odrzucanie ogona</strong> w sytuacji zagrożenia. Ogon się odrywa i wije, odwracając uwagę drapieżnika. Jaszczurce odrasta nowy ogon (z chrząstki).'},
-      {q:'Podaj różnicę między zaskrońcem a żmiją.',a:'<strong>Zaskroniec</strong> — niejadowity, żółte plamy za głową, pływa w wodzie. <strong>Żmija zygzakowata</strong> — jadowita, wzór zygzak na grzbiecie, jedyny jadowity wąż w Polsce.'},
-    ],
-    quiz:[
-      {q:'Czym gady różnią się od płazów w kontekście wody?',opts:['Gady żyją tylko w wodzie','Gady są całkowicie niezależne od wody','Gady i płazy są jednakowo zależne','Gady muszą być bliżej wody'],a:1,hint:'Łuski + jaja owodniowe',expl:'Gady są <strong>całkowicie niezależne od wody</strong>: sucha łuskowata skóra chroni przed wysychaniem, a jaja owodniowe mogą być składane na suchym lądzie.'},
-      {q:'Co to jest jajo owodniowe?',opts:['Jajo składane w wodzie','Jajo bez skorupki','Jajo z osłoną i błonami — może być złożone na lądzie','Jajo płazów'],a:2,hint:'Rewolucja ewolucyjna gadów',expl:'<strong>Jajo owodniowe</strong> ma osłonę (twardą lub skórzastą) i błony chroniące zarodek. Zawiera własny zapas wody — może być złożone daleko od wody.'},
-      {q:'Jak gady regulują temperaturę ciała?',opts:['Wytwarzają własne ciepło','Piją gorącą wodę','Grzeją się na słońcu, chłodzą w cieniu','Mają stałą temperaturę ciała'],a:2,hint:'Ektotermy = ciepło z zewnątrz',expl:'Gady są <strong>zmiennocieplne (ektotermy)</strong> — nie wytwarzają własnego ciepła. Grzeją się na słońcu (poikilotermia). Rano nieaktywne, po nagrzaniu aktywne.'},
-      {q:'Który wąż jest jadowity i żyje w Polsce?',opts:['Zaskroniec','Gniewosz plamisty','Żmija zygzakowata','Wąż Eskulapa'],a:2,hint:'Zygzak na grzbiecie',expl:'<strong>Żmija zygzakowata</strong> — jedyny jadowity wąż w Polsce. Ma wzór zygzaka na grzbiecie. Zaskroniec jest niejadowity.'},
-      {q:'Który gad ma serce 4-komorowe?',opts:['Jaszczurka','Wąż','Żółw','Krokodyl'],a:3,hint:'Wyjątek wśród gadów — jak ssaki!',expl:'<strong>Krokodyle</strong> mają serce 4-komorowe — wyjątek wśród gadów! Inne gady mają serce trójkomorowe. Serce 4-komorowe mają też ptaki i ssaki.'},
-      {q:'Co to jest autotomia?',opts:['Linienie skóry gadów','Odrzucanie ogona przez jaszczurkę','Hibernacja gadów','Zmiana koloru u kameleonów'],a:1,hint:'Obrona przed drapieżnikiem — ogon!',expl:'<strong>Autotomia</strong> — zdolność odrzucania ogona przez jaszczurki w sytuacji zagrożenia. Ogon odrywa się i wije, odwracając uwagę drapieżnika. Odrasta nowy (z chrząstki).'},
-    ],
-  },
+{id:'t3',ico:'📅',num:'Rozd. 3',name:'Liczby na co dzień',
+theory:{
+  summary:'Praktyczne zastosowania matematyki — czas, jednostki, skale, zaokrąglanie i odczytywanie danych.',
+  blocks:[
+    {t:'t3',h:'Czas',items:['1 godzina = 60 minut','1 minuta = 60 sekund','1 doba = 24 godziny','1 tydzień = 7 dni','1 rok = 365 dni (przestępny: 366)']},
+    {t:'t3',h:'Jednostki długości',items:['1 km = 1000 m','1 m = 100 cm = 1000 mm','1 cm = 10 mm','Przeliczaj zawsze na jedną jednostkę!','np. 2,5 km = 2500 m']},
+    {t:'t3',h:'Jednostki masy',items:['1 tona (t) = 1000 kg','1 kg = 1000 g','1 g = 1000 mg','Przeliczaj na jedną jednostkę!','np. 3,5 kg = 3500 g']},
+    {t:'t3',h:'Skala i zaokrąglanie',items:['Skala 1:100 → 1 cm = 100 cm (1 m)','Skala 1:10 000 → 1 cm = 100 m','Zaokrąglanie do dziesiątek: patrz jedności','Cyfra ≥5 → zaokrąglij w górę','Cyfra <5 → zaokrąglij w dół']},
+  ],
+  formulas:`<strong>Skala:</strong> <span class="math">skala = odległość na mapie / odległość rzeczywista</span><br>
+<strong>Odległość rzeczywista:</strong> <span class="math">d_rzecz = d_mapa × mianownik skali</span><br>
+<strong>Zaokrąglanie do 10:</strong> patrzymy na cyfrę jedności — ≥5 w górę, &lt;5 w dół`,
+},
+examples:[
+  {q:'Przelicz 2h 35min na minuty',steps:['2 godziny = 2 × 60 = 120 minut','Dodajemy 35 minut','120 + 35 = 155 minut'],ans:'155 minut'},
+  {q:'Mapa w skali 1:50 000. Odcinek 4 cm. Ile to km?',steps:['d = 4 cm × 50 000 = 200 000 cm','Przeliczamy: 200 000 cm ÷ 100 = 2000 m','2000 m ÷ 1000 = 2 km'],ans:'2 km'},
+  {q:'Zaokrąglij 3748 do setek',steps:['Cyfra dziesiątek = 4 (mniej niż 5)','Zaokrąglamy w dół','3748 ≈ 3700'],ans:'3700'},
+],
+flashcards:[
+  {q:'Ile sekund ma 1 godzina?',a:'1 godzina = 60 minut × 60 sekund = <strong>3600 sekund</strong>.'},
+  {q:'Jak obliczyć odległość rzeczywistą z mapy?',a:'d_rzeczywista = d_na_mapie × <strong>mianownik skali</strong>. Np. skala 1:10 000, odcinek 3 cm → 3 × 10 000 = 30 000 cm = 300 m.'},
+  {q:'Jak zaokrąglić 2365 do setek?',a:'Patrzymy na cyfrę <strong>dziesiątek</strong> = 6 ≥ 5, więc zaokrąglamy w górę: 2365 ≈ <strong>2400</strong>.'},
+  {q:'Ile gramów ma 2,75 kg?',a:'1 kg = 1000 g. Więc 2,75 kg = 2,75 × 1000 = <strong>2750 g</strong>.'},
+  {q:'Co to znaczy skala 1:100?',a:'1 jednostka na mapie = <strong>100 jednostek w rzeczywistości</strong>. Np. 1 cm na planie = 100 cm = 1 m w rzeczywistości.'},
+],
+quiz:[
+  {q:'Ile minut to 3 godziny 20 minut?',opts:['180 min','200 min','220 min','320 min'],a:1,hint:'3×60 + 20',expl:'3 × 60 = 180 min. 180 + 20 = <strong>200 min</strong>.'},
+  {q:'Przelicz 4,2 km na metry',opts:['420 m','4200 m','42 m','42 000 m'],a:1,hint:'1 km = 1000 m',expl:'4,2 × 1000 = <strong>4200 m</strong>.'},
+  {q:'Zaokrąglij 5,87 do dziesiątek',opts:['5,8','5,9','6,0','5,0'],a:1,hint:'Cyfra setnych = 7 ≥ 5',expl:'Cyfra setnych to 7 ≥ 5, więc zaokrąglamy w górę: 5,87 ≈ <strong>5,9</strong>.'},
+  {q:'Mapa skala 1:20 000. Odcinek 5 cm = ile metrów?',opts:['100 m','1000 m','10 000 m','500 m'],a:1,hint:'5 × 20 000 = ? cm, potem zamień',expl:'5 × 20 000 = 100 000 cm = <strong>1000 m</strong> = 1 km.'},
+  {q:'3500 g = ile kg?',opts:['35 kg','0,35 kg','3,5 kg','350 kg'],a:2,hint:'1 kg = 1000 g',expl:'3500 ÷ 1000 = <strong>3,5 kg</strong>.'},
+]},
+
+{id:'t4',ico:'🚀',num:'Rozd. 4',name:'Prędkość, droga, czas',
+theory:{
+  summary:'Trzy wzajemnie powiązane wielkości — jeśli znasz dwie, obliczasz trzecią. Kluczowe: spójne jednostki!',
+  blocks:[
+    {t:'t4',h:'Wzory — trójkąt PDT',items:['Droga = Prędkość × Czas','Prędkość = Droga ÷ Czas','Czas = Droga ÷ Prędkość','Zapamiętaj: D = P × T','Zasłoń szukaną — reszta podpowie!']},
+    {t:'t4',h:'Jednostki',items:['Prędkość: km/h lub m/s','1 m/s = 3,6 km/h','Droga: km, m, cm','Czas: h, min, s','Zawsze ujednolicaj jednostki!']},
+    {t:'t4',h:'Typowe błędy',items:['Czas musi być w godzinach (gdy v w km/h)','30 min = 0,5 h','1h 30min = 1,5 h','Przelicz minuty: min ÷ 60','Nie mieszaj km/h z m/s!']},
+    {t:'t4',h:'Zadania złożone',items:['Dwa pojazdy naprzeciw: dodaj prędkości','Dwa pojazdy w tym samym kierunku: odejmuj','Czas spotkania: d ÷ (v₁ + v₂)','Zawsze zapisuj dane i szukaną','Sprawdzaj jednostki w odpowiedzi']},
+  ],
+  formulas:`<strong>Droga:</strong> <span class="math">d = v × t</span><br>
+<strong>Prędkość:</strong> <span class="math">v = d ÷ t</span><br>
+<strong>Czas:</strong> <span class="math">t = d ÷ v</span><br>
+<strong>Uwaga:</strong> 1 h = 60 min, więc 30 min = <strong>0,5 h</strong>, 45 min = <strong>0,75 h</strong>`,
+},
+examples:[
+  {q:'Samochód jedzie v=80 km/h przez t=2,5 h. Jaka droga?',steps:['d = v × t','d = 80 × 2,5','d = 200 km'],ans:'d = 200 km'},
+  {q:'Przejechano 150 km w t=3 h. Jaka prędkość?',steps:['v = d ÷ t','v = 150 ÷ 3','v = 50 km/h'],ans:'v = 50 km/h'},
+  {q:'d=90 km, v=60 km/h. Ile czasu?',steps:['t = d ÷ v','t = 90 ÷ 60 = 1,5 h','1,5 h = 1 godzina 30 minut'],ans:'1 h 30 min'},
+],
+flashcards:[
+  {q:'Podaj trzy wzory trójkąta PDT',a:'<strong>d = v × t</strong> (droga = prędkość × czas)<br><strong>v = d ÷ t</strong> (prędkość = droga ÷ czas)<br><strong>t = d ÷ v</strong> (czas = droga ÷ prędkość)'},
+  {q:'Jak zamienić 45 minut na godziny?',a:'45 min ÷ 60 = <strong>0,75 h</strong>. Bo 45/60 = 3/4 = 0,75. Zapamiętaj: 30 min = 0,5 h, 15 min = 0,25 h.'},
+  {q:'Dwa pociągi jadą naprzeciwko siebie: 80 i 60 km/h. Dzielą je 280 km. Po ilu godzinach się spotkają?',a:'Dodajemy prędkości: 80+60=140 km/h. t = 280÷140 = <strong>2 h</strong>.'},
+  {q:'Jak zapamiętać wzory PDT?',a:'Narysuj trójkąt: D na górze, P i T na dole. Zasłoń szukaną: D=P×T, P=D÷T, T=D÷P.'},
+],
+quiz:[
+  {q:'v=60 km/h, t=3 h. Ile drogi?',opts:['20 km','63 km','180 km','200 km'],a:2,hint:'d = v × t',expl:'d = 60 × 3 = <strong>180 km</strong>.'},
+  {q:'d=200 km, v=80 km/h. Ile czasu?',opts:['2 h','2,5 h','3 h','4 h'],a:1,hint:'t = d ÷ v',expl:'t = 200 ÷ 80 = <strong>2,5 h</strong> = 2 h 30 min.'},
+  {q:'d=120 km, t=1,5 h. Jaka prędkość?',opts:['60 km/h','80 km/h','90 km/h','100 km/h'],a:1,hint:'v = d ÷ t',expl:'v = 120 ÷ 1,5 = <strong>80 km/h</strong>.'},
+  {q:'45 minut = ile godzin?',opts:['0,4 h','0,75 h','0,45 h','4,5 h'],a:1,hint:'min ÷ 60',expl:'45 ÷ 60 = <strong>0,75 h</strong> (trzy czwarte godziny).'},
+  {q:'Auto 90 km/h i rower 10 km/h jadą z tego samego miejsca w tym samym kierunku. Po 2h różnica drogi?',opts:['80 km','160 km','100 km','180 km'],a:1,hint:'Różnica prędkości × czas',expl:'Różnica v = 90−10 = 80 km/h. Po 2h: 80×2 = <strong>160 km</strong>.'},
+]},
+
+{id:'t5',ico:'📏',num:'Rozd. 5',name:'Pola wielokątów',
+theory:{
+  summary:'Wzory na pola figur geometrycznych — prostokąt, równoległobok, romb, trójkąt i trapez.',
+  blocks:[
+    {t:'t5',h:'Prostokąt i kwadrat',items:['P = a × b (długość × szerokość)','Kwadrat: P = a × a = a²','Obwód prostokąta: 2(a+b)','Obwód kwadratu: 4a','Przekątna kwadratu: a√2']},
+    {t:'t5',h:'Równoległobok i romb',items:['P = a × h (bok × wysokość)','Wysokość ⊥ podstawa!','Romb: 4 równe boki','Romb: P = a × h','lub P = (d₁ × d₂) ÷ 2 (przekątne)']},
+    {t:'t5',h:'Trójkąt',items:['P = (a × h) ÷ 2','Podstawa × wysokość ÷ 2','Wysokość ⊥ do podstawy','Każdy bok może być podstawą','h zmienia się przy zmianie podstawy']},
+    {t:'t5',h:'Trapez',items:['P = (a + b) × h ÷ 2','a i b = równoległe boki (podstawy)','h = wysokość (odległość między nimi)','(a+b) = suma podstaw','Pamiętaj: dzielisz przez 2!']},
+  ],
+  formulas:`<strong>Prostokąt:</strong> <span class="math">P = a × b</span><br>
+<strong>Równoległobok:</strong> <span class="math">P = a × h</span><br>
+<strong>Trójkąt:</strong> <span class="math">P = (a × h) ÷ 2</span><br>
+<strong>Trapez:</strong> <span class="math">P = (a + b) × h ÷ 2</span><br>
+<strong>Romb:</strong> <span class="math">P = (d₁ × d₂) ÷ 2</span> lub <span class="math">P = a × h</span>`,
+},
+examples:[
+  {q:'Pole trójkąta: podstawa 8 cm, wysokość 5 cm',steps:['P = (a × h) ÷ 2','P = (8 × 5) ÷ 2','P = 40 ÷ 2'],ans:'P = 20 cm²'},
+  {q:'Pole trapezu: a=10, b=6, h=4 cm',steps:['P = (a + b) × h ÷ 2','P = (10 + 6) × 4 ÷ 2','P = 16 × 4 ÷ 2 = 64 ÷ 2'],ans:'P = 32 cm²'},
+  {q:'Pole równoległoboku: a=7 cm, h=3 cm',steps:['P = a × h','P = 7 × 3'],ans:'P = 21 cm²'},
+],
+flashcards:[
+  {q:'Wzór na pole trójkąta?',a:'<strong>P = (a × h) ÷ 2</strong>, gdzie a to podstawa, h to wysokość (prostopadła do podstawy). To połowa pola równoległoboku o tym samym boku i wysokości.'},
+  {q:'Wzór na pole trapezu?',a:'<strong>P = (a + b) × h ÷ 2</strong>, gdzie a i b to podstawy (równoległe boki), h to wysokość (odległość między podstawami).'},
+  {q:'Czym różni się wysokość od boku?',a:'Wysokość jest <strong>prostopadła</strong> (⊥) do podstawy — tworzy kąt 90°. Bok to krawędź figury. W trójkącie i równoległoboku do wzoru na pole używamy wysokości, NIE boku!'},
+  {q:'Jak obliczyć pole rombu ze przekątnych?',a:'<strong>P = (d₁ × d₂) ÷ 2</strong>, gdzie d₁ i d₂ to przekątne rombu. Np. d₁=6, d₂=8: P = (6×8)÷2 = 24 cm².'},
+],
+quiz:[
+  {q:'Pole prostokąta a=12 cm, b=5 cm?',opts:['34 cm²','17 cm²','60 cm²','70 cm²'],a:2,hint:'P = a × b',expl:'P = 12 × 5 = <strong>60 cm²</strong>.'},
+  {q:'Pole trójkąta a=6, h=4 cm?',opts:['24 cm²','12 cm²','10 cm²','48 cm²'],a:1,hint:'P = (a × h) ÷ 2',expl:'P = (6 × 4) ÷ 2 = 24 ÷ 2 = <strong>12 cm²</strong>.'},
+  {q:'Pole trapezu: a=8, b=4, h=5 cm?',opts:['30 cm²','20 cm²','60 cm²','40 cm²'],a:0,hint:'P = (a+b) × h ÷ 2',expl:'P = (8+4) × 5 ÷ 2 = 12 × 5 ÷ 2 = 60 ÷ 2 = <strong>30 cm²</strong>.'},
+  {q:'Pole równoległoboku a=9, h=4 cm?',opts:['26 cm²','36 cm²','18 cm²','13 cm²'],a:1,hint:'P = a × h (nie a²!)',expl:'P = 9 × 4 = <strong>36 cm²</strong>.'},
+  {q:'Pole kwadratu o boku a=7 cm?',opts:['28 cm²','49 cm²','14 cm²','56 cm²'],a:1,hint:'Kwadrat: P = a²',expl:'P = 7² = 7×7 = <strong>49 cm²</strong>.'},
+]},
+
+{id:'t6',ico:'💯',num:'Rozd. 6',name:'Procenty',
+theory:{
+  summary:'Procent to setna część całości. Kluczowe: zamieniać procenty na ułamki i odwrotnie, obliczać podstawę.',
+  blocks:[
+    {t:'t6',h:'Podstawy procentów',items:['1% = 1/100 = 0,01','25% = 25/100 = 1/4','50% = 1/2 = 0,5','100% = całość','150% = więcej niż całość!']},
+    {t:'t6',h:'Obliczanie %',items:['p% z liczby n = n × p/100','20% z 300 = 300 × 20/100 = 60','Jaki % to x z n? → x/n × 100%','Obniżka: cena × (1 − p/100)','Podwyżka: cena × (1 + p/100)']},
+    {t:'t6',h:'Obniżki i podwyżki',items:['−20%: cena × 0,8','−30%: cena × 0,7','+15%: cena × 1,15','+50%: cena × 1,5','Skrót: (100±p)/100']},
+    {t:'t6',h:'Obliczanie bazy',items:['Dany jest % z liczby → znajdź liczbę','Jeśli p% = x, to całość = x × 100/p','30% = 90 → całość = 90 × 100/30 = 300','Proporcja: p/100 = x/n','n = x × 100/p']},
+  ],
+  formulas:`<strong>p% z liczby n:</strong> <span class="math">wynik = n × p ÷ 100</span><br>
+<strong>Jaki % to x z n:</strong> <span class="math">procent = x ÷ n × 100%</span><br>
+<strong>Obniżka o p%:</strong> <span class="math">nowa cena = cena × (100 − p) ÷ 100</span><br>
+<strong>Znajdź bazę:</strong> <span class="math">n = wynik × 100 ÷ p</span>`,
+},
+examples:[
+  {q:'Oblicz 35% z 240',steps:['wynik = 240 × 35 ÷ 100','= 240 × 0,35','= 84'],ans:'84'},
+  {q:'Bluza kosztuje 120 zł. Obniżka 25%. Nowa cena?',steps:['Obniżka = 120 × 25 ÷ 100 = 30 zł','Nowa cena = 120 − 30 = 90 zł','lub: 120 × 0,75 = 90 zł'],ans:'90 zł'},
+  {q:'20% uczniów = 8 osób. Ile uczniów w klasie?',steps:['20% = 8, szukamy 100%','100% = 8 × 100 ÷ 20','= 800 ÷ 20 = 40'],ans:'40 uczniów'},
+],
+flashcards:[
+  {q:'Jak zamienić procent na ułamek dziesiętny?',a:'Podziel przez 100: 35% = 35÷100 = <strong>0,35</strong>. Lub przesuń przecinek o 2 miejsca w lewo: 35% → 0,35.'},
+  {q:'Jak obliczyć p% z liczby n?',a:'<strong>n × p ÷ 100</strong>. Np. 20% z 150 = 150 × 20 ÷ 100 = 150 × 0,2 = <strong>30</strong>.'},
+  {q:'Cena 200 zł, obniżka 30%. Ile zapłacisz?',a:'200 × (100−30)/100 = 200 × 0,7 = <strong>140 zł</strong>. Lub: obniżka = 200×0,3=60, cena = 200−60=140.'},
+  {q:'Jak znaleźć 100%, gdy dany jest procent?',a:'Wzór: całość = wynik × 100 ÷ p. Np. 40% = 60 → całość = 60 × 100 ÷ 40 = <strong>150</strong>.'},
+  {q:'Jaki procent stanowi 15 z 60?',a:'15 ÷ 60 × 100% = 0,25 × 100% = <strong>25%</strong>.'},
+],
+quiz:[
+  {q:'Ile to 20% z 350?',opts:['35','50','70','700'],a:2,hint:'350 × 20 ÷ 100',expl:'350 × 20 ÷ 100 = 350 × 0,2 = <strong>70</strong>.'},
+  {q:'Cena 80 zł, obniżka 15%. Cena po obniżce?',opts:['68 zł','65 zł','72 zł','60 zł'],a:0,hint:'80 × (100−15) ÷ 100',expl:'80 × 0,85 = 80 − 12 = <strong>68 zł</strong>.'},
+  {q:'25% klasy = 6 osób. Ile osób w klasie?',opts:['24','18','30','150'],a:0,hint:'100% = 6 × 100 ÷ 25',expl:'6 × 100 ÷ 25 = 600 ÷ 25 = <strong>24 osoby</strong>.'},
+  {q:'Jaki procent stanowi 12 z 48?',opts:['12%','20%','25%','4%'],a:2,hint:'12 ÷ 48 × 100%',expl:'12 ÷ 48 = 0,25. 0,25 × 100% = <strong>25%</strong>.'},
+  {q:'Cena wzrosła o 10% i wynosi teraz 110 zł. Ile była przed podwyżką?',opts:['90 zł','99 zł','100 zł','105 zł'],a:2,hint:'Stara × 1,1 = 110',expl:'Stara cena × 1,1 = 110. Stara = 110 ÷ 1,1 = <strong>100 zł</strong>.'},
+]},
+
+{id:'t7',ico:'➕➖',num:'Rozd. 7',name:'Liczby dodatnie i ujemne',
+theory:{
+  summary:'Liczby całkowite na osi liczbowej — dodawanie, odejmowanie, mnożenie i dzielenie z liczbami ujemnymi.',
+  blocks:[
+    {t:'t7',h:'Oś liczbowa',items:['Liczby ujemne: …−3, −2, −1','Zero: 0','Liczby dodatnie: 1, 2, 3…','Im bardziej w lewo → mniejsza','−5 < −2 < 0 < 3 < 7']},
+    {t:'t7',h:'Dodawanie i odejmowanie',items:['(+) + (+) = +','(−) + (−) = − (większa wartość)','(+) + (−) = ± (różnica, znak większej)','a − (−b) = a + b','Odejmowanie ujemnej = dodawanie!']},
+    {t:'t7',h:'Mnożenie',items:['(+) × (+) = +','(−) × (−) = + ← uwaga!','(+) × (−) = −','(−) × (+) = −','Jednakowe znaki → +, różne → −']},
+    {t:'t7',h:'Dzielenie',items:['Zasady jak przy mnożeniu!','(+) ÷ (+) = +','(−) ÷ (−) = +','(+) ÷ (−) = −','(−) ÷ (+) = −']},
+  ],
+  formulas:`<strong>Znaki przy mnożeniu/dzieleniu:</strong><br>
+<span class="math">(+) × (+) = (+)</span> &nbsp; <span class="math">(−) × (−) = (+)</span><br>
+<span class="math">(+) × (−) = (−)</span> &nbsp; <span class="math">(−) × (+) = (−)</span><br>
+<strong>Odejmowanie ujemnej:</strong> <span class="math">a − (−b) = a + b</span><br>
+<strong>Wartość bezwzględna:</strong> <span class="math">|−5| = 5, |7| = 7</span>`,
+},
+examples:[
+  {q:'Oblicz: −3 + (−5)',steps:['Dodajemy dwie ujemne','Wynik jest ujemny','Wartość: 3+5 = 8'],ans:'−8'},
+  {q:'Oblicz: 4 − (−7)',steps:['Odejmowanie ujemnej = dodawanie','4 − (−7) = 4 + 7'],ans:'11'},
+  {q:'Oblicz: (−6) × (−4)',steps:['Dwa znaki minus → wynik dodatni','(−6) × (−4) = +(6×4)'],ans:'+24'},
+],
+flashcards:[
+  {q:'Ile wynosi (−3) × (−5)?',a:'<strong>+15</strong>. Dwie liczby ujemne mnożone przez siebie dają wynik <strong>dodatni</strong>. Minus × Minus = Plus!'},
+  {q:'Ile wynosi 5 − (−8)?',a:'Odejmowanie ujemnej = dodawanie: 5 − (−8) = 5 + 8 = <strong>13</strong>.'},
+  {q:'Które jest większe: −7 czy −2?',a:'<strong>−2 > −7</strong>. Na osi liczbowej −2 leży dalej w prawo (bliżej zera). Im mniejsza wartość bezwzględna ujemnej — tym większa liczba.'},
+  {q:'Ile wynosi (−12) ÷ (−3)?',a:'Dwa minusy → wynik plus: (−12) ÷ (−3) = <strong>+4</strong>.'},
+  {q:'Co to wartość bezwzględna?',a:'<strong>|a|</strong> = odległość od zera na osi liczbowej. Zawsze nieujemna: |−5| = 5, |3| = 3, |0| = 0.'},
+],
+quiz:[
+  {q:'Ile wynosi −4 + (−9)?',opts:['5','−5','−13','13'],a:2,hint:'Dwie ujemne: dodajesz wartości, wynik −',expl:'(−4) + (−9) = −(4+9) = <strong>−13</strong>.'},
+  {q:'Ile wynosi 3 − (−8)?',opts:['−5','5','11','−11'],a:2,hint:'Odejmowanie ujemnej = dodawanie',expl:'3 − (−8) = 3 + 8 = <strong>11</strong>.'},
+  {q:'Ile wynosi (−5) × (−7)?',opts:['−35','35','12','−12'],a:1,hint:'Minus × minus = plus',expl:'(−5) × (−7) = +(5×7) = <strong>35</strong>.'},
+  {q:'Które jest największe?',opts:['−10','−1','0','−5'],a:2,hint:'Na osi liczbowej: im dalej w prawo, tym większe',expl:'0 > −1 > −5 > −10. Największe to <strong>0</strong>.'},
+  {q:'Ile wynosi (−20) ÷ 4?',opts:['5','−5','80','−80'],a:1,hint:'Minus ÷ plus = minus',expl:'(−20) ÷ 4 = −(20÷4) = <strong>−5</strong>.'},
+]},
+
+{id:'t8',ico:'🔣',num:'Rozd. 8',name:'Wyrażenia algebraiczne i równania',
+theory:{
+  summary:'Algebra — zapisywanie wyrażeń z literami, upraszczanie, rozwiązywanie równań z tekstowych zadań.',
+  blocks:[
+    {t:'t8',h:'Wyrażenia algebraiczne',items:['Litera (x, y, n) = niewiadoma','2x = 2 razy x','3x + 5 = wyrażenie liniowe','Wartość: podstaw liczbę za x','np. dla x=4: 3×4+5 = 17']},
+    {t:'t8',h:'Upraszczanie wyrażeń',items:['Zbieraj wyrazy podobne!','3x + 5x = 8x (te same litery)','2x + 3y ≠ 5xy (różne litery!)','3(x+2) = 3x + 6 (rozwiń)','Zachowaj kolejność działań']},
+    {t:'t8',h:'Rozwiązywanie równań',items:['x + 5 = 12 → x = 12 − 5 = 7','2x = 14 → x = 14 ÷ 2 = 7','Sprawdzenie: podstaw x do równania','Przenosimy: zmiana znaku!','x − 3 = 9 → x = 9 + 3 = 12']},
+    {t:'t8',h:'Zadania tekstowe → równanie',items:['"większy o 3 od x" → x + 3','Suma = równa się','"dwukrotność x" → 2x','"razy mniejszy" → dzielenie','Zawsze sprawdź odpowiedź!']},
+  ],
+  formulas:`<strong>Wyrażenie → wartość:</strong> podstaw liczbę za literę<br>
+<strong>Upraszczanie:</strong> <span class="math">ax + bx = (a+b)x</span><br>
+<strong>Rozwinięcie nawiasu:</strong> <span class="math">a(b+c) = ab + ac</span><br>
+<strong>Równanie:</strong> przenoś na drugą stronę ze <strong>zmianą znaku</strong> (+→−, ×→÷)`,
+},
+examples:[
+  {q:'Uprość: 4x + 3y − x + 2y',steps:['Zbierz wyrazy z x: 4x − x = 3x','Zbierz wyrazy z y: 3y + 2y = 5y','Wynik: 3x + 5y'],ans:'3x + 5y'},
+  {q:'Rozwiąż: 3x − 4 = 11',steps:['3x = 11 + 4 = 15','x = 15 ÷ 3','x = 5','Sprawdzenie: 3×5−4 = 15−4 = 11 ✓'],ans:'x = 5'},
+  {q:'Suma liczby o 2 większej od x i 3x równa 22',steps:['Zapisz równanie: (x+2) + 3x = 22','Uprość: 4x + 2 = 22','4x = 20 → x = 5'],ans:'x = 5'},
+],
+flashcards:[
+  {q:'Co to znaczy "uprościć wyrażenie"?',a:'Zebrać <strong>wyrazy podobne</strong> (z tą samą literą). Np. 5x + 3x = 8x, 2x + 4y − x = x + 4y. Nie można łączyć różnych liter (x ≠ y)!'},
+  {q:'Jak rozwiązać równanie 5x + 3 = 18?',a:'1. Przenieś 3: 5x = 18−3 = 15. 2. Podziel: x = 15÷5 = <strong>3</strong>. 3. Sprawdzenie: 5×3+3 = 18 ✓.'},
+  {q:'Oblicz wartość 2x² − 3x dla x=4',a:'2×(4²) − 3×4 = 2×16 − 12 = 32 − 12 = <strong>20</strong>. Zawsze podstawiaj w nawiasach!'},
+  {q:'Jak zapisać "dwukrotność sumy x i 3"?',a:'<strong>2 × (x + 3)</strong> = 2(x+3). Nawiasy są ważne! Bez nich: 2x+3 ≠ 2(x+3).'},
+  {q:'Co to przeniesienie wyrazu na drugą stronę?',a:'Wyraz przenosi się ze <strong>zmianą znaku</strong>: + staje się −, × staje się ÷. Np. x+5=12 → x=12<strong>−</strong>5=7.'},
+],
+quiz:[
+  {q:'Ile wynosi 3x − 2 dla x=5?',opts:['13','8','17','11'],a:0,hint:'Podstaw x=5',expl:'3×5 − 2 = 15 − 2 = <strong>13</strong>.'},
+  {q:'Uprość: 6x + 2y − 2x + y',opts:['4x + 3y','8x + 3y','4x + y','8x + y'],a:0,hint:'Zbierz osobno x i y',expl:'6x−2x = 4x; 2y+y = 3y. Wynik: <strong>4x + 3y</strong>.'},
+  {q:'Rozwiąż: 4x + 5 = 21',opts:['x=4','x=5','x=6','x=3'],a:0,hint:'4x = 21−5, potem ÷4',expl:'4x = 21−5 = 16. x = 16÷4 = <strong>4</strong>. Sprawdzenie: 4×4+5=21 ✓.'},
+  {q:'Rozwinij nawias: 3(2x − 4)',opts:['6x − 4','6x − 12','5x − 7','6x + 12'],a:1,hint:'3 × 2x i 3 × (−4)',expl:'3×2x = 6x; 3×(−4) = −12. Wynik: <strong>6x − 12</strong>.'},
+  {q:'"Suma liczby o 5 większej od x i 2x = 23" — ile to x?',opts:['x=4','x=5','x=6','x=7'],a:2,hint:'(x+5) + 2x = 23',expl:'(x+5)+2x=23 → 3x+5=23 → 3x=18 → x=<strong>6</strong>. Sprawdź: (6+5)+12=23 ✓.'},
+]},
 ];
 
-// ══════════════════════════════════════════════════ STATE
-let cg = GROUPS[0];
-let ct = 'theory';
-let fcI=0,fcF=false;
-let qi=0,sel=null,score=0,mistakes=[],qList=[];
+// ══════════════════ STATE
+let ct=TOPICS[0],tab='theory',fcI=0,fcF=false,qi=0,sel=null,score=0,mistakes=[],qList=[];
 
-const ITABS=[
-  {id:'theory',l:'📖 Teoria'},
-  {id:'body',l:'🔬 Budowa'},
-  {id:'examples',l:'🐾 Przykłady'},
-  {id:'significance',l:'🌍 Znaczenie'},
-  {id:'flash',l:'🃏 Fiszki'},
-  {id:'quiz',l:'✏️ Test'},
-];
-
-function setGroup(id){
-  cg=GROUPS.find(g=>g.id===id);
-  ct='theory';fcI=0;fcF=false;
-  qi=0;sel=null;score=0;mistakes=[];
-  qList=[...cg.quiz].sort(()=>Math.random()-.5);
-  renderGroups();renderITabs();render();
+function applyColors(id){
+  const c=C[id];
+  document.documentElement.style.setProperty('--c',c.c);
+  document.documentElement.style.setProperty('--c-bg',c.bg);
+  document.documentElement.style.setProperty('--c-d',c.d);
 }
+
+function setTopic(id){
+  ct=TOPICS.find(t=>t.id===id);
+  tab='theory';fcI=0;fcF=false;
+  qi=0;sel=null;score=0;mistakes=[];
+  qList=[...ct.quiz].sort(()=>Math.random()-.5);
+  applyColors(id);
+  renderTopics();renderITabs();render();
+}
+
 function setTab(id){
-  ct=id;fcI=0;fcF=false;
-  if(id==='quiz'){qi=0;sel=null;score=0;mistakes=[];qList=[...cg.quiz].sort(()=>Math.random()-.5);}
+  tab=id;fcI=0;fcF=false;
+  if(id==='quiz'){qi=0;sel=null;score=0;mistakes=[];qList=[...ct.quiz].sort(()=>Math.random()-.5);}
   renderITabs();render();
 }
 
-function renderGroups(){
-  document.getElementById('group-tabs').innerHTML=GROUPS.map(g=>`
-    <button class="gtab ${g.cls}${g.id===cg.id?' active':''}" onclick="setGroup('${g.id}')">
-      <div class="g-ico">${g.ico}</div>
-      <div class="g-name">${g.name}</div>
-      <div class="g-sub">${g.sub}</div>
+function renderTopics(){
+  document.getElementById('topic-grid').innerHTML=TOPICS.map(t=>`
+    <button class="tcard${t.id===ct.id?' active':''}" onclick="setTopic('${t.id}')"
+      style="${t.id===ct.id?`border-color:${C[t.id].c};background:${C[t.id].bg}`:''}">
+      <div class="tc-ico">${t.ico}</div>
+      <div class="tc-body">
+        <div class="tc-num">${t.num}</div>
+        <div class="tc-name">${t.name}</div>
+      </div>
     </button>`).join('');
 }
+
+const TABS=[
+  {id:'theory',l:'📖 Teoria'},
+  {id:'formulas',l:'📋 Wzory'},
+  {id:'examples',l:'✏️ Przykłady'},
+  {id:'flash',l:'🃏 Fiszki'},
+  {id:'quiz',l:'🧮 Test'},
+];
+
 function renderITabs(){
-  document.getElementById('itabs').innerHTML=ITABS.map(t=>`
-    <button class="itab${ct===t.id?' active '+cg.cls:''}" onclick="setTab('${t.id}')">${t.l}</button>`).join('');
+  document.getElementById('itabs').innerHTML=TABS.map(t=>`
+    <button class="itab${tab===t.id?' active':''}"
+      style="${tab===t.id?`background:${C[ct.id].c}`:''}
+      " onclick="setTab('${t.id}')">${t.l}</button>`).join('');
 }
 
-// ══════════════════════════════════════════════════ RENDERS
-
+// RENDERS
 function renderTheory(){
-  const g=cg;
+  const th=ct.theory;
   return `<div class="card">
-    <div class="card-h">${g.ico} ${g.name} — podstawowe cechy</div>
-    <p style="font-size:14px;color:var(--muted);margin-bottom:14px;line-height:1.6">${g.summary}</p>
-    <div class="fg">${g.facts.map(f=>`
-      <div class="fb ${f.t}"><h3>${f.h}</h3>
-      <ul>${f.i.map(i=>`<li>${i}</li>`).join('')}</ul></div>`).join('')}
+    <div class="card-h">${ct.ico} ${ct.name}</div>
+    <p style="font-size:14px;color:var(--muted);margin-bottom:14px;line-height:1.6">${th.summary}</p>
+    <div class="tgrid">${th.blocks.map(b=>`
+      <div class="tbox" style="background:${C[b.t].bg};border-color:${C[b.t].c}40">
+        <h3 style="color:${C[b.t].d}">${b.h}</h3>
+        <ul style="color:${C[b.t].d}">${b.items.map(i=>`<li>${i}</li>`).join('')}</ul>
+      </div>`).join('')}
     </div>
   </div>
-  <div style="margin-top:4px">
-    <button class="btn ${g.btnCls}" onclick="setTab('body')">🔬 Budowa →</button>
+  <div style="margin-top:4px"><button class="btn btn-pri" onclick="setTab('formulas')">📋 Wzory →</button></div>`;
+}
+
+function renderFormulas(){
+  return `<div class="card">
+    <div class="card-h">📋 Wzory — ${ct.name}</div>
+    <div class="formula">${ct.theory.formulas}</div>
+    <div style="margin-top:4px"><button class="btn btn-pri" onclick="setTab('examples')">✏️ Przykłady →</button></div>
   </div>`;
 }
 
-function renderBody(){
-  const g=cg;
+function renderExamples(){
   return `<div class="card">
-    <div class="card-h">🔬 Budowa — ${g.name}</div>
-    <div class="body-grid">${g.body.map(b=>`
-      <div class="body-item">
-        <div class="body-ico">${b.ico}</div>
-        <div>
-          <div class="body-name">${b.name}</div>
-          <div class="body-pl">${b.pl}</div>
-          <div class="body-desc">${b.desc}</div>
+    <div class="card-h">✏️ Przykłady krok po kroku</div>
+    <div class="ex-list">${ct.examples.map(e=>`
+      <div class="ex-item">
+        <div class="ex-q">${e.q}</div>
+        <div class="ex-steps">
+          ${e.steps.map((s,i)=>`
+            <div class="ex-step">
+              <div class="ex-step-n" style="background:${C[ct.id].c}">${i+1}</div>
+              <div>${s}</div>
+            </div>`).join('')}
+          <div class="ex-ans">✅ Odpowiedź: ${e.ans}</div>
         </div>
       </div>`).join('')}
     </div>
   </div>`;
 }
 
-function renderExamples(){
-  const g=cg;
-  return `<div class="card">
-    <div class="card-h">🐾 Przykłady — ${g.name}</div>
-    <div class="ex-grid">${g.examples.map(e=>`
-      <div class="ex-card">
-        <div class="ex-ico">${e.ico}</div>
-        <div class="ex-name">${e.name}</div>
-        <div class="ex-pl">${e.pl}</div>
-        <div class="ex-fact">${e.fact}</div>
-      </div>`).join('')}
-    </div>
-  </div>`;
-}
-
-function renderSignificance(){
-  const g=cg;
-  return `<div class="card">
-    <div class="card-h">🌍 Znaczenie — ${g.name}</div>
-    <div>${g.significance.map(s=>`
-      <div class="sig-item">
-        <div class="sig-ico">${s.ico}</div>
-        <div class="sig-text">${s.text}</div>
-      </div>`).join('')}
-    </div>
-  </div>`;
-}
-
 function renderFlash(){
-  const cards=cg.flashcards;
+  const cards=ct.flashcards;
   const c=cards[fcI];
   return `<div class="card">
-    <div class="card-h">🃏 Fiszki — ${cg.name}</div>
+    <div class="card-h">🃏 Fiszki — ${ct.name}</div>
     <div class="fc-meta">Kliknij kartę · ${fcI+1} z ${cards.length}</div>
     <div class="flashcard${fcF?' flipped':''}" onclick="flipCard()">
       <div class="fc-inner">
-        <div class="fc-front"><div class="fc-q">${c.q}</div><div class="fc-tap">👆 Kliknij — odpowiedź</div></div>
-        <div class="fc-back ${cg.cls}"><div class="fc-a">${c.a}</div></div>
+        <div class="fc-front"><div class="fc-q">${c.q}</div><div class="fc-tap">👆 Kliknij, by zobaczyć odpowiedź</div></div>
+        <div class="fc-back" style="background:${C[ct.id].bg};border-color:${C[ct.id].c}">
+          <div class="fc-a" style="--c-d:${C[ct.id].d}">${c.a}</div>
+        </div>
       </div>
     </div>
     <div class="fc-nav">
       <button class="btn btn-sec" onclick="fcNav(-1)" ${fcI===0?'disabled':''}>← Poprzednia</button>
       <span class="fc-count">${fcI+1} / ${cards.length}</span>
-      <button class="btn ${cg.btnCls}" onclick="fcNav(1)" ${fcI===cards.length-1?'disabled':''}>Następna →</button>
+      <button class="btn btn-pri" onclick="fcNav(1)" ${fcI===cards.length-1?'disabled':''}>Następna →</button>
     </div>
   </div>`;
 }
@@ -520,15 +583,15 @@ function renderQuiz(){
   let fb='';
   if(sel!==null){
     fb=sel===q.a
-      ?`<div class="feedback ok">✓ Правильно! <div class="expl-box">${q.expl}</div></div>`
-      :`<div class="feedback no">✗ Правильna: <strong>${q.opts[q.a]}</strong><div class="expl-box">${q.expl}</div></div>`;
+      ?`<div class="feedback ok">✓ Правильно! <div class="expl">${q.expl}</div></div>`
+      :`<div class="feedback no">✗ Правильna: <strong>${q.opts[q.a]}</strong><div class="expl">${q.expl}</div></div>`;
   }
   return `
-  <div class="prog-bar"><div class="prog-fill ${cg.cls}-prog" style="width:${pct}%"></div></div>
+  <div class="prog-bar"><div class="prog-fill" style="background:${C[ct.id].c};width:${pct}%"></div></div>
   <div class="score-row">
     <span>Pytanie <b>${qi+1}/${total}</b></span>
-    <span>✅ <b style="color:var(--green)">${score}</b></span>
-    <span>❌ <b style="color:var(--red)">${mistakes.length}</b></span>
+    <span>✅ <b style="color:var(--ok)">${score}</b></span>
+    <span>❌ <b style="color:var(--err)">${mistakes.length}</b></span>
   </div>
   <div class="card">
     <div class="q-label">Pytanie ${qi+1}</div>
@@ -537,7 +600,7 @@ function renderQuiz(){
     <div class="opts">${optsHTML}</div>
     ${fb}
   </div>
-  <div class="nav-row">${sel!==null?`<button class="btn ${cg.btnCls}" onclick="nextQ()">Dalej →</button>`:''}</div>`;
+  <div class="nav-row">${sel!==null?`<button class="btn btn-pri" onclick="nextQ()">Dalej →</button>`:''}</div>`;
 }
 
 function renderResult(){
@@ -545,10 +608,10 @@ function renderResult(){
   const pct=Math.round((score/total)*100);
   const emoji=pct>=80?'🎉':pct>=60?'👍':'📚';
   const stars=pct>=100?'⭐⭐⭐':pct>=80?'⭐⭐':pct>=60?'⭐':'';
-  const msg=pct>=80?'Warwara — świetna robota!':pct>=60?'Dobrze! Powtórz błędy.':'Wróć do teorii i spróbuj ponownie.';
+  const msg=pct>=80?'Warwara — gotowa na kontrolną!':pct>=60?'Dobrze! Powtórz błędy.':'Wróć do teorii i wzorów.';
   const mHTML=mistakes.length?`
-    <div style="margin-top:18px;text-align:left">
-      <div style="font-family:'Outfit',sans-serif;font-size:15px;font-weight:800;margin-bottom:12px">Błędy do powtórzenia:</div>
+    <div style="margin-top:16px;text-align:left">
+      <div style="font-size:14px;font-weight:800;margin-bottom:10px">Błędy:</div>
       ${mistakes.map(m=>`
         <div class="mk">
           <div class="mk-q">${m.q}</div>
@@ -558,14 +621,14 @@ function renderResult(){
         </div>`).join('')}
     </div>`:'';
   return `<div class="card"><div class="result">
-    <div style="font-size:44px">${emoji}</div>
-    <div style="font-size:26px;margin:6px 0">${stars}</div>
-    <div class="big">${score}/${total}</div>
+    <div style="font-size:42px">${emoji}</div>
+    <div style="font-size:24px;margin:4px 0">${stars}</div>
+    <div class="big" style="color:${C[ct.id].c}">${score}/${total}</div>
     <div class="msg">${msg}</div>
     <div class="result-btns">
       <button class="btn btn-sec" onclick="setTab('theory')">📖 Teoria</button>
-      <button class="btn btn-sec" onclick="setTab('flash')">🃏 Fiszki</button>
-      <button class="btn ${cg.btnCls}" onclick="setTab('quiz')">Ponownie ↺</button>
+      <button class="btn btn-sec" onclick="setTab('formulas')">📋 Wzory</button>
+      <button class="btn btn-pri" onclick="setTab('quiz')">Ponownie ↺</button>
     </div>
     ${mHTML}
   </div></div>`;
@@ -583,15 +646,14 @@ function nextQ(){qi++;sel=null;render();}
 
 function render(){
   const c=document.getElementById('content');
-  if(ct==='theory')c.innerHTML=renderTheory();
-  else if(ct==='body')c.innerHTML=renderBody();
-  else if(ct==='examples')c.innerHTML=renderExamples();
-  else if(ct==='significance')c.innerHTML=renderSignificance();
-  else if(ct==='flash')c.innerHTML=renderFlash();
+  if(tab==='theory')c.innerHTML=renderTheory();
+  else if(tab==='formulas')c.innerHTML=renderFormulas();
+  else if(tab==='examples')c.innerHTML=renderExamples();
+  else if(tab==='flash')c.innerHTML=renderFlash();
   else c.innerHTML=renderQuiz();
 }
 
-setGroup('fish');
+setTopic('t1');
 </script>
 </body>
 </html>
