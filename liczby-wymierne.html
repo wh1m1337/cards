@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Liczby — tренажер / trener</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Sora:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#232042;
+    --plum:#453a7c;
+    --plum-deep:#2d2657;
+    --cream:#f7f4ee;
+    --paper:#ffffff;
+    --teal:#2f8f83;
+    --teal-soft:#e3f2ef;
+    --amber:#e8a33d;
+    --amber-soft:#fbeed9;
+    --coral:#d65f5f;
+    --coral-soft:#fbe6e6;
+    --line:#e4e0d6;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:'Sora',sans-serif;background:var(--cream);color:var(--ink);line-height:1.55;}
+  h1,h2,h3,.display{font-family:'Fraunces',serif;font-weight:600;color:var(--plum-deep);margin:0;}
+
+  .langswitch{
+    position:fixed;
+    top:12px;right:12px;
+    z-index:50;
+    display:flex;
+    background:rgba(255,255,255,.15);
+    border:1px solid rgba(255,255,255,.35);
+    border-radius:20px;
+    padding:3px;
+    backdrop-filter:blur(4px);
+  }
+  .langswitch button{
+    border:none;background:transparent;color:#e9e5fb;
+    font-family:'Sora',sans-serif;font-weight:600;font-size:13px;
+    padding:6px 12px;border-radius:16px;cursor:pointer;
+  }
+  .langswitch button.active{background:#fff;color:var(--plum-deep);}
+
+  .hero{background:var(--plum-deep);color:#f3f1fb;padding:38px 22px 46px;position:relative;overflow:hidden;}
+  .hero .kicker{font-size:14px;letter-spacing:0.02em;color:#c8bfef;margin-bottom:6px;}
+  .hero h1{color:#fff;font-size:clamp(28px,7vw,40px);line-height:1.15;max-width:520px;}
+  .hero p{color:#d8d2ef;max-width:480px;margin-top:10px;font-size:15px;}
+  .numberline{margin-top:28px;position:relative;height:64px;}
+  .numberline svg{width:100%;height:100%;display:block;}
+  .numberline .tick-label{font-family:'Fraunces',serif;font-size:13px;fill:#c8bfef;}
+  .numberline .tick-label.hi{fill:#e8a33d;font-weight:600;}
+
+  nav{display:flex;gap:6px;padding:14px 16px;background:var(--paper);border-bottom:1px solid var(--line);overflow-x:auto;position:sticky;top:0;z-index:10;}
+  nav button.tab-btn{flex:none;border:none;background:transparent;color:var(--plum);font-family:'Sora',sans-serif;font-size:14px;font-weight:600;padding:9px 14px;border-radius:20px;cursor:pointer;white-space:nowrap;}
+  nav button.tab-btn.active{background:var(--plum-deep);color:#fff;}
+
+  main{max-width:640px;margin:0 auto;padding:22px 18px 60px;}
+  section{display:none;}
+  section.active{display:block;animation:rise .35s ease;}
+  @keyframes rise{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:none;}}
+
+  .card{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:18px 18px;margin-bottom:16px;}
+  .card h2{font-size:19px;margin-bottom:10px;}
+  .card h3{font-size:16px;margin:14px 0 6px;color:var(--plum);}
+  .card p{margin:6px 0;font-size:15px;}
+  .card ul{margin:6px 0;padding-left:20px;font-size:15px;}
+  .card li{margin-bottom:4px;}
+
+  .pill-row{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0;}
+  .pill{background:var(--teal-soft);color:var(--teal);border-radius:10px;padding:6px 10px;font-size:13px;font-weight:600;}
+  .pill.amber{background:var(--amber-soft);color:#a06a13;}
+  .pill.coral{background:var(--coral-soft);color:var(--coral);}
+
+  .example{background:var(--teal-soft);border-left:3px solid var(--teal);border-radius:0 10px 10px 0;padding:10px 14px;margin:10px 0;font-size:14.5px;}
+
+  .fracbox{display:inline-flex;flex-direction:column;text-align:center;vertical-align:middle;font-family:'Fraunces',serif;font-weight:600;margin:0 3px;line-height:1;}
+  .fracbox .num{border-bottom:1.5px solid var(--ink);padding:0 4px 2px;}
+  .fracbox .den{padding:2px 4px 0;}
+
+  .flip-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px;}
+  .flip{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:14px 10px;text-align:center;font-size:14px;cursor:pointer;min-height:64px;display:flex;align-items:center;justify-content:center;}
+  .flip.on{background:var(--plum-deep);color:#fff;border-color:var(--plum-deep);}
+
+  .progress-wrap{height:6px;background:var(--line);border-radius:4px;overflow:hidden;margin-bottom:16px;}
+  .progress-bar{height:100%;background:var(--teal);width:0%;transition:width .3s ease;}
+
+  .qcounter{font-size:13px;color:var(--plum);font-weight:600;margin-bottom:6px;}
+  .qtext{font-size:17px;font-weight:600;margin-bottom:14px;color:var(--ink);font-family:'Fraunces',serif;}
+  .opt{display:block;width:100%;text-align:left;background:var(--paper);border:1.5px solid var(--line);border-radius:11px;padding:12px 14px;margin-bottom:9px;font-size:15px;font-family:'Sora',sans-serif;color:var(--ink);cursor:pointer;}
+  .opt.correct{background:var(--teal-soft);border-color:var(--teal);color:#1d5c53;}
+  .opt.wrong{background:var(--coral-soft);border-color:var(--coral);color:#8a3a3a;}
+  .opt[disabled]{cursor:default;}
+
+  .explain{font-size:13.5px;background:var(--amber-soft);border-radius:10px;padding:10px 12px;margin-top:6px;color:#7a5615;display:none;}
+  .explain.show{display:block;}
+
+  .btnrow{display:flex;gap:10px;margin-top:16px;}
+  .btn{flex:1;border:none;border-radius:11px;padding:12px;font-family:'Sora',sans-serif;font-weight:600;font-size:15px;cursor:pointer;}
+  .btn-primary{background:var(--plum-deep);color:#fff;}
+  .btn-sec{background:var(--paper);color:var(--plum);border:1.5px solid var(--line);}
+
+  .result{text-align:center;padding:20px 4px;}
+  .result .big{font-family:'Fraunces',serif;font-size:44px;color:var(--plum-deep);font-weight:700;}
+  .result .msg{margin:8px 0 18px;font-size:15px;color:var(--plum);}
+  .mistake-card{text-align:left;background:var(--coral-soft);border-radius:10px;padding:10px 12px;margin-bottom:8px;font-size:14px;}
+  .mistake-card .mq{font-weight:600;margin-bottom:4px;font-family:'Fraunces',serif;}
+  .mistake-card .mc{color:#1d5c53;}
+  .mistake-card .mrule{color:#7a5615;margin-top:4px;font-size:13px;}
+
+  footer{text-align:center;font-size:12px;color:#9891b0;padding:20px;}
+</style>
+</head>
+<body>
+
+<div class="langswitch">
+  <button id="btnUK" class="active" onclick="setLang('uk')">UA</button>
+  <button id="btnPL" onclick="setLang('pl')">PL</button>
+</div>
+
+<div class="hero">
+  <div class="kicker" id="t-kicker">Matematyka · Liczby</div>
+  <h1 id="t-h1">Числа — від натуральних до раціональних</h1>
+  <p id="t-hp">Теорія, приклади з підручника і тест з поясненням помилок. Проходь у своєму темпі.</p>
+  <div class="numberline">
+    <svg viewBox="0 0 400 64" preserveAspectRatio="none">
+      <line x1="10" y1="32" x2="390" y2="32" stroke="#6b5fae" stroke-width="2"/>
+      <polygon points="390,32 380,27 380,37" fill="#6b5fae"/>
+      <polygon points="10,32 20,27 20,37" fill="#6b5fae"/>
+      <g stroke="#6b5fae" stroke-width="2">
+        <line x1="40" y1="26" x2="40" y2="38"/>
+        <line x1="110" y1="26" x2="110" y2="38"/>
+        <line x1="180" y1="26" x2="180" y2="38"/>
+        <line x1="250" y1="26" x2="250" y2="38"/>
+        <line x1="320" y1="26" x2="320" y2="38"/>
+      </g>
+      <circle cx="180" cy="32" r="5" fill="#e8a33d"/>
+      <text x="40" y="55" text-anchor="middle" class="tick-label">-2</text>
+      <text x="110" y="55" text-anchor="middle" class="tick-label">-1</text>
+      <text x="180" y="55" text-anchor="middle" class="tick-label hi">0</text>
+      <text x="250" y="55" text-anchor="middle" class="tick-label">1</text>
+      <text x="320" y="55" text-anchor="middle" class="tick-label">2</text>
+    </svg>
+  </div>
+</div>
+
+<nav>
+  <button class="tab-btn active" data-tab="theory" id="tab-theory">📖 Теорія</button>
+  <button class="tab-btn" data-tab="convert" id="tab-convert">🔁 Дроби ↔ Десяткові</button>
+  <button class="tab-btn" data-tab="flash" id="tab-flash">🃏 Картки</button>
+  <button class="tab-btn" data-tab="quiz" id="tab-quiz">✏️ Тест</button>
+</nav>
+
+<main>
+  <section id="theory" class="active"><div id="theoryContent"></div></section>
+  <section id="convert"><div id="convertContent"></div></section>
+  <section id="flash">
+    <div class="card">
+      <h2 id="flashTitle">Швидкі картки — торкнись, щоб перевірити себе</h2>
+      <p id="flashHint" style="font-size:13.5px;color:#7a7398;">Спробуй згадати відповідь перед тим, як торкнутись картки.</p>
+      <div class="flip-grid" id="flipGrid"></div>
+    </div>
+  </section>
+  <section id="quiz"><div class="card" id="quizCard"></div></section>
+</main>
+
+<footer id="t-footer">Тренажер для Варвари · тема «Liczby» · зроблено з ❤️</footer>
+
+<script>
+/* ================= I18N ================= */
+const NAV = {
+  uk:{kicker:"Matematyka · Liczby", h1:"Числа — від натуральних до раціональних", hp:"Теорія, приклади з підручника і тест з поясненням помилок. Проходь у своєму темпі.",
+      theory:"📖 Теорія", convert:"🔁 Дроби ↔ Десяткові", flash:"🃏 Картки", quiz:"✏️ Тест",
+      flashTitle:"Швидкі картки — торкнись, щоб перевірити себе", flashHint:"Спробуй згадати відповідь перед тим, як торкнутись картки.",
+      footer:"Тренажер для Варвари · тема «Liczby» · зроблено з ❤️"},
+  pl:{kicker:"Matematyka · Liczby", h1:"Liczby — od naturalnych do wymiernych", hp:"Teoria, przykłady z podręcznika i test z wyjaśnieniem błędów. Ćwicz w swoim tempie.",
+      theory:"📖 Teoria", convert:"🔁 Ułamki ↔ Dziesiętne", flash:"🃏 Fiszki", quiz:"✏️ Test",
+      flashTitle:"Szybkie fiszki — dotknij, aby sprawdzić siebie", flashHint:"Spróbuj przypomnieć sobie odpowiedź, zanim dotkniesz karty.",
+      footer:"Trener dla Warwary · temat «Liczby» · zrobione z ❤️"}
+};
+
+const THEORY = {
+uk:`
+<div class="card">
+  <h2>Три види чисел</h2>
+  <div class="pill-row">
+    <span class="pill">Naturalne: 0,1,2,3…</span>
+    <span class="pill amber">Całkowite: …,-2,-1,0,1,2…</span>
+    <span class="pill coral">Wymierne: l/m</span>
+  </div>
+  <p><b>Liczby naturalne</b> — 0, 1, 2, 3, 4… Ними рахуємо предмети.</p>
+  <p><b>Liczby całkowite</b> — натуральні числа плюс від'ємні до них: …, −3, −2, −1, 0, 1, 2, 3…</p>
+  <p><b>Liczby wymierne</b> — будь-яке число, яке можна записати як дріб l/m, де l і m — цілі числа, m ≠ 0. Це найширша множина: сюди входять і натуральні, і цілі, і звичайні та десяткові дроби.</p>
+  <div class="example">Натуральні ⊂ Цілі ⊂ Раціональні — кожна наступна множина «містить у собі» попередню.</div>
+</div>
+<div class="card">
+  <h2>Liczby przeciwne — протилежні числа</h2>
+  <p>Два числа протилежні, якщо вони відрізняються лише знаком. Сума протилежних чисел завжди дорівнює 0.</p>
+  <div class="example">4 і −4 · 2,25 і −2,25 · <span class="fracbox"><span class="num">3</span><span class="den">4</span></span> і <span class="fracbox"><span class="num">-3</span><span class="den">4</span></span></div>
+  <p>На числовій осі протилежні числа розташовані симетрично відносно нуля, на однаковій відстані.</p>
+</div>
+<div class="card">
+  <h2>Odwrotność liczby — обернене число</h2>
+  <p>Обернене число до a — це число, яке при множенні на a дає 1, тобто це <span class="fracbox"><span class="num">1</span><span class="den">a</span></span>.</p>
+  <div class="example">обернене до 5 → <span class="fracbox"><span class="num">1</span><span class="den">5</span></span><br>обернене до <span class="fracbox"><span class="num">3</span><span class="den">4</span></span> → <span class="fracbox"><span class="num">4</span><span class="den">3</span></span></div>
+  <p><b>Важливо:</b> у числа 0 оберненого не існує — на нуль ділити не можна.</p>
+</div>
+<div class="card">
+  <h2>Число з розрядів (запис буквами)</h2>
+  <p>Десятковий дріб можна розкласти на суму цілої частини і дробових розрядів — і навпаки, зібрати з розрядів число.</p>
+  <div class="example">a = 3 + <span class="fracbox"><span class="num">1</span><span class="den">10</span></span> = 3,1 &nbsp;&nbsp;&nbsp; c = 4 + <span class="fracbox"><span class="num">2</span><span class="den">10</span></span> + <span class="fracbox"><span class="num">1</span><span class="den">100</span></span> = 4,21</div>
+</div>
+<div class="card">
+  <h2>Порівняння чисел</h2>
+  <p>Щоб порівняти два дроби (звичайний і десятковий, або два звичайні з різними знаменниками), приведи їх до однакового вигляду — обидва десяткові або обидва звичайні зі спільним знаменником.</p>
+  <p>На числовій осі: число, розташоване правіше, завжди більше.</p>
+</div>`,
+pl:`
+<div class="card">
+  <h2>Trzy rodzaje liczb</h2>
+  <div class="pill-row">
+    <span class="pill">Naturalne: 0,1,2,3…</span>
+    <span class="pill amber">Całkowite: …,-2,-1,0,1,2…</span>
+    <span class="pill coral">Wymierne: l/m</span>
+  </div>
+  <p><b>Liczby naturalne</b> — 0, 1, 2, 3, 4… Używamy ich do liczenia przedmiotów.</p>
+  <p><b>Liczby całkowite</b> — liczby naturalne oraz liczby do nich przeciwne: …, −3, −2, −1, 0, 1, 2, 3…</p>
+  <p><b>Liczby wymierne</b> — każda liczba, którą można zapisać w postaci ułamka l/m, gdzie l i m są liczbami całkowitymi, m ≠ 0. To najszerszy zbiór: zawiera liczby naturalne, całkowite, a także ułamki zwykłe i dziesiętne.</p>
+  <div class="example">Naturalne ⊂ Całkowite ⊂ Wymierne — każdy kolejny zbiór zawiera w sobie poprzedni.</div>
+</div>
+<div class="card">
+  <h2>Liczby przeciwne</h2>
+  <p>Dwie liczby są przeciwne, jeśli różnią się tylko znakiem. Suma liczb przeciwnych zawsze wynosi 0.</p>
+  <div class="example">4 i −4 · 2,25 i −2,25 · <span class="fracbox"><span class="num">3</span><span class="den">4</span></span> i <span class="fracbox"><span class="num">-3</span><span class="den">4</span></span></div>
+  <p>Na osi liczbowej liczby przeciwne leżą symetrycznie względem zera, w jednakowej odległości.</p>
+</div>
+<div class="card">
+  <h2>Odwrotność liczby</h2>
+  <p>Odwrotność liczby a to liczba, która pomnożona przez a daje 1, czyli <span class="fracbox"><span class="num">1</span><span class="den">a</span></span>.</p>
+  <div class="example">odwrotność 5 → <span class="fracbox"><span class="num">1</span><span class="den">5</span></span><br>odwrotność <span class="fracbox"><span class="num">3</span><span class="den">4</span></span> → <span class="fracbox"><span class="num">4</span><span class="den">3</span></span></div>
+  <p><b>Ważne:</b> liczba 0 nie ma odwrotności — nie można dzielić przez zero.</p>
+</div>
+<div class="card">
+  <h2>Liczba zapisana literami (suma rzędów)</h2>
+  <p>Ułamek dziesiętny można rozłożyć na sumę części całkowitej i rzędów dziesiętnych — i odwrotnie, złożyć liczbę z rzędów.</p>
+  <div class="example">a = 3 + <span class="fracbox"><span class="num">1</span><span class="den">10</span></span> = 3,1 &nbsp;&nbsp;&nbsp; c = 4 + <span class="fracbox"><span class="num">2</span><span class="den">10</span></span> + <span class="fracbox"><span class="num">1</span><span class="den">100</span></span> = 4,21</div>
+</div>
+<div class="card">
+  <h2>Porównywanie liczb</h2>
+  <p>Aby porównać dwa ułamki (zwykły i dziesiętny albo dwa zwykłe o różnych mianownikach), sprowadź je do tej samej postaci — obie dziesiętne albo obie zwykłe o wspólnym mianowniku.</p>
+  <p>Na osi liczbowej: liczba położona bardziej na prawo jest zawsze większa.</p>
+</div>`
+};
+
+const CONVERT = {
+uk:`
+<div class="card">
+  <h2>Звичайний дріб → десятковий</h2>
+  <p>Ділимо чисельник на знаменник стовпчиком.</p>
+  <div class="example"><span class="fracbox"><span class="num">17</span><span class="den">20</span></span> = 17 : 20 = 0,85</div>
+  <div class="example">5<span class="fracbox"><span class="num">2</span><span class="den">5</span></span> (мішаний) = 5,4 — ціла частина лишається, дробову ділимо окремо</div>
+  <p><i>Іноді ділення не закінчується — виходить нескінченний періодичний дріб, наприклад 7/9 = 0,7777…</i></p>
+</div>
+<div class="card">
+  <h2>Десятковий дріб → звичайний</h2>
+  <p>Число після коми стає чисельником. Знаменник залежить від кількості цифр після коми:</p>
+  <ul>
+    <li>1 цифра після коми → знаменник <b>10</b></li>
+    <li>2 цифри → знаменник <b>100</b></li>
+    <li>3 цифри → знаменник <b>1000</b></li>
+  </ul>
+  <div class="example">0,3 = <span class="fracbox"><span class="num">3</span><span class="den">10</span></span> &nbsp;·&nbsp; 0,15 = <span class="fracbox"><span class="num">15</span><span class="den">100</span></span> = <span class="fracbox"><span class="num">3</span><span class="den">20</span></span> &nbsp;·&nbsp; 0,424 = <span class="fracbox"><span class="num">424</span><span class="den">1000</span></span> = <span class="fracbox"><span class="num">53</span><span class="den">125</span></span></div>
+  <p>Після запису дробом — обов'язково <b>скорочуй</b> на найбільший спільний дільник чисельника і знаменника.</p>
+</div>
+<div class="card">
+  <h2>Кроки скорочення 424/1000</h2>
+  <p>424/1000 → ділимо на 2 → 212/500 → ще на 2 → 106/250 → ще на 2 → 53/125. Далі 53 і 125 не мають спільних дільників — дріб скорочено повністю.</p>
+</div>`,
+pl:`
+<div class="card">
+  <h2>Ułamek zwykły → dziesiętny</h2>
+  <p>Dzielimy licznik przez mianownik pisemnie.</p>
+  <div class="example"><span class="fracbox"><span class="num">17</span><span class="den">20</span></span> = 17 : 20 = 0,85</div>
+  <div class="example">5<span class="fracbox"><span class="num">2</span><span class="den">5</span></span> (liczba mieszana) = 5,4 — część całkowita zostaje, ułamek dzielimy osobno</div>
+  <p><i>Czasem dzielenie się nie kończy — powstaje nieskończony ułamek okresowy, np. 7/9 = 0,7777…</i></p>
+</div>
+<div class="card">
+  <h2>Ułamek dziesiętny → zwykły</h2>
+  <p>Cyfry po przecinku stają się licznikiem. Mianownik zależy od liczby cyfr po przecinku:</p>
+  <ul>
+    <li>1 cyfra po przecinku → mianownik <b>10</b></li>
+    <li>2 cyfry → mianownik <b>100</b></li>
+    <li>3 cyfry → mianownik <b>1000</b></li>
+  </ul>
+  <div class="example">0,3 = <span class="fracbox"><span class="num">3</span><span class="den">10</span></span> &nbsp;·&nbsp; 0,15 = <span class="fracbox"><span class="num">15</span><span class="den">100</span></span> = <span class="fracbox"><span class="num">3</span><span class="den">20</span></span> &nbsp;·&nbsp; 0,424 = <span class="fracbox"><span class="num">424</span><span class="den">1000</span></span> = <span class="fracbox"><span class="num">53</span><span class="den">125</span></span></div>
+  <p>Po zapisaniu ułamkiem — koniecznie <b>skróć</b> przez największy wspólny dzielnik licznika i mianownika.</p>
+</div>
+<div class="card">
+  <h2>Kroki skracania 424/1000</h2>
+  <p>424/1000 → dzielimy przez 2 → 212/500 → jeszcze przez 2 → 106/250 → jeszcze przez 2 → 53/125. Dalej 53 i 125 nie mają wspólnych dzielników — ułamek skrócony do końca.</p>
+</div>`
+};
+
+const FLASH = {
+uk:[
+  {f:"1/2", b:"0,5"},{f:"1/4", b:"0,25"},{f:"1/5", b:"0,2"},{f:"3/4", b:"0,75"},{f:"1/8", b:"0,125"},
+  {f:"Обернене до 5", b:"1/5"},{f:"Обернене до 2/3", b:"3/2"},{f:"Протилежне до -7", b:"7"},
+  {f:"Обернене до 0", b:"не існує"},{f:"0,3 як дріб", b:"3/10"},
+],
+pl:[
+  {f:"1/2", b:"0,5"},{f:"1/4", b:"0,25"},{f:"1/5", b:"0,2"},{f:"3/4", b:"0,75"},{f:"1/8", b:"0,125"},
+  {f:"Odwrotność 5", b:"1/5"},{f:"Odwrotność 2/3", b:"3/2"},{f:"Przeciwna do -7", b:"7"},
+  {f:"Odwrotność 0", b:"nie istnieje"},{f:"0,3 jako ułamek", b:"3/10"},
+]
+};
+
+const QUESTIONS = {
+uk:[
+  {q:"Яке з чисел НЕ є натуральним?", opts:["0","−3","7","152"], correct:1, rule:"Натуральні числа — це 0,1,2,3… без від'ємних значень."},
+  {q:"17/20 у вигляді десяткового дробу:", opts:["0,17","0,85","1,7","8,5"], correct:1, rule:"17 : 20 = 0,85."},
+  {q:"Скороти 424/1000 повністю:", opts:["212/500","106/250","53/125","42/100"], correct:2, rule:"Ділимо чисельник і знаменник на 2 тричі: 424→212→106→53, 1000→500→250→125."},
+  {q:"0,15 у вигляді нескороченого звичайного дробу:", opts:["15/10","15/100","1,5/10","150/10"], correct:1, rule:"2 цифри після коми → знаменник 100."},
+  {q:"Обернене число до 3/4:", opts:["4/3","−3/4","3/4","−4/3"], correct:0, rule:"Обернене число a — це 1/a, тобто чисельник і знаменник міняються місцями."},
+  {q:"Яке число не має оберненого?", opts:["1","−1","0","1/2"], correct:2, rule:"На нуль ділити не можна, тому у 0 немає оберненого числа."},
+  {q:"Протилежне число до −2,25:", opts:["2,25","−2,25","0","1/2,25"], correct:0, rule:"Протилежні числа відрізняються лише знаком."},
+  {q:"5 2/5 (мішаний дріб) у десятковому вигляді:", opts:["5,2","5,4","5,25","2,5"], correct:1, rule:"2/5 = 0,4, тому 5 2/5 = 5,4."},
+  {q:"Яка множина найширша?", opts:["Naturalne","Całkowite","Wymierne","Усі однакові"], correct:2, rule:"Раціональні числа містять у собі і цілі, і натуральні."},
+  {q:"a = 3 + 1/10. Чому дорівнює a?", opts:["3,01","3,1","31","0,31"], correct:1, rule:"1/10 — це перший розряд після коми (десяті), тобто 3 + 0,1 = 3,1."},
+  {q:"Яке з чисел є цілим, але НЕ натуральним?", opts:["5","0","−4","2,5"], correct:2, rule:"−4 — ціле від'ємне число, натуральні числа від'ємними не бувають."},
+  {q:"Порівняй: 0,3 і 3/10", opts:["0,3 більше","3/10 більше","Рівні","Не можна порівняти"], correct:2, rule:"3/10 = 0,3 — це те саме число, записане по-різному."},
+  {q:"Обернене число до −5:", opts:["5","1/5","−1/5","−5"], correct:2, rule:"Обернене до −5 це −1/5, знак зберігається."},
+  {q:"0,3(3)... (нескінченний дріб) отримуємо при діленні:", opts:["1/3","1/2","3/10","1/4"], correct:0, rule:"1 : 3 = 0,333… — нескінченний періодичний дріб."},
+  {q:"Яка пара чисел протилежна?", opts:["2 і 1/2","2 і −2","2 і 0,2","2 і 2,0"], correct:1, rule:"Протилежні числа різняться лише знаком, сума дорівнює 0."},
+],
+pl:[
+  {q:"Która liczba NIE jest naturalna?", opts:["0","−3","7","152"], correct:1, rule:"Liczby naturalne to 0,1,2,3… bez wartości ujemnych."},
+  {q:"17/20 w postaci ułamka dziesiętnego:", opts:["0,17","0,85","1,7","8,5"], correct:1, rule:"17 : 20 = 0,85."},
+  {q:"Skróć 424/1000 do końca:", opts:["212/500","106/250","53/125","42/100"], correct:2, rule:"Dzielimy licznik i mianownik przez 2 trzy razy: 424→212→106→53, 1000→500→250→125."},
+  {q:"0,15 jako nieskrócony ułamek zwykły:", opts:["15/10","15/100","1,5/10","150/10"], correct:1, rule:"2 cyfry po przecinku → mianownik 100."},
+  {q:"Odwrotność liczby 3/4:", opts:["4/3","−3/4","3/4","−4/3"], correct:0, rule:"Odwrotność liczby a to 1/a, czyli licznik i mianownik zamieniają się miejscami."},
+  {q:"Która liczba nie ma odwrotności?", opts:["1","−1","0","1/2"], correct:2, rule:"Nie można dzielić przez zero, dlatego 0 nie ma odwrotności."},
+  {q:"Liczba przeciwna do −2,25:", opts:["2,25","−2,25","0","1/2,25"], correct:0, rule:"Liczby przeciwne różnią się tylko znakiem."},
+  {q:"5 2/5 (liczba mieszana) w postaci dziesiętnej:", opts:["5,2","5,4","5,25","2,5"], correct:1, rule:"2/5 = 0,4, więc 5 2/5 = 5,4."},
+  {q:"Który zbiór jest najszerszy?", opts:["Naturalne","Całkowite","Wymierne","Wszystkie takie same"], correct:2, rule:"Liczby wymierne zawierają w sobie zarówno całkowite, jak i naturalne."},
+  {q:"a = 3 + 1/10. Ile wynosi a?", opts:["3,01","3,1","31","0,31"], correct:1, rule:"1/10 to pierwszy rząd po przecinku (dziesiąte), czyli 3 + 0,1 = 3,1."},
+  {q:"Która liczba jest całkowita, ale NIE naturalna?", opts:["5","0","−4","2,5"], correct:2, rule:"−4 to liczba całkowita ujemna, liczby naturalne nie bywają ujemne."},
+  {q:"Porównaj: 0,3 i 3/10", opts:["0,3 jest większe","3/10 jest większe","Równe","Nie da się porównać"], correct:2, rule:"3/10 = 0,3 — to ta sama liczba zapisana inaczej."},
+  {q:"Odwrotność liczby −5:", opts:["5","1/5","−1/5","−5"], correct:2, rule:"Odwrotność −5 to −1/5, znak zostaje zachowany."},
+  {q:"0,3(3)... (nieskończony ułamek) otrzymujemy przy dzieleniu:", opts:["1/3","1/2","3/10","1/4"], correct:0, rule:"1 : 3 = 0,333… — nieskończony ułamek okresowy."},
+  {q:"Która para liczb jest przeciwna?", opts:["2 i 1/2","2 i −2","2 i 0,2","2 i 2,0"], correct:1, rule:"Liczby przeciwne różnią się tylko znakiem, ich suma wynosi 0."},
+]
+};
+
+const RESULT_TXT = {
+  uk:{good:"Варвара готова до карткóвки!", ok:"Непогано! Повтори помилки ще раз.", bad:"Ще раз прочитай теорію і спробуй знову.",
+      mistakesTitle:"Розбір помилок:", yourAnswer:"Ти відповіла:", correctLabel:"✓ Правильно:", none:"Жодної помилки — чудово! 🌟",
+      toTheory:"📖 До теорії", again:"Ще раз ↺", next:"Далі →", showResult:"Показати результат", qOf:(a,b)=>`Питання ${a} з ${b}`},
+  pl:{good:"Warwara jest gotowa do sprawdzianu!", ok:"Nieźle! Powtórz błędy jeszcze raz.", bad:"Przeczytaj jeszcze raz teorię i spróbuj ponownie.",
+      mistakesTitle:"Analiza błędów:", yourAnswer:"Odpowiedziałaś:", correctLabel:"✓ Poprawnie:", none:"Ani jednego błędu — świetnie! 🌟",
+      toTheory:"📖 Do teorii", again:"Jeszcze raz ↺", next:"Dalej →", showResult:"Pokaż wynik", qOf:(a,b)=>`Pytanie ${a} z ${b}`}
+};
+
+let lang = 'uk';
+
+function setLang(l){
+  lang = l;
+  document.getElementById('btnUK').classList.toggle('active', l==='uk');
+  document.getElementById('btnPL').classList.toggle('active', l==='pl');
+  document.documentElement.lang = l;
+
+  const n = NAV[l];
+  document.getElementById('t-kicker').textContent = n.kicker;
+  document.getElementById('t-h1').textContent = n.h1;
+  document.getElementById('t-hp').textContent = n.hp;
+  document.getElementById('tab-theory').textContent = n.theory;
+  document.getElementById('tab-convert').textContent = n.convert;
+  document.getElementById('tab-flash').textContent = n.flash;
+  document.getElementById('tab-quiz').textContent = n.quiz;
+  document.getElementById('flashTitle').textContent = n.flashTitle;
+  document.getElementById('flashHint').textContent = n.flashHint;
+  document.getElementById('t-footer').textContent = n.footer;
+
+  document.getElementById('theoryContent').innerHTML = THEORY[l];
+  document.getElementById('convertContent').innerHTML = CONVERT[l];
+
+  renderFlash();
+  if(quizStarted){ current=0; score=0; mistakes=[]; renderQuestion(); }
+}
+
+/* ---------- TABS ---------- */
+document.querySelectorAll('.tab-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+    document.querySelectorAll('main section').forEach(s=>s.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById(btn.dataset.tab).classList.add('active');
+    if(btn.dataset.tab==='quiz' && !quizStarted){ startQuiz(); }
+  });
+});
+
+/* ---------- FLASHCARDS ---------- */
+function renderFlash(){
+  const grid = document.getElementById('flipGrid');
+  grid.innerHTML='';
+  FLASH[lang].forEach(item=>{
+    const el = document.createElement('div');
+    el.className='flip';
+    el.textContent=item.f;
+    el.dataset.state='front';
+    el.addEventListener('click',()=>{
+      if(el.dataset.state==='front'){ el.textContent=item.b; el.classList.add('on'); el.dataset.state='back'; }
+      else { el.textContent=item.f; el.classList.remove('on'); el.dataset.state='front'; }
+    });
+    grid.appendChild(el);
+  });
+}
+
+/* ---------- QUIZ ---------- */
+let quizStarted=false, current=0, score=0, mistakes=[], answered=false;
+
+function startQuiz(){ quizStarted=true; current=0; score=0; mistakes=[]; renderQuestion(); }
+
+function renderQuestion(){
+  answered=false;
+  const t = RESULT_TXT[lang];
+  const list = QUESTIONS[lang];
+  const card = document.getElementById('quizCard');
+  const q = list[current];
+  const pct = Math.round((current/list.length)*100);
+  card.innerHTML = `
+    <div class="progress-wrap"><div class="progress-bar" style="width:${pct}%"></div></div>
+    <div class="qcounter">${t.qOf(current+1, list.length)}</div>
+    <div class="qtext">${q.q}</div>
+    <div id="optsWrap"></div>
+    <div class="explain" id="explainBox"></div>
+  `;
+  const wrap = document.getElementById('optsWrap');
+  q.opts.forEach((opt,i)=>{
+    const b = document.createElement('button');
+    b.className='opt';
+    b.textContent=opt;
+    b.addEventListener('click',()=>selectAnswer(i));
+    wrap.appendChild(b);
+  });
+}
+
+function selectAnswer(i){
+  if(answered) return;
+  answered=true;
+  const list = QUESTIONS[lang];
+  const q = list[current];
+  const opts = document.querySelectorAll('#optsWrap .opt');
+  opts.forEach((el,idx)=>{
+    el.disabled=true;
+    if(idx===q.correct) el.classList.add('correct');
+    if(idx===i && i!==q.correct) el.classList.add('wrong');
+  });
+  const box = document.getElementById('explainBox');
+  box.textContent = q.rule;
+  box.classList.add('show');
+  if(i===q.correct){ score++; }
+  else{ mistakes.push({q:q.q, wrong:q.opts[i], correct:q.opts[q.correct], rule:q.rule}); }
+
+  const t = RESULT_TXT[lang];
+  const nextBtn = document.createElement('button');
+  nextBtn.className='btn btn-primary';
+  nextBtn.style.marginTop='14px';
+  nextBtn.style.width='100%';
+  nextBtn.textContent = current+1 < list.length ? t.next : t.showResult;
+  nextBtn.addEventListener('click', ()=>{
+    if(current+1 < list.length){ current++; renderQuestion(); }
+    else{ showResult(); }
+  });
+  document.getElementById('quizCard').appendChild(nextBtn);
+}
+
+function showResult(){
+  const t = RESULT_TXT[lang];
+  const list = QUESTIONS[lang];
+  const total = list.length;
+  const pct = Math.round((score/total)*100);
+  const emoji = pct>=80?'🎉':pct>=60?'👍':'📚';
+  const msg = pct>=80?t.good:pct>=60?t.ok:t.bad;
+  const mHTML = mistakes.length ? `
+    <div style="text-align:left;margin-top:10px;">
+      <h3 style="margin-bottom:8px;">${t.mistakesTitle}</h3>
+      ${mistakes.map(m=>`
+        <div class="mistake-card">
+          <div class="mq">${m.q}</div>
+          <div>${t.yourAnswer} <b>${m.wrong}</b></div>
+          <div class="mc">${t.correctLabel} ${m.correct}</div>
+          <div class="mrule">${m.rule}</div>
+        </div>
+      `).join('')}
+    </div>` : `<p style="color:#2f8f83;font-weight:600;">${t.none}</p>`;
+
+  document.getElementById('quizCard').innerHTML = `
+    <div class="result">
+      <div class="big">${score}/${total}</div>
+      <div class="msg">${emoji} ${msg}</div>
+      <div class="btnrow">
+        <button class="btn btn-sec" onclick="document.querySelector('[data-tab=theory]').click()">${t.toTheory}</button>
+        <button class="btn btn-primary" onclick="startQuiz()">${t.again}</button>
+      </div>
+      ${mHTML}
+    </div>
+  `;
+}
+
+/* ---------- INIT ---------- */
+setLang('uk');
+</script>
+</body>
+</html>
