@@ -502,8 +502,10 @@
     .example { flex-direction: column; align-items: flex-start; gap: 8px; }
   }
 </style>
+<style>.ld-home{position:fixed;top:10px;left:10px;z-index:100;background:rgba(45,38,87,.92);color:#fff!important;text-decoration:none;font:600 13px/1 system-ui,sans-serif;padding:9px 13px;border-radius:20px;box-shadow:0 2px 8px rgba(0,0,0,.2)}</style>
 </head>
 <body>
+<a class="ld-home" href="index.html">← Головна / Strona główna</a>
 
 <div class="hero">
   <h1>➕➖ Liczby Dodatnie i Ujemne</h1>
@@ -870,7 +872,7 @@ const questions = [
   // Teoria
   { cat: "Teoria", q: "Które z poniższych to liczba ujemna?", opts: ["+5", "–3", "0", "+100"], ans: 1 },
   { cat: "Teoria", q: "Jaka jest wartość bezwzględna |–8|?", opts: ["–8", "0", "8", "+16"], ans: 2 },
-  { cat: "Teoria", q: "Jaka jest wartość bezwzględna |+4|?", opts: ["–4", "+4", "0", "4"], ans: 3 },
+  { cat: "Teoria", q: "Jaka jest wartość bezwzględna |+4|?", opts: ["–4", "0", "8", "4"], ans: 3 },
   { cat: "Porównywanie", q: "Które zdanie jest PRAWDZIWE?", opts: ["–5 > –2", "+3 < –1", "–4 < +1", "0 < –6"], ans: 2 },
   { cat: "Porównywanie", q: "Uszereguj od najmniejszej: –3, +1, –7, 0", opts: ["–7, –3, 0, +1", "0, –3, –7, +1", "+1, 0, –3, –7", "–3, –7, 0, +1"], ans: 0 },
   { cat: "Porównywanie", q: "Która liczba jest większa: –2 czy –8?", opts: ["–8", "–2", "Obie równe", "Brak odpowiedzi"], ans: 1 },

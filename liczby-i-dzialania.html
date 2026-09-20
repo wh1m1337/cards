@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Liczby i działania · уроки 1–4 · Варвара</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%94%A2%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Sora:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#232042; --plum:#453a7c; --plum-deep:#2d2657; --cream:#f7f4ee; --paper:#fff;
+  --teal:#2f8f83; --teal-soft:#e3f2ef; --amber:#e8a33d; --amber-soft:#fbeed9;
+  --coral:#d65f5f; --coral-soft:#fbe6e6; --line:#e4e0d6; --muted:#7a7398;
+}
+*{box-sizing:border-box;}
+html{-webkit-text-size-adjust:100%;}
+body{margin:0;font-family:'Sora',system-ui,sans-serif;background:var(--cream);color:var(--ink);line-height:1.55;font-size:16px;}
+h1,h2,h3,.display{font-family:'Fraunces',Georgia,serif;font-weight:600;color:var(--plum-deep);margin:0;}
+button{font-family:inherit;}
+a{color:var(--plum);}
+
+/* hero */
+.hero{background:var(--plum-deep);color:#f3f1fb;padding:26px 18px 30px;position:relative;}
+.hero .top{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:14px;}
+.home{color:#d8d2ef;text-decoration:none;font-size:14px;font-weight:600;padding:6px 2px;}
+.langswitch{display:flex;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.35);border-radius:20px;padding:3px;}
+.langswitch button{border:none;background:transparent;color:#e9e5fb;font-weight:600;font-size:13px;padding:6px 13px;border-radius:16px;cursor:pointer;min-height:32px;}
+.langswitch button.active{background:#fff;color:var(--plum-deep);}
+.hero .kicker{font-size:13px;letter-spacing:.03em;color:#c8bfef;margin-bottom:4px;}
+.hero h1{color:#fff;font-size:clamp(26px,6.5vw,36px);line-height:1.15;max-width:560px;}
+.hero p{color:#d8d2ef;max-width:520px;margin:8px 0 0;font-size:14.5px;}
+
+/* nav */
+nav{display:flex;gap:6px;padding:10px 12px;background:var(--paper);border-bottom:1px solid var(--line);overflow-x:auto;position:sticky;top:0;z-index:20;scrollbar-width:none;}
+nav::-webkit-scrollbar{display:none;}
+nav button{flex:none;border:none;background:transparent;color:var(--plum);font-size:14px;font-weight:600;padding:9px 13px;border-radius:20px;cursor:pointer;white-space:nowrap;min-height:40px;}
+nav button.active{background:var(--plum-deep);color:#fff;}
+nav button .badge{display:inline-block;background:var(--coral);color:#fff;border-radius:10px;font-size:11px;padding:0 6px;margin-left:4px;line-height:17px;}
+
+main{max-width:680px;margin:0 auto;padding:18px 14px 60px;}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:18px;margin-bottom:14px;}
+.card h2{font-size:20px;margin-bottom:8px;}
+.card h3{font-size:16px;margin:14px 0 4px;color:var(--plum);}
+.card p{margin:6px 0;font-size:15px;}
+.card ul,.card ol{margin:6px 0;padding-left:22px;font-size:15px;}
+.card li{margin-bottom:4px;}
+.muted{color:var(--muted);}
+.rise{animation:rise .3s ease;}
+@keyframes rise{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:none;}}
+
+/* mode tabs */
+.seg{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:4px;margin-bottom:14px;}
+.seg button{border:none;background:transparent;border-radius:10px;padding:10px 4px;font-weight:600;font-size:14px;color:var(--plum);cursor:pointer;min-height:44px;}
+.seg button.active{background:var(--teal);color:#fff;}
+.ltitle{margin:0 0 12px;}
+.ltitle .n{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:50%;background:var(--plum-deep);color:#fff;font-size:15px;margin-right:8px;font-family:'Sora',sans-serif;font-weight:700;}
+.ltitle h1{font-size:22px;display:inline;}
+.ltitle .sub{display:block;font-size:13.5px;color:var(--muted);margin-top:2px;}
+
+/* дроби */
+.fr{display:inline-flex;flex-direction:column;text-align:center;vertical-align:middle;font-family:'Fraunces',serif;font-weight:600;margin:0 3px;line-height:1.05;}
+.fr .n{border-bottom:1.5px solid currentColor;padding:0 4px 2px;}
+.fr .d{padding:2px 4px 0;}
+.mx{font-family:'Fraunces',serif;font-weight:600;font-size:1.15em;margin-right:1px;vertical-align:middle;}
+.blank{display:inline-block;min-width:1.5em;padding:0 6px;border:2px dashed var(--amber);border-radius:6px;background:var(--amber-soft);color:#a06a13;text-align:center;font-weight:700;}
+.eq{font-family:'Fraunces',serif;font-size:24px;text-align:center;margin:12px 0 4px;font-weight:600;color:var(--plum-deep);line-height:1.7;overflow-x:auto;overflow-y:hidden;padding:3px 0;}
+.example{background:var(--teal-soft);border-left:3px solid var(--teal);border-radius:0 10px 10px 0;padding:10px 14px;margin:10px 0;font-size:14.5px;line-height:1.9;}
+.warn{background:var(--coral-soft);border-left:3px solid var(--coral);border-radius:0 10px 10px 0;padding:10px 14px;margin:10px 0;font-size:14.5px;}
+.tip{background:var(--amber-soft);border-left:3px solid var(--amber);border-radius:0 10px 10px 0;padding:10px 14px;margin:10px 0;font-size:14.5px;color:#6b4a10;}
+.pill-row{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0;}
+.pill{background:var(--teal-soft);color:var(--teal);border-radius:10px;padding:6px 10px;font-size:13px;font-weight:600;}
+.pill.amber{background:var(--amber-soft);color:#a06a13;} .pill.coral{background:var(--coral-soft);color:var(--coral);}
+table.t{border-collapse:collapse;width:100%;font-size:14px;margin:8px 0;}
+table.t th,table.t td{border:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top;}
+table.t th{background:var(--cream);}
+.gloss{display:grid;grid-template-columns:1fr 1fr;gap:4px 14px;font-size:14px;}
+.gloss b{color:var(--plum-deep);}
+pre.col{font-family:'JetBrains Mono',ui-monospace,Menlo,monospace;background:#fff;border:1px solid var(--line);border-radius:8px;padding:8px 12px;display:inline-block;margin:6px 0;line-height:1.4;font-size:15px;}
+.axis{width:100%;max-width:440px;color:var(--plum);display:block;margin:6px auto;}
+ul.items{text-align:left;margin:8px 0;padding-left:20px;font-size:15px;}
+
+/* вправи */
+.qhead{display:flex;justify-content:space-between;align-items:center;font-size:13px;color:var(--plum);font-weight:600;margin-bottom:8px;gap:8px;flex-wrap:wrap;}
+.prompt{font-size:16px;font-weight:600;}
+.art{margin:6px 0;}
+.ansrow{display:flex;gap:8px;margin-top:10px;}
+.ansrow input{flex:1;min-width:0;font-size:20px;font-family:'Fraunces',serif;padding:11px 14px;border:2px solid var(--line);border-radius:12px;background:#fff;color:var(--ink);}
+.ansrow input:focus{outline:none;border-color:var(--plum);}
+.ansrow input:disabled{background:var(--cream);}
+.keys{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px;}
+.keys button{border:1.5px solid var(--line);background:#fff;border-radius:10px;min-width:46px;min-height:42px;font-size:18px;font-weight:600;color:var(--plum);cursor:pointer;padding:0 12px;}
+.keys button:active{background:var(--teal-soft);}
+.opts{display:grid;gap:8px;margin-top:12px;}
+.opts.two{grid-template-columns:1fr 1fr;} .opts.three{grid-template-columns:repeat(3,1fr);}
+.opt{display:block;width:100%;text-align:center;background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:12px 14px;font-size:17px;color:var(--ink);cursor:pointer;min-height:48px;font-family:'Fraunces',serif;font-weight:600;}
+.opt.sel{border-color:var(--plum);background:#efecfa;}
+.opt.correct{background:var(--teal-soft);border-color:var(--teal);color:#1d5c53;}
+.opt.wrong{background:var(--coral-soft);border-color:var(--coral);color:#8a3a3a;}
+.opt[disabled]{cursor:default;}
+.btn{border:none;border-radius:12px;padding:12px 18px;font-weight:600;font-size:15px;cursor:pointer;min-height:46px;}
+.btn-primary{background:var(--plum-deep);color:#fff;}
+.btn-teal{background:var(--teal);color:#fff;}
+.btn-sec{background:#fff;color:var(--plum);border:1.5px solid var(--line);}
+.btn[disabled]{opacity:.5;cursor:default;}
+.btnrow{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap;}
+.btnrow .btn{flex:1;min-width:120px;}
+.fb{border-radius:12px;padding:10px 14px;margin-top:12px;font-size:15px;}
+.fb.ok{background:var(--teal-soft);color:#1d5c53;border:1px solid #bfe0d9;}
+.fb.bad{background:var(--coral-soft);color:#7d3030;border:1px solid #f0c4c4;}
+.fb.near{background:var(--amber-soft);color:#6b4a10;border:1px solid #f0d9a8;}
+.sol{background:#f5f2fb;border-radius:12px;padding:10px 14px;margin-top:10px;font-size:14.5px;line-height:1.85;}
+.hint{background:var(--amber-soft);border-radius:10px;padding:9px 12px;margin-top:10px;font-size:14px;color:#6b4a10;}
+details.how{margin-top:10px;font-size:13.5px;color:var(--muted);}
+details.how summary{cursor:pointer;}
+details.sol2{margin-top:8px;} details.sol2 summary{cursor:pointer;color:var(--plum);font-weight:600;font-size:14px;}
+.bar{height:7px;background:var(--line);border-radius:5px;overflow:hidden;margin-bottom:12px;}
+.bar i{display:block;height:100%;background:var(--teal);transition:width .25s;}
+
+/* результат */
+.result{text-align:center;padding:8px 0 4px;}
+.result .big{font-family:'Fraunces',serif;font-size:52px;font-weight:700;color:var(--plum-deep);line-height:1.1;}
+.result .msg{margin:6px 0 14px;font-size:16px;color:var(--plum);font-weight:600;}
+.brk{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin:8px 0 4px;}
+.brk span{background:var(--cream);border:1px solid var(--line);border-radius:10px;padding:4px 10px;font-size:13.5px;}
+.mist{background:var(--coral-soft);border-radius:12px;padding:10px 12px;margin:10px 0;font-size:14.5px;}
+.mist .yr{color:#7d3030;} .mist .cr{color:#1d5c53;}
+
+/* головна */
+.lgrid{display:grid;gap:12px;}
+.lcard{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:16px;}
+.lcard .top{display:flex;gap:12px;align-items:flex-start;}
+.lcard .num{flex:none;width:38px;height:38px;border-radius:50%;background:var(--plum-deep);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;}
+.lcard h3{margin:0;font-size:18px;color:var(--plum-deep);} .lcard .sub{font-size:13.5px;color:var(--muted);margin-top:2px;}
+.chips{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0 2px;}
+.chip{font-size:12.5px;background:var(--cream);border:1px solid var(--line);border-radius:10px;padding:3px 9px;color:var(--plum);}
+.chip.good{background:var(--teal-soft);border-color:#bfe0d9;color:#1d5c53;}
+.lcard .btnrow .btn{padding:10px 8px;font-size:14px;min-height:42px;}
+footer{text-align:center;font-size:12px;color:#9891b0;padding:8px 20px 30px;}
+@media(max-width:420px){.eq{font-size:21px;}.gloss{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<header class="hero">
+  <div class="top">
+    <a class="home" href="index.html" id="homeLink">← Головна</a>
+    <div class="langswitch"><button id="bUK" data-act="lang" data-lang="uk">UA</button><button id="bPL" data-act="lang" data-lang="pl">PL</button></div>
+  </div>
+  <div class="kicker" id="hKicker"></div>
+  <h1 id="hTitle"></h1>
+  <p id="hSub"></p>
+</header>
+<nav id="nav"></nav>
+<main id="app"><div class="card">Завантаження… / Ładowanie…</div></main>
+<footer id="foot"></footer>
+<noscript><main><div class="card">Потрібен JavaScript. / Wymagany JavaScript.</div></main></noscript>
+
+<script src="ld-core.js?v=1"></script>
+<script>
+(function(){
+'use strict';
+if(!window.LD){document.getElementById('app').innerHTML='<div class="card">Не завантажився ld-core.js — онови сторінку. / Odśwież stronę.</div>';return;}
+const LD=window.LD, T=LD.T, F=LD.F, MX=LD.MX;
+const $=(s,el)=> (el||document).querySelector(s);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+/* ---------- збереження ---------- */
+const KEY='ld_v1';
+function load(){try{const s=JSON.parse(localStorage.getItem(KEY));if(s&&typeof s==='object')return Object.assign({lang:'uk',prog:{},mistakes:[]},s);}catch(e){}return {lang:'uk',prog:{},mistakes:[]};}
+let store=load();
+function save(){try{localStorage.setItem(KEY,JSON.stringify(store));}catch(e){}}
+const prog=k=>store.prog[k]||(store.prog[k]={best:null,bestOf:null,tests:0,ok:0,total:0});
+const seed32=()=>{try{const a=new Uint32Array(1);crypto.getRandomValues(a);return a[0];}catch(e){return (Date.now()*1103515245+Math.floor(Math.random()*1e9))>>>0;}};
+
+/* ---------- мови ---------- */
+const I={
+ uk:{home:'← Головна',kicker:'Matematyka · Liczby i działania · lekcje 1–4',title:'Числа і дії — уроки 1–4',sub:'Теорія, тренажер із новими прикладами щоразу, тести та розбір помилок. Ті самі теми, що в зошиті.',
+  nOverview:'🏠 Огляд',nFinal:'🏁 Підсумок',nMist:'🔁 Помилки',
+  theory:'📖 Теорія',practice:'🏋️ Тренажер',test:'📝 Тест',
+  check:'Перевірити',next:'Далі →',finish:'Завершити',hintBtn:'💡 Підказка',giveup:'Показати відповідь',solution:'Розв’язок',
+  right:'✓ Правильно!',wrong:'✗ Не зовсім.',correctAns:'Правильна відповідь:',yourAns:'Твоя відповідь:',noAns:'без відповіді',
+  qOf:(a,b)=>`Питання ${a} з ${b}`,streak:'серія',
+  how:'Як вводити відповідь?',howBody:'Звичайний дріб: <b>5/7</b> · мішане число: <b>1 4/7</b> (з пробілом) · десятковий: <b>0,25</b> · період у дужках: <b>0,8(3)</b>',
+  newTest:'Новий тест ↻',toTheory:'📖 До теорії',toPractice:'🏋️ Тренуватись',repeatMist:'🔁 Повторити помилки',
+  resGreat:'Відмінно! Ти готова 🌟',resGood:'Добре! Розбери помилки нижче.',resOk:'Непогано. Повтори теорію й спробуй ще.',resLow:'Треба ще потренуватись — почни з теорії й тренажера.',
+  mistTitle:'Розбір помилок',noMist:'Жодної помилки — чудово! 🌟',
+  mistEmpty:'Немає помилок для повторення 🎉',mistEmptySub:'Коли помилятимешся в тренажері чи тесті — задачі з’являться тут, поки не розв’яжеш їх правильно.',
+  mistLeft:n=>`Залишилось: ${n}`,
+  intro:'<h2>Привіт, Варваро! 👋</h2><p>Тут — усе по чотирьох уроках із розділу «Liczby i działania», які ви зараз проходите. Порядок: <b>Теорія → Тренажер → Тест</b>. Тренажер щоразу дає нові приклади, тому можна тренуватись скільки завгодно.</p><p class="muted">Терміни польською подано в дужках — саме так вони звучать на уроці й у контрольній. Перемикач <b>UA / PL</b> вгорі змінює мову всього сайту.</p>',
+  practiceStat:'Тренажер',bestTest:'Найкращий тест',noTest:'тест ще не проходила',
+  finalCard:'Змішаний тест на 20 питань: по 5 з кожного уроку. Наприкінці — розбір по темах.',mistCard:'Задачі, де були помилки, повертаються сюди, доки не розв’яжеш їх правильно.',
+  finalTitle:'Підсумковий тест · уроки 1–4',finalStart:'Почати (20 питань)',testStart:'Почати тест (10 питань)',testIntro:'10 питань, відповіді перевіряються наприкінці — як на контрольній. Розбір помилок буде після тесту.',
+  foot:'Тренажер для Варвари · Liczby i działania · зроблено з ❤️',
+  byLesson:'За темами',
+  cardOpen:'Відкрити',
+  lessons:{1:['Liczby','Числа'],2:['Rozwinięcia dziesiętne liczb wymiernych','Десяткові розвинення раціональних чисел'],3:['Zaokrąglanie liczb','Округлення чисел'],4:['Dodawanie i odejmowanie liczb dodatnich','Додавання і віднімання додатних чисел']},
+  lsum:{1:'Натуральні, цілі, раціональні · дроби ↔ десяткові · мішані числа · числова вісь · порівняння',2:'Ділення стовпчиком · скінченні й періодичні дроби · запис з періодом · порівняння',3:'Правило 0–4 / 5–9 · розряди · округлення періодичних · оцінка покупок',4:'Дроби й мішані числа · «позичити» 1 · десяткові стовпчиком · задачі'},
+  short:{1:'Liczby',2:'Rozwinięcia',3:'Zaokrąglanie',4:'Dodawanie'}},
+ pl:{home:'← Strona główna',kicker:'Matematyka · Liczby i działania · lekcje 1–4',title:'Liczby i działania — lekcje 1–4',sub:'Teoria, trener z nowymi przykładami za każdym razem, testy i analiza błędów. Te same tematy, co w zeszycie.',
+  nOverview:'🏠 Przegląd',nFinal:'🏁 Podsumowanie',nMist:'🔁 Błędy',
+  theory:'📖 Teoria',practice:'🏋️ Trener',test:'📝 Test',
+  check:'Sprawdź',next:'Dalej →',finish:'Zakończ',hintBtn:'💡 Podpowiedź',giveup:'Pokaż odpowiedź',solution:'Rozwiązanie',
+  right:'✓ Dobrze!',wrong:'✗ Niezupełnie.',correctAns:'Poprawna odpowiedź:',yourAns:'Twoja odpowiedź:',noAns:'brak odpowiedzi',
+  qOf:(a,b)=>`Pytanie ${a} z ${b}`,streak:'seria',
+  how:'Jak wpisywać odpowiedź?',howBody:'Ułamek zwykły: <b>5/7</b> · liczba mieszana: <b>1 4/7</b> (ze spacją) · dziesiętny: <b>0,25</b> · okres w nawiasie: <b>0,8(3)</b>',
+  newTest:'Nowy test ↻',toTheory:'📖 Do teorii',toPractice:'🏋️ Ćwicz',repeatMist:'🔁 Powtórz błędy',
+  resGreat:'Świetnie! Jesteś gotowa 🌟',resGood:'Dobrze! Przejrzyj błędy poniżej.',resOk:'Nieźle. Powtórz teorię i spróbuj jeszcze raz.',resLow:'Trzeba jeszcze poćwiczyć — zacznij od teorii i trenera.',
+  mistTitle:'Analiza błędów',noMist:'Ani jednego błędu — świetnie! 🌟',
+  mistEmpty:'Brak błędów do powtórzenia 🎉',mistEmptySub:'Gdy pomylisz się w trenerze lub teście — zadania pojawią się tutaj, aż rozwiążesz je poprawnie.',
+  mistLeft:n=>`Zostało: ${n}`,
+  intro:'<h2>Cześć, Warwaro! 👋</h2><p>Tu jest wszystko do czterech lekcji z działu „Liczby i działania”, które teraz przerabiacie. Kolejność: <b>Teoria → Trener → Test</b>. Trener za każdym razem daje nowe przykłady, więc możesz ćwiczyć do woli.</p><p class="muted">Przełącznik <b>UA / PL</b> u góry zmienia język całej strony.</p>',
+  practiceStat:'Trener',bestTest:'Najlepszy test',noTest:'test jeszcze nie rozwiązany',
+  finalCard:'Test mieszany na 20 pytań: po 5 z każdej lekcji. Na końcu — podsumowanie według tematów.',mistCard:'Zadania, w których był błąd, wracają tutaj, aż rozwiążesz je poprawnie.',
+  finalTitle:'Test podsumowujący · lekcje 1–4',finalStart:'Zacznij (20 pytań)',testStart:'Zacznij test (10 pytań)',testIntro:'10 pytań, odpowiedzi sprawdzane na końcu — jak na sprawdzianie. Analiza błędów po teście.',
+  foot:'Trener dla Warwary · Liczby i działania · zrobione z ❤️',
+  byLesson:'Według tematów',
+  cardOpen:'Otwórz',
+  lessons:{1:['Liczby','Liczby'],2:['Rozwinięcia dziesiętne liczb wymiernych','Rozwinięcia dziesiętne liczb wymiernych'],3:['Zaokrąglanie liczb','Zaokrąglanie liczb'],4:['Dodawanie i odejmowanie liczb dodatnich','Dodawanie i odejmowanie liczb dodatnich']},
+  lsum:{1:'Naturalne, całkowite, wymierne · ułamki ↔ dziesiętne · liczby mieszane · oś liczbowa · porównywanie',2:'Dzielenie pisemne · ułamki skończone i okresowe · zapis z okresem · porównywanie',3:'Reguła 0–4 / 5–9 · rzędy · zaokrąglanie okresowych · szacowanie zakupów',4:'Ułamki i liczby mieszane · „pożyczanie” 1 · dziesiętne pisemnie · zadania tekstowe',},
+  short:{1:'Liczby',2:'Rozwinięcia',3:'Zaokrąglanie',4:'Dodawanie'}}
+};
+let lang=(store.lang==='pl'?'pl':'uk');
+const t=k=>I[lang][k];
+const lt=(l)=>I[lang].lessons[l];
+
+/* ---------- теорія ---------- */
+const GLOSS_TASK=(
+ ['Oblicz — Обчисли','Uzupełnij — Доповни / Впиши','Zamień na — Перетвори на','Zapisz w postaci — Запиши у вигляді','Wstaw znak &lt;, = lub &gt; — Постав знак','Porównaj — Порівняй','Oszacuj — Оціни (приблизно)','Zaznacz na osi — Познач на осі','Podkreśl okres — Підкресли період','Skróć — Скороти','Przedstaw wynik w postaci liczby mieszanej — Результат подай як мішане число','Wystarczy? — Чи вистачить?'].map(x=>{const [a,b]=x.split(' — ');return `<div><b>${a}</b></div><div>${b}</div>`;}).join('')
+);
+const gl=(rows)=>`<div class="gloss">${rows.map(r=>`<div><b>${r[0]}</b></div><div>${r[1]}</div>`).join('')}</div>`;
+const glossCard=(rows,withTask)=>{const h=gl(rows)+(withTask?`<h3>Мова завдань / Polecenia</h3><div class="gloss">${GLOSS_TASK}</div>`:'');return {h:T('Слова, які треба знати (PL → UA)','Słowniczek (PL → UA)'),b:T(h,h)};};
+
+const THEORY={
+1:[
+ {h:T('Три види чисел','Trzy rodzaje liczb'),b:T(
+ `<div class="pill-row"><span class="pill">naturalne: 0, 1, 2, 3…</span><span class="pill amber">całkowite: …, −2, −1, 0, 1, 2…</span><span class="pill coral">wymierne: a/b</span></div>
+  <p><b>Liczby naturalne</b> (натуральні) — 0, 1, 2, 3, 4… У польській школі <b>0 теж натуральне</b>.</p>
+  <p><b>Liczby całkowite</b> (цілі) — натуральні та протилежні до них: …, −3, −2, −1, 0, 1, 2, 3…</p>
+  <p><b>Liczby wymierne</b> (раціональні) — усі числа, які можна записати дробом ${F('a','b')}, де a, b — цілі, b ≠ 0. Сюди входять цілі, звичайні й десяткові дроби та мішані числа.</p>
+  <div class="example">Натуральні ⊂ Цілі ⊂ Раціональні — кожна наступна множина «містить» попередню.</div>
+  <div class="tip"><b>Спочатку спрости!</b> ${F(-30,2)} = −15 → ціле, не натуральне. ${F(12,4)} = 3 → натуральне. ${F(9,4)} → раціональне, але не ціле.</div>`,
+ `<div class="pill-row"><span class="pill">naturalne: 0, 1, 2, 3…</span><span class="pill amber">całkowite: …, −2, −1, 0, 1, 2…</span><span class="pill coral">wymierne: a/b</span></div>
+  <p><b>Liczby naturalne</b> — 0, 1, 2, 3, 4… W polskiej szkole <b>0 też jest naturalne</b>.</p>
+  <p><b>Liczby całkowite</b> — naturalne oraz liczby do nich przeciwne: …, −3, −2, −1, 0, 1, 2, 3…</p>
+  <p><b>Liczby wymierne</b> — wszystkie liczby, które można zapisać ułamkiem ${F('a','b')}, gdzie a, b są całkowite, b ≠ 0. Należą tu liczby całkowite, ułamki zwykłe i dziesiętne oraz liczby mieszane.</p>
+  <div class="example">Naturalne ⊂ Całkowite ⊂ Wymierne — każdy kolejny zbiór zawiera poprzedni.</div>
+  <div class="tip"><b>Najpierw uprość!</b> ${F(-30,2)} = −15 → całkowita, nie naturalna. ${F(12,4)} = 3 → naturalna. ${F(9,4)} → wymierna, ale nie całkowita.</div>`)},
+ {h:T('Розширення і скорочення дробів','Rozszerzanie i skracanie ułamków'),b:T(
+ `<p>Чисельник і знаменник множимо (розширення) або ділимо (скорочення) на <b>те саме</b> число — значення дробу не змінюється.</p>
+  <div class="example">${F(2,3)} = ${F('2·4','3·4')} = ${F(8,12)} &nbsp;(розширили ×4)<br>${F(8,12)} = ${F('8:4','12:4')} = ${F(2,3)} &nbsp;(скоротили ÷4)</div>
+  <p>Ціле число теж можна записати дробом: <b>6 = ${F(6,1)} = ${F(12,2)} = ${F(30,5)}</b>.</p>
+  <div class="tip">Завдання «впиши пропущене число»: подивись, у скільки разів змінився <i>відомий</i> бік дробу, — так само зміни другий.</div>`,
+ `<p>Licznik i mianownik mnożymy (rozszerzanie) albo dzielimy (skracanie) przez <b>tę samą</b> liczbę — wartość ułamka się nie zmienia.</p>
+  <div class="example">${F(2,3)} = ${F('2·4','3·4')} = ${F(8,12)} &nbsp;(rozszerzyliśmy ×4)<br>${F(8,12)} = ${F('8:4','12:4')} = ${F(2,3)} &nbsp;(skróciliśmy ÷4)</div>
+  <p>Liczbę całkowitą też można zapisać ułamkiem: <b>6 = ${F(6,1)} = ${F(12,2)} = ${F(30,5)}</b>.</p>
+  <div class="tip">Zadanie „wpisz brakującą liczbę”: sprawdź, ile razy zmienił się <i>znany</i> element ułamka — tak samo zmień drugi.</div>`)},
+ {h:T('Мішане число ↔ неправильний дріб','Liczba mieszana ↔ ułamek niewłaściwy'),b:T(
+ `<p><b>Liczba mieszana</b> = ціла частина + правильний дріб. <b>Ułamek niewłaściwy</b> — чисельник ≥ знаменника.</p>
+  <div class="example"><b>Мішане → неправильний:</b> ціла · знаменник + чисельник<br>${MX(3,2,5)} = ${F('3·5+2',5)} = ${F(17,5)}</div>
+  <div class="example"><b>Неправильний → мішане:</b> ділимо чисельник на знаменник<br>${F(17,5)}: 17 : 5 = 3, залишок 2 → ${MX(3,2,5)}</div>`,
+ `<p><b>Liczba mieszana</b> = całość + ułamek właściwy. <b>Ułamek niewłaściwy</b> — licznik ≥ mianownik.</p>
+  <div class="example"><b>Mieszana → niewłaściwy:</b> całość · mianownik + licznik<br>${MX(3,2,5)} = ${F('3·5+2',5)} = ${F(17,5)}</div>
+  <div class="example"><b>Niewłaściwy → mieszana:</b> dzielimy licznik przez mianownik<br>${F(17,5)}: 17 : 5 = 3, reszta 2 → ${MX(3,2,5)}</div>`)},
+ {h:T('Десятковий ↔ звичайний дріб','Ułamek dziesiętny ↔ zwykły'),b:T(
+ `<h3>Десятковий → звичайний</h3>
+  <p>Скільки цифр після коми — стільки нулів у знаменнику (10, 100, 1000). Потім скороти.</p>
+  <div class="example">0,43 = ${F(43,100)} &nbsp;·&nbsp; 1,73 = ${MX(1,73,100)} &nbsp;·&nbsp; 0,15 = ${F(15,100)} = ${F(3,20)} &nbsp;·&nbsp; 3,08 = ${MX(3,8,100)} = ${MX(3,2,25)}</div>
+  <div class="warn"><b>Типова помилка з нулями:</b> ${MX(1,3,1000)} = <b>1,003</b> (а не 1,0003 і не 1,03). Три нулі в знаменнику → <b>три цифри</b> після коми: 003.<br>Так само ${F(7,100)} = 0,07 · ${F(3,1000)} = 0,003.</div>
+  <h3>Звичайний → десятковий</h3>
+  <p>Розшир дріб до знаменника 10, 100 або 1000.</p>
+  <div class="example">${F(9,50)} = ${F(18,100)} = 0,18 &nbsp;·&nbsp; ${F(21,25)} = ${F(84,100)} = 0,84 &nbsp;·&nbsp; ${F(13,20)} = ${F(65,100)} = 0,65 &nbsp;·&nbsp; ${F(1,8)} = ${F(125,1000)} = 0,125</div>
+  <div class="pill-row"><span class="pill">½ = 0,5</span><span class="pill">¼ = 0,25</span><span class="pill">¾ = 0,75</span><span class="pill">⅕ = 0,2</span><span class="pill">⅛ = 0,125</span><span class="pill">⅜ = 0,375</span><span class="pill">1/20 = 0,05</span><span class="pill">1/25 = 0,04</span></div>`,
+ `<h3>Dziesiętny → zwykły</h3>
+  <p>Ile cyfr po przecinku — tyle zer w mianowniku (10, 100, 1000). Potem skróć.</p>
+  <div class="example">0,43 = ${F(43,100)} &nbsp;·&nbsp; 1,73 = ${MX(1,73,100)} &nbsp;·&nbsp; 0,15 = ${F(15,100)} = ${F(3,20)} &nbsp;·&nbsp; 3,08 = ${MX(3,8,100)} = ${MX(3,2,25)}</div>
+  <div class="warn"><b>Typowy błąd z zerami:</b> ${MX(1,3,1000)} = <b>1,003</b> (a nie 1,0003 ani 1,03). Trzy zera w mianowniku → <b>trzy cyfry</b> po przecinku: 003.<br>Podobnie ${F(7,100)} = 0,07 · ${F(3,1000)} = 0,003.</div>
+  <h3>Zwykły → dziesiętny</h3>
+  <p>Rozszerz ułamek do mianownika 10, 100 lub 1000.</p>
+  <div class="example">${F(9,50)} = ${F(18,100)} = 0,18 &nbsp;·&nbsp; ${F(21,25)} = ${F(84,100)} = 0,84 &nbsp;·&nbsp; ${F(13,20)} = ${F(65,100)} = 0,65 &nbsp;·&nbsp; ${F(1,8)} = ${F(125,1000)} = 0,125</div>
+  <div class="pill-row"><span class="pill">½ = 0,5</span><span class="pill">¼ = 0,25</span><span class="pill">¾ = 0,75</span><span class="pill">⅕ = 0,2</span><span class="pill">⅛ = 0,125</span><span class="pill">⅜ = 0,375</span><span class="pill">1/20 = 0,05</span><span class="pill">1/25 = 0,04</span></div>`)},
+ {h:T('Числова вісь (oś liczbowa)','Oś liczbowa'),b:T(
+ `<ul><li>Праворуч — більші числа, ліворуч — менші. Нуль посередині.</li><li>Одиничний відрізок ділять на <b>m</b> рівних частин → один крок = ${F(1,'m')}.</li><li>Протилежні числа (наприклад 1,5 і −1,5) лежать симетрично відносно нуля.</li></ul>
+  <div class="example">Відрізок від 0 до 1, поділений на 4 частини: ${F(1,4)} = 0,25 · ${F(2,4)} = ${F(1,2)} = 0,5 · ${F(3,4)} = 0,75</div>
+  <div class="tip">Щоб позначити ${MX(1,1,2)}: це між 1 і 2, рівно посередині (1,5).</div>`,
+ `<ul><li>Po prawej — liczby większe, po lewej — mniejsze. Zero jest pośrodku.</li><li>Odcinek jednostkowy dzielimy na <b>m</b> równych części → jeden krok = ${F(1,'m')}.</li><li>Liczby przeciwne (np. 1,5 i −1,5) leżą symetrycznie względem zera.</li></ul>
+  <div class="example">Odcinek od 0 do 1 podzielony na 4 części: ${F(1,4)} = 0,25 · ${F(2,4)} = ${F(1,2)} = 0,5 · ${F(3,4)} = 0,75</div>
+  <div class="tip">Aby zaznaczyć ${MX(1,1,2)}: leży między 1 a 2, dokładnie pośrodku (1,5).</div>`)},
+ {h:T('Порівняння чисел','Porównywanie liczb'),b:T(
+ `<h3>Десяткові дроби</h3><div class="example">0,6 і 0,56 → дописуємо нуль: 0,60 і 0,56 → 0,6 &gt; 0,56</div>
+  <h3>Звичайні дроби з різними знаменниками</h3>
+  <div class="example">${F(5,6)} і ${F(7,9)}: спільний знаменник 18 → ${F(15,18)} і ${F(14,18)} → ${F(5,6)} &gt; ${F(7,9)}</div>
+  <h3>Дріб і десятковий</h3><div class="example">${F(3,5)} і 0,55: ${F(3,5)} = 0,6 → 0,6 &gt; 0,55</div>
+  <h3>Від’ємні числа</h3>
+  <div class="example">−4,7 і −4,2: на осі −4,7 лежить лівіше → <b>−4,7 &lt; −4,2</b>.<br>Ближче до нуля = більше. Будь-яке від’ємне &lt; будь-якого додатного.</div>`,
+ `<h3>Ułamki dziesiętne</h3><div class="example">0,6 i 0,56 → dopisujemy zero: 0,60 i 0,56 → 0,6 &gt; 0,56</div>
+  <h3>Ułamki zwykłe o różnych mianownikach</h3>
+  <div class="example">${F(5,6)} i ${F(7,9)}: wspólny mianownik 18 → ${F(15,18)} i ${F(14,18)} → ${F(5,6)} &gt; ${F(7,9)}</div>
+  <h3>Ułamek zwykły i dziesiętny</h3><div class="example">${F(3,5)} i 0,55: ${F(3,5)} = 0,6 → 0,6 &gt; 0,55</div>
+  <h3>Liczby ujemne</h3>
+  <div class="example">−4,7 i −4,2: na osi −4,7 leży bardziej na lewo → <b>−4,7 &lt; −4,2</b>.<br>Bliżej zera = większa. Każda liczba ujemna &lt; każdej dodatniej.</div>`)},
+ glossCard([['liczba naturalna','натуральне число'],['liczba całkowita','ціле число'],['liczba wymierna','раціональне число'],['licznik / mianownik','чисельник / знаменник'],['skracać / rozszerzać','скорочувати / розширювати'],['liczba mieszana','мішане число'],['ułamek niewłaściwy','неправильний дріб'],['ułamek dziesiętny','десятковий дріб'],['oś liczbowa','числова вісь'],['liczby przeciwne','протилежні числа']],true)
+],
+2:[
+ {h:T('Дріб — це ділення','Ułamek to dzielenie'),b:T(
+ `<p>${F('a','b')} = a : b. Щоб знайти десяткове розвинення (<b>rozwinięcie dziesiętne</b>), ділимо чисельник на знаменник стовпчиком.</p>
+  <div class="example"><b>${F(5,8)} = 5 : 8</b><br>50 : 8 = 6, залишок 2 · 20 : 8 = 2, залишок 4 · 40 : 8 = 5, залишок <b>0</b> → ділення закінчилось: <b>0,625</b></div>
+  <div class="example"><b>${F(2,3)} = 2 : 3</b><br>20 : 3 = 6, залишок 2 · 20 : 3 = 6, залишок 2 <b>← знову 2!</b> → цифра 6 повторюватиметься завжди: <b>0,(6)</b></div>
+  <div class="tip">Дописуй нуль до залишку і ділй далі. Ділення закінчилось — коли залишок 0 <i>або</i> коли залишок <b>повторився</b>.</div>`,
+ `<p>${F('a','b')} = a : b. Aby znaleźć rozwinięcie dziesiętne, dzielimy licznik przez mianownik pisemnie.</p>
+  <div class="example"><b>${F(5,8)} = 5 : 8</b><br>50 : 8 = 6, reszta 2 · 20 : 8 = 2, reszta 4 · 40 : 8 = 5, reszta <b>0</b> → dzielenie się kończy: <b>0,625</b></div>
+  <div class="example"><b>${F(2,3)} = 2 : 3</b><br>20 : 3 = 6, reszta 2 · 20 : 3 = 6, reszta 2 <b>← znowu 2!</b> → cyfra 6 będzie się powtarzać: <b>0,(6)</b></div>
+  <div class="tip">Dopisuj zero do reszty i dziel dalej. Koniec, gdy reszta jest 0 <i>albo</i> gdy reszta się <b>powtórzyła</b>.</div>`)},
+ {h:T('Скінченні й нескінченні періодичні','Skończone i nieskończone okresowe'),b:T(
+ `<p>Кожне раціональне число має розвинення <b>скінченне</b> (0,625) або <b>нескінченне періодичне</b> (0,666… = 0,(6)).</p>
+  <div class="example"><b>Як передбачити?</b> Скороти дріб. Якщо у знаменнику лишились <b>тільки 2 і 5</b> → скінченне. Є інший множник (3, 7, 11…) → періодичне.</div>
+  <table class="t"><tr><th>дріб</th><th>знаменник</th><th>розвинення</th></tr>
+  <tr><td>${F(3,4)}</td><td>4 = 2·2</td><td>0,75 — скінченне</td></tr>
+  <tr><td>${F(3,11)}</td><td>11</td><td>0,(27)</td></tr>
+  <tr><td>${F(7,12)}</td><td>12 = 2·2·3</td><td>0,58(3)</td></tr>
+  <tr><td>${F(9,12)}</td><td>12, але ${F(9,12)} = ${F(3,4)}</td><td>0,75 — скінченне!</td></tr></table>`,
+ `<p>Każda liczba wymierna ma rozwinięcie <b>skończone</b> (0,625) lub <b>nieskończone okresowe</b> (0,666… = 0,(6)).</p>
+  <div class="example"><b>Jak przewidzieć?</b> Skróć ułamek. Jeśli w mianowniku zostały <b>tylko 2 i 5</b> → skończone. Inny czynnik (3, 7, 11…) → okresowe.</div>
+  <table class="t"><tr><th>ułamek</th><th>mianownik</th><th>rozwinięcie</th></tr>
+  <tr><td>${F(3,4)}</td><td>4 = 2·2</td><td>0,75 — skończone</td></tr>
+  <tr><td>${F(3,11)}</td><td>11</td><td>0,(27)</td></tr>
+  <tr><td>${F(7,12)}</td><td>12 = 2·2·3</td><td>0,58(3)</td></tr>
+  <tr><td>${F(9,12)}</td><td>12, ale ${F(9,12)} = ${F(3,4)}</td><td>0,75 — skończone!</td></tr></table>`)},
+ {h:T('Скорочений запис з періодом','Zapis skrócony z okresem'),b:T(
+ `<p><b>Okres</b> (період) — найкоротша група цифр, що повторюється. Її беремо в дужки. Цифри <i>до</i> неї лишаються перед дужкою.</p>
+  <div class="example">0,666… = 0,(6) &nbsp;·&nbsp; 2,636363… = 2,(63) &nbsp;·&nbsp; 3,8333… = 3,8(3)<br>12,34<u>011</u><u>011</u>011… = 12,34(011) &nbsp;·&nbsp; 83,0<u>344</u><u>344</u>… = 83,0(344)</div>
+  <div class="warn"><b>Типові помилки:</b><br>• 9,343434… = <b>9,(34)</b> — а не 9,3(43): період починай якнайраніше.<br>• Не забувай <b>дужки</b>: 0,8(3), а не 0,83.<br>• Період — це <i>вся</i> група, що повторюється: 2,(63), а не 2,(6).</div>`,
+ `<p><b>Okres</b> — najkrótsza grupa cyfr, która się powtarza. Ujmujemy ją w nawias. Cyfry <i>przed</i> nią zostają przed nawiasem.</p>
+  <div class="example">0,666… = 0,(6) &nbsp;·&nbsp; 2,636363… = 2,(63) &nbsp;·&nbsp; 3,8333… = 3,8(3)<br>12,34<u>011</u><u>011</u>011… = 12,34(011) &nbsp;·&nbsp; 83,0<u>344</u><u>344</u>… = 83,0(344)</div>
+  <div class="warn"><b>Typowe błędy:</b><br>• 9,343434… = <b>9,(34)</b> — a nie 9,3(43): okres zaczynaj jak najwcześniej.<br>• Nie zapomnij o <b>nawiasie</b>: 0,8(3), a nie 0,83.<br>• Okres to <i>cała</i> powtarzająca się grupa: 2,(63), a nie 2,(6).</div>`)},
+ {h:T('Мішане число','Liczba mieszana'),b:T(
+ `<p>Ціла частина <b>лишається</b>. Розвинення шукаємо тільки для дробової частини.</p>
+  <div class="example">${MX(3,5,6)} = 3 + ${F(5,6)} = 3 + 0,8(3) = <b>3,8(3)</b><br>${MX(1,4,9)} = 1 + ${F(4,9)} = <b>1,(4)</b><br>${MX(1,2,3)} = 1 + ${F(2,3)} = <b>1,(6)</b></div>`,
+ `<p>Całość <b>zostaje</b>. Rozwinięcia szukamy tylko dla części ułamkowej.</p>
+  <div class="example">${MX(3,5,6)} = 3 + ${F(5,6)} = 3 + 0,8(3) = <b>3,8(3)</b><br>${MX(1,4,9)} = 1 + ${F(4,9)} = <b>1,(4)</b><br>${MX(1,2,3)} = 1 + ${F(2,3)} = <b>1,(6)</b></div>`)},
+ {h:T('Випиши цифри та порівняй','Wypisywanie cyfr i porównywanie'),b:T(
+ `<h3>Кілька цифр після коми</h3>
+  <div class="example">15,(261) = 15,261261261… → шість цифр: <b>261261</b><br>0,2(443) = 0,2443443443… → шість цифр: <b>244344</b><br>2,34(78) = 2,347878… → шість цифр: <b>347878</b></div>
+  <h3>Порівняння</h3>
+  <p>Випиши обидва розвинення з кількома цифрами й порівнюй <b>цифра за цифрою зліва направо</b> — перша різниця вирішує.</p>
+  <div class="example">7,(09) = 7,0909…<br>7,9 = 7,9000…<br>7,(90) = 7,9090…<br>→ <b>7,(09) &lt; 7,9 &lt; 7,(90)</b></div>`,
+ `<h3>Kilka cyfr po przecinku</h3>
+  <div class="example">15,(261) = 15,261261261… → sześć cyfr: <b>261261</b><br>0,2(443) = 0,2443443443… → sześć cyfr: <b>244344</b><br>2,34(78) = 2,347878… → sześć cyfr: <b>347878</b></div>
+  <h3>Porównywanie</h3>
+  <p>Wypisz oba rozwinięcia z kilkoma cyframi i porównuj <b>cyfra po cyfrze od lewej</b> — pierwsza różnica rozstrzyga.</p>
+  <div class="example">7,(09) = 7,0909…<br>7,9 = 7,9000…<br>7,(90) = 7,9090…<br>→ <b>7,(09) &lt; 7,9 &lt; 7,(90)</b></div>`)},
+ glossCard([['rozwinięcie dziesiętne','десяткове розвинення'],['ułamek okresowy','періодичний дріб'],['okres','період'],['ułamek skończony','скінченний дріб'],['przecinek','кома'],['dzielenie pisemne','ділення стовпчиком'],['reszta','залишок'],['podkreśl okres','підкресли період'],['zapis skrócony','скорочений запис']],false)
+],
+3:[
+ {h:T('Головне правило','Główna zasada'),b:T(
+ `<p>Дивись на цифру <b>одразу праворуч</b> від розряду, до якого округлюєш:</p>
+  <div class="pill-row"><span class="pill coral">0 1 2 3 4 → вниз (w dół): цифра розряду не змінюється</span><span class="pill">5 6 7 8 9 → вгору (w górę): цифра розряду +1</span></div>
+  <p>Усі цифри правіше відкидаємо (у цілих числах замінюємо нулями).</p>
+  <div class="example">3748 → до сотень: розряд сотень — 7, наступна цифра 4 &lt; 5 → <b>3700</b><br>2365 → до сотень: наступна цифра 6 ≥ 5 → сотні 3 → 4 → <b>2400</b></div>`,
+ `<p>Patrz na cyfrę <b>tuż po prawej</b> od rzędu, do którego zaokrąglasz:</p>
+  <div class="pill-row"><span class="pill coral">0 1 2 3 4 → w dół: cyfra rzędu się nie zmienia</span><span class="pill">5 6 7 8 9 → w górę: cyfra rzędu +1</span></div>
+  <p>Wszystkie cyfry po prawej odrzucamy (w liczbach całkowitych zastępujemy zerami).</p>
+  <div class="example">3748 → do setek: cyfra setek to 7, następna 4 &lt; 5 → <b>3700</b><br>2365 → do setek: następna cyfra 6 ≥ 5 → setki 3 → 4 → <b>2400</b></div>`)},
+ {h:T('Розряди: не переплутай!','Rzędy: nie pomyl!'),b:T(
+ `<table class="t"><tr><th>польською</th><th>розряд</th><th>приклад</th></tr>
+  <tr><td>do tysięcy</td><td>1000</td><td>4 380 → 4 000</td></tr>
+  <tr><td>do setek</td><td>100</td><td>3748 → 3700</td></tr>
+  <tr><td>do dziesiątek</td><td>10</td><td>3748 → 3750</td></tr>
+  <tr><td>do jedności</td><td>1</td><td>5,87 → 6</td></tr>
+  <tr><td>do dziesiątych</td><td>0,1</td><td>5,87 → 5,9</td></tr>
+  <tr><td>do setnych</td><td>0,01</td><td>4,268 → 4,27</td></tr>
+  <tr><td>do tysięcznych</td><td>0,001</td><td>4,2687 → 4,269</td></tr></table>
+  <div class="warn"><b>dziesiątEK</b> (десятків, 10) ≠ <b>dziesiątYCH</b> (десятих, 0,1)!<br>Закінчення <b>-ek / -y</b> (dziesiątek, setek, tysięcy) — це <b>цілі</b> розряди. Закінчення <b>-ych</b> (dziesiątych, setnych, tysięcznych) — розряди <b>після коми</b>.</div>`,
+ `<table class="t"><tr><th>po polsku</th><th>rząd</th><th>przykład</th></tr>
+  <tr><td>do tysięcy</td><td>1000</td><td>4 380 → 4 000</td></tr>
+  <tr><td>do setek</td><td>100</td><td>3748 → 3700</td></tr>
+  <tr><td>do dziesiątek</td><td>10</td><td>3748 → 3750</td></tr>
+  <tr><td>do jedności</td><td>1</td><td>5,87 → 6</td></tr>
+  <tr><td>do dziesiątych</td><td>0,1</td><td>5,87 → 5,9</td></tr>
+  <tr><td>do setnych</td><td>0,01</td><td>4,268 → 4,27</td></tr>
+  <tr><td>do tysięcznych</td><td>0,001</td><td>4,2687 → 4,269</td></tr></table>
+  <div class="warn"><b>dziesiątEK</b> (10) ≠ <b>dziesiątYCH</b> (0,1)!<br>Końcówka <b>-ek / -y</b> (dziesiątek, setek, tysięcy) — rzędy <b>całkowite</b>. Końcówka <b>-ych</b> (dziesiątych, setnych, tysięcznych) — rzędy <b>po przecinku</b>.</div>`)},
+ {h:T('Перенесення: коли 9 + 1','Przeniesienie: gdy 9 + 1'),b:T(
+ `<div class="example">4,96 → до десятих: наступна цифра 6 → 9 + 1 = 10 → пишемо 0, переносимо 1: <b>5,0</b><br>199 → до десятків: наступна цифра 9 → <b>200</b><br>9,996 → до сотих: <b>10,00</b></div>
+  <p>5,0 і 5 — це одне й те саме число. Але якщо просять «до десятих», <b>5,0</b> — гарний запис.</p>`,
+ `<div class="example">4,96 → do dziesiątych: następna cyfra 6 → 9 + 1 = 10 → piszemy 0, przenosimy 1: <b>5,0</b><br>199 → do dziesiątek: następna cyfra 9 → <b>200</b><br>9,996 → do setnych: <b>10,00</b></div>
+  <p>5,0 i 5 to ta sama liczba. Ale gdy proszą „do dziesiątych”, <b>5,0</b> to dobry zapis.</p>`)},
+ {h:T('Округлення періодичних дробів','Zaokrąglanie ułamków okresowych'),b:T(
+ `<p>Спочатку знайди розвинення, потім округлюй за звичайним правилом.</p>
+  <div class="example">${F(2,3)} = 0,(6) = 0,6666… → до сотих: наступна цифра 6 → <b>0,67</b><br>${F(5,6)} = 0,8(3) = 0,8333… → до десятих: <b>0,8</b>; до сотих: <b>0,83</b><br>${MX(1,4,9)} = 1,(4) → до тисячних: <b>1,444</b></div>`,
+ `<p>Najpierw znajdź rozwinięcie, potem zaokrąglij wg zwykłej zasady.</p>
+  <div class="example">${F(2,3)} = 0,(6) = 0,6666… → do setnych: następna cyfra 6 → <b>0,67</b><br>${F(5,6)} = 0,8(3) = 0,8333… → do dziesiątych: <b>0,8</b>; do setnych: <b>0,83</b><br>${MX(1,4,9)} = 1,(4) → do tysięcznych: <b>1,444</b></div>`)},
+ {h:T('Оцінка: чи вистачить грошей?','Szacowanie: czy wystarczy pieniędzy?'),b:T(
+ `<p><b>Oszacuj</b> = порахуй приблизно. Округли кожну ціну до <b>цілих злотих</b>, додай і порівняй із заданою сумою.</p>
+  <div class="example">Чи вистачить 20 zł на 2 × 6,90 zł і 4,79 zł?<br>6,90 ≈ 7, 4,79 ≈ 5 → 2·7 + 5 = <b>19 zł</b> ≤ 20 zł → <b>TAK</b></div>
+  <div class="example">Чи вистачить 10 zł на 4 × 2,29 zł?<br>2,29 ≈ 2 → 4 · 2 = <b>8 zł</b> ≤ 10 zł → <b>TAK</b> &nbsp;(точно: 9,16 zł ✓)</div>
+  <div class="example">Чи вистачить 15 zł на 11,99 zł і 5,89 zł?<br>12 + 6 = <b>18 zł</b> &gt; 15 zł → <b>NIE</b></div>
+  <div class="tip">Не рахуй копійки! Оцінка потрібна, щоб швидко зрозуміти «так чи ні». Для кількох однакових товарів: округли ціну й помнож. (Якщо округлена сума майже дорівнює даній — тоді краще порахувати точно.)</div>`,
+ `<p><b>Oszacuj</b> = policz w przybliżeniu. Zaokrąglij każdą cenę do <b>pełnych złotych</b>, dodaj i porównaj z daną kwotą.</p>
+  <div class="example">Czy 20 zł wystarczy na 2 × 6,90 zł i 4,79 zł?<br>6,90 ≈ 7, 4,79 ≈ 5 → 2·7 + 5 = <b>19 zł</b> ≤ 20 zł → <b>TAK</b></div>
+  <div class="example">Czy 10 zł wystarczy na 4 × 2,29 zł?<br>2,29 ≈ 2 → 4 · 2 = <b>8 zł</b> ≤ 10 zł → <b>TAK</b> &nbsp;(dokładnie: 9,16 zł ✓)</div>
+  <div class="example">Czy 15 zł wystarczy na 11,99 zł i 5,89 zł?<br>12 + 6 = <b>18 zł</b> &gt; 15 zł → <b>NIE</b></div>
+  <div class="tip">Nie licz groszy! Szacowanie służy do szybkiego „tak czy nie”. Kilka takich samych towarów: zaokrąglij cenę i pomnóż. (Gdy zaokrąglona suma jest prawie równa danej kwocie — lepiej policz dokładnie.)</div>`)},
+ {h:T('Вгору / вниз (z nadmiarem / z niedomiarem)','W górę / w dół (z nadmiarem / z niedomiarem)'),b:T(
+ `<p>Іноді просять округлити <b>в один бік</b> — незалежно від наступної цифри.</p>
+  <div class="example">3,42 до десятих: <b>вниз</b> (з niedomiarem) → 3,4 · <b>вгору</b> (z nadmiarem) → 3,5<br>Звичайне округлення дало б 3,4.</div>
+  <p class="muted">«Вниз» — просто відкидаємо зайві цифри. «Вгору» — остання цифра +1 (якщо було що відкидати).</p>`,
+ `<p>Czasem trzeba zaokrąglić <b>w jedną stronę</b> — niezależnie od następnej cyfry.</p>
+  <div class="example">3,42 do dziesiątych: <b>w dół</b> (z niedomiarem) → 3,4 · <b>w górę</b> (z nadmiarem) → 3,5<br>Zwykłe zaokrąglenie dałoby 3,4.</div>
+  <p class="muted">„W dół” — po prostu odrzucamy cyfry. „W górę” — ostatnia cyfra +1 (jeśli było co odrzucać).</p>`)},
+ glossCard([['zaokrąglić','округлити'],['w górę / w dół','вгору / вниз'],['z nadmiarem / z niedomiarem','з надлишком / з нестачею'],['rząd (jedności, dziesiątek…)','розряд'],['dziesiąte, setne, tysięczne','десяті, соті, тисячні'],['oszacować','оцінити'],['wystarczy','вистачить'],['cyfra','цифра'],['reszta','решта (гроші) / залишок']],false)
+],
+4:[
+ {h:T('Однакові знаменники','Jednakowe mianowniki'),b:T(
+ `<p>Додаємо (віднімаємо) <b>тільки чисельники</b>, знаменник переписуємо.</p>
+  <div class="example">${F(5,7)} + ${F(6,7)} = ${F(11,7)} = ${MX(1,4,7)}<br>${F(7,9)} − ${F(4,9)} = ${F(3,9)} = ${F(1,3)} &nbsp;(скоротили на 3)</div>
+  <div class="warn"><b>Ніколи</b> не додавай знаменники: ${F(1,3)} + ${F(1,4)} ≠ ${F(2,7)}!</div>`,
+ `<p>Dodajemy (odejmujemy) <b>tylko liczniki</b>, mianownik przepisujemy.</p>
+  <div class="example">${F(5,7)} + ${F(6,7)} = ${F(11,7)} = ${MX(1,4,7)}<br>${F(7,9)} − ${F(4,9)} = ${F(3,9)} = ${F(1,3)} &nbsp;(skróciliśmy przez 3)</div>
+  <div class="warn"><b>Nigdy</b> nie dodawaj mianowników: ${F(1,3)} + ${F(1,4)} ≠ ${F(2,7)}!</div>`)},
+ {h:T('Різні знаменники','Różne mianowniki'),b:T(
+ `<ol><li>Знайди <b>спільний знаменник</b> (NWW) — найменше число, що ділиться на обидва знаменники.</li><li>Розшир обидва дроби.</li><li>Додай (відніми) чисельники.</li><li>Скороти й, якщо треба, виділи цілу частину.</li></ol>
+  <div class="example">${F(1,3)} + ${F(3,4)}: NWW(3, 4) = 12<br>${F(4,12)} + ${F(9,12)} = ${F(13,12)} = ${MX(1,1,12)}</div>
+  <div class="example">${F(5,9)} + ${F(3,5)}: NWW = 45<br>${F(25,45)} + ${F(27,45)} = ${F(52,45)} = ${MX(1,7,45)}</div>
+  <div class="tip">Як знайти NWW: виписуй кратні більшого знаменника (6, 12, 18…), доки не потрапиш на число, що ділиться на менший.</div>`,
+ `<ol><li>Znajdź <b>wspólny mianownik</b> (NWW) — najmniejszą liczbę podzielną przez oba mianowniki.</li><li>Rozszerz oba ułamki.</li><li>Dodaj (odejmij) liczniki.</li><li>Skróć i, jeśli trzeba, wyłącz całości.</li></ol>
+  <div class="example">${F(1,3)} + ${F(3,4)}: NWW(3, 4) = 12<br>${F(4,12)} + ${F(9,12)} = ${F(13,12)} = ${MX(1,1,12)}</div>
+  <div class="example">${F(5,9)} + ${F(3,5)}: NWW = 45<br>${F(25,45)} + ${F(27,45)} = ${F(52,45)} = ${MX(1,7,45)}</div>
+  <div class="tip">Jak znaleźć NWW: wypisuj wielokrotności większego mianownika (6, 12, 18…), aż trafisz na liczbę podzielną przez mniejszy.</div>`)},
+ {h:T('Додавання мішаних чисел','Dodawanie liczb mieszanych'),b:T(
+ `<p>Цілі — з цілими, дроби — з дробами (спільний знаменник). Якщо дробова частина вийшла ≥ 1 — «переносимо» 1 до цілих.</p>
+  <div class="example">${MX(1,5,6)} + ${MX(2,3,4)} = ${MX(1,10,12)} + ${MX(2,9,12)} = ${MX(3,19,12)} = 3 + 1 + ${F(7,12)} = <b>${MX(4,7,12)}</b></div>
+  <div class="tip">Той самий результат — через неправильні дроби: ${F(11,6)} + ${F(11,4)} = ${F(22,12)} + ${F(33,12)} = ${F(55,12)} = ${MX(4,7,12)}.</div>`,
+ `<p>Całości z całościami, ułamki z ułamkami (wspólny mianownik). Jeśli część ułamkowa wyszła ≥ 1 — „przenosimy” 1 do całości.</p>
+  <div class="example">${MX(1,5,6)} + ${MX(2,3,4)} = ${MX(1,10,12)} + ${MX(2,9,12)} = ${MX(3,19,12)} = 3 + 1 + ${F(7,12)} = <b>${MX(4,7,12)}</b></div>
+  <div class="tip">Ten sam wynik — przez ułamki niewłaściwe: ${F(11,6)} + ${F(11,4)} = ${F(22,12)} + ${F(33,12)} = ${F(55,12)} = ${MX(4,7,12)}.</div>`)},
+ {h:T('Віднімання мішаних чисел: «позичаємо» 1','Odejmowanie liczb mieszanych: „pożyczamy” 1'),b:T(
+ `<div class="example">${MX(5,1,6)} − ${MX(2,3,4)}: спільний знаменник 12<br>${MX(5,2,12)} − ${MX(2,9,12)}<br>${F(2,12)} &lt; ${F(9,12)} — дробу не вистачає → «позичаємо» 1 у цілих: 5 = 4 + ${F(12,12)}<br>${MX(4,14,12)} − ${MX(2,9,12)} = ${MX(2,5,12)}</div>
+  <div class="example">Ціле мінус мішане: 5 − ${MX(1,2,7)} = ${MX(4,7,7)} − ${MX(1,2,7)} = <b>${MX(3,5,7)}</b></div>
+  <div class="warn"><b>Помилка:</b> «від 9 віднімаємо 2» навпаки. Менше від більшого віднімати не можна — тоді позичай 1, а не міняй місцями!</div>
+  <div class="tip">Перевір: додай результат до від’ємника — має вийти зменшуване. ${MX(2,5,12)} + ${MX(2,9,12)} = ${MX(4,14,12)} = ${MX(5,2,12)} = ${MX(5,1,6)} ✓</div>`,
+ `<div class="example">${MX(5,1,6)} − ${MX(2,3,4)}: wspólny mianownik 12<br>${MX(5,2,12)} − ${MX(2,9,12)}<br>${F(2,12)} &lt; ${F(9,12)} — brakuje ułamka → „pożyczamy” 1 z całości: 5 = 4 + ${F(12,12)}<br>${MX(4,14,12)} − ${MX(2,9,12)} = ${MX(2,5,12)}</div>
+  <div class="example">Całość minus mieszana: 5 − ${MX(1,2,7)} = ${MX(4,7,7)} − ${MX(1,2,7)} = <b>${MX(3,5,7)}</b></div>
+  <div class="warn"><b>Błąd:</b> „od 9 odejmujemy 2” na odwrót. Nie odejmuje się większego od mniejszego — wtedy pożycz 1, a nie zamieniaj miejscami!</div>
+  <div class="tip">Sprawdź: dodaj wynik do odjemnika — ma wyjść odjemna. ${MX(2,5,12)} + ${MX(2,9,12)} = ${MX(4,14,12)} = ${MX(5,2,12)} = ${MX(5,1,6)} ✓</div>`)},
+ {h:T('Десяткові дроби','Ułamki dziesiętne'),b:T(
+ `<p>Пиши <b>кому під комою</b>. Де бракує цифр — дописуй нулі справа.</p>
+  <div class="example"><pre class="col">  12,70\n+  3,48\n──────\n  16,18</pre> &nbsp; <pre class="col">  10,00\n−  3,76\n──────\n   6,24</pre></div>
+  <h3>Дріб + десятковий</h3>
+  <p>Приведи обидва числа до одного вигляду.</p>
+  <div class="example">${F(1,4)} + 0,5 = 0,25 + 0,5 = <b>0,75</b> &nbsp;·&nbsp; ${MX(2,1,4)} + 1,5 = 2,25 + 1,5 = <b>3,75</b></div>`,
+ `<p>Pisz <b>przecinek pod przecinkiem</b>. Gdzie brakuje cyfr — dopisz zera z prawej.</p>
+  <div class="example"><pre class="col">  12,70\n+  3,48\n──────\n  16,18</pre> &nbsp; <pre class="col">  10,00\n−  3,76\n──────\n   6,24</pre></div>
+  <h3>Ułamek zwykły + dziesiętny</h3>
+  <p>Sprowadź obie liczby do tej samej postaci.</p>
+  <div class="example">${F(1,4)} + 0,5 = 0,25 + 0,5 = <b>0,75</b> &nbsp;·&nbsp; ${MX(2,1,4)} + 1,5 = 2,25 + 1,5 = <b>3,75</b></div>`)},
+ {h:T('Задачі з умовою і перевірка','Zadania tekstowe i sprawdzanie'),b:T(
+ `<ul><li>«Разом», «всього» → <b>додавання</b>. «Залишилось», «на скільки більше» → <b>віднімання</b>.</li><li>Спершу <b>прикинь</b>: ${F(1,2)} + ${F(3,4)} трохи більше 1 — якщо вийшло 5, помилка.</li><li>Перевір зворотною дією: різниця + від’ємник = зменшуване.</li><li>Не забудь <b>одиницю</b> у відповіді (km, l, zł).</li></ul>
+  <div class="example">Аня пройшла ${MX(2,1,4)} км, а потім ще ${MX(1,5,6)} км. Разом: ${MX(2,3,12)} + ${MX(1,10,12)} = ${MX(3,13,12)} = <b>${MX(4,1,12)} км</b>.</div>`,
+ `<ul><li>„Razem”, „łącznie” → <b>dodawanie</b>. „Zostało”, „o ile więcej” → <b>odejmowanie</b>.</li><li>Najpierw <b>oszacuj</b>: ${F(1,2)} + ${F(3,4)} to trochę więcej niż 1 — jeśli wyszło 5, jest błąd.</li><li>Sprawdź działaniem odwrotnym: różnica + odjemnik = odjemna.</li><li>Nie zapomnij o <b>jednostce</b> w odpowiedzi (km, l, zł).</li></ul>
+  <div class="example">Ania przeszła ${MX(2,1,4)} km, a potem jeszcze ${MX(1,5,6)} km. Razem: ${MX(2,3,12)} + ${MX(1,10,12)} = ${MX(3,13,12)} = <b>${MX(4,1,12)} km</b>.</div>`)},
+ glossCard([['składnik','доданок'],['suma','сума'],['odjemna','зменшуване'],['odjemnik','від’ємник'],['różnica','різниця'],['wspólny mianownik','спільний знаменник'],['NWW','НСК (найменше спільне кратне)'],['skrócić ułamek','скоротити дріб'],['wyłączyć całości','виділити цілу частину'],['pożyczyć 1','«позичити» 1'],['razem / łącznie','разом / всього'],['zostało','залишилось']],false)
+]};
+
+/* ---------- стан і навігація ---------- */
+const S={view:'home',lesson:1,mode:'theory',prac:null,test:null,fin:null,mist:null};
+let QC=null; // поточне питання
+const NEAR=LD.NEAR;
+
+function setLang(l){lang=l;store.lang=l;save();document.documentElement.lang=(l==='pl'?'pl':'uk');render(false);}
+function go(view,lesson,mode){
+  S.view=view; if(lesson) S.lesson=+lesson; if(mode) S.mode=mode;
+  S.prac=null;S.test=null;QC=null;
+  if(view==='lesson'&&S.mode==='practice') startPractice({lesson:S.lesson});
+  if(view==='mistakes') startMistakes();
+  render(true);
+}
+function renderHero(){
+  $('#homeLink').textContent=t('home'); $('#hKicker').textContent=t('kicker'); $('#hTitle').textContent=t('title'); $('#hSub').textContent=t('sub'); $('#foot').textContent=t('foot');
+  $('#bUK').classList.toggle('active',lang==='uk'); $('#bPL').classList.toggle('active',lang==='pl');
+}
+function renderNav(){
+  const nm=store.mistakes.length;
+  const items=[['home',null,t('nOverview')]].concat([1,2,3,4].map(l=>['lesson',l,l+' '+I[lang].short[l]])).concat([['final',null,t('nFinal')],['mistakes',null,t('nMist')+(nm?`<span class="badge">${nm}</span>`:'')]]);
+  $('#nav').innerHTML=items.map(([v,l,label])=>`<button data-act="go" data-view="${v}" ${l?`data-lesson="${l}"`:''} class="${S.view===v&&(v!=='lesson'||S.lesson===l)?'active':''}">${label}</button>`).join('');
+  const a=$('#nav .active'); if(a&&a.scrollIntoView) try{a.scrollIntoView({inline:'center',block:'nearest'});}catch(e){}
+}
+function render(scrollTop){
+  renderHero();renderNav();
+  const app=$('#app');
+  if(S.view==='home') app.innerHTML=viewHome();
+  else if(S.view==='lesson') viewLesson(app);
+  else if(S.view==='final') viewFinal(app);
+  else if(S.view==='mistakes') viewMistakes(app);
+  if(scrollTop) window.scrollTo(0,0);
+}
+
+/* ---------- головна ---------- */
+function viewHome(){
+  let h=`<div class="card rise">${t('intro')}</div><div class="lgrid">`;
+  for(const l of [1,2,3,4]){
+    const p=store.prog[l]||{}; const [pl,ua]=lt(l);
+    const chips=[];
+    if(p.total) chips.push(`<span class="chip">${t('practiceStat')}: ✓ ${p.ok}/${p.total}</span>`);
+    chips.push(p.best!=null?`<span class="chip good">${t('bestTest')}: ${p.best}/${p.bestOf}</span>`:`<span class="chip">${t('noTest')}</span>`);
+    h+=`<div class="lcard rise"><div class="top"><div class="num">${l}</div><div><h3>${pl}</h3><div class="sub">${lang==='uk'?ua+' · ':''}${I[lang].lsum[l]}</div></div></div><div class="chips">${chips.join('')}</div>
+    <div class="btnrow"><button class="btn btn-sec" data-act="go" data-view="lesson" data-lesson="${l}" data-mode="theory">${t('theory')}</button><button class="btn btn-sec" data-act="go" data-view="lesson" data-lesson="${l}" data-mode="practice">${t('practice')}</button><button class="btn btn-primary" data-act="go" data-view="lesson" data-lesson="${l}" data-mode="test">${t('test')}</button></div></div>`;
+  }
+  const fp=store.prog.final||{};
+  h+=`<div class="lcard rise"><div class="top"><div class="num">🏁</div><div><h3>${t('finalTitle')}</h3><div class="sub">${t('finalCard')}</div></div></div><div class="chips">${fp.best!=null?`<span class="chip good">${t('bestTest')}: ${fp.best}/${fp.bestOf}</span>`:`<span class="chip">${t('noTest')}</span>`}</div><div class="btnrow"><button class="btn btn-primary" data-act="go" data-view="final">${t('cardOpen')}</button></div></div>`;
+  h+=`<div class="lcard rise"><div class="top"><div class="num">🔁</div><div><h3>${t('nMist').replace(/^🔁 /,'')}</h3><div class="sub">${t('mistCard')}</div></div></div><div class="chips"><span class="chip ${store.mistakes.length?'':'good'}">${t('mistLeft')(store.mistakes.length)}</span></div><div class="btnrow"><button class="btn btn-sec" data-act="go" data-view="mistakes">${t('cardOpen')}</button></div></div>`;
+  return h+'</div>';
+}
+
+/* ---------- урок ---------- */
+function lessonHead(l){const [pl,ua]=lt(l);return `<div class="ltitle"><span class="n">${l}</span><h1>${pl}</h1><span class="sub">${lang==='uk'?ua:''}</span></div>`;}
+function seg(){return `<div class="seg">${['theory','practice','test'].map(m=>`<button data-act="mode" data-mode="${m}" class="${S.mode===m?'active':''}">${t(m)}</button>`).join('')}</div>`;}
+function viewLesson(app){
+  const l=S.lesson; let h=lessonHead(l)+seg();
+  if(S.mode==='theory'){
+    h+=THEORY[l].map(c=>`<div class="card rise"><h2>${c.h[lang]}</h2>${c.b[lang]}</div>`).join('');
+    h+=`<div class="btnrow"><button class="btn btn-teal" data-act="mode" data-mode="practice">${t('toPractice')} →</button></div>`;
+    app.innerHTML=h;
+  } else if(S.mode==='practice'){
+    app.innerHTML=h+'<div class="card rise" id="qcard"><div id="qhost"></div></div>';
+    drawPractice();
+  } else {
+    if(!S.test){app.innerHTML=h+`<div class="card rise"><h2>${t('test')} · ${lt(l)[0]}</h2><p>${t('testIntro')}</p><div class="btnrow"><button class="btn btn-primary" data-act="starttest">${t('testStart')}</button></div></div>`;}
+    else drawTest(app,h);
+  }
+}
+
+/* ---------- питання (спільний компонент) ---------- */
+const KEYS={int:[],digits:[],dec:[','],frac:['/'],mixed:[' ','/'],per:[',','(',')']};
+const INPMODE={int:'numeric',digits:'numeric',dec:'decimal',frac:'text',mixed:'text',per:'text'};
+const chTxt=c=>typeof c==='string'?c:c[lang];
+const ansTxt=q=>typeof q.answer==='string'?q.answer:q.answer[lang];
+function mountQ(q,cfg){QC={q,cfg,done:false,val:cfg.val||'',sel:cfg.sel==null?null:cfg.sel,hint:false,note:null,res:null};drawQ();}
+function drawQ(){
+  const {q,cfg}=QC; const host=$('#qhost'); if(!host) return;
+  const headH=typeof cfg.head==='function'?cfg.head():(cfg.head||'');
+  let h=`<div class="qhead">${headH}</div><div class="prompt">${q.prompt[lang]}</div>${q.art?`<div class="art">${q.art}</div>`:''}`;
+  if(q.kind==='choice'){
+    const cols=q.choices.length===3?'three':q.choices.length===2?'two':'';
+    h+=`<div class="opts ${cols}">`+q.choices.map((c,i)=>{
+      let cls='opt'; if(QC.done){ if(i===q.correct) cls+=' correct'; else if(i===QC.sel) cls+=' wrong'; } else if(i===QC.sel) cls+=' sel';
+      return `<button class="${cls}" data-act="choice" data-i="${i}" ${QC.done?'disabled':''}>${chTxt(c)}</button>`;}).join('')+'</div>';
+  } else {
+    h+=`<div class="ansrow"><input id="ans" type="text" inputmode="${INPMODE[q.fmt]||'text'}" enterkeyhint="done" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" value="${esc(QC.val)}" ${QC.done?'disabled':''} aria-label="answer">${cfg.reveal&&!QC.done?`<button class="btn btn-primary" data-act="check">${t('check')}</button>`:''}</div>`;
+    const ks=KEYS[q.fmt]||[]; if(!QC.done&&ks.length) h+=`<div class="keys">${ks.map(k=>`<button data-act="key" data-k="${esc(k)}" aria-label="${k===' '?'space':k}">${k===' '?'␣':k}</button>`).join('')}</div>`;
+    if(!QC.done) h+=`<details class="how"><summary>${t('how')}</summary><div style="margin-top:6px">${t('howBody')}</div></details>`;
+  }
+  h+='<div id="qfb">'+fbHtml()+'</div>';
+  h+='<div id="qbtns">'+btnsHtml()+'</div>';
+  host.innerHTML=h;
+  if(q.kind==='input'&&!QC.done){const inp=$('#ans'); if(inp&&cfg.autofocus!==false&&!matchMedia('(pointer:coarse)').matches) inp.focus();}
+}
+function fbHtml(){
+  const {q,cfg}=QC; let h='';
+  if(QC.hint&&!QC.done) h+=`<div class="hint">💡 ${q.hint[lang]}</div>`;
+  if(QC.note) h+=`<div class="fb near">${LD.MSG[QC.note][lang]}</div>`;
+  if(QC.done&&cfg.reveal){
+    const r=QC.res;
+    if(r.correct){h+=`<div class="fb ok">${t('right')}${r.equiv?` ${lang==='uk'?'Скорочений запис':'Zapis skrócony'}: <b>${esc(r.equiv)}</b>`:''}</div>`;}
+    else h+=`<div class="fb bad">${t('wrong')} ${t('correctAns')} <b>${ansTxt(q)}</b></div>`;
+    h+=r.correct?`<details class="sol2"><summary>${t('solution')}</summary><div class="sol">${q.sol[lang]}</div></details>`:`<div class="sol"><b>${t('solution')}</b><br>${q.sol[lang]}</div>`;
+  }
+  return h;
+}
+function btnsHtml(){
+  const {q,cfg}=QC; let b='';
+  if(cfg.reveal){
+    if(QC.done) b=`<div class="btnrow"><button class="btn btn-primary" data-act="qnext">${cfg.nextLabel||t('next')}</button></div>`;
+    else b=`<div class="btnrow"><button class="btn btn-sec" data-act="hint">${t('hintBtn')}</button>${q.kind==='input'?`<button class="btn btn-sec" data-act="giveup">${t('giveup')}</button>`:''}</div>`;
+  } else b=`<div class="btnrow"><button class="btn btn-primary" data-act="qnext">${cfg.nextLabel||t('next')}</button></div>`;
+  return b;
+}
+function refreshFb(){const a=$('#qfb'),b=$('#qbtns'); if(a) a.innerHTML=fbHtml(); if(b) b.innerHTML=btnsHtml();}
+function readVal(){const i=$('#ans'); return i?i.value.trim():'';}
+function submitPractice(){
+  const q=QC.q; if(QC.done) return;
+  if(q.kind==='choice') return;
+  const v=readVal(); QC.val=v; if(!v) return;
+  const r=q.check(v);
+  if(r.ok) return finishQ(true,{equiv:r.equiv});
+  if(NEAR.has(r.code)){QC.note=r.code; refreshFb(); return;}
+  finishQ(false,{});
+}
+function finishQ(correct,extra){
+  QC.done=true; QC.res=Object.assign({correct},extra||{}); QC.note=null;
+  if(QC.cfg.onDone) QC.cfg.onDone(QC.res);
+  drawQ();
+}
+
+/* ---------- тренажер ---------- */
+function startPractice(o){S.prac={lesson:o.lesson,list:o.list||null,idx:0,ok:0,total:0,streak:0};nextPractice();}
+function nextPractice(){
+  const P=S.prac; let q;
+  if(P.list){ q=P.list[0]; if(!q){P.q=null;return;} }
+  else { const r=LD.mulberry32(seed32()); q=LD.makeQ(LD.weighted(r,P.lesson),seed32()); }
+  P.q=q; P.head=null;
+}
+function practiceHead(){const P=S.prac;const stat=`✓ ${P.ok}/${P.total}${P.streak>=3?` · 🔥 ${t('streak')} ${P.streak}`:''}`;return `<span>${S.view==='mistakes'?t('mistLeft')(store.mistakes.length):t('practice')}</span><span>${stat}</span>`;}
+function drawPractice(){
+  const P=S.prac; if(!P||!P.q) return;
+  if(QC&&QC.q===P.q){QC.cfg.head=practiceHead;drawQ();return;}
+  mountQ(P.q,{reveal:true,head:practiceHead,onDone:res=>practiceDone(P.q,res)});
+}
+function practiceDone(q,res){
+  const P=S.prac; P.total++; const key=q.g+'|'+q.seed;
+  if(res.correct){P.ok++;P.streak++;} else P.streak=0;
+  if(S.view==='lesson'){const pg=prog(q.lesson);pg.total++; if(res.correct) pg.ok++;}
+  const i=store.mistakes.findIndex(m=>m.g+'|'+m.seed===key);
+  if(res.correct){ if(i>=0) store.mistakes.splice(i,1); } else if(i<0) { store.mistakes.push({g:q.g,seed:q.seed}); if(store.mistakes.length>40) store.mistakes.shift(); }
+  save(); renderNav();
+}
+function practiceNext(){
+  const P=S.prac;
+  if(P.list){ const done=QC&&QC.res&&QC.res.correct; const q=P.list.shift(); if(!done) P.list.push(q); if(!P.list.length){ P.q=null; render(false); return; } P.q=P.list[0]; }
+  else nextPractice();
+  const host=$('#qhost'); if(host){mountQ(P.q,{reveal:true,head:practiceHead,onDone:res=>practiceDone(P.q,res)});}
+}
+
+/* ---------- тест ---------- */
+function startTest(lesson){
+  const qs=lesson==='final'?LD.makeFinal(seed32(),5):LD.makeSet(lesson,10,seed32());
+  const T_={lesson,qs,i:0,ans:[],done:false}; if(lesson==='final') S.fin=T_; else S.test=T_;
+}
+const curTest=()=>S.view==='final'?S.fin:S.test;
+function drawTest(app,headHtml){
+  const T_=curTest();
+  if(T_.done){app.innerHTML=(headHtml||'')+resultsHtml(T_);return;}
+  app.innerHTML=(headHtml||'')+`<div class="card rise"><div class="bar"><i style="width:${Math.round(T_.i/T_.qs.length*100)}%"></i></div><div id="qhost"></div></div>`;
+  const q=T_.qs[T_.i]; const last=T_.i===T_.qs.length-1;
+  if(QC&&QC.q===q){QC.cfg.head=`<span>${S.view==='final'?t('finalTitle'):t('test')}</span><span>${t('qOf')(T_.i+1,T_.qs.length)}</span>`;QC.cfg.nextLabel=last?t('finish'):t('next');drawQ();return;}
+  mountQ(q,{reveal:false,head:`<span>${S.view==='final'?t('finalTitle'):t('test')}</span><span>${t('qOf')(T_.i+1,T_.qs.length)}</span>`,nextLabel:last?t('finish'):t('next'),val:T_.draft&&T_.draft.i===T_.i?T_.draft.v:'',sel:T_.draft&&T_.draft.i===T_.i?T_.draft.s:null});
+}
+function testNext(){
+  const T_=curTest(),q=T_.qs[T_.i]; let rec;
+  if(q.kind==='choice'){rec={sel:QC.sel,correct:QC.sel===q.correct};}
+  else {const v=readVal(); const r=v?q.check(v):{ok:false,code:'empty'}; rec={val:v,correct:!!r.ok,code:r.code};}
+  T_.ans[T_.i]=rec; T_.i++; T_.draft=null;
+  if(T_.i>=T_.qs.length){finishTest(T_);}
+  render(false); window.scrollTo(0,0);
+}
+function finishTest(T_){
+  T_.done=true; const n=T_.qs.length; const ok=T_.ans.filter(a=>a.correct).length; T_.ok=ok;
+  const key=T_.lesson==='final'?'final':T_.lesson; const pg=prog(key); pg.tests++;
+  if(pg.best==null||ok/n>=pg.best/pg.bestOf){pg.best=ok;pg.bestOf=n;}
+  T_.qs.forEach((q,i)=>{ if(!T_.ans[i].correct){const k=q.g+'|'+q.seed; if(!store.mistakes.some(m=>m.g+'|'+m.seed===k)) store.mistakes.push({g:q.g,seed:q.seed}); }});
+  if(store.mistakes.length>40) store.mistakes=store.mistakes.slice(-40);
+  save();
+}
+function resultsHtml(T_){
+  const n=T_.qs.length, ok=T_.ok, pct=Math.round(ok/n*100);
+  const msg=pct>=90?t('resGreat'):pct>=70?t('resGood'):pct>=50?t('resOk'):t('resLow');
+  let h=`<div class="card rise"><div class="result"><div class="big">${ok}/${n}</div><div class="msg">${pct}% · ${msg}</div>`;
+  if(T_.lesson==='final'){
+    h+=`<div class="brk">`+[1,2,3,4].map(l=>{const idx=T_.qs.map((q,i)=>q.lesson===l?i:-1).filter(i=>i>=0);const c=idx.filter(i=>T_.ans[i].correct).length;return `<span>${l} ${I[lang].short[l]}: <b>${c}/${idx.length}</b></span>`;}).join('')+`</div>`;
+  }
+  h+=`</div>`;
+  const bad=T_.qs.map((q,i)=>[q,T_.ans[i]]).filter(([q,a])=>!a.correct);
+  h+=`<h2>${t('mistTitle')}</h2>`;
+  if(!bad.length) h+=`<p>${t('noMist')}</p>`;
+  else h+=bad.map(([q,a])=>{
+    let yours; if(q.kind==='choice') yours=a.sel==null?`<i>${t('noAns')}</i>`:chTxt(q.choices[a.sel]); else yours=a.val?esc(a.val):`<i>${t('noAns')}</i>`;
+    const note=a.code&&a.code!=='val'&&a.code!=='empty'&&LD.MSG[a.code]?`<div class="muted" style="font-size:13px;margin-top:2px">${LD.MSG[a.code][lang]}</div>`:'';
+    return `<div class="mist"><div>${q.prompt[lang]}</div><div class="yr">${t('yourAns')} ${yours}</div>${note}<div class="cr">${t('correctAns')} <b>${ansTxt(q)}</b></div><details class="sol2"><summary>${t('solution')}</summary><div class="sol">${q.sol[lang]}</div></details></div>`;
+  }).join('');
+  h+=`<div class="btnrow"><button class="btn btn-primary" data-act="starttest">${t('newTest')}</button>${bad.length?`<button class="btn btn-sec" data-act="go" data-view="mistakes">${t('repeatMist')}</button>`:''}${T_.lesson!=='final'?`<button class="btn btn-sec" data-act="mode" data-mode="theory">${t('toTheory')}</button>`:''}</div></div>`;
+  return h;
+}
+function viewFinal(app){
+  const head=`<div class="ltitle"><span class="n">🏁</span><h1>${t('finalTitle')}</h1></div>`;
+  if(!S.fin) app.innerHTML=head+`<div class="card rise"><p>${t('finalCard')}</p><p>${t('testIntro').replace('10','20')}</p><div class="btnrow"><button class="btn btn-primary" data-act="starttest">${t('finalStart')}</button></div></div>`;
+  else drawTest(app,head);
+}
+
+/* ---------- помилки ---------- */
+function startMistakes(){
+  const list=store.mistakes.map(m=>{try{return LD.makeQ(m.g,m.seed);}catch(e){return null;}}).filter(Boolean);
+  S.prac={lesson:0,list,idx:0,ok:0,total:0,streak:0,q:list[0]||null};
+}
+function viewMistakes(app){
+  const head=`<div class="ltitle"><span class="n">🔁</span><h1>${t('nMist').replace(/^🔁 /,'')}</h1></div>`;
+  const P=S.prac;
+  if(!P||!P.q){app.innerHTML=head+`<div class="card rise"><h2>${t('mistEmpty')}</h2><p class="muted">${t('mistEmptySub')}</p></div>`;return;}
+  app.innerHTML=head+'<div class="card rise"><div id="qhost"></div></div>';
+  drawPractice();
+}
+
+/* ---------- події ---------- */
+document.addEventListener('click',e=>{
+  const el=e.target.closest('[data-act]'); if(!el) return; const act=el.dataset.act;
+  if(act==='lang') return setLang(el.dataset.lang);
+  if(act==='go') return go(el.dataset.view,el.dataset.lesson,el.dataset.mode);
+  if(act==='mode'){S.mode=el.dataset.mode;S.test=null;QC=null;if(S.mode==='practice')startPractice({lesson:S.lesson});render(true);return;}
+  if(act==='starttest'){startTest(S.view==='final'?'final':S.lesson);render(true);return;}
+  if(!QC&&act!=='key') return;
+  if(act==='key'){const i=$('#ans');if(!i)return;const k=el.dataset.k;const s=i.selectionStart==null?i.value.length:i.selectionStart,en=i.selectionEnd==null?s:i.selectionEnd;i.value=i.value.slice(0,s)+k+i.value.slice(en);i.focus();try{i.setSelectionRange(s+k.length,s+k.length);}catch(er){}return;}
+  if(act==='check') return submitPractice();
+  if(act==='hint'){QC.hint=!QC.hint;refreshFb();return;}
+  if(act==='giveup'){QC.val=readVal();finishQ(false,{});return;}
+  if(act==='choice'){
+    if(QC.done) return; const i=+el.dataset.i;
+    if(QC.cfg.reveal){QC.sel=i;finishQ(i===QC.q.correct,{});} else {QC.sel=i;drawQ();}
+    return;
+  }
+  if(act==='qnext'){
+    if(QC.cfg.reveal) return practiceNext();
+    return testNext();
+  }
+});
+document.addEventListener('keydown',e=>{
+  if(!(e.key==='Enter'||e.code==='Enter'||e.keyCode===13)||!QC) return; const tag=(e.target.tagName||'').toLowerCase();
+  if(tag==='button') return;
+  if(QC.cfg.reveal){ if(QC.done) practiceNext(); else submitPractice(); }
+  else testNext();
+});
+document.addEventListener('input',e=>{ if(QC&&e.target.id==='ans'){QC.val=e.target.value; const T_=(!QC.cfg.reveal)&&curTest(); if(T_) T_.draft={i:T_.i,v:e.target.value,s:QC.sel}; if(QC.note){QC.note=null;refreshFb();} }});
+
+document.documentElement.lang=(lang==='pl'?'pl':'uk');
+if(/[?&]debug\b/.test(location.search)) window.__ld={get QC(){return QC;},S:S,store:()=>store};
+render(false);
+})();
+</script>
+</body>
+</html>

@@ -3,657 +3,75 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Matematyka · Річна контрольна · Варвара</title>
-<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<title>Matematyka · Варвара</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%93%90%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Sora:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root{
-  --bg:#fafafa;--card:#fff;--ink:#111827;--muted:#6b7280;--border:#e5e7eb;
-  --t1:#2563eb;--t1b:#dbeafe;--t1d:#1d4ed8;
-  --t2:#059669;--t2b:#d1fae5;--t2d:#065f46;
-  --t3:#7c3aed;--t3b:#ede9fe;--t3d:#5b21b6;
-  --t4:#dc2626;--t4b:#fee2e2;--t4d:#991b1b;
-  --t5:#d97706;--t5b:#fef3c7;--t5d:#92400e;
-  --t6:#0891b2;--t6b:#cffafe;--t6d:#164e63;
-  --t7:#be185d;--t7b:#fce7f3;--t7d:#9d174d;
-  --t8:#4f46e5;--t8b:#e0e7ff;--t8d:#3730a3;
-  --ok:#16a34a;--okb:#dcfce7;--err:#dc2626;--errb:#fee2e2;
-  --r:14px;--rs:8px;--sh:0 2px 12px rgba(0,0,0,.07);
-}
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Sora',sans-serif;background:var(--bg);color:var(--ink);min-height:100vh}
-.page{max-width:720px;margin:0 auto;padding:20px 14px 80px}
-
-/* HERO */
-.hero{text-align:center;padding:24px 0 20px;margin-bottom:20px;
-  background:linear-gradient(135deg,#1d4ed8 0%,#7c3aed 50%,#059669 100%);
-  border-radius:20px;color:white}
-.hero .badge{display:inline-block;background:rgba(255,255,255,.2);
-  font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
-  padding:4px 14px;border-radius:99px;margin-bottom:12px}
-.hero h1{font-size:26px;font-weight:800;line-height:1.2;margin-bottom:6px}
-.hero p{font-size:13px;opacity:.8}
-
-/* TOPIC GRID */
-.topic-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:18px}
-.tcard{
-  padding:12px 14px;border:2px solid var(--border);border-radius:var(--r);
-  background:var(--card);cursor:pointer;transition:all .16s;box-shadow:var(--sh);
-  display:flex;align-items:center;gap:10px;
-}
-.tcard:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,.1)}
-.tcard .tc-ico{font-size:22px;flex-shrink:0}
-.tcard .tc-body{min-width:0}
-.tcard .tc-num{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:2px}
-.tcard .tc-name{font-size:13px;font-weight:700;color:var(--ink);line-height:1.3}
-.tcard.active{border-width:2px;background:var(--c-bg,#dbeafe)}
-
-/* INNER TABS */
-.itabs{display:flex;gap:4px;background:var(--card);padding:4px;
-  border-radius:var(--r);border:1px solid var(--border);margin-bottom:16px;overflow-x:auto}
-.itab{flex-shrink:0;padding:7px 12px;border-radius:var(--rs);border:none;
-  font-family:'Sora',sans-serif;font-size:12px;font-weight:600;
-  cursor:pointer;background:transparent;color:var(--muted);transition:all .16s;white-space:nowrap}
-.itab:hover{background:var(--bg)}
-.itab.active{color:white}
-
-/* CARD */
-.card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);
-  padding:18px;margin-bottom:12px;box-shadow:var(--sh);animation:up .2s ease}
-@keyframes up{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
-.card-h{font-size:16px;font-weight:800;margin-bottom:14px;display:flex;align-items:center;gap:8px}
-
-/* THEORY BLOCKS */
-.tgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
-.tbox{padding:12px 13px;border-radius:var(--rs);border:1.5px solid}
-.tbox h3{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:7px}
-.tbox ul{list-style:none;font-size:13px;line-height:2}
-.tbox ul li::before{content:"• ";opacity:.4}
-
-/* FORMULA BOX */
-.formula{background:var(--c-bg,#dbeafe);border:1.5px solid var(--c,#2563eb);
-  border-radius:var(--rs);padding:14px 16px;margin-bottom:12px;font-size:14px;line-height:2}
-.formula strong{color:var(--c-d,#1d4ed8);font-weight:800}
-.math{font-family:'JetBrains Mono',monospace;background:rgba(0,0,0,.05);
-  padding:2px 7px;border-radius:5px;font-size:13px}
-
-/* EXAMPLES */
-.ex-list{display:flex;flex-direction:column;gap:10px}
-.ex-item{background:var(--bg);border-radius:var(--rs);border:1px solid var(--border);overflow:hidden}
-.ex-q{padding:10px 14px;font-size:14px;font-weight:600;border-bottom:1px solid var(--border)}
-.ex-steps{padding:10px 14px}
-.ex-step{display:flex;gap:8px;margin-bottom:6px;font-size:13px;line-height:1.6;align-items:flex-start}
-.ex-step-n{width:20px;height:20px;border-radius:50%;background:var(--c,#2563eb);color:white;
-  font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
-.ex-ans{background:var(--okb);color:#14532d;font-weight:700;font-size:13px;
-  padding:7px 12px;border-radius:6px;margin-top:6px;display:inline-block}
-
-/* QUIZ */
-.prog-bar{height:5px;background:var(--border);border-radius:99px;margin-bottom:10px;overflow:hidden}
-.prog-fill{height:100%;border-radius:99px;background:var(--c,#2563eb);transition:width .4s}
-.score-row{display:flex;gap:14px;font-size:12px;color:var(--muted);margin-bottom:12px}
-.score-row b{color:var(--ink)}
-.q-label{font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;font-weight:700}
-.q-text{font-size:16px;font-weight:800;line-height:1.5;margin-bottom:6px}
-.q-hint{font-size:13px;color:var(--muted);font-style:italic;margin-bottom:12px}
-.opts{display:flex;flex-direction:column;gap:6px}
-.opt{padding:10px 14px;border:1.5px solid var(--border);border-radius:var(--rs);
-  font-family:'Sora',sans-serif;font-size:14px;font-weight:500;
-  cursor:pointer;background:var(--card);color:var(--ink);text-align:left;transition:all .14s}
-.opt:hover:not(:disabled){border-color:var(--c,#2563eb);background:var(--c-bg,#dbeafe)}
-.opt.ok{background:var(--okb);border-color:#86efac;color:#14532d;font-weight:700}
-.opt.no{background:var(--errb);border-color:#fca5a5;color:#7f1d1d}
-.feedback{margin-top:10px;padding:11px 14px;border-radius:var(--rs);font-size:13px;line-height:1.7;animation:up .18s ease}
-.feedback.ok{background:var(--okb);color:#14532d;border:1px solid #86efac}
-.feedback.no{background:var(--errb);color:#7f1d1d;border:1px solid #fca5a5}
-.expl{margin-top:7px;background:white;border-radius:7px;padding:8px 12px;font-size:13px;color:#1e3a8a;line-height:1.7;border:1px solid #bfdbfe}
-.nav-row{display:flex;justify-content:flex-end;margin-top:10px}
-.btn{padding:9px 20px;border-radius:var(--rs);border:none;font-family:'Sora',sans-serif;
-  font-size:13px;font-weight:700;cursor:pointer;transition:all .14s}
-.btn-pri{background:var(--c,#2563eb);color:white}
-.btn-pri:hover{filter:brightness(.9);transform:translateY(-1px)}
-.btn-sec{background:var(--card);color:var(--ink);border:1.5px solid var(--border)}
-.btn-sec:hover{background:var(--bg)}
-
-/* RESULT */
-.result{text-align:center;padding:10px 0 16px}
-.result .big{font-size:54px;font-weight:800;color:var(--c,#2563eb);line-height:1}
-.result .msg{font-size:15px;color:var(--muted);margin:8px 0 18px}
-.result-btns{display:flex;gap:7px;justify-content:center;flex-wrap:wrap}
-.mk{background:#fffbeb;border:1.5px solid #fcd34d;border-radius:var(--rs);padding:12px;margin-bottom:8px;text-align:left}
-.mk-q{font-weight:700;font-size:13px;margin-bottom:4px}
-.mk-w{font-size:12px;color:var(--err);margin-bottom:3px}
-.mk-c{display:inline-block;background:var(--okb);color:#14532d;font-size:12px;font-weight:700;padding:2px 9px;border-radius:5px;margin-bottom:6px}
-.mk-r{font-size:12px;color:#1e3a8a;background:#dbeafe;padding:7px 11px;border-radius:7px;line-height:1.7}
-
-/* FLASHCARDS */
-.fc-meta{text-align:center;font-size:13px;color:var(--muted);margin-bottom:10px}
-.flashcard{perspective:900px;width:100%;min-height:160px;cursor:pointer;margin-bottom:10px}
-.fc-inner{position:relative;width:100%;min-height:160px;transform-style:preserve-3d;transition:transform .45s;border-radius:var(--r)}
-.flashcard.flipped .fc-inner{transform:rotateY(180deg)}
-.fc-front,.fc-back{position:absolute;width:100%;min-height:160px;backface-visibility:hidden;
-  border-radius:var(--r);padding:20px;display:flex;flex-direction:column;justify-content:center;
-  border:2px solid var(--border);box-shadow:var(--sh)}
-.fc-front{background:white;text-align:center}
-.fc-back{transform:rotateY(180deg);background:var(--c-bg,#dbeafe);border-color:var(--c,#2563eb)}
-.fc-q{font-size:16px;font-weight:800;line-height:1.4;margin-bottom:7px}
-.fc-tap{font-size:12px;color:var(--muted)}
-.fc-a{font-size:14px;line-height:1.75}
-.fc-a strong{color:var(--c-d,#1d4ed8)}
-.fc-nav{display:flex;justify-content:space-between;align-items:center}
-.fc-count{font-size:12px;color:var(--muted);font-weight:600}
-
-@media(max-width:500px){
-  .topic-grid{grid-template-columns:1fr}
-  .tgrid{grid-template-columns:1fr}
-  .hero h1{font-size:20px}
-  .result .big{font-size:40px}
-}
+:root{--ink:#232042;--plum:#453a7c;--plum-deep:#2d2657;--cream:#f7f4ee;--paper:#fff;--teal:#2f8f83;--teal-soft:#e3f2ef;--amber:#e8a33d;--amber-soft:#fbeed9;--line:#e4e0d6;--muted:#7a7398;}
+*{box-sizing:border-box;}
+body{margin:0;font-family:'Sora',system-ui,sans-serif;background:var(--cream);color:var(--ink);line-height:1.55;font-size:16px;}
+h1,h2,h3{font-family:'Fraunces',Georgia,serif;font-weight:600;color:var(--plum-deep);margin:0;}
+.hero{background:var(--plum-deep);color:#f3f1fb;padding:34px 20px 38px;}
+.hero .in{max-width:680px;margin:0 auto;}
+.hero .kicker{font-size:13px;letter-spacing:.03em;color:#c8bfef;margin-bottom:4px;}
+.hero h1{color:#fff;font-size:clamp(28px,7vw,40px);line-height:1.12;}
+.hero p{color:#d8d2ef;max-width:520px;margin:10px 0 0;font-size:15px;}
+main{max-width:680px;margin:0 auto;padding:20px 14px 50px;}
+h2.sec{font-size:15px;font-family:'Sora',sans-serif;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);margin:26px 4px 10px;}
+a.tile{display:block;text-decoration:none;color:inherit;background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:18px;margin-bottom:12px;transition:transform .12s,box-shadow .12s;}
+a.tile:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgba(45,38,87,.10);}
+a.tile.main{border:2px solid var(--teal);background:linear-gradient(180deg,#fff, #f2faf8);}
+.tile .row{display:flex;gap:14px;align-items:flex-start;}
+.tile .ico{flex:none;font-size:30px;line-height:1;}
+.tile h3{font-size:19px;margin-bottom:3px;}
+.tile .sub{font-size:14px;color:var(--muted);}
+.tile .tag{display:inline-block;font-size:11.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;background:var(--teal);color:#fff;border-radius:8px;padding:2px 8px;margin-bottom:6px;}
+.chips{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px;}
+.chip{font-size:12.5px;background:var(--cream);border:1px solid var(--line);border-radius:10px;padding:3px 9px;color:var(--plum);}
+.chip.good{background:var(--teal-soft);border-color:#bfe0d9;color:#1d5c53;}
+.go{display:inline-block;margin-top:12px;font-weight:600;color:var(--teal);font-size:15px;}
+footer{text-align:center;font-size:12px;color:#9891b0;padding:8px 20px 30px;}
 </style>
 </head>
 <body>
-<div class="page">
+<header class="hero"><div class="in">
+  <div class="kicker">Matematyka · Варвара</div>
+  <h1>Тренажери з математики</h1>
+  <p>Теорія, вправи з новими прикладами та тести — українською й польською.</p>
+</div></header>
+<main>
+  <h2 class="sec">Зараз в зошиті</h2>
+  <a class="tile main" href="liczby-i-dzialania.html">
+    <span class="tag">Нове</span>
+    <div class="row"><div class="ico">🔢</div><div>
+      <h3>Liczby i działania · уроки 1–4</h3>
+      <div class="sub">Liczby · Rozwinięcia dziesiętne · Zaokrąglanie · Dodawanie i odejmowanie liczb dodatnich</div>
+    </div></div>
+    <div class="chips" id="prog"><span class="chip">Теорія</span><span class="chip">Тренажер без кінця</span><span class="chip">Тести з розбором помилок</span><span class="chip">UA / PL</span></div>
+    <span class="go">Відкрити →</span>
+  </a>
 
-<div class="hero">
-  <div class="badge">📐 Matematyka · 6 клас · Річна контрольна</div>
-  <h1>Повна підготовка —<br>8 тем, всі розділи</h1>
-  <p>Теорія · Формули · Приклади · Фішки · Тест · Варвара</p>
-</div>
-
-<div class="topic-grid" id="topic-grid"></div>
-<div class="itabs" id="itabs"></div>
-<div id="content"></div>
-
-</div>
+  <h2 class="sec">Додатково</h2>
+  <a class="tile" href="liczby-wymierne.html"><div class="row"><div class="ico">🧮</div><div>
+    <h3>Liczby wymierne</h3><div class="sub">Натуральні, цілі, раціональні · дроби ↔ десяткові · протилежні й обернені числа · тест (UA / PL)</div></div></div></a>
+  <a class="tile" href="liczby_dodatnie_ujemne.html"><div class="row"><div class="ico">➕</div><div>
+    <h3>Liczby dodatnie i ujemne</h3><div class="sub">Порівняння, додавання, віднімання, множення й ділення з від’ємними числами · тест на 20 питань</div></div></div></a>
+  <a class="tile" href="rok.html"><div class="row"><div class="ico">📅</div><div>
+    <h3>Річна контрольна · 8 тем</h3><div class="sub">Дроби · геометрія · швидкість, шлях, час · площі · відсотки · рівняння — теорія, формули, фішки, тест</div></div></div></a>
+</main>
+<footer>Zrobione z ❤️ dla Warwary</footer>
 <script>
-const C={
-  t1:{c:'#2563eb',bg:'#dbeafe',d:'#1d4ed8'},
-  t2:{c:'#059669',bg:'#d1fae5',d:'#065f46'},
-  t3:{c:'#7c3aed',bg:'#ede9fe',d:'#5b21b6'},
-  t4:{c:'#dc2626',bg:'#fee2e2',d:'#991b1b'},
-  t5:{c:'#d97706',bg:'#fef3c7',d:'#92400e'},
-  t6:{c:'#0891b2',bg:'#cffafe',d:'#164e63'},
-  t7:{c:'#be185d',bg:'#fce7f3',d:'#9d174d'},
-  t8:{c:'#4f46e5',bg:'#e0e7ff',d:'#3730a3'},
-};
-
-const TOPICS=[
-{id:'t1',ico:'🔢',num:'Rozd. 1',name:'Liczby naturalne i ułamki',
-theory:{
-  summary:'Podstawa całej matematyki — działania na liczbach naturalnych, ułamkach zwykłych i dziesiętnych, potęgowanie.',
-  blocks:[
-    {t:'t1',h:'Ułamki zwykłe',items:['½, ¾, ⁵⁄₈ — licznik / mianownik','Skracanie: 6/8 = 3/4','Rozszerzanie: 1/3 = 4/12','Dodawanie: wspólny mianownik','Mnożenie: licznik × licznik']},
-    {t:'t1',h:'Ułamki dziesiętne',items:['0,5 = 5/10 = 1/2','0,75 = 75/100 = 3/4','Dodawanie — wyrównaj przecinek','Mnożenie: przesuń przecinek','Dzielenie: przesuń przecinek']},
-    {t:'t1',h:'Potęgowanie',items:['aⁿ = a × a × ... (n razy)','2³ = 2×2×2 = 8','a⁰ = 1 (każda liczba!)','a¹ = a','10² = 100, 10³ = 1000']},
-    {t:'t1',h:'Rozwinięcia dziesiętne',items:['1/2 = 0,5 (skończone)','1/3 = 0,333... (nieskończone)','1/4 = 0,25 (skończone)','1/7 = 0,142857... (okresowe)','Ułamek → dzielenie licznika przez mianownik']},
-  ],
-  formulas:`<strong>Dodawanie ułamków:</strong> <span class="math">a/b + c/d = (a·d + c·b) / (b·d)</span><br>
-<strong>Mnożenie ułamków:</strong> <span class="math">a/b × c/d = (a·c) / (b·d)</span><br>
-<strong>Dzielenie ułamków:</strong> <span class="math">a/b ÷ c/d = a/b × d/c</span><br>
-<strong>Potęga:</strong> <span class="math">aⁿ = a × a × a ... (n razy)</span>`,
-},
-examples:[
-  {q:'Oblicz: 2/3 + 1/4',steps:['Wspólny mianownik: NWW(3,4) = 12','2/3 = 8/12,  1/4 = 3/12','8/12 + 3/12 = 11/12'],ans:'11/12'},
-  {q:'Oblicz: 3/5 × 2/7',steps:['Mnożymy licznik przez licznik: 3×2 = 6','Mnożymy mianownik przez mianownik: 5×7 = 35','Wynik: 6/35 (nie można skrócić)'],ans:'6/35'},
-  {q:'Oblicz: 2⁴',steps:['2⁴ = 2×2×2×2','2×2 = 4,  4×2 = 8,  8×2 = 16'],ans:'16'},
-  {q:'Zamień 3/8 na ułamek dziesiętny',steps:['Dzielimy: 3 ÷ 8','3,000 ÷ 8 = 0,375'],ans:'0,375'},
-],
-flashcards:[
-  {q:'Jak dodać ułamki o różnych mianownikach?',a:'Znajdź <strong>wspólny mianownik</strong> (NWW), rozszerz oba ułamki, dodaj liczniki. Np. 1/3 + 1/4: NWW=12, więc 4/12 + 3/12 = 7/12.'},
-  {q:'Co to jest potęgowanie?',a:'<strong>aⁿ</strong> = a mnożone n razy przez siebie. Np. 2³ = 2×2×2 = 8. Ważne: a⁰ = 1 dla każdej liczby!'},
-  {q:'Jak zamienić ułamek zwykły na dziesiętny?',a:'Podziel licznik przez mianownik. Np. 3/4: 3÷4 = <strong>0,75</strong>. Wynik może być skończony lub nieskończony (okresowy).'},
-  {q:'Jak skrócić ułamek?',a:'Podziel licznik i mianownik przez ich <strong>NWD</strong> (największy wspólny dzielnik). Np. 6/8: NWD(6,8)=2, więc 6/8 = 3/4.'},
-  {q:'Jak mnożyć ułamki?',a:'Mnożymy <strong>licznik przez licznik</strong> i <strong>mianownik przez mianownik</strong>. Np. 2/3 × 3/4 = 6/12 = 1/2. Przed mnożeniem warto skrócić!'},
-],
-quiz:[
-  {q:'Ile wynosi 1/3 + 1/6?',opts:['2/9','1/2','2/6','1/3'],a:1,hint:'Wspólny mianownik: 6',expl:'1/3 = 2/6. Więc 2/6 + 1/6 = <strong>3/6 = 1/2</strong>.'},
-  {q:'Ile wynosi 2⁵?',opts:['10','25','32','16'],a:2,hint:'2×2×2×2×2',expl:'2⁵ = 2×2×2×2×2 = 4×4×2 = <strong>32</strong>.'},
-  {q:'Jak dziesiętnie zapisujemy 1/4?',opts:['0,4','0,25','0,14','0,5'],a:1,hint:'1 ÷ 4 = ?',expl:'1 ÷ 4 = <strong>0,25</strong>. Bo 4×25 = 100, więc 1/4 = 25/100 = 0,25.'},
-  {q:'Ile wynosi 3/4 × 8/9?',opts:['11/13','2/3','24/36','1/2'],a:1,hint:'Mnóż liczniki i mianowniki, potem skróć',expl:'3/4 × 8/9 = 24/36. Skrócimy: NWD(24,36)=12, więc 24/36 = <strong>2/3</strong>.'},
-  {q:'Ile wynosi 3² + 2³?',opts:['13','17','11','15'],a:1,hint:'3²=9, 2³=8',expl:'3² = 9, 2³ = 8. Suma: 9+8 = <strong>17</strong>.'},
-]},
-
-{id:'t2',ico:'📐',num:'Rozd. 2',name:'Figury na płaszczyźnie',
-theory:{
-  summary:'Geometria płaska — proste, okręgi, trójkąty, czworokąty, kąty i ich właściwości.',
-  blocks:[
-    {t:'t2',h:'Kąty',items:['Ostry: 0°–90°','Prosty: dokładnie 90°','Rozwarty: 90°–180°','Półpełny: 180°','Pełny: 360°']},
-    {t:'t2',h:'Trójkąty',items:['Suma kątów = 180°','Równoboczny: 3 równe boki','Równoramienny: 2 równe boki','Prostokątny: jeden kąt = 90°','Twierdzenie Pitagorasa: a²+b²=c²']},
-    {t:'t2',h:'Czworokąty',items:['Suma kątów = 360°','Prostokąt: 4 kąty proste','Kwadrat: 4 równe boki + 4 kąty proste','Równoległobok: pary równoległych boków','Trapez: jedna para równoległych boków']},
-    {t:'t2',h:'Okrąg i koło',items:['Okrąg: linia (obwód)','Koło: figura (powierzchnia)','r = promień, d = średnica = 2r','Obwód okręgu = 2πr','Pole koła = πr²']},
-  ],
-  formulas:`<strong>Suma kątów trójkąta:</strong> <span class="math">α + β + γ = 180°</span><br>
-<strong>Suma kątów czworokąta:</strong> <span class="math">α + β + γ + δ = 360°</span><br>
-<strong>Twierdzenie Pitagorasa:</strong> <span class="math">a² + b² = c²</span> (c = przyprostokątna/hypotenusa)<br>
-<strong>Obwód okręgu:</strong> <span class="math">L = 2πr</span> &nbsp;|&nbsp; <strong>Pole koła:</strong> <span class="math">P = πr²</span>`,
-},
-examples:[
-  {q:'Trzeci kąt trójkąta, gdy dwa wynoszą 50° i 70°',steps:['Suma kątów trójkąta = 180°','Trzeci kąt = 180° − 50° − 70°','= 180° − 120°'],ans:'60°'},
-  {q:'Czwarty kąt czworokąta: 80°, 100°, 90°, ?',steps:['Suma kątów = 360°','? = 360° − 80° − 100° − 90°','= 360° − 270°'],ans:'90°'},
-  {q:'Obwód okręgu o promieniu r = 5 cm (π≈3,14)',steps:['L = 2 × π × r','L = 2 × 3,14 × 5','L = 31,4 cm'],ans:'L = 31,4 cm'},
-],
-flashcards:[
-  {q:'Ile wynosi suma kątów trójkąta?',a:'Zawsze <strong>180°</strong>. Jeśli znasz dwa kąty, trzeci = 180° − suma dwóch znanych.'},
-  {q:'Czym różni się okrąg od koła?',a:'<strong>Okrąg</strong> to linia (sama granica). <strong>Koło</strong> to figura — okrąg wraz z wnętrzem. Obwód = 2πr. Pole koła = πr².'},
-  {q:'Co to jest twierdzenie Pitagorasa?',a:'W trójkącie prostokątnym: <strong>a² + b² = c²</strong>, gdzie c to najdłuższy bok (przeciwprostokątna/hypotenusa), a i b to przyprostokątne.'},
-  {q:'Ile wynosi suma kątów czworokąta?',a:'Zawsze <strong>360°</strong>. Czworokąt można podzielić na dwa trójkąty: 2 × 180° = 360°.'},
-  {q:'Czym różni się prostokąt od równoległoboku?',a:'<strong>Prostokąt</strong>: 4 kąty proste (90°), przeciwległe boki równe i równoległe. <strong>Równoległobok</strong>: przeciwległe boki równoległe i równe, ale kąty NIE muszą być 90°.'},
-],
-quiz:[
-  {q:'Dwa kąty trójkąta to 45° i 65°. Ile wynosi trzeci?',opts:['60°','70°','80°','90°'],a:1,hint:'Suma = 180°',expl:'180° − 45° − 65° = <strong>70°</strong>.'},
-  {q:'Jak nazywa się kąt równy dokładnie 90°?',opts:['Ostry','Rozwarty','Półpełny','Prosty'],a:3,hint:'Kąt prosty = symbol kwadracika',expl:'Kąt <strong>prosty</strong> = dokładnie 90°. Ostry < 90°, rozwarty > 90°.'},
-  {q:'Czworokąt ma kąty 90°, 80°, 110°. Czwarty kąt?',opts:['70°','80°','90°','100°'],a:1,hint:'Suma kątów czworokąta = 360°',expl:'360° − 90° − 80° − 110° = <strong>80°</strong>.'},
-  {q:'Obwód okręgu r=3 cm (π≈3,14)?',opts:['9,42 cm','18,84 cm','6,28 cm','28,26 cm'],a:1,hint:'L = 2 × π × r',expl:'L = 2 × 3,14 × 3 = <strong>18,84 cm</strong>.'},
-  {q:'W trójkącie prostokątnym a=3, b=4. Ile wynosi c?',opts:['5','7','6','√7'],a:0,hint:'a²+b²=c², czyli 9+16=?',expl:'c² = 3²+4² = 9+16 = 25, więc c = √25 = <strong>5</strong>.'},
-]},
-
-{id:'t3',ico:'📅',num:'Rozd. 3',name:'Liczby na co dzień',
-theory:{
-  summary:'Praktyczne zastosowania matematyki — czas, jednostki, skale, zaokrąglanie i odczytywanie danych.',
-  blocks:[
-    {t:'t3',h:'Czas',items:['1 godzina = 60 minut','1 minuta = 60 sekund','1 doba = 24 godziny','1 tydzień = 7 dni','1 rok = 365 dni (przestępny: 366)']},
-    {t:'t3',h:'Jednostki długości',items:['1 km = 1000 m','1 m = 100 cm = 1000 mm','1 cm = 10 mm','Przeliczaj zawsze na jedną jednostkę!','np. 2,5 km = 2500 m']},
-    {t:'t3',h:'Jednostki masy',items:['1 tona (t) = 1000 kg','1 kg = 1000 g','1 g = 1000 mg','Przeliczaj na jedną jednostkę!','np. 3,5 kg = 3500 g']},
-    {t:'t3',h:'Skala i zaokrąglanie',items:['Skala 1:100 → 1 cm = 100 cm (1 m)','Skala 1:10 000 → 1 cm = 100 m','Zaokrąglanie do dziesiątek: patrz jedności','Cyfra ≥5 → zaokrąglij w górę','Cyfra <5 → zaokrąglij w dół']},
-  ],
-  formulas:`<strong>Skala:</strong> <span class="math">skala = odległość na mapie / odległość rzeczywista</span><br>
-<strong>Odległość rzeczywista:</strong> <span class="math">d_rzecz = d_mapa × mianownik skali</span><br>
-<strong>Zaokrąglanie do 10:</strong> patrzymy na cyfrę jedności — ≥5 w górę, &lt;5 w dół`,
-},
-examples:[
-  {q:'Przelicz 2h 35min na minuty',steps:['2 godziny = 2 × 60 = 120 minut','Dodajemy 35 minut','120 + 35 = 155 minut'],ans:'155 minut'},
-  {q:'Mapa w skali 1:50 000. Odcinek 4 cm. Ile to km?',steps:['d = 4 cm × 50 000 = 200 000 cm','Przeliczamy: 200 000 cm ÷ 100 = 2000 m','2000 m ÷ 1000 = 2 km'],ans:'2 km'},
-  {q:'Zaokrąglij 3748 do setek',steps:['Cyfra dziesiątek = 4 (mniej niż 5)','Zaokrąglamy w dół','3748 ≈ 3700'],ans:'3700'},
-],
-flashcards:[
-  {q:'Ile sekund ma 1 godzina?',a:'1 godzina = 60 minut × 60 sekund = <strong>3600 sekund</strong>.'},
-  {q:'Jak obliczyć odległość rzeczywistą z mapy?',a:'d_rzeczywista = d_na_mapie × <strong>mianownik skali</strong>. Np. skala 1:10 000, odcinek 3 cm → 3 × 10 000 = 30 000 cm = 300 m.'},
-  {q:'Jak zaokrąglić 2365 do setek?',a:'Patrzymy na cyfrę <strong>dziesiątek</strong> = 6 ≥ 5, więc zaokrąglamy w górę: 2365 ≈ <strong>2400</strong>.'},
-  {q:'Ile gramów ma 2,75 kg?',a:'1 kg = 1000 g. Więc 2,75 kg = 2,75 × 1000 = <strong>2750 g</strong>.'},
-  {q:'Co to znaczy skala 1:100?',a:'1 jednostka na mapie = <strong>100 jednostek w rzeczywistości</strong>. Np. 1 cm na planie = 100 cm = 1 m w rzeczywistości.'},
-],
-quiz:[
-  {q:'Ile minut to 3 godziny 20 minut?',opts:['180 min','200 min','220 min','320 min'],a:1,hint:'3×60 + 20',expl:'3 × 60 = 180 min. 180 + 20 = <strong>200 min</strong>.'},
-  {q:'Przelicz 4,2 km na metry',opts:['420 m','4200 m','42 m','42 000 m'],a:1,hint:'1 km = 1000 m',expl:'4,2 × 1000 = <strong>4200 m</strong>.'},
-  {q:'Zaokrąglij 5,87 do dziesiątek',opts:['5,8','5,9','6,0','5,0'],a:1,hint:'Cyfra setnych = 7 ≥ 5',expl:'Cyfra setnych to 7 ≥ 5, więc zaokrąglamy w górę: 5,87 ≈ <strong>5,9</strong>.'},
-  {q:'Mapa skala 1:20 000. Odcinek 5 cm = ile metrów?',opts:['100 m','1000 m','10 000 m','500 m'],a:1,hint:'5 × 20 000 = ? cm, potem zamień',expl:'5 × 20 000 = 100 000 cm = <strong>1000 m</strong> = 1 km.'},
-  {q:'3500 g = ile kg?',opts:['35 kg','0,35 kg','3,5 kg','350 kg'],a:2,hint:'1 kg = 1000 g',expl:'3500 ÷ 1000 = <strong>3,5 kg</strong>.'},
-]},
-
-{id:'t4',ico:'🚀',num:'Rozd. 4',name:'Prędkość, droga, czas',
-theory:{
-  summary:'Trzy wzajemnie powiązane wielkości — jeśli znasz dwie, obliczasz trzecią. Kluczowe: spójne jednostki!',
-  blocks:[
-    {t:'t4',h:'Wzory — trójkąt PDT',items:['Droga = Prędkość × Czas','Prędkość = Droga ÷ Czas','Czas = Droga ÷ Prędkość','Zapamiętaj: D = P × T','Zasłoń szukaną — reszta podpowie!']},
-    {t:'t4',h:'Jednostki',items:['Prędkość: km/h lub m/s','1 m/s = 3,6 km/h','Droga: km, m, cm','Czas: h, min, s','Zawsze ujednolicaj jednostki!']},
-    {t:'t4',h:'Typowe błędy',items:['Czas musi być w godzinach (gdy v w km/h)','30 min = 0,5 h','1h 30min = 1,5 h','Przelicz minuty: min ÷ 60','Nie mieszaj km/h z m/s!']},
-    {t:'t4',h:'Zadania złożone',items:['Dwa pojazdy naprzeciw: dodaj prędkości','Dwa pojazdy w tym samym kierunku: odejmuj','Czas spotkania: d ÷ (v₁ + v₂)','Zawsze zapisuj dane i szukaną','Sprawdzaj jednostki w odpowiedzi']},
-  ],
-  formulas:`<strong>Droga:</strong> <span class="math">d = v × t</span><br>
-<strong>Prędkość:</strong> <span class="math">v = d ÷ t</span><br>
-<strong>Czas:</strong> <span class="math">t = d ÷ v</span><br>
-<strong>Uwaga:</strong> 1 h = 60 min, więc 30 min = <strong>0,5 h</strong>, 45 min = <strong>0,75 h</strong>`,
-},
-examples:[
-  {q:'Samochód jedzie v=80 km/h przez t=2,5 h. Jaka droga?',steps:['d = v × t','d = 80 × 2,5','d = 200 km'],ans:'d = 200 km'},
-  {q:'Przejechano 150 km w t=3 h. Jaka prędkość?',steps:['v = d ÷ t','v = 150 ÷ 3','v = 50 km/h'],ans:'v = 50 km/h'},
-  {q:'d=90 km, v=60 km/h. Ile czasu?',steps:['t = d ÷ v','t = 90 ÷ 60 = 1,5 h','1,5 h = 1 godzina 30 minut'],ans:'1 h 30 min'},
-],
-flashcards:[
-  {q:'Podaj trzy wzory trójkąta PDT',a:'<strong>d = v × t</strong> (droga = prędkość × czas)<br><strong>v = d ÷ t</strong> (prędkość = droga ÷ czas)<br><strong>t = d ÷ v</strong> (czas = droga ÷ prędkość)'},
-  {q:'Jak zamienić 45 minut na godziny?',a:'45 min ÷ 60 = <strong>0,75 h</strong>. Bo 45/60 = 3/4 = 0,75. Zapamiętaj: 30 min = 0,5 h, 15 min = 0,25 h.'},
-  {q:'Dwa pociągi jadą naprzeciwko siebie: 80 i 60 km/h. Dzielą je 280 km. Po ilu godzinach się spotkają?',a:'Dodajemy prędkości: 80+60=140 km/h. t = 280÷140 = <strong>2 h</strong>.'},
-  {q:'Jak zapamiętać wzory PDT?',a:'Narysuj trójkąt: D na górze, P i T na dole. Zasłoń szukaną: D=P×T, P=D÷T, T=D÷P.'},
-],
-quiz:[
-  {q:'v=60 km/h, t=3 h. Ile drogi?',opts:['20 km','63 km','180 km','200 km'],a:2,hint:'d = v × t',expl:'d = 60 × 3 = <strong>180 km</strong>.'},
-  {q:'d=200 km, v=80 km/h. Ile czasu?',opts:['2 h','2,5 h','3 h','4 h'],a:1,hint:'t = d ÷ v',expl:'t = 200 ÷ 80 = <strong>2,5 h</strong> = 2 h 30 min.'},
-  {q:'d=120 km, t=1,5 h. Jaka prędkość?',opts:['60 km/h','80 km/h','90 km/h','100 km/h'],a:1,hint:'v = d ÷ t',expl:'v = 120 ÷ 1,5 = <strong>80 km/h</strong>.'},
-  {q:'45 minut = ile godzin?',opts:['0,4 h','0,75 h','0,45 h','4,5 h'],a:1,hint:'min ÷ 60',expl:'45 ÷ 60 = <strong>0,75 h</strong> (trzy czwarte godziny).'},
-  {q:'Auto 90 km/h i rower 10 km/h jadą z tego samego miejsca w tym samym kierunku. Po 2h różnica drogi?',opts:['80 km','160 km','100 km','180 km'],a:1,hint:'Różnica prędkości × czas',expl:'Różnica v = 90−10 = 80 km/h. Po 2h: 80×2 = <strong>160 km</strong>.'},
-]},
-
-{id:'t5',ico:'📏',num:'Rozd. 5',name:'Pola wielokątów',
-theory:{
-  summary:'Wzory na pola figur geometrycznych — prostokąt, równoległobok, romb, trójkąt i trapez.',
-  blocks:[
-    {t:'t5',h:'Prostokąt i kwadrat',items:['P = a × b (długość × szerokość)','Kwadrat: P = a × a = a²','Obwód prostokąta: 2(a+b)','Obwód kwadratu: 4a','Przekątna kwadratu: a√2']},
-    {t:'t5',h:'Równoległobok i romb',items:['P = a × h (bok × wysokość)','Wysokość ⊥ podstawa!','Romb: 4 równe boki','Romb: P = a × h','lub P = (d₁ × d₂) ÷ 2 (przekątne)']},
-    {t:'t5',h:'Trójkąt',items:['P = (a × h) ÷ 2','Podstawa × wysokość ÷ 2','Wysokość ⊥ do podstawy','Każdy bok może być podstawą','h zmienia się przy zmianie podstawy']},
-    {t:'t5',h:'Trapez',items:['P = (a + b) × h ÷ 2','a i b = równoległe boki (podstawy)','h = wysokość (odległość między nimi)','(a+b) = suma podstaw','Pamiętaj: dzielisz przez 2!']},
-  ],
-  formulas:`<strong>Prostokąt:</strong> <span class="math">P = a × b</span><br>
-<strong>Równoległobok:</strong> <span class="math">P = a × h</span><br>
-<strong>Trójkąt:</strong> <span class="math">P = (a × h) ÷ 2</span><br>
-<strong>Trapez:</strong> <span class="math">P = (a + b) × h ÷ 2</span><br>
-<strong>Romb:</strong> <span class="math">P = (d₁ × d₂) ÷ 2</span> lub <span class="math">P = a × h</span>`,
-},
-examples:[
-  {q:'Pole trójkąta: podstawa 8 cm, wysokość 5 cm',steps:['P = (a × h) ÷ 2','P = (8 × 5) ÷ 2','P = 40 ÷ 2'],ans:'P = 20 cm²'},
-  {q:'Pole trapezu: a=10, b=6, h=4 cm',steps:['P = (a + b) × h ÷ 2','P = (10 + 6) × 4 ÷ 2','P = 16 × 4 ÷ 2 = 64 ÷ 2'],ans:'P = 32 cm²'},
-  {q:'Pole równoległoboku: a=7 cm, h=3 cm',steps:['P = a × h','P = 7 × 3'],ans:'P = 21 cm²'},
-],
-flashcards:[
-  {q:'Wzór na pole trójkąta?',a:'<strong>P = (a × h) ÷ 2</strong>, gdzie a to podstawa, h to wysokość (prostopadła do podstawy). To połowa pola równoległoboku o tym samym boku i wysokości.'},
-  {q:'Wzór na pole trapezu?',a:'<strong>P = (a + b) × h ÷ 2</strong>, gdzie a i b to podstawy (równoległe boki), h to wysokość (odległość między podstawami).'},
-  {q:'Czym różni się wysokość od boku?',a:'Wysokość jest <strong>prostopadła</strong> (⊥) do podstawy — tworzy kąt 90°. Bok to krawędź figury. W trójkącie i równoległoboku do wzoru na pole używamy wysokości, NIE boku!'},
-  {q:'Jak obliczyć pole rombu ze przekątnych?',a:'<strong>P = (d₁ × d₂) ÷ 2</strong>, gdzie d₁ i d₂ to przekątne rombu. Np. d₁=6, d₂=8: P = (6×8)÷2 = 24 cm².'},
-],
-quiz:[
-  {q:'Pole prostokąta a=12 cm, b=5 cm?',opts:['34 cm²','17 cm²','60 cm²','70 cm²'],a:2,hint:'P = a × b',expl:'P = 12 × 5 = <strong>60 cm²</strong>.'},
-  {q:'Pole trójkąta a=6, h=4 cm?',opts:['24 cm²','12 cm²','10 cm²','48 cm²'],a:1,hint:'P = (a × h) ÷ 2',expl:'P = (6 × 4) ÷ 2 = 24 ÷ 2 = <strong>12 cm²</strong>.'},
-  {q:'Pole trapezu: a=8, b=4, h=5 cm?',opts:['30 cm²','20 cm²','60 cm²','40 cm²'],a:0,hint:'P = (a+b) × h ÷ 2',expl:'P = (8+4) × 5 ÷ 2 = 12 × 5 ÷ 2 = 60 ÷ 2 = <strong>30 cm²</strong>.'},
-  {q:'Pole równoległoboku a=9, h=4 cm?',opts:['26 cm²','36 cm²','18 cm²','13 cm²'],a:1,hint:'P = a × h (nie a²!)',expl:'P = 9 × 4 = <strong>36 cm²</strong>.'},
-  {q:'Pole kwadratu o boku a=7 cm?',opts:['28 cm²','49 cm²','14 cm²','56 cm²'],a:1,hint:'Kwadrat: P = a²',expl:'P = 7² = 7×7 = <strong>49 cm²</strong>.'},
-]},
-
-{id:'t6',ico:'💯',num:'Rozd. 6',name:'Procenty',
-theory:{
-  summary:'Procent to setna część całości. Kluczowe: zamieniać procenty na ułamki i odwrotnie, obliczać podstawę.',
-  blocks:[
-    {t:'t6',h:'Podstawy procentów',items:['1% = 1/100 = 0,01','25% = 25/100 = 1/4','50% = 1/2 = 0,5','100% = całość','150% = więcej niż całość!']},
-    {t:'t6',h:'Obliczanie %',items:['p% z liczby n = n × p/100','20% z 300 = 300 × 20/100 = 60','Jaki % to x z n? → x/n × 100%','Obniżka: cena × (1 − p/100)','Podwyżka: cena × (1 + p/100)']},
-    {t:'t6',h:'Obniżki i podwyżki',items:['−20%: cena × 0,8','−30%: cena × 0,7','+15%: cena × 1,15','+50%: cena × 1,5','Skrót: (100±p)/100']},
-    {t:'t6',h:'Obliczanie bazy',items:['Dany jest % z liczby → znajdź liczbę','Jeśli p% = x, to całość = x × 100/p','30% = 90 → całość = 90 × 100/30 = 300','Proporcja: p/100 = x/n','n = x × 100/p']},
-  ],
-  formulas:`<strong>p% z liczby n:</strong> <span class="math">wynik = n × p ÷ 100</span><br>
-<strong>Jaki % to x z n:</strong> <span class="math">procent = x ÷ n × 100%</span><br>
-<strong>Obniżka o p%:</strong> <span class="math">nowa cena = cena × (100 − p) ÷ 100</span><br>
-<strong>Znajdź bazę:</strong> <span class="math">n = wynik × 100 ÷ p</span>`,
-},
-examples:[
-  {q:'Oblicz 35% z 240',steps:['wynik = 240 × 35 ÷ 100','= 240 × 0,35','= 84'],ans:'84'},
-  {q:'Bluza kosztuje 120 zł. Obniżka 25%. Nowa cena?',steps:['Obniżka = 120 × 25 ÷ 100 = 30 zł','Nowa cena = 120 − 30 = 90 zł','lub: 120 × 0,75 = 90 zł'],ans:'90 zł'},
-  {q:'20% uczniów = 8 osób. Ile uczniów w klasie?',steps:['20% = 8, szukamy 100%','100% = 8 × 100 ÷ 20','= 800 ÷ 20 = 40'],ans:'40 uczniów'},
-],
-flashcards:[
-  {q:'Jak zamienić procent na ułamek dziesiętny?',a:'Podziel przez 100: 35% = 35÷100 = <strong>0,35</strong>. Lub przesuń przecinek o 2 miejsca w lewo: 35% → 0,35.'},
-  {q:'Jak obliczyć p% z liczby n?',a:'<strong>n × p ÷ 100</strong>. Np. 20% z 150 = 150 × 20 ÷ 100 = 150 × 0,2 = <strong>30</strong>.'},
-  {q:'Cena 200 zł, obniżka 30%. Ile zapłacisz?',a:'200 × (100−30)/100 = 200 × 0,7 = <strong>140 zł</strong>. Lub: obniżka = 200×0,3=60, cena = 200−60=140.'},
-  {q:'Jak znaleźć 100%, gdy dany jest procent?',a:'Wzór: całość = wynik × 100 ÷ p. Np. 40% = 60 → całość = 60 × 100 ÷ 40 = <strong>150</strong>.'},
-  {q:'Jaki procent stanowi 15 z 60?',a:'15 ÷ 60 × 100% = 0,25 × 100% = <strong>25%</strong>.'},
-],
-quiz:[
-  {q:'Ile to 20% z 350?',opts:['35','50','70','700'],a:2,hint:'350 × 20 ÷ 100',expl:'350 × 20 ÷ 100 = 350 × 0,2 = <strong>70</strong>.'},
-  {q:'Cena 80 zł, obniżka 15%. Cena po obniżce?',opts:['68 zł','65 zł','72 zł','60 zł'],a:0,hint:'80 × (100−15) ÷ 100',expl:'80 × 0,85 = 80 − 12 = <strong>68 zł</strong>.'},
-  {q:'25% klasy = 6 osób. Ile osób w klasie?',opts:['24','18','30','150'],a:0,hint:'100% = 6 × 100 ÷ 25',expl:'6 × 100 ÷ 25 = 600 ÷ 25 = <strong>24 osoby</strong>.'},
-  {q:'Jaki procent stanowi 12 z 48?',opts:['12%','20%','25%','4%'],a:2,hint:'12 ÷ 48 × 100%',expl:'12 ÷ 48 = 0,25. 0,25 × 100% = <strong>25%</strong>.'},
-  {q:'Cena wzrosła o 10% i wynosi teraz 110 zł. Ile była przed podwyżką?',opts:['90 zł','99 zł','100 zł','105 zł'],a:2,hint:'Stara × 1,1 = 110',expl:'Stara cena × 1,1 = 110. Stara = 110 ÷ 1,1 = <strong>100 zł</strong>.'},
-]},
-
-{id:'t7',ico:'➕➖',num:'Rozd. 7',name:'Liczby dodatnie i ujemne',
-theory:{
-  summary:'Liczby całkowite na osi liczbowej — dodawanie, odejmowanie, mnożenie i dzielenie z liczbami ujemnymi.',
-  blocks:[
-    {t:'t7',h:'Oś liczbowa',items:['Liczby ujemne: …−3, −2, −1','Zero: 0','Liczby dodatnie: 1, 2, 3…','Im bardziej w lewo → mniejsza','−5 < −2 < 0 < 3 < 7']},
-    {t:'t7',h:'Dodawanie i odejmowanie',items:['(+) + (+) = +','(−) + (−) = − (większa wartość)','(+) + (−) = ± (różnica, znak większej)','a − (−b) = a + b','Odejmowanie ujemnej = dodawanie!']},
-    {t:'t7',h:'Mnożenie',items:['(+) × (+) = +','(−) × (−) = + ← uwaga!','(+) × (−) = −','(−) × (+) = −','Jednakowe znaki → +, różne → −']},
-    {t:'t7',h:'Dzielenie',items:['Zasady jak przy mnożeniu!','(+) ÷ (+) = +','(−) ÷ (−) = +','(+) ÷ (−) = −','(−) ÷ (+) = −']},
-  ],
-  formulas:`<strong>Znaki przy mnożeniu/dzieleniu:</strong><br>
-<span class="math">(+) × (+) = (+)</span> &nbsp; <span class="math">(−) × (−) = (+)</span><br>
-<span class="math">(+) × (−) = (−)</span> &nbsp; <span class="math">(−) × (+) = (−)</span><br>
-<strong>Odejmowanie ujemnej:</strong> <span class="math">a − (−b) = a + b</span><br>
-<strong>Wartość bezwzględna:</strong> <span class="math">|−5| = 5, |7| = 7</span>`,
-},
-examples:[
-  {q:'Oblicz: −3 + (−5)',steps:['Dodajemy dwie ujemne','Wynik jest ujemny','Wartość: 3+5 = 8'],ans:'−8'},
-  {q:'Oblicz: 4 − (−7)',steps:['Odejmowanie ujemnej = dodawanie','4 − (−7) = 4 + 7'],ans:'11'},
-  {q:'Oblicz: (−6) × (−4)',steps:['Dwa znaki minus → wynik dodatni','(−6) × (−4) = +(6×4)'],ans:'+24'},
-],
-flashcards:[
-  {q:'Ile wynosi (−3) × (−5)?',a:'<strong>+15</strong>. Dwie liczby ujemne mnożone przez siebie dają wynik <strong>dodatni</strong>. Minus × Minus = Plus!'},
-  {q:'Ile wynosi 5 − (−8)?',a:'Odejmowanie ujemnej = dodawanie: 5 − (−8) = 5 + 8 = <strong>13</strong>.'},
-  {q:'Które jest większe: −7 czy −2?',a:'<strong>−2 > −7</strong>. Na osi liczbowej −2 leży dalej w prawo (bliżej zera). Im mniejsza wartość bezwzględna ujemnej — tym większa liczba.'},
-  {q:'Ile wynosi (−12) ÷ (−3)?',a:'Dwa minusy → wynik plus: (−12) ÷ (−3) = <strong>+4</strong>.'},
-  {q:'Co to wartość bezwzględna?',a:'<strong>|a|</strong> = odległość od zera na osi liczbowej. Zawsze nieujemna: |−5| = 5, |3| = 3, |0| = 0.'},
-],
-quiz:[
-  {q:'Ile wynosi −4 + (−9)?',opts:['5','−5','−13','13'],a:2,hint:'Dwie ujemne: dodajesz wartości, wynik −',expl:'(−4) + (−9) = −(4+9) = <strong>−13</strong>.'},
-  {q:'Ile wynosi 3 − (−8)?',opts:['−5','5','11','−11'],a:2,hint:'Odejmowanie ujemnej = dodawanie',expl:'3 − (−8) = 3 + 8 = <strong>11</strong>.'},
-  {q:'Ile wynosi (−5) × (−7)?',opts:['−35','35','12','−12'],a:1,hint:'Minus × minus = plus',expl:'(−5) × (−7) = +(5×7) = <strong>35</strong>.'},
-  {q:'Które jest największe?',opts:['−10','−1','0','−5'],a:2,hint:'Na osi liczbowej: im dalej w prawo, tym większe',expl:'0 > −1 > −5 > −10. Największe to <strong>0</strong>.'},
-  {q:'Ile wynosi (−20) ÷ 4?',opts:['5','−5','80','−80'],a:1,hint:'Minus ÷ plus = minus',expl:'(−20) ÷ 4 = −(20÷4) = <strong>−5</strong>.'},
-]},
-
-{id:'t8',ico:'🔣',num:'Rozd. 8',name:'Wyrażenia algebraiczne i równania',
-theory:{
-  summary:'Algebra — zapisywanie wyrażeń z literami, upraszczanie, rozwiązywanie równań z tekstowych zadań.',
-  blocks:[
-    {t:'t8',h:'Wyrażenia algebraiczne',items:['Litera (x, y, n) = niewiadoma','2x = 2 razy x','3x + 5 = wyrażenie liniowe','Wartość: podstaw liczbę za x','np. dla x=4: 3×4+5 = 17']},
-    {t:'t8',h:'Upraszczanie wyrażeń',items:['Zbieraj wyrazy podobne!','3x + 5x = 8x (te same litery)','2x + 3y ≠ 5xy (różne litery!)','3(x+2) = 3x + 6 (rozwiń)','Zachowaj kolejność działań']},
-    {t:'t8',h:'Rozwiązywanie równań',items:['x + 5 = 12 → x = 12 − 5 = 7','2x = 14 → x = 14 ÷ 2 = 7','Sprawdzenie: podstaw x do równania','Przenosimy: zmiana znaku!','x − 3 = 9 → x = 9 + 3 = 12']},
-    {t:'t8',h:'Zadania tekstowe → równanie',items:['"większy o 3 od x" → x + 3','Suma = równa się','"dwukrotność x" → 2x','"razy mniejszy" → dzielenie','Zawsze sprawdź odpowiedź!']},
-  ],
-  formulas:`<strong>Wyrażenie → wartość:</strong> podstaw liczbę za literę<br>
-<strong>Upraszczanie:</strong> <span class="math">ax + bx = (a+b)x</span><br>
-<strong>Rozwinięcie nawiasu:</strong> <span class="math">a(b+c) = ab + ac</span><br>
-<strong>Równanie:</strong> przenoś na drugą stronę ze <strong>zmianą znaku</strong> (+→−, ×→÷)`,
-},
-examples:[
-  {q:'Uprość: 4x + 3y − x + 2y',steps:['Zbierz wyrazy z x: 4x − x = 3x','Zbierz wyrazy z y: 3y + 2y = 5y','Wynik: 3x + 5y'],ans:'3x + 5y'},
-  {q:'Rozwiąż: 3x − 4 = 11',steps:['3x = 11 + 4 = 15','x = 15 ÷ 3','x = 5','Sprawdzenie: 3×5−4 = 15−4 = 11 ✓'],ans:'x = 5'},
-  {q:'Suma liczby o 2 większej od x i 3x równa 22',steps:['Zapisz równanie: (x+2) + 3x = 22','Uprość: 4x + 2 = 22','4x = 20 → x = 5'],ans:'x = 5'},
-],
-flashcards:[
-  {q:'Co to znaczy "uprościć wyrażenie"?',a:'Zebrać <strong>wyrazy podobne</strong> (z tą samą literą). Np. 5x + 3x = 8x, 2x + 4y − x = x + 4y. Nie można łączyć różnych liter (x ≠ y)!'},
-  {q:'Jak rozwiązać równanie 5x + 3 = 18?',a:'1. Przenieś 3: 5x = 18−3 = 15. 2. Podziel: x = 15÷5 = <strong>3</strong>. 3. Sprawdzenie: 5×3+3 = 18 ✓.'},
-  {q:'Oblicz wartość 2x² − 3x dla x=4',a:'2×(4²) − 3×4 = 2×16 − 12 = 32 − 12 = <strong>20</strong>. Zawsze podstawiaj w nawiasach!'},
-  {q:'Jak zapisać "dwukrotność sumy x i 3"?',a:'<strong>2 × (x + 3)</strong> = 2(x+3). Nawiasy są ważne! Bez nich: 2x+3 ≠ 2(x+3).'},
-  {q:'Co to przeniesienie wyrazu na drugą stronę?',a:'Wyraz przenosi się ze <strong>zmianą znaku</strong>: + staje się −, × staje się ÷. Np. x+5=12 → x=12<strong>−</strong>5=7.'},
-],
-quiz:[
-  {q:'Ile wynosi 3x − 2 dla x=5?',opts:['13','8','17','11'],a:0,hint:'Podstaw x=5',expl:'3×5 − 2 = 15 − 2 = <strong>13</strong>.'},
-  {q:'Uprość: 6x + 2y − 2x + y',opts:['4x + 3y','8x + 3y','4x + y','8x + y'],a:0,hint:'Zbierz osobno x i y',expl:'6x−2x = 4x; 2y+y = 3y. Wynik: <strong>4x + 3y</strong>.'},
-  {q:'Rozwiąż: 4x + 5 = 21',opts:['x=4','x=5','x=6','x=3'],a:0,hint:'4x = 21−5, potem ÷4',expl:'4x = 21−5 = 16. x = 16÷4 = <strong>4</strong>. Sprawdzenie: 4×4+5=21 ✓.'},
-  {q:'Rozwinij nawias: 3(2x − 4)',opts:['6x − 4','6x − 12','5x − 7','6x + 12'],a:1,hint:'3 × 2x i 3 × (−4)',expl:'3×2x = 6x; 3×(−4) = −12. Wynik: <strong>6x − 12</strong>.'},
-  {q:'"Suma liczby o 5 większej od x i 2x = 23" — ile to x?',opts:['x=4','x=5','x=6','x=7'],a:2,hint:'(x+5) + 2x = 23',expl:'(x+5)+2x=23 → 3x+5=23 → 3x=18 → x=<strong>6</strong>. Sprawdź: (6+5)+12=23 ✓.'},
-]},
-];
-
-// ══════════════════ STATE
-let ct=TOPICS[0],tab='theory',fcI=0,fcF=false,qi=0,sel=null,score=0,mistakes=[],qList=[];
-
-function applyColors(id){
-  const c=C[id];
-  document.documentElement.style.setProperty('--c',c.c);
-  document.documentElement.style.setProperty('--c-bg',c.bg);
-  document.documentElement.style.setProperty('--c-d',c.d);
-}
-
-function setTopic(id){
-  ct=TOPICS.find(t=>t.id===id);
-  tab='theory';fcI=0;fcF=false;
-  qi=0;sel=null;score=0;mistakes=[];
-  qList=[...ct.quiz].sort(()=>Math.random()-.5);
-  applyColors(id);
-  renderTopics();renderITabs();render();
-}
-
-function setTab(id){
-  tab=id;fcI=0;fcF=false;
-  if(id==='quiz'){qi=0;sel=null;score=0;mistakes=[];qList=[...ct.quiz].sort(()=>Math.random()-.5);}
-  renderITabs();render();
-}
-
-function renderTopics(){
-  document.getElementById('topic-grid').innerHTML=TOPICS.map(t=>`
-    <button class="tcard${t.id===ct.id?' active':''}" onclick="setTopic('${t.id}')"
-      style="${t.id===ct.id?`border-color:${C[t.id].c};background:${C[t.id].bg}`:''}">
-      <div class="tc-ico">${t.ico}</div>
-      <div class="tc-body">
-        <div class="tc-num">${t.num}</div>
-        <div class="tc-name">${t.name}</div>
-      </div>
-    </button>`).join('');
-}
-
-const TABS=[
-  {id:'theory',l:'📖 Teoria'},
-  {id:'formulas',l:'📋 Wzory'},
-  {id:'examples',l:'✏️ Przykłady'},
-  {id:'flash',l:'🃏 Fiszki'},
-  {id:'quiz',l:'🧮 Test'},
-];
-
-function renderITabs(){
-  document.getElementById('itabs').innerHTML=TABS.map(t=>`
-    <button class="itab${tab===t.id?' active':''}"
-      style="${tab===t.id?`background:${C[ct.id].c}`:''}
-      " onclick="setTab('${t.id}')">${t.l}</button>`).join('');
-}
-
-// RENDERS
-function renderTheory(){
-  const th=ct.theory;
-  return `<div class="card">
-    <div class="card-h">${ct.ico} ${ct.name}</div>
-    <p style="font-size:14px;color:var(--muted);margin-bottom:14px;line-height:1.6">${th.summary}</p>
-    <div class="tgrid">${th.blocks.map(b=>`
-      <div class="tbox" style="background:${C[b.t].bg};border-color:${C[b.t].c}40">
-        <h3 style="color:${C[b.t].d}">${b.h}</h3>
-        <ul style="color:${C[b.t].d}">${b.items.map(i=>`<li>${i}</li>`).join('')}</ul>
-      </div>`).join('')}
-    </div>
-  </div>
-  <div style="margin-top:4px"><button class="btn btn-pri" onclick="setTab('formulas')">📋 Wzory →</button></div>`;
-}
-
-function renderFormulas(){
-  return `<div class="card">
-    <div class="card-h">📋 Wzory — ${ct.name}</div>
-    <div class="formula">${ct.theory.formulas}</div>
-    <div style="margin-top:4px"><button class="btn btn-pri" onclick="setTab('examples')">✏️ Przykłady →</button></div>
-  </div>`;
-}
-
-function renderExamples(){
-  return `<div class="card">
-    <div class="card-h">✏️ Przykłady krok po kroku</div>
-    <div class="ex-list">${ct.examples.map(e=>`
-      <div class="ex-item">
-        <div class="ex-q">${e.q}</div>
-        <div class="ex-steps">
-          ${e.steps.map((s,i)=>`
-            <div class="ex-step">
-              <div class="ex-step-n" style="background:${C[ct.id].c}">${i+1}</div>
-              <div>${s}</div>
-            </div>`).join('')}
-          <div class="ex-ans">✅ Odpowiedź: ${e.ans}</div>
-        </div>
-      </div>`).join('')}
-    </div>
-  </div>`;
-}
-
-function renderFlash(){
-  const cards=ct.flashcards;
-  const c=cards[fcI];
-  return `<div class="card">
-    <div class="card-h">🃏 Fiszki — ${ct.name}</div>
-    <div class="fc-meta">Kliknij kartę · ${fcI+1} z ${cards.length}</div>
-    <div class="flashcard${fcF?' flipped':''}" onclick="flipCard()">
-      <div class="fc-inner">
-        <div class="fc-front"><div class="fc-q">${c.q}</div><div class="fc-tap">👆 Kliknij, by zobaczyć odpowiedź</div></div>
-        <div class="fc-back" style="background:${C[ct.id].bg};border-color:${C[ct.id].c}">
-          <div class="fc-a" style="--c-d:${C[ct.id].d}">${c.a}</div>
-        </div>
-      </div>
-    </div>
-    <div class="fc-nav">
-      <button class="btn btn-sec" onclick="fcNav(-1)" ${fcI===0?'disabled':''}>← Poprzednia</button>
-      <span class="fc-count">${fcI+1} / ${cards.length}</span>
-      <button class="btn btn-pri" onclick="fcNav(1)" ${fcI===cards.length-1?'disabled':''}>Następna →</button>
-    </div>
-  </div>`;
-}
-
-function flipCard(){fcF=!fcF;render();}
-function fcNav(d){fcI+=d;fcF=false;render();}
-
-function renderQuiz(){
-  if(qi>=qList.length)return renderResult();
-  const q=qList[qi];
-  const total=qList.length;
-  const pct=Math.round((qi/total)*100);
-  const optsHTML=q.opts.map((o,i)=>{
-    let cls='opt';
-    if(sel!==null){if(i===q.a)cls+=' ok';else if(i===sel&&sel!==q.a)cls+=' no';}
-    return `<button class="${cls}" onclick="choose(${i})" ${sel!==null?'disabled':''}>${o}</button>`;
-  }).join('');
-  let fb='';
-  if(sel!==null){
-    fb=sel===q.a
-      ?`<div class="feedback ok">✓ Правильно! <div class="expl">${q.expl}</div></div>`
-      :`<div class="feedback no">✗ Правильna: <strong>${q.opts[q.a]}</strong><div class="expl">${q.expl}</div></div>`;
-  }
-  return `
-  <div class="prog-bar"><div class="prog-fill" style="background:${C[ct.id].c};width:${pct}%"></div></div>
-  <div class="score-row">
-    <span>Pytanie <b>${qi+1}/${total}</b></span>
-    <span>✅ <b style="color:var(--ok)">${score}</b></span>
-    <span>❌ <b style="color:var(--err)">${mistakes.length}</b></span>
-  </div>
-  <div class="card">
-    <div class="q-label">Pytanie ${qi+1}</div>
-    <div class="q-text">${q.q}</div>
-    <div class="q-hint">💡 ${q.hint}</div>
-    <div class="opts">${optsHTML}</div>
-    ${fb}
-  </div>
-  <div class="nav-row">${sel!==null?`<button class="btn btn-pri" onclick="nextQ()">Dalej →</button>`:''}</div>`;
-}
-
-function renderResult(){
-  const total=qList.length;
-  const pct=Math.round((score/total)*100);
-  const emoji=pct>=80?'🎉':pct>=60?'👍':'📚';
-  const stars=pct>=100?'⭐⭐⭐':pct>=80?'⭐⭐':pct>=60?'⭐':'';
-  const msg=pct>=80?'Warwara — gotowa na kontrolną!':pct>=60?'Dobrze! Powtórz błędy.':'Wróć do teorii i wzorów.';
-  const mHTML=mistakes.length?`
-    <div style="margin-top:16px;text-align:left">
-      <div style="font-size:14px;font-weight:800;margin-bottom:10px">Błędy:</div>
-      ${mistakes.map(m=>`
-        <div class="mk">
-          <div class="mk-q">${m.q}</div>
-          <div class="mk-w">Ти відповіла: <b>${m.wrong}</b></div>
-          <div class="mk-c">✓ ${m.correct}</div>
-          <div class="mk-r">${m.rule}</div>
-        </div>`).join('')}
-    </div>`:'';
-  return `<div class="card"><div class="result">
-    <div style="font-size:42px">${emoji}</div>
-    <div style="font-size:24px;margin:4px 0">${stars}</div>
-    <div class="big" style="color:${C[ct.id].c}">${score}/${total}</div>
-    <div class="msg">${msg}</div>
-    <div class="result-btns">
-      <button class="btn btn-sec" onclick="setTab('theory')">📖 Teoria</button>
-      <button class="btn btn-sec" onclick="setTab('formulas')">📋 Wzory</button>
-      <button class="btn btn-pri" onclick="setTab('quiz')">Ponownie ↺</button>
-    </div>
-    ${mHTML}
-  </div></div>`;
-}
-
-function choose(i){
-  if(sel!==null)return;
-  sel=i;
-  const q=qList[qi];
-  if(i===q.a)score++;
-  else mistakes.push({q:q.q,wrong:q.opts[i],correct:q.opts[q.a],rule:q.expl});
-  render();
-}
-function nextQ(){qi++;sel=null;render();}
-
-function render(){
-  const c=document.getElementById('content');
-  if(tab==='theory')c.innerHTML=renderTheory();
-  else if(tab==='formulas')c.innerHTML=renderFormulas();
-  else if(tab==='examples')c.innerHTML=renderExamples();
-  else if(tab==='flash')c.innerHTML=renderFlash();
-  else c.innerHTML=renderQuiz();
-}
-
-setTopic('t1');
+(function(){
+  try{
+    var s=JSON.parse(localStorage.getItem('ld_v1')||'null'); if(!s||!s.prog) return;
+    var chips=[], names={1:'Liczby',2:'Rozwinięcia',3:'Zaokrąglanie',4:'Dodawanie'};
+    [1,2,3,4].forEach(function(l){ var p=s.prog[l]; if(p&&p.best!=null) chips.push('<span class="chip good">'+l+' '+names[l]+': '+p.best+'/'+p.bestOf+'</span>'); });
+    if(s.prog.final&&s.prog.final.best!=null) chips.push('<span class="chip good">🏁 '+s.prog.final.best+'/'+s.prog.final.bestOf+'</span>');
+    if(s.mistakes&&s.mistakes.length) chips.push('<span class="chip">🔁 помилок до повтору: '+s.mistakes.length+'</span>');
+    if(chips.length) document.getElementById('prog').innerHTML=chips.join('');
+  }catch(e){}
+})();
 </script>
 </body>
 </html>
