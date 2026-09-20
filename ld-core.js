@@ -371,7 +371,7 @@ GEN.frac2dec = function (r) {
 };
 
 GEN.zeros = function (r) {
-  const k = ri(r, 1, 3); const num = k === 1 ? ri(r, 1, 9) : ri(r, 1, k === 2 ? 20 : 30);
+  const k = ri(r, 1, 3); const num = k === 1 ? ri(r, 1, 9) : r() < 0.6 ? ri(r, 1, k === 2 ? 20 : 99) : ri(r, k === 2 ? 21 : 100, k === 2 ? 99 : 999);
   const w = r() < 0.5 ? 0 : ri(r, 1, 3);
   const total = w * pow10(k) + num;
   const shown = w ? MX(w, num, pow10(k)) : F(num, pow10(k));
@@ -481,7 +481,7 @@ function divisionSol(n, d, e) {
 }
 GEN.divide = function (r) {
   const roll = r();
-  const d = roll < 0.6 ? pick(r, [3, 6, 9, 11, 12, 15, 18, 22]) : roll < 0.8 ? pick(r, [7, 13, 27, 37]) : pick(r, [4, 5, 8, 16, 20, 25, 40]);
+  const d = roll < 0.6 ? pick(r, [3, 6, 9, 11, 12, 15, 18, 22, 24, 30, 33, 36, 44, 45, 55, 66]) : roll < 0.8 ? pick(r, [7, 13, 27, 37, 14, 21]) : pick(r, [4, 5, 8, 16, 20, 25, 40, 32, 50]);
   let n; do { n = ri(r, 1, d - 1); } while (n % d === 0);
   const e = expand(n, d);
   return inputQ({
@@ -504,8 +504,8 @@ GEN.mixDiv = function (r) {
 };
 GEN.finite = function (r) {
   const mode = ri(r, 0, 3); let n, d;
-  if (mode === 0) { d = pick(r, [4, 5, 8, 10, 16, 20, 25, 40, 50]); n = ri(r, 1, d - 1); }
-  else if (mode === 1) { d = pick(r, [3, 6, 7, 9, 11, 12, 13, 15, 18, 22]); do { n = ri(r, 1, d - 1); } while (gcd(n, d) !== 1); }
+  if (mode === 0) { d = pick(r, [4, 5, 8, 10, 16, 20, 25, 32, 40, 50, 64, 80, 100]); n = ri(r, 1, d - 1); }
+  else if (mode === 1) { d = pick(r, [3, 6, 7, 9, 11, 12, 13, 15, 18, 22, 24, 30, 33, 36, 45, 55]); do { n = ri(r, 1, d - 1); } while (gcd(n, d) !== 1); }
   else if (mode === 2) { // пастка: скорочується до знаменника з 2 і 5
     const base = pick(r, [2, 4, 5, 8, 10, 20]), k = pick(r, [3, 6, 9, 12]); d = base * k; n = ri(r, 1, base - 1) * k;
   } else { const base = pick(r, [3, 7, 9, 11]), k = pick(r, [2, 4, 5, 10]); d = base * k; n = ri(r, 1, base - 1) * k; }
@@ -936,22 +936,30 @@ function weighted(r, lesson) {
   const list = LESSONS[lesson].gens, tot = list.reduce((a, x) => a + x[1], 0); let x = r() * tot;
   for (const [g, w] of list) { if ((x -= w) < 0) return g; } return list[0][0];
 }
-function makeSet(lesson, n, baseSeed) {
+function sig(q) { // короткий «відбиток» задачі: тип + умова + варіанти відповіді
+  const t = q.g + '|' + q.prompt.uk + '|' + (q.choices ? JSON.stringify(q.choices) : '');
+  let h = 5381; for (let i = 0; i < t.length; i++) h = ((h << 5) + h + t.charCodeAt(i)) | 0;
+  return (h >>> 0).toString(36);
+}
+function freshQ(g, avoid, seedFn) { // нова задача типу g, якої немає в avoid (Set відбитків)
+  let q; for (let i = 0; i < 60; i++) { q = makeQ(g, seedFn()); if (!avoid || !avoid.has(sig(q))) return q; }
+  return q;
+}
+function makeSet(lesson, n, baseSeed, avoid) {
   const r = mulberry32(baseSeed); const out = []; const used = new Set();
   const list = LESSONS[lesson].gens.map(x => x[0]);
-  // спершу по одному з кожного типу (у довільному порядку), далі за вагами
-  const order = shuffle(r, list);
+  const order = shuffle(r, list); // спершу по одному з кожного типу, далі за вагами
   for (let i = 0; i < n; i++) {
     const g = i < order.length ? order[i] : weighted(r, lesson);
     let q, tries = 0;
-    do { q = makeQ(g, Math.floor(r() * 4294967296)); tries++; } while (used.has(g + '|' + JSON.stringify(q.prompt.uk)) && tries < 20);
-    used.add(g + '|' + JSON.stringify(q.prompt.uk)); out.push(q);
+    do { q = makeQ(g, Math.floor(r() * 4294967296)); tries++; } while ((used.has(sig(q)) || (avoid && avoid.has(sig(q)))) && tries < 60);
+    used.add(sig(q)); out.push(q);
   }
   return shuffle(r, out);
 }
-function makeFinal(baseSeed, perLesson) {
-  const r = mulberry32(baseSeed); let all = [];
-  for (const l of [1, 2, 3, 4]) all = all.concat(makeSet(l, perLesson, Math.floor(r() * 4294967296)));
+function makeFinal(baseSeed, perLesson, avoid) {
+  const r = mulberry32(baseSeed); let all = []; const av = new Set(avoid || []);
+  for (const l of [1, 2, 3, 4]) { const part = makeSet(l, perLesson, Math.floor(r() * 4294967296), av); part.forEach(q => av.add(sig(q))); all = all.concat(part); }
   return all;
 }
 const MSG = {
@@ -965,6 +973,6 @@ const MSG = {
 };
 const NEAR = new Set(['form-mixed', 'form-frac', 'form-dec', 'reduce', 'fmt', 'per']);
 
-const API = { F, MX, BLANK, fracH, mixH, decH, GEN, LESSONS, makeQ, makeSet, makeFinal, weighted, mulberry32, parseNum, expand, fmtExp, digitsOf, canon, MSG, NEAR, T, cmpSym, gcd, lcm, fr, fadd, fsub, fcmp };
+const API = { F, MX, BLANK, fracH, mixH, decH, GEN, LESSONS, makeQ, makeSet, makeFinal, freshQ, sig, weighted, mulberry32, parseNum, expand, fmtExp, digitsOf, canon, MSG, NEAR, T, cmpSym, gcd, lcm, fr, fadd, fsub, fcmp };
 if (typeof module !== 'undefined' && module.exports) module.exports = API; else root.LD = API;
 })(typeof self !== 'undefined' ? self : this);

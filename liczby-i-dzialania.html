@@ -155,7 +155,7 @@ footer{text-align:center;font-size:12px;color:#9891b0;padding:8px 20px 30px;}
 <footer id="foot"></footer>
 <noscript><main><div class="card">Потрібен JavaScript. / Wymagany JavaScript.</div></main></noscript>
 
-<script src="ld-core.js?v=1"></script>
+<script src="ld-core.js?v=2"></script>
 <script>
 (function(){
 'use strict';
@@ -166,10 +166,12 @@ const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',
 
 /* ---------- збереження ---------- */
 const KEY='ld_v1';
-function load(){try{const s=JSON.parse(localStorage.getItem(KEY));if(s&&typeof s==='object')return Object.assign({lang:'uk',prog:{},mistakes:[]},s);}catch(e){}return {lang:'uk',prog:{},mistakes:[]};}
+function load(){try{const s=JSON.parse(localStorage.getItem(KEY));if(s&&typeof s==='object')return Object.assign({lang:'uk',prog:{},mistakes:[],seen:[]},s);}catch(e){}return {lang:'uk',prog:{},mistakes:[],seen:[]};}
 let store=load();
 function save(){try{localStorage.setItem(KEY,JSON.stringify(store));}catch(e){}}
 const prog=k=>store.prog[k]||(store.prog[k]={best:null,bestOf:null,tests:0,ok:0,total:0});
+const seenSet=()=>new Set(store.seen||[]);
+function markSeen(q){const k=LD.sig(q); store.seen=(store.seen||[]).filter(x=>x!==k); store.seen.push(k); if(store.seen.length>500) store.seen=store.seen.slice(-500); save();}
 const seed32=()=>{try{const a=new Uint32Array(1);crypto.getRandomValues(a);return a[0];}catch(e){return (Date.now()*1103515245+Math.floor(Math.random()*1e9))>>>0;}};
 
 /* ---------- мови ---------- */
@@ -184,11 +186,11 @@ const I={
   newTest:'Новий тест ↻',toTheory:'📖 До теорії',toPractice:'🏋️ Тренуватись',repeatMist:'🔁 Повторити помилки',
   resGreat:'Відмінно! Ти готова 🌟',resGood:'Добре! Розбери помилки нижче.',resOk:'Непогано. Повтори теорію й спробуй ще.',resLow:'Треба ще потренуватись — почни з теорії й тренажера.',
   mistTitle:'Розбір помилок',noMist:'Жодної помилки — чудово! 🌟',
-  mistEmpty:'Немає помилок для повторення 🎉',mistEmptySub:'Коли помилятимешся в тренажері чи тесті — задачі з’являться тут, поки не розв’яжеш їх правильно.',
+  mistEmpty:'Немає помилок для повторення 🎉',mistEmptySub:'Коли помилятимешся в тренажері чи тесті — типи задач з’являться тут, а числа щоразу будуть інші.',
   mistLeft:n=>`Залишилось: ${n}`,
   intro:'<h2>Привіт, Варваро! 👋</h2><p>Тут — усе по чотирьох уроках із розділу «Liczby i działania», які ви зараз проходите. Порядок: <b>Теорія → Тренажер → Тест</b>. Тренажер щоразу дає нові приклади, тому можна тренуватись скільки завгодно.</p><p class="muted">Терміни польською подано в дужках — саме так вони звучать на уроці й у контрольній. Перемикач <b>UA / PL</b> вгорі змінює мову всього сайту.</p>',
   practiceStat:'Тренажер',bestTest:'Найкращий тест',noTest:'тест ще не проходила',
-  finalCard:'Змішаний тест на 20 питань: по 5 з кожного уроку. Наприкінці — розбір по темах.',mistCard:'Задачі, де були помилки, повертаються сюди, доки не розв’яжеш їх правильно.',
+  finalCard:'Змішаний тест на 20 питань: по 5 з кожного уроку. Наприкінці — розбір по темах.',mistCard:'Тут — нові задачі того типу, де були помилки (числа щоразу інші). Розв’яжеш правильно — тип зникає зі списку.',
   finalTitle:'Підсумковий тест · уроки 1–4',finalStart:'Почати (20 питань)',testStart:'Почати тест (10 питань)',testIntro:'10 питань, відповіді перевіряються наприкінці — як на контрольній. Розбір помилок буде після тесту.',
   foot:'Тренажер для Варвари · Liczby i działania · зроблено з ❤️',
   byLesson:'За темами',
@@ -206,11 +208,11 @@ const I={
   newTest:'Nowy test ↻',toTheory:'📖 Do teorii',toPractice:'🏋️ Ćwicz',repeatMist:'🔁 Powtórz błędy',
   resGreat:'Świetnie! Jesteś gotowa 🌟',resGood:'Dobrze! Przejrzyj błędy poniżej.',resOk:'Nieźle. Powtórz teorię i spróbuj jeszcze raz.',resLow:'Trzeba jeszcze poćwiczyć — zacznij od teorii i trenera.',
   mistTitle:'Analiza błędów',noMist:'Ani jednego błędu — świetnie! 🌟',
-  mistEmpty:'Brak błędów do powtórzenia 🎉',mistEmptySub:'Gdy pomylisz się w trenerze lub teście — zadania pojawią się tutaj, aż rozwiążesz je poprawnie.',
+  mistEmpty:'Brak błędów do powtórzenia 🎉',mistEmptySub:'Gdy pomylisz się w trenerze lub teście — typy zadań pojawią się tutaj, a liczby będą za każdym razem inne.',
   mistLeft:n=>`Zostało: ${n}`,
   intro:'<h2>Cześć, Warwaro! 👋</h2><p>Tu jest wszystko do czterech lekcji z działu „Liczby i działania”, które teraz przerabiacie. Kolejność: <b>Teoria → Trener → Test</b>. Trener za każdym razem daje nowe przykłady, więc możesz ćwiczyć do woli.</p><p class="muted">Przełącznik <b>UA / PL</b> u góry zmienia język całej strony.</p>',
   practiceStat:'Trener',bestTest:'Najlepszy test',noTest:'test jeszcze nie rozwiązany',
-  finalCard:'Test mieszany na 20 pytań: po 5 z każdej lekcji. Na końcu — podsumowanie według tematów.',mistCard:'Zadania, w których był błąd, wracają tutaj, aż rozwiążesz je poprawnie.',
+  finalCard:'Test mieszany na 20 pytań: po 5 z każdej lekcji. Na końcu — podsumowanie według tematów.',mistCard:'Tu są nowe zadania tego typu, w którym był błąd (za każdym razem inne liczby). Rozwiążesz poprawnie — typ znika z listy.',
   finalTitle:'Test podsumowujący · lekcje 1–4',finalStart:'Zacznij (20 pytań)',testStart:'Zacznij test (10 pytań)',testIntro:'10 pytań, odpowiedzi sprawdzane na końcu — jak na sprawdzianie. Analiza błędów po teście.',
   foot:'Trener dla Warwary · Liczby i działania · zrobione z ❤️',
   byLesson:'Według tematów',
@@ -596,7 +598,7 @@ function startPractice(o){S.prac={lesson:o.lesson,list:o.list||null,idx:0,ok:0,t
 function nextPractice(){
   const P=S.prac; let q;
   if(P.list){ q=P.list[0]; if(!q){P.q=null;return;} }
-  else { const r=LD.mulberry32(seed32()); q=LD.makeQ(LD.weighted(r,P.lesson),seed32()); }
+  else { const r=LD.mulberry32(seed32()); q=LD.freshQ(LD.weighted(r,P.lesson),seenSet(),seed32); markSeen(q); }
   P.q=q; P.head=null;
 }
 function practiceHead(){const P=S.prac;const stat=`✓ ${P.ok}/${P.total}${P.streak>=3?` · 🔥 ${t('streak')} ${P.streak}`:''}`;return `<span>${S.view==='mistakes'?t('mistLeft')(store.mistakes.length):t('practice')}</span><span>${stat}</span>`;}
@@ -606,23 +608,23 @@ function drawPractice(){
   mountQ(P.q,{reveal:true,head:practiceHead,onDone:res=>practiceDone(P.q,res)});
 }
 function practiceDone(q,res){
-  const P=S.prac; P.total++; const key=q.g+'|'+q.seed;
+  const P=S.prac; P.total++;
   if(res.correct){P.ok++;P.streak++;} else P.streak=0;
   if(S.view==='lesson'){const pg=prog(q.lesson);pg.total++; if(res.correct) pg.ok++;}
-  const i=store.mistakes.findIndex(m=>m.g+'|'+m.seed===key);
-  if(res.correct){ if(i>=0) store.mistakes.splice(i,1); } else if(i<0) { store.mistakes.push({g:q.g,seed:q.seed}); if(store.mistakes.length>40) store.mistakes.shift(); }
+  if(q.entry){ if(res.correct){const i=store.mistakes.indexOf(q.entry); if(i>=0) store.mistakes.splice(i,1);} }
+  else if(!res.correct){ store.mistakes.push({g:q.g}); if(store.mistakes.length>40) store.mistakes.shift(); }
   save(); renderNav();
 }
 function practiceNext(){
   const P=S.prac;
-  if(P.list){ const done=QC&&QC.res&&QC.res.correct; const q=P.list.shift(); if(!done) P.list.push(q); if(!P.list.length){ P.q=null; render(false); return; } P.q=P.list[0]; }
+  if(P.list){ const done=QC&&QC.res&&QC.res.correct; const q=P.list.shift(); if(!done&&q.entry) P.list.push(freshFor(q.entry)); if(!P.list.length){ P.q=null; render(false); return; } P.q=P.list[0]; }
   else nextPractice();
   const host=$('#qhost'); if(host){mountQ(P.q,{reveal:true,head:practiceHead,onDone:res=>practiceDone(P.q,res)});}
 }
 
 /* ---------- тест ---------- */
 function startTest(lesson){
-  const qs=lesson==='final'?LD.makeFinal(seed32(),5):LD.makeSet(lesson,10,seed32());
+  const qs=lesson==='final'?LD.makeFinal(seed32(),5,seenSet()):LD.makeSet(lesson,10,seed32(),seenSet()); qs.forEach(markSeen);
   const T_={lesson,qs,i:0,ans:[],done:false}; if(lesson==='final') S.fin=T_; else S.test=T_;
 }
 const curTest=()=>S.view==='final'?S.fin:S.test;
@@ -646,7 +648,7 @@ function finishTest(T_){
   T_.done=true; const n=T_.qs.length; const ok=T_.ans.filter(a=>a.correct).length; T_.ok=ok;
   const key=T_.lesson==='final'?'final':T_.lesson; const pg=prog(key); pg.tests++;
   if(pg.best==null||ok/n>=pg.best/pg.bestOf){pg.best=ok;pg.bestOf=n;}
-  T_.qs.forEach((q,i)=>{ if(!T_.ans[i].correct){const k=q.g+'|'+q.seed; if(!store.mistakes.some(m=>m.g+'|'+m.seed===k)) store.mistakes.push({g:q.g,seed:q.seed}); }});
+  T_.qs.forEach((q,i)=>{ if(!T_.ans[i].correct) store.mistakes.push({g:q.g}); });
   if(store.mistakes.length>40) store.mistakes=store.mistakes.slice(-40);
   save();
 }
@@ -676,8 +678,9 @@ function viewFinal(app){
 }
 
 /* ---------- помилки ---------- */
+function freshFor(m){const q=LD.freshQ(m.g,seenSet(),seed32); q.entry=m; markSeen(q); return q;}
 function startMistakes(){
-  const list=store.mistakes.map(m=>{try{return LD.makeQ(m.g,m.seed);}catch(e){return null;}}).filter(Boolean);
+  const list=store.mistakes.map(m=>{try{return freshFor(m);}catch(e){return null;}}).filter(Boolean);
   S.prac={lesson:0,list,idx:0,ok:0,total:0,streak:0,q:list[0]||null};
 }
 function viewMistakes(app){
