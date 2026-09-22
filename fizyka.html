@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fizyka — start! 🔬</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%94%AC%3C/text%3E%3C/svg%3E">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Baloo+2:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --blue: #2563eb;
+    --blue-soft: #dbeafe;
+    --teal: #0d9488;
+    --teal-soft: #ccfbf1;
+    --purple: #7c3aed;
+    --purple-soft: #ede9fe;
+    --orange: #ea580c;
+    --orange-soft: #ffedd5;
+    --pink: #db2777;
+    --pink-soft: #fce7f3;
+    --bg: #f5f7fb;
+    --card: #ffffff;
+    --text: #1e293b;
+    --muted: #64748b;
+    --border: #e2e8f0;
+    --shadow: 0 4px 24px rgba(0,0,0,0.08);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Nunito', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+
+  .hero { background: linear-gradient(135deg, #1e3a8a 0%, #7c3aed 100%); padding: 38px 20px 28px; text-align: center; position: relative; overflow: hidden; }
+  .hero::before { content:''; position:absolute; inset:0; background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.06'%3E%3Ccircle cx='30' cy='30' r='3'/%3E%3Ccircle cx='6' cy='6' r='2'/%3E%3Ccircle cx='54' cy='54' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"); }
+  .hero h1 { font-family:'Baloo 2',sans-serif; font-size:clamp(1.7rem,5.5vw,2.8rem); font-weight:800; color:#fff; text-shadow:0 2px 8px rgba(0,0,0,.2); position:relative; }
+  .hero p { color:rgba(255,255,255,.85); font-size:1rem; margin-top:8px; position:relative; }
+  .hero a.back { display:inline-block; margin-top:14px; color:#fff; background:rgba(255,255,255,.18); border:1px solid rgba(255,255,255,.35); padding:5px 14px; border-radius:16px; font-size:.85rem; font-weight:700; text-decoration:none; position:relative; }
+
+  .tabs { display:flex; gap:0; background:#fff; border-bottom:2px solid var(--border); overflow-x:auto; position:sticky; top:0; z-index:100; box-shadow:0 2px 8px rgba(0,0,0,.06); }
+  .tab { padding:14px 18px; font-weight:700; font-size:.88rem; color:var(--muted); cursor:pointer; white-space:nowrap; border:none; border-bottom:3px solid transparent; background:none; transition:all .2s; font-family:'Nunito',sans-serif; }
+  .tab:hover { color:var(--purple); background:#f8f7ff; }
+  .tab.active { color:var(--purple); border-bottom-color:var(--purple); }
+
+  .main { max-width:900px; margin:0 auto; padding:26px 16px 60px; }
+  .section { display:none; }
+  .section.active { display:block; }
+
+  .card { background:var(--card); border-radius:16px; padding:24px; margin-bottom:18px; box-shadow:var(--shadow); border:1px solid var(--border); }
+  .card-title { font-family:'Baloo 2',sans-serif; font-size:1.2rem; font-weight:700; margin-bottom:14px; display:flex; align-items:center; gap:10px; }
+  .card-title .icon { width:34px; height:34px; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:1.05rem; flex-shrink:0; }
+  .icon-blue{background:var(--blue-soft);} .icon-teal{background:var(--teal-soft);} .icon-purple{background:var(--purple-soft);} .icon-orange{background:var(--orange-soft);} .icon-pink{background:var(--pink-soft);}
+
+  .card p, .card li { font-size:.95rem; line-height:1.65; color:var(--text); }
+  .card ul, .card ol { margin-left:20px; margin-top:6px; }
+  .card ol li, .card ul li { margin-bottom:6px; }
+  .ua { color:var(--muted); font-size:.82rem; font-style:italic; }
+
+  .rules-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:14px; margin-top:6px; }
+  .rule-box { border-radius:12px; padding:16px; border-left:4px solid; }
+  .rule-box.blue{background:#eff6ff;border-color:var(--blue);} .rule-box.teal{background:#f0fdfa;border-color:var(--teal);}
+  .rule-box.purple{background:#f5f3ff;border-color:var(--purple);} .rule-box.orange{background:#fff7ed;border-color:var(--orange);}
+  .rule-box.pink{background:#fdf2f8;border-color:var(--pink);}
+  .rule-title{font-weight:800;font-size:.9rem;margin-bottom:6px;}
+  .rule-title.blue{color:#1d4ed8;} .rule-title.teal{color:#0f766e;} .rule-title.purple{color:#5b21b6;} .rule-title.orange{color:#9a3412;} .rule-title.pink{color:#9d174d;}
+  .rule-text{font-size:.87rem;line-height:1.55;color:var(--text);}
+
+  .table-wrap { overflow-x:auto; }
+  table.units { width:100%; border-collapse:collapse; margin-top:8px; font-size:.88rem; }
+  table.units th, table.units td { border:1px solid var(--border); padding:8px 10px; text-align:left; }
+  table.units th { background:#f1f5f9; font-weight:800; }
+  table.units td.sym { font-weight:800; color:var(--blue); white-space:nowrap; }
+
+  .steps { counter-reset: step; list-style:none; margin-left:0 !important; }
+  .steps li { counter-increment: step; position:relative; padding-left:42px; margin-bottom:14px; }
+  .steps li::before { content:counter(step); position:absolute; left:0; top:0; width:30px; height:30px; border-radius:50%; background:linear-gradient(135deg,var(--purple),var(--blue)); color:#fff; font-weight:800; display:flex; align-items:center; justify-content:center; font-size:.9rem; }
+  .steps b { color:var(--purple); }
+
+  .trick-box { background:linear-gradient(135deg,#fef3c7,#fde68a); border-radius:12px; padding:16px; margin-top:14px; }
+  .trick-title{font-weight:800;font-size:.9rem;color:#92400e;margin-bottom:6px;}
+  .trick-text{font-size:.87rem;line-height:1.55;color:#78350f;}
+
+  /* QUIZ */
+  .quiz-header{text-align:center;margin-bottom:16px;}
+  .quiz-header h2{font-family:'Baloo 2',sans-serif;font-size:1.5rem;color:var(--purple);}
+  .quiz-header p{color:var(--muted);margin-top:4px;font-size:.9rem;}
+  .quiz-progress{display:flex;align-items:center;gap:12px;margin-bottom:16px;}
+  .progress-bar-wrap{flex:1;height:10px;background:var(--border);border-radius:6px;overflow:hidden;}
+  .progress-bar{height:100%;background:linear-gradient(90deg,var(--purple),var(--blue));width:0%;transition:width .3s;}
+  .progress-text{font-weight:700;font-size:.85rem;color:var(--muted);white-space:nowrap;}
+  .question-card{background:var(--card);border-radius:16px;padding:26px;box-shadow:var(--shadow);border:1px solid var(--border);}
+  .question-card.correct{border-color:var(--teal);} .question-card.wrong{border-color:#ef4444;}
+  .q-number{font-size:.8rem;font-weight:800;color:var(--muted);margin-bottom:8px;text-transform:uppercase;letter-spacing:.03em;}
+  .q-category{background:var(--purple-soft);color:var(--purple);padding:2px 10px;border-radius:10px;margin-left:8px;text-transform:none;}
+  .q-text{font-size:1.08rem;font-weight:700;margin-bottom:18px;line-height:1.5;}
+  .answers{display:flex;flex-direction:column;gap:10px;}
+  .answer-btn{display:flex;align-items:center;gap:12px;text-align:left;padding:14px 16px;border-radius:12px;border:2px solid var(--border);background:#fff;font-family:'Nunito',sans-serif;font-size:.95rem;font-weight:600;color:var(--text);cursor:pointer;transition:all .15s;}
+  .answer-btn:hover:not(:disabled){border-color:var(--purple);background:#faf9ff;}
+  .answer-letter{width:26px;height:26px;border-radius:50%;background:var(--bg);border:2px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:800;flex-shrink:0;}
+  .answer-btn.selected-correct{border-color:var(--teal);background:#f0fdfa;}
+  .answer-btn.selected-correct .answer-letter{background:var(--teal);border-color:var(--teal);color:#fff;}
+  .answer-btn.selected-wrong{border-color:#ef4444;background:#fef2f2;}
+  .answer-btn.selected-wrong .answer-letter{background:#ef4444;border-color:#ef4444;color:#fff;}
+  .answer-btn.show-correct{border-color:var(--teal);background:#f0fdfa;}
+  .answer-btn:disabled{cursor:default;}
+  .feedback-msg{margin-top:14px;padding:12px 14px;border-radius:10px;font-weight:700;font-size:.9rem;display:none;}
+  .feedback-msg.correct{display:block;background:#f0fdfa;color:#0f766e;}
+  .feedback-msg.wrong{display:block;background:#fef2f2;color:#b91c1c;}
+  .next-btn{display:none;margin-top:16px;width:100%;padding:13px;border:none;border-radius:12px;background:linear-gradient(135deg,var(--purple),var(--blue));color:#fff;font-family:'Nunito',sans-serif;font-weight:800;font-size:.95rem;cursor:pointer;}
+  .next-btn.show{display:block;}
+  .results-card{display:none;text-align:center;background:var(--card);border-radius:16px;padding:36px 24px;box-shadow:var(--shadow);border:1px solid var(--border);}
+  .results-card.show{display:block;}
+  .results-emoji{font-size:3.5rem;margin-bottom:10px;}
+  .results-score{font-family:'Baloo 2',sans-serif;font-size:2.2rem;font-weight:800;color:var(--purple);}
+  .results-label{color:var(--muted);font-size:.9rem;margin-top:4px;}
+  .results-msg{margin-top:14px;font-size:1rem;font-weight:700;}
+  .retry-btn{margin-top:18px;margin-right:8px;padding:11px 22px;border:none;border-radius:12px;background:linear-gradient(135deg,var(--purple),var(--blue));color:#fff;font-weight:800;font-size:.9rem;cursor:pointer;font-family:'Nunito',sans-serif;}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <h1>🔬 Fizyka — start!</h1>
+  <p>Czym zajmuje się fizyka · Wielkości, jednostki i pomiary · Jak przeprowadzić doświadczenie</p>
+  <a class="back" href="index.html">← усі тренажери</a>
+</header>
+
+<nav class="tabs">
+  <button class="tab active" onclick="showSection('teoria1')">1. Czym jest fizyka</button>
+  <button class="tab" onclick="showSection('teoria2')">2. Wielkości i pomiary</button>
+  <button class="tab" onclick="showSection('teoria3')">3. Doświadczenie</button>
+  <button class="tab" onclick="showSection('test')">📝 Test</button>
+</nav>
+
+<div class="main">
+
+<!-- ============ TEORIA 1 ============ -->
+<div class="section active" id="teoria1">
+
+  <div class="card">
+    <div class="card-title"><div class="icon icon-blue">🌌</div>Czym zajmuje się fizyka?</div>
+    <p><b>Fizyka</b> to nauka przyrodnicza, która bada <b>materię, energię</b> i zjawiska zachodzące w przyrodzie — od ruchu ciał, przez światło i dźwięk, po elektryczność, magnetyzm, ciepło i budowę materii.</p>
+    <p class="ua">Фізика — наука, яка досліджує матерію, енергію та явища природи.</p>
+    <p style="margin-top:10px;">Fizyk stara się odpowiedzieć na pytania: <i>dlaczego</i> coś się dzieje i <i>jak</i> to opisać za pomocą liczb i praw.</p>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><div class="icon icon-purple">🧩</div>Działy fizyki</div>
+    <div class="rules-grid">
+      <div class="rule-box blue"><div class="rule-title blue">Mechanika</div><div class="rule-text">ruch ciał, siły, prędkość <span class="ua">(рух тіл, сили)</span></div></div>
+      <div class="rule-box teal"><div class="rule-title teal">Optyka</div><div class="rule-text">światło, odbicie, załamanie <span class="ua">(світло)</span></div></div>
+      <div class="rule-box orange"><div class="rule-title orange">Termodynamika</div><div class="rule-text">ciepło, temperatura <span class="ua">(тепло)</span></div></div>
+      <div class="rule-box purple"><div class="rule-title purple">Elektryczność i magnetyzm</div><div class="rule-text">prąd, pole magnetyczne <span class="ua">(струм, магнетизм)</span></div></div>
+      <div class="rule-box pink"><div class="rule-title pink">Akustyka</div><div class="rule-text">dźwięk i drgania <span class="ua">(звук)</span></div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><div class="icon icon-teal">🔍</div>Obserwacja, pomiar, doświadczenie</div>
+    <p>Fizyka opiera się na <b>obserwacji</b> zjawisk, <b>pomiarze</b> wielkości fizycznych i <b>doświadczeniu</b>, które sprawdza, czy przewidywania są prawdziwe. Fizyka jest ściśle powiązana z matematyką — prawa fizyczne zapisuje się często jako wzory.</p>
+    <div class="trick-box">
+      <div class="trick-title">💡 Zapamiętaj</div>
+      <div class="trick-text">Obserwacja → pytanie → hipoteza → doświadczenie → wniosek. To jest tzw. <b>metoda naukowa</b> <span class="ua">(науковий метод)</span>, z której korzysta fizyka i inne nauki przyrodnicze (chemia, biologia, astronomia).</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ============ TEORIA 2 ============ -->
+<div class="section" id="teoria2">
+
+  <div class="card">
+    <div class="card-title"><div class="icon icon-blue">📏</div>Co to jest wielkość fizyczna?</div>
+    <p><b>Wielkość fizyczna</b> to cecha ciała lub zjawiska, którą można <b>zmierzyć</b> i wyrazić liczbą z jednostką. Np. długość, masa, czas, temperatura, prędkość.</p>
+    <p class="ua">Фізична величина — це те, що можна виміряти і виразити числом з одиницею (довжина, маса, час...).</p>
+    <p style="margin-top:10px;">Wynik pomiaru zawsze zapisujemy jako: <b>liczba + jednostka</b>, np. <b>1,5 m</b>, <b>250 g</b>, <b>12 s</b>. Sama liczba bez jednostki nie ma sensu fizycznego!</p>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><div class="icon icon-purple">⚖️</div>Podstawowe wielkości i jednostki (układ SI)</div>
+    <div class="table-wrap">
+    <table class="units">
+      <tr><th>Wielkość</th><th>Jednostka</th><th>Symbol</th><th>Przyrząd</th></tr>
+      <tr><td>Długość <span class="ua">довжина</span></td><td>metr</td><td class="sym">m</td><td>linijka, taśma miernicza</td></tr>
+      <tr><td>Masa <span class="ua">маса</span></td><td>kilogram</td><td class="sym">kg</td><td>waga</td></tr>
+      <tr><td>Czas <span class="ua">час</span></td><td>sekunda</td><td class="sym">s</td><td>stoper, zegar</td></tr>
+      <tr><td>Temperatura <span class="ua">температура</span></td><td>kelwin (w szkole często °C)</td><td class="sym">K, °C</td><td>termometr</td></tr>
+      <tr><td>Natężenie prądu <span class="ua">сила струму</span></td><td>amper</td><td class="sym">A</td><td>amperomierz</td></tr>
+      <tr><td>Liczność materii</td><td>mol</td><td class="sym">mol</td><td>—</td></tr>
+      <tr><td>Światłość</td><td>kandela</td><td class="sym">cd</td><td>—</td></tr>
+    </table>
+    </div>
+    <p style="margin-top:10px;">Z jednostek podstawowych powstają <b>jednostki pochodne</b>, np. prędkość — <b>m/s</b>, pole powierzchni — <b>m²</b>, objętość — <b>m³</b>, gęstość — <b>kg/m³</b>.</p>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><div class="icon icon-orange">🔁</div>Przedrostki jednostek</div>
+    <div class="rules-grid">
+      <div class="rule-box blue"><div class="rule-title blue">kilo- (k)</div><div class="rule-text">×1000, np. 1 km = 1000 m; 1 kg = 1000 g</div></div>
+      <div class="rule-box teal"><div class="rule-title teal">centy- (c)</div><div class="rule-text">×0,01, np. 1 cm = 0,01 m</div></div>
+      <div class="rule-box purple"><div class="rule-title purple">mili- (m)</div><div class="rule-text">×0,001, np. 1 mm = 0,001 m</div></div>
+      <div class="rule-box orange"><div class="rule-title orange">Zamiana</div><div class="rule-text">2,5 km = 2500 m<br>350 g = 0,35 kg</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><div class="icon icon-pink">🎯</div>Dokładność pomiaru</div>
+    <p>Każdy pomiar ma pewną <b>dokładność</b> — zależy od przyrządu (np. linijka mierzy z dokładnością do 1 mm). Wynik pomiaru różni się nieco od wartości rzeczywistej — to <b>niepewność pomiarowa</b>.</p>
+    <p class="ua">Точність вимірювання залежить від приладу; результат завжди трохи відрізняється від справжнього значення.</p>
+    <div class="trick-box">
+      <div class="trick-title">💡 Zapamiętaj</div>
+      <div class="trick-text">Im dokładniejszy przyrząd, tym mniejsza niepewność pomiaru. Pomiar warto powtórzyć kilka razy i obliczyć <b>średnią</b>.</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ============ TEORIA 3 ============ -->
+<div class="section" id="teoria3">
+
+  <div class="card">
+    <div class="card-title"><div class="icon icon-purple">🧪</div>Etapy doświadczenia</div>
+    <ol class="steps">
+      <li><b>Problem badawczy / pytanie</b> — co chcemy sprawdzić? <span class="ua">(дослідницьке питання)</span></li>
+      <li><b>Hipoteza</b> — nasze przypuszczenie, co się stanie <span class="ua">(гіпотеза)</span></li>
+      <li><b>Plan doświadczenia</b> — dobór przyrządów i sposobu pomiaru</li>
+      <li><b>Przeprowadzenie doświadczenia</b> — wykonanie pomiarów</li>
+      <li><b>Obserwacje i zapis wyników</b> — najlepiej w tabeli</li>
+      <li><b>Wnioski</b> — czy hipoteza się potwierdziła? <span class="ua">(висновок)</span></li>
+    </ol>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><div class="icon icon-blue">🎛️</div>Zmienne w doświadczeniu</div>
+    <div class="rules-grid">
+      <div class="rule-box blue"><div class="rule-title blue">Zmienna niezależna</div><div class="rule-text">to, co <b>sami zmieniamy</b> w doświadczeniu, np. długość wahadła</div></div>
+      <div class="rule-box teal"><div class="rule-title teal">Zmienna zależna</div><div class="rule-text">to, co <b>mierzymy</b> i co się zmienia w wyniku, np. czas wahnięcia</div></div>
+      <div class="rule-box orange"><div class="rule-title orange">Warunki kontrolowane</div><div class="rule-text">to, co musi <b>zostać takie samo</b>, aby wynik był wiarygodny</div></div>
+    </div>
+    <p class="ua" style="margin-top:10px;">Незалежна змінна — те, що ми самі змінюємо; залежна — те, що вимірюємо; контрольовані умови — те, що має лишатися однаковим.</p>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><div class="icon icon-teal">📋</div>Sprawozdanie z doświadczenia</div>
+    <p>Dobre sprawozdanie zawiera: <b>cel</b>, <b>hipotezę</b>, <b>listę przyrządów i materiałów</b>, <b>opis przebiegu</b>, <b>tabelę wyników</b> oraz <b>wniosek</b>.</p>
+    <div class="trick-box">
+      <div class="trick-title">💡 Przykład</div>
+      <div class="trick-text">Cel: sprawdzić, czy masa ciała wpływa na czas jego spadania.<br>Hipoteza: masa nie wpływa na czas spadania.<br>Przebieg: upuszczamy z tej samej wysokości kulki tej samej wielkości, ale o różnej masie (np. plastelinową i stalową), i mierzymy czas stoperem. Pomiar powtarzamy kilka razy.<br>Wniosek: porównujemy zmierzone czasy z hipotezą.</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ============ TEST ============ -->
+<div class="section" id="test">
+
+  <div class="quiz-header">
+    <h2>📝 Test: Fizyka — start!</h2>
+    <p>18 pytań • Sprawdź się przed kartkówką!</p>
+  </div>
+
+  <div class="quiz-progress">
+    <div class="progress-bar-wrap"><div class="progress-bar" id="progressBar" style="width:0%"></div></div>
+    <div class="progress-text" id="progressText">0 / 18</div>
+    <div style="font-weight:700;font-size:.9rem;color:var(--teal);" id="scoreText">✅ 0</div>
+  </div>
+
+  <div id="quizContainer"></div>
+
+  <div class="results-card" id="resultsCard">
+    <div class="results-emoji" id="resultsEmoji">🎉</div>
+    <div class="results-score" id="resultsScore">0/18</div>
+    <div class="results-label">Twój wynik</div>
+    <div class="results-msg" id="resultsMsg"></div>
+    <button class="retry-btn" onclick="restartQuiz()">🔄 Spróbuj jeszcze raz</button>
+    <button class="retry-btn" onclick="showSection('teoria1')" style="background:linear-gradient(135deg,#0d9488,#0f766e)">📖 Wróć do teorii</button>
+  </div>
+
+</div>
+
+</div><!-- end main -->
+
+<script>
+function showSection(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  const tabs = ['teoria1','teoria2','teoria3','test'];
+  const tabEls = document.querySelectorAll('.tab');
+  const idx = tabs.indexOf(id);
+  if (idx >= 0) tabEls[idx].classList.add('active');
+  window.scrollTo({top:0, behavior:'smooth'});
+  if (id === 'test' && !quizStarted) initQuiz();
+}
+
+const bank = [
+  { cat:"Czym jest fizyka", q:"Co bada fizyka?", opts:["Tylko żywe organizmy","Materię, energię i zjawiska przyrody","Tylko liczby i wzory","Tylko historię wynalazków"], ans:1 },
+  { cat:"Czym jest fizyka", q:"Który dział fizyki zajmuje się ruchem ciał i siłami?", opts:["Optyka","Akustyka","Mechanika","Termodynamika"], ans:2 },
+  { cat:"Czym jest fizyka", q:"Który dział fizyki bada światło?", opts:["Mechanika","Optyka","Elektryczność","Akustyka"], ans:1 },
+  { cat:"Czym jest fizyka", q:"Który dział fizyki zajmuje się ciepłem i temperaturą?", opts:["Termodynamika","Akustyka","Optyka","Mechanika"], ans:0 },
+  { cat:"Czym jest fizyka", q:"Co to jest metoda naukowa?", opts:["Zgadywanie odpowiedzi","Obserwacja → hipoteza → doświadczenie → wniosek","Uczenie się wzorów na pamięć","Czytanie podręcznika"], ans:1 },
+  { cat:"Czym jest fizyka", q:"Z jaką nauką fizyka jest najściślej powiązana przy zapisie praw?", opts:["Historią","Geografią","Matematyką","Plastyką"], ans:2 },
+  { cat:"Wielkości i pomiary", q:"Co to jest wielkość fizyczna?", opts:["Dowolne słowo w fizyce","Cecha, którą można zmierzyć i wyrazić liczbą z jednostką","Nazwa przyrządu pomiarowego","Rodzaj doświadczenia"], ans:1 },
+  { cat:"Wielkości i pomiary", q:"Jaka jest podstawowa jednostka długości w układzie SI?", opts:["Kilogram","Sekunda","Metr","Kelwin"], ans:2 },
+  { cat:"Wielkości i pomiary", q:"Jaka jest podstawowa jednostka masy w układzie SI?", opts:["Gram","Kilogram","Metr","Tona"], ans:1 },
+  { cat:"Wielkości i pomiary", q:"Jaka jest podstawowa jednostka czasu w układzie SI?", opts:["Minuta","Godzina","Sekunda","Doba"], ans:2 },
+  { cat:"Wielkości i pomiary", q:"Jakim przyrządem mierzymy masę ciała?", opts:["Linijką","Stoperem","Wagą","Termometrem"], ans:2 },
+  { cat:"Wielkości i pomiary", q:"Jakim przyrządem mierzymy czas trwania zjawiska?", opts:["Wagą","Stoperem","Linijką","Amperomierzem"], ans:1 },
+  { cat:"Wielkości i pomiary", q:"Ile metrów ma 1 kilometr?", opts:["10 m","100 m","1000 m","10000 m"], ans:2 },
+  { cat:"Wielkości i pomiary", q:"Ile gramów ma 1 kilogram?", opts:["10 g","100 g","1000 g","10000 g"], ans:2 },
+  { cat:"Wielkości i pomiary", q:"Wynik pomiaru zawsze zapisujemy jako:", opts:["Samą liczbę","Liczbę i jednostkę","Sam wzór","Nazwę przyrządu"], ans:1 },
+  { cat:"Doświadczenie", q:"Co to jest hipoteza?", opts:["Zapis wyników w tabeli","Nasze przypuszczenie, co się stanie","Nazwa przyrządu","Ostateczny wniosek"], ans:1 },
+  { cat:"Doświadczenie", q:"Co to jest zmienna niezależna w doświadczeniu?", opts:["To, co mierzymy na końcu","To, co sami zmieniamy w doświadczeniu","To, co musi zostać stałe","Błąd pomiaru"], ans:1 },
+  { cat:"Doświadczenie", q:"Które z poniższych NIE jest etapem doświadczenia?", opts:["Postawienie hipotezy","Zapis wyników","Losowe zgadywanie odpowiedzi","Wyciągnięcie wniosków"], ans:2 },
+];
+
+// Każda próba: nowa kolejność pytań i odpowiedzi — żeby liczyło się rozumienie, nie zapamiętanie liter.
+function shuffle(a){ a=a.slice(); for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
+function buildQuiz(){
+  return shuffle(bank).map(q => {
+    const order = shuffle(q.opts.map((_,i)=>i));
+    return { cat:q.cat, q:q.q, opts:order.map(i=>q.opts[i]), ans:order.indexOf(q.ans) };
+  });
+}
+
+let questions=[], quizStarted=false, current=0, score=0, answered=false;
+
+function initQuiz(){ questions=buildQuiz(); quizStarted=true; current=0; score=0; answered=false; document.getElementById('resultsCard').classList.remove('show'); document.getElementById('scoreText').textContent='✅ 0'; renderQuestion(); }
+function restartQuiz(){ initQuiz(); }
+
+function renderQuestion(){
+  const container=document.getElementById('quizContainer');
+  if(current>=questions.length){ showResults(); return; }
+  const q=questions[current];
+  const letters=['A','B','C','D'];
+  updateProgress();
+  container.innerHTML=`
+    <div class="question-card" id="qCard">
+      <div class="q-number">Pytanie ${current+1} z ${questions.length} <span class="q-category">${q.cat}</span></div>
+      <div class="q-text">${q.q}</div>
+      <div class="answers" id="answers">
+        ${q.opts.map((opt,i)=>`
+          <button class="answer-btn" onclick="selectAnswer(${i})" id="btn${i}">
+            <span class="answer-letter">${letters[i]}</span>${opt}
+          </button>`).join('')}
+      </div>
+      <div class="feedback-msg" id="feedback"></div>
+      <button class="next-btn" id="nextBtn" onclick="nextQuestion()">${current+1<questions.length?'Następne pytanie →':'Zobacz wynik 🎉'}</button>
+    </div>`;
+  answered=false;
+}
+
+function selectAnswer(idx){
+  if(answered) return;
+  answered=true;
+  const q=questions[current];
+  const btns=document.querySelectorAll('.answer-btn');
+  const feedback=document.getElementById('feedback');
+  const qCard=document.getElementById('qCard');
+  const nextBtn=document.getElementById('nextBtn');
+  btns.forEach(b=>b.disabled=true);
+  if(idx===q.ans){
+    score++;
+    btns[idx].classList.add('selected-correct');
+    feedback.textContent='✅ Brawo! Dobra odpowiedź!';
+    feedback.className='feedback-msg correct';
+    qCard.classList.add('correct');
+  } else {
+    btns[idx].classList.add('selected-wrong');
+    btns[q.ans].classList.add('show-correct');
+    feedback.textContent=`❌ Błąd. Poprawna odpowiedź: ${q.opts[q.ans]}`;
+    feedback.className='feedback-msg wrong';
+    qCard.classList.add('wrong');
+  }
+  nextBtn.classList.add('show');
+  document.getElementById('scoreText').textContent=`✅ ${score}`;
+}
+
+function nextQuestion(){ current++; renderQuestion(); }
+
+function updateProgress(){
+  const pct=(current/questions.length)*100;
+  document.getElementById('progressBar').style.width=pct+'%';
+  document.getElementById('progressText').textContent=`${current} / ${questions.length}`;
+}
+
+function showResults(){
+  document.getElementById('quizContainer').innerHTML='';
+  updateProgress();
+  document.getElementById('progressBar').style.width='100%';
+  document.getElementById('progressText').textContent=`${questions.length} / ${questions.length}`;
+  const resultsCard=document.getElementById('resultsCard');
+  resultsCard.classList.add('show');
+  document.getElementById('resultsScore').textContent=`${score}/${questions.length}`;
+  let emoji, msg;
+  const pct=score/questions.length;
+  if(pct>=0.9){ emoji='🏆'; msg='Doskonale! Jesteś gotowa na kartkówkę! 🌟'; }
+  else if(pct>=0.75){ emoji='🎉'; msg='Bardzo dobrze! Jeszcze trochę powtórki i będziesz super!'; }
+  else if(pct>=0.6){ emoji='😊'; msg='Nieźle! Przejrzyj błędne tematy i spróbuj jeszcze raz.'; }
+  else { emoji='💪'; msg='Nie martw się! Wróć do teorii i poćwicz — dasz radę!'; }
+  document.getElementById('resultsEmoji').textContent=emoji;
+  document.getElementById('resultsMsg').textContent=msg;
+}
+</script>
+
+</body>
+</html>
