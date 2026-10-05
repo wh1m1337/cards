@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chemia · Dział 1+2 · Варвара</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#fafafa;--card:#fff;--ink:#111827;--muted:#6b7280;--border:#e5e7eb;
+  --t1:#2563eb;--t1b:#dbeafe;--t1d:#1d4ed8;
+  --t2:#059669;--t2b:#d1fae5;--t2d:#065f46;
+  --t3:#7c3aed;--t3b:#ede9fe;--t3d:#5b21b6;
+  --t4:#dc2626;--t4b:#fee2e2;--t4d:#991b1b;
+  --t5:#d97706;--t5b:#fef3c7;--t5d:#92400e;
+  --t6:#0891b2;--t6b:#cffafe;--t6d:#164e63;
+  --t7:#be185d;--t7b:#fce7f3;--t7d:#9d174d;
+  --t8:#4f46e5;--t8b:#e0e7ff;--t8d:#3730a3;
+  --t9:#0d9488;--t9b:#ccfbf1;--t9d:#115e59;
+  --t10:#ea580c;--t10b:#ffedd5;--t10d:#9a3412;
+  --t11:#64748b;--t11b:#f1f5f9;--t11d:#334155;
+  --t12:#78716c;--t12b:#f5f5f4;--t12d:#44403c;
+  --t13:#c026d3;--t13b:#fae8ff;--t13d:#86198f;
+  --ok:#16a34a;--okb:#dcfce7;--err:#dc2626;--errb:#fee2e2;
+  --r:14px;--rs:8px;--sh:0 2px 12px rgba(0,0,0,.07);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Sora',sans-serif;background:var(--bg);color:var(--ink);min-height:100vh}
+.page{max-width:720px;margin:0 auto;padding:20px 14px 80px}
+.hero{text-align:center;padding:24px 0 20px;margin-bottom:20px;
+  background:linear-gradient(135deg,#1d4ed8 0%,#7c3aed 50%,#059669 100%);
+  border-radius:20px;color:white}
+.hero .badge{display:inline-block;background:rgba(255,255,255,.2);
+  font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  padding:4px 14px;border-radius:99px;margin-bottom:12px}
+.hero h1{font-size:24px;font-weight:800;line-height:1.2;margin-bottom:6px}
+.hero p{font-size:13px;opacity:.8}
+.topic-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:18px}
+.tcard{
+  padding:12px 14px;border:2px solid var(--border);border-radius:var(--r);
+  background:var(--card);cursor:pointer;transition:all .16s;box-shadow:var(--sh);
+  display:flex;align-items:center;gap:10px;
+}
+.tcard:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,.1)}
+.tcard .tc-ico{font-size:22px;flex-shrink:0}
+.tcard .tc-body{min-width:0}
+.tcard .tc-num{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:2px}
+.tcard .tc-name{font-size:13px;font-weight:700;color:var(--ink);line-height:1.3}
+.tcard.active{border-width:2px;background:var(--c-bg,#dbeafe)}
+.itabs{display:flex;gap:4px;background:var(--card);padding:4px;
+  border-radius:var(--r);border:1px solid var(--border);margin-bottom:16px;overflow-x:auto}
+.itab{flex-shrink:0;padding:7px 12px;border-radius:var(--rs);border:none;
+  font-family:'Sora',sans-serif;font-size:12px;font-weight:600;
+  cursor:pointer;background:transparent;color:var(--muted);transition:all .16s;white-space:nowrap}
+.itab:hover{background:var(--bg)}
+.itab.active{color:white}
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);
+  padding:18px;margin-bottom:12px;box-shadow:var(--sh);animation:up .2s ease}
+@keyframes up{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+.card-h{font-size:16px;font-weight:800;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.tgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
+.tbox{padding:12px 13px;border-radius:var(--rs);border:1.5px solid}
+.tbox h3{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:7px}
+.tbox ul{list-style:none;font-size:13px;line-height:2}
+.tbox ul li::before{content:"• ";opacity:.4}
+.formula{background:var(--c-bg,#dbeafe);border:1.5px solid var(--c,#2563eb);
+  border-radius:var(--rs);padding:14px 16px;margin-bottom:12px;font-size:14px;line-height:2}
+.formula strong{color:var(--c-d,#1d4ed8);font-weight:800}
+.math{font-family:'JetBrains Mono',monospace;background:rgba(0,0,0,.05);
+  padding:2px 7px;border-radius:5px;font-size:13px}
+.ex-list{display:flex;flex-direction:column;gap:10px}
+.ex-item{background:var(--bg);border-radius:var(--rs);border:1px solid var(--border);overflow:hidden}
+.ex-q{padding:10px 14px;font-size:14px;font-weight:600;border-bottom:1px solid var(--border)}
+.ex-steps{padding:10px 14px}
+.ex-step{display:flex;gap:8px;margin-bottom:6px;font-size:13px;line-height:1.6;align-items:flex-start}
+.ex-step-n{width:20px;height:20px;border-radius:50%;background:var(--c,#2563eb);color:white;
+  font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.ex-ans{background:var(--okb);color:#14532d;font-weight:700;font-size:13px;
+  padding:7px 12px;border-radius:6px;margin-top:6px;display:inline-block}
+.prog-bar{height:5px;background:var(--border);border-radius:99px;margin-bottom:10px;overflow:hidden}
+.prog-fill{height:100%;border-radius:99px;background:var(--c,#2563eb);transition:width .4s}
+.score-row{display:flex;gap:14px;font-size:12px;color:var(--muted);margin-bottom:12px}
+.score-row b{color:var(--ink)}
+.q-label{font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;font-weight:700}
+.q-text{font-size:16px;font-weight:800;line-height:1.5;margin-bottom:6px}
+.q-hint{font-size:13px;color:var(--muted);font-style:italic;margin-bottom:12px}
+.opts{display:flex;flex-direction:column;gap:6px}
+.opt{padding:10px 14px;border:1.5px solid var(--border);border-radius:var(--rs);
+  font-family:'Sora',sans-serif;font-size:14px;font-weight:500;
+  cursor:pointer;background:var(--card);color:var(--ink);text-align:left;transition:all .14s}
+.opt:hover:not(:disabled){border-color:var(--c,#2563eb);background:var(--c-bg,#dbeafe)}
+.opt.ok{background:var(--okb);border-color:#86efac;color:#14532d;font-weight:700}
+.opt.no{background:var(--errb);border-color:#fca5a5;color:#7f1d1d}
+.feedback{margin-top:10px;padding:11px 14px;border-radius:var(--rs);font-size:13px;line-height:1.7;animation:up .18s ease}
+.feedback.ok{background:var(--okb);color:#14532d;border:1px solid #86efac}
+.feedback.no{background:var(--errb);color:#7f1d1d;border:1px solid #fca5a5}
+.expl{margin-top:7px;background:white;border-radius:7px;padding:8px 12px;font-size:13px;color:#1e3a8a;line-height:1.7;border:1px solid #bfdbfe}
+.nav-row{display:flex;justify-content:flex-end;margin-top:10px}
+.btn{padding:9px 20px;border-radius:var(--rs);border:none;font-family:'Sora',sans-serif;
+  font-size:13px;font-weight:700;cursor:pointer;transition:all .14s}
+.btn-pri{background:var(--c,#2563eb);color:white}
+.btn-pri:hover{filter:brightness(.9);transform:translateY(-1px)}
+.btn-sec{background:var(--card);color:var(--ink);border:1.5px solid var(--border)}
+.btn-sec:hover{background:var(--bg)}
+.result{text-align:center;padding:10px 0 16px}
+.result .big{font-size:54px;font-weight:800;color:var(--c,#2563eb);line-height:1}
+.result .msg{font-size:15px;color:var(--muted);margin:8px 0 18px}
+.result-btns{display:flex;gap:7px;justify-content:center;flex-wrap:wrap}
+.mk{background:#fffbeb;border:1.5px solid #fcd34d;border-radius:var(--rs);padding:12px;margin-bottom:8px;text-align:left}
+.mk-q{font-weight:700;font-size:13px;margin-bottom:4px}
+.mk-w{font-size:12px;color:var(--err);margin-bottom:3px}
+.mk-c{display:inline-block;background:var(--okb);color:#14532d;font-size:12px;font-weight:700;padding:2px 9px;border-radius:5px;margin-bottom:6px}
+.mk-r{font-size:12px;color:#1e3a8a;background:#dbeafe;padding:7px 11px;border-radius:7px;line-height:1.7}
+.fc-meta{text-align:center;font-size:13px;color:var(--muted);margin-bottom:10px}
+.flashcard{perspective:900px;width:100%;min-height:160px;cursor:pointer;margin-bottom:10px}
+.fc-inner{position:relative;width:100%;min-height:160px;transform-style:preserve-3d;transition:transform .45s;border-radius:var(--r)}
+.flashcard.flipped .fc-inner{transform:rotateY(180deg)}
+.fc-front,.fc-back{position:absolute;width:100%;min-height:160px;backface-visibility:hidden;
+  border-radius:var(--r);padding:20px;display:flex;flex-direction:column;justify-content:center;
+  border:2px solid var(--border);box-shadow:var(--sh)}
+.fc-front{background:white;text-align:center}
+.fc-back{transform:rotateY(180deg);background:var(--c-bg,#dbeafe);border-color:var(--c,#2563eb)}
+.fc-q{font-size:16px;font-weight:800;line-height:1.4;margin-bottom:7px}
+.fc-tap{font-size:12px;color:var(--muted)}
+.fc-a{font-size:14px;line-height:1.75}
+.fc-a strong{color:var(--c-d,#1d4ed8)}
+.fc-nav{display:flex;justify-content:space-between;align-items:center}
+.fc-count{font-size:12px;color:var(--muted);font-weight:600}
+@media(max-width:500px){
+  .topic-grid{grid-template-columns:1fr}
+  .tgrid{grid-template-columns:1fr}
+  .hero h1{font-size:19px}
+  .result .big{font-size:40px}
+}
+</style>
+<style>.ld-home{position:fixed;top:10px;left:10px;z-index:100;background:rgba(45,38,87,.92);color:#fff!important;text-decoration:none;font:600 13px/1 system-ui,sans-serif;padding:9px 13px;border-radius:20px;box-shadow:0 2px 8px rgba(0,0,0,.2)}</style>
+</head>
+<body>
+<a class="ld-home" href="index.html">← Головна / Strona główna</a>
+<div class="page">
+
+<div class="hero">
+  <div class="badge">🧪 Chemia · Dział 1 + Dział 2 · Kontrolna</div>
+  <h1>Повна підготовка —<br>13 тем, всі розділи</h1>
+  <p>Teoria · Kluczowe fakty · Przykłady · Fiszki · Test · Варвара</p>
+</div>
+
+<div class="topic-grid" id="topic-grid"></div>
+<div class="itabs" id="itabs"></div>
+<div id="content"></div>
+
+</div>
+<script>
+const C={
+  t1:{c:'#2563eb',bg:'#dbeafe',d:'#1d4ed8'},
+  t2:{c:'#059669',bg:'#d1fae5',d:'#065f46'},
+  t3:{c:'#7c3aed',bg:'#ede9fe',d:'#5b21b6'},
+  t4:{c:'#dc2626',bg:'#fee2e2',d:'#991b1b'},
+  t5:{c:'#d97706',bg:'#fef3c7',d:'#92400e'},
+  t6:{c:'#0891b2',bg:'#cffafe',d:'#164e63'},
+  t7:{c:'#be185d',bg:'#fce7f3',d:'#9d174d'},
+  t8:{c:'#4f46e5',bg:'#e0e7ff',d:'#3730a3'},
+  t9:{c:'#0d9488',bg:'#ccfbf1',d:'#115e59'},
+  t10:{c:'#ea580c',bg:'#ffedd5',d:'#9a3412'},
+  t11:{c:'#64748b',bg:'#f1f5f9',d:'#334155'},
+  t12:{c:'#78716c',bg:'#f5f5f4',d:'#44403c'},
+  t13:{c:'#c026d3',bg:'#fae8ff',d:'#86198f'},
+};
+
+const TOPICS=[
+{id:'t1',ico:'🥽',num:'Dział 1 · Temat 1',name:'Zasady bezpiecznej pracy (BHP)',
+theory:{
+  summary:'Podstawowe zasady bezpieczeństwa w pracowni chemicznej oraz oznaczenia substancji niebezpiecznych.',
+  blocks:[
+    {t:'t1',h:'Zasady BHP',items:['Fartuch i okulary ochronne','Nie jeść i nie pić w pracowni','Nie wącha się substancji bezpośrednio — wachlujemy dłonią','Nigdy nie próbujemy substancji smakiem','Po pracy myjemy ręce']},
+    {t:'t1',h:'Praca z odczynnikami',items:['Każdy odczynnik ma etykietę z nazwą','Nie wolno mieszać nieznanych substancji','Odczynniki wlewamy, nie wrzucamy','Rozlaną substancję zgłaszamy nauczycielowi','Szkło laboratoryjne traktujemy ostrożnie']},
+    {t:'t1',h:'Sprzęt laboratoryjny',items:['Probówka — małe ilości substancji','Zlewka — mieszanie, ogrzewanie','Kolba stożkowa — reakcje, miareczkowanie','Palnik gazowy — ogrzewanie','Statyw, bagietka, lejek, pipeta']},
+    {t:'t1',h:'Piktogramy BHP (GHS)',items:['Pomarańczowy/czerwony romb z czarnym symbolem','Płomień — substancja łatwopalna','Czaszka — substancja toksyczna','Korozja — substancja żrąca','Wykrzyknik — substancja drażniąca']},
+  ],
+  formulas:`<strong>Zasada 1:</strong> Nigdy nie pracuj bez nadzoru nauczyciela i bez okularów ochronnych.<br><strong>Zasada 2:</strong> Nie jemy, nie pijemy, nie wąchamy substancji bezpośrednio.<br><strong>Zasada 3:</strong> Piktogram ostrzega przed konkretnym zagrożeniem — zawsze go sprawdzaj przed użyciem substancji.`,
+},
+examples:[
+  {q:'Jak prawidłowo poczuć zapach substancji w probówce?',steps:['Nie wolno wąchać bezpośrednio znad probówki','Trzymamy probówkę z dala od twarzy','Ruchem dłoni kierujemy opary w stronę nosa'],ans:'Metodą "wachlowania" dłonią'},
+  {q:'Zobaczyłaś symbol płomienia na butelce z odczynnikiem. Co to oznacza?',steps:['To piktogram GHS','Oznacza substancję łatwopalną','Trzymaj z dala od ognia i źródeł ciepła'],ans:'Substancja łatwopalna — uwaga na ogień!'},
+  {q:'Rozlałaś odczynnik na stole. Co robisz?',steps:['Nie dotykasz samodzielnie nieznanej substancji','Natychmiast informujesz nauczyciela','Czekasz na instrukcje dotyczące sprzątania'],ans:'Zgłaszamy nauczycielowi'},
+],
+flashcards:[
+  {q:'Jak prawidłowo wąchać substancję chemiczną?',a:'Nigdy nie wącha się bezpośrednio znad naczynia! Dłonią <strong>wachlujemy</strong> opary w stronę nosa, trzymając naczynie z dala od twarzy.'},
+  {q:'Co oznacza piktogram z czaszką?',a:'<strong>Substancja toksyczna</strong> — niebezpieczna dla zdrowia i życia przy spożyciu, wdychaniu lub kontakcie ze skórą.'},
+  {q:'Do czego służy probówka?',a:'Do przeprowadzania doświadczeń z <strong>małymi ilościami</strong> substancji — np. obserwacji reakcji chemicznej.'},
+  {q:'Jakie są trzy podstawowe zasady BHP w pracowni?',a:'1) Fartuch i okulary ochronne, 2) nie jeść/pić/wąchać bezpośrednio, 3) pracować tylko pod nadzorem nauczyciela.'},
+],
+quiz:[
+  {q:'Jak należy sprawdzać zapach substancji chemicznej?',opts:['Wąchając bezpośrednio znad naczynia','Wachlując dłonią w stronę nosa','Nie wolno tego robić wcale','Zbliżając nos do butelki'],a:1,hint:'Metoda bezpiecznego wąchania',expl:'Substancję sprawdzamy <strong>wachlując</strong> dłonią opary w stronę nosa, nigdy nie wąchając bezpośrednio.'},
+  {q:'Co oznacza piktogram z płomieniem?',opts:['Substancja żrąca','Substancja łatwopalna','Substancja trująca','Substancja nieszkodliwa'],a:1,hint:'Płomień = ogień',expl:'Piktogram z płomieniem oznacza substancję <strong>łatwopalną</strong> — trzymaj z dala od źródeł ognia.'},
+  {q:'Czy wolno jeść i pić w pracowni chemicznej?',opts:['Tak, jeśli jedzenie jest zapakowane','Tak, zawsze','Nie, nigdy','Tylko picie wody'],a:2,hint:'Podstawowa zasada BHP',expl:'W pracowni chemicznej <strong>nigdy</strong> nie jemy ani nie pijemy — ryzyko skażenia.'},
+  {q:'Do czego służy zlewka?',opts:['Do dokładnego odmierzania małych objętości','Do mieszania i ogrzewania substancji','Do przechowywania odczynników przez lata','Do obserwacji pod mikroskopem'],a:1,hint:'Podstawowe naczynie laboratoryjne',expl:'Zlewka służy do <strong>mieszania i ogrzewania</strong> substancji — nie do precyzyjnych pomiarów objętości.'},
+  {q:'Co robisz, gdy rozlejesz nieznaną substancję?',opts:['Sprzątasz samodzielnie ręcznikiem','Zgłaszasz nauczycielowi i czekasz na instrukcje','Wylewasz do zlewu','Nie robisz nic'],a:1,hint:'Bezpieczeństwo przede wszystkim',expl:'Zawsze <strong>zgłaszamy nauczycielowi</strong> — sami nie podejmujemy decyzji o sprzątaniu nieznanej substancji.'},
+]},
+
+{id:'t2',ico:'🔍',num:'Dział 1 · Temat 2',name:'Właściwości substancji',
+theory:{
+  summary:'Cechy charakterystyczne substancji — fizyczne i chemiczne — pozwalają je rozpoznawać i odróżniać.',
+  blocks:[
+    {t:'t2',h:'Właściwości fizyczne',items:['Stan skupienia (stały, ciekły, gazowy)','Barwa i połysk','Zapach (nigdy nie wącha się bezpośrednio!)','Temperatura topnienia i wrzenia','Rozpuszczalność w wodzie']},
+    {t:'t2',h:'Więcej właściwości fizycznych',items:['Gęstość','Twardość','Przewodnictwo ciepła i prądu','Plastyczność, ciągliwość (metale)','Smak NIE jest badaną właściwością w szkole!']},
+    {t:'t2',h:'Właściwości chemiczne',items:['Palność — czy substancja się pali','Reakcja z tlenem (utlenianie)','Reakcja z kwasami','Reakcja z wodą','Odporność na rdzewienie/korozję']},
+    {t:'t2',h:'Substancja czysta a mieszanina',items:['Substancja czysta — stałe, określone właściwości','Mieszanina — zmienne właściwości, zależne od składu','Każda substancja ma swój "zestaw" cech charakterystycznych','Dzięki właściwościom rozpoznajemy substancje','np. woda: bezbarwna, bezwonna, wrze w 100°C']},
+  ],
+  formulas:`<strong>Właściwości fizyczne</strong> — obserwujemy bez zmiany substancji w inną (barwa, stan skupienia, gęstość, rozpuszczalność).<br><strong>Właściwości chemiczne</strong> — ujawniają się podczas reakcji chemicznej (palność, reakcja z tlenem/kwasem).<br>Zestaw właściwości jest jak "odcisk palca" substancji.`,
+},
+examples:[
+  {q:'Podaj trzy właściwości fizyczne wody.',steps:['Stan skupienia: ciecz (w temp. pokojowej)','Barwa: bezbarwna, zapach: bezwonna','Temperatura wrzenia: 100°C'],ans:'Bezbarwna ciecz, bezwonna, wrze w 100°C'},
+  {q:'Czy palność to właściwość fizyczna czy chemiczna?',steps:['Palność ujawnia się podczas reakcji z tlenem','Powstaje nowa substancja (np. popiół, dym)','To więc właściwość chemiczna'],ans:'Właściwość chemiczna'},
+  {q:'Jak bezpiecznie sprawdzić zapach substancji?',steps:['Nie wolno wąchać bezpośrednio','Trzymamy naczynie z dala od twarzy','Dłonią kierujemy opary w stronę nosa'],ans:'Metodą wachlowania dłonią'},
+],
+flashcards:[
+  {q:'Czym różnią się właściwości fizyczne od chemicznych?',a:'<strong>Fizyczne</strong> obserwujemy bez zmiany substancji (barwa, stan skupienia). <strong>Chemiczne</strong> ujawniają się podczas reakcji (np. palność, reakcja z kwasem).'},
+  {q:'Wymień pięć właściwości fizycznych.',a:'Stan skupienia, barwa, zapach, gęstość, rozpuszczalność w wodzie, temperatura topnienia/wrzenia, twardość, przewodnictwo.'},
+  {q:'Czy smak jest badaną właściwością substancji w szkole?',a:'<strong>Nie!</strong> Nigdy nie próbujemy substancji smakiem — może być toksyczna. To zasada BHP.'},
+  {q:'Po czym rozpoznajemy substancję?',a:'Po jej <strong>charakterystycznym zestawie właściwości</strong> — fizycznych i chemicznych, które są dla niej unikatowe.'},
+],
+quiz:[
+  {q:'Która właściwość jest właściwością FIZYCZNĄ?',opts:['Palność','Reakcja z kwasem','Temperatura wrzenia','Reakcja z tlenem'],a:2,hint:'Fizyczna = bez zmiany substancji w inną',expl:'<strong>Temperatura wrzenia</strong> to właściwość fizyczna — nie powstaje nowa substancja.'},
+  {q:'Która właściwość jest właściwością CHEMICZNĄ?',opts:['Barwa','Gęstość','Palność','Stan skupienia'],a:2,hint:'Chemiczna ujawnia się w reakcji',expl:'<strong>Palność</strong> ujawnia się podczas spalania — powstaje nowa substancja, więc to właściwość chemiczna.'},
+  {q:'Jak bezpiecznie badamy zapach substancji?',opts:['Wąchając wprost z naczynia','Wachlując dłonią w stronę nosa','Próbując smaku najpierw','Nie badamy nigdy zapachu'],a:1,hint:'Zasada BHP',expl:'Zapach badamy <strong>wachlując</strong> dłonią, nigdy nie wąchając bezpośrednio.'},
+  {q:'Czym jest substancja czysta?',opts:['Mieszaniną kilku substancji','Substancją o stałych, określonych właściwościach','Dowolnym płynem','Substancją bez zapachu'],a:1,hint:'Przeciwieństwo mieszaniny',expl:'Substancja czysta ma <strong>stałe, określone właściwości</strong> — w odróżnieniu od mieszaniny.'},
+  {q:'Które z poniższych NIE jest właściwością fizyczną?',opts:['Gęstość','Barwa','Reakcja z wodą','Rozpuszczalność'],a:2,hint:'Reakcja = zmiana w nową substancję',expl:'<strong>Reakcja z wodą</strong> to właściwość chemiczna — pozostałe są fizyczne.'},
+]},
+
+{id:'t3',ico:'⚖️',num:'Dział 1 · Temat 3',name:'Gęstość substancji',
+theory:{
+  summary:'Gęstość to stosunek masy do objętości — pozwala porównywać substancje i przewidzieć, czy coś będzie pływać czy tonąć.',
+  blocks:[
+    {t:'t3',h:'Definicja gęstości',items:['Gęstość = masa ÷ objętość','Oznaczenie: d (lub ρ)','Jednostki: g/cm³, kg/m³, g/dm³','Każda substancja ma charakterystyczną gęstość','Gęstość nie zależy od ilości substancji!']},
+    {t:'t3',h:'Przykładowe gęstości',items:['Woda: 1 g/cm³','Żelazo: ok. 7,9 g/cm³','Aluminium: ok. 2,7 g/cm³','Drewno: ok. 0,5–0,9 g/cm³ (pływa!)','Rtęć: ok. 13,6 g/cm³ (bardzo ciężka)']},
+    {t:'t3',h:'Pływanie i tonięcie',items:['Gęstość < gęstości wody → pływa','Gęstość > gęstości wody → tonie','Dlatego drewno pływa, a żelazo tonie','Statki pływają dzięki kształtowi (wypornościowe)','Olej pływa na wodzie (mniejsza gęstość)']},
+    {t:'t3',h:'Przeliczanie jednostek',items:['1 g/cm³ = 1000 kg/m³','1 g/cm³ = 1 g/mL','Dla gazów używamy g/dm³ (g/L)','Przy obliczeniach pilnuj spójności jednostek!','np. 2,7 g/cm³ = 2700 kg/m³']},
+  ],
+  formulas:`<strong>Wzór na gęstość:</strong> <span class="math">d = m ÷ V</span><br><strong>Masa z gęstości:</strong> <span class="math">m = d × V</span><br><strong>Objętość z gęstości:</strong> <span class="math">V = m ÷ d</span><br><strong>Przelicznik:</strong> 1 g/cm³ = 1000 kg/m³`,
+},
+examples:[
+  {q:'Oblicz gęstość substancji o masie 50 g i objętości 25 cm³.',steps:['d = m ÷ V','d = 50 ÷ 25'],ans:'d = 2 g/cm³'},
+  {q:'Jaka jest masa 10 cm³ żelaza (d ≈ 7,9 g/cm³)?',steps:['m = d × V','m = 7,9 × 10'],ans:'m = 79 g'},
+  {q:'Kawałek drewna ma gęstość 0,6 g/cm³. Czy będzie pływał na wodzie?',steps:['Gęstość wody = 1 g/cm³','0,6 < 1, więc drewno jest "lżejsze" od wody'],ans:'Tak, będzie pływał'},
+],
+flashcards:[
+  {q:'Jaki jest wzór na gęstość?',a:'<strong>d = m ÷ V</strong> (masa podzielona przez objętość). Jednostki: g/cm³ lub kg/m³.'},
+  {q:'Dlaczego drewno pływa, a żelazo tonie?',a:'Bo gęstość drewna (ok. 0,6 g/cm³) jest <strong>mniejsza</strong> od gęstości wody (1 g/cm³), a gęstość żelaza (7,9 g/cm³) jest <strong>większa</strong>.'},
+  {q:'Jak przeliczyć g/cm³ na kg/m³?',a:'Mnożymy przez <strong>1000</strong>. Np. 2,7 g/cm³ = 2700 kg/m³.'},
+  {q:'Jaka jest gęstość wody?',a:'<strong>1 g/cm³</strong> (czyli 1000 kg/m³) — punkt odniesienia dla pływania/tonięcia innych substancji.'},
+],
+quiz:[
+  {q:'Oblicz gęstość: m = 100 g, V = 50 cm³',opts:['2 g/cm³','0,5 g/cm³','150 g/cm³','50 g/cm³'],a:0,hint:'d = m ÷ V',expl:'d = 100 ÷ 50 = <strong>2 g/cm³</strong>.'},
+  {q:'Gęstość aluminium wynosi ok. 2,7 g/cm³. Ile to w kg/m³?',opts:['27 kg/m³','270 kg/m³','2700 kg/m³','27000 kg/m³'],a:2,hint:'× 1000',expl:'2,7 × 1000 = <strong>2700 kg/m³</strong>.'},
+  {q:'Substancja ma gęstość 0,8 g/cm³. Co się stanie, gdy wrzucisz ją do wody?',opts:['Zatonie','Będzie pływać','Rozpuści się natychmiast','Nic się nie stanie'],a:1,hint:'Porównaj z gęstością wody = 1 g/cm³',expl:'0,8 < 1, więc substancja jest lżejsza od wody — <strong>będzie pływać</strong>.'},
+  {q:'Jaka jest masa 5 cm³ substancji o gęstości 3 g/cm³?',opts:['8 g','15 g','1,67 g','0,6 g'],a:1,hint:'m = d × V',expl:'m = 3 × 5 = <strong>15 g</strong>.'},
+  {q:'Jaka jest objętość 40 g substancji o gęstości 4 g/cm³?',opts:['10 cm³','160 cm³','36 cm³','44 cm³'],a:0,hint:'V = m ÷ d',expl:'V = 40 ÷ 4 = <strong>10 cm³</strong>.'},
+]},
+
+{id:'t4',ico:'🧪',num:'Dział 1 · Temat 4',name:'Mieszaniny i ich rozdzielanie',
+theory:{
+  summary:'Mieszaniny dzielimy na jednorodne i niejednorodne — każdy rodzaj rozdzielamy inną metodą, zależną od właściwości składników.',
+  blocks:[
+    {t:'t4',h:'Mieszanina jednorodna',items:['Nie widać poszczególnych składników','Jedna faza (np. roztwór)','Przykłady: woda z solą, powietrze, mosiądz','Nazywana też roztworem','Składniki równomiernie rozmieszczone']},
+    {t:'t4',h:'Mieszanina niejednorodna',items:['Widać poszczególne składniki','Kilka faz (np. ciało stałe + ciecz)','Przykłady: piasek z wodą, sałatka, mgła','Składniki można czasem rozdzielić "na oko"','Granice między składnikami są widoczne']},
+    {t:'t4',h:'Metody rozdzielania I',items:['Sączenie (filtracja) — ciało stałe od cieczy','Odparowanie — ciecz odparowuje, zostaje ciało stałe','Dekantacja — zlewanie cieczy znad osadu','Sortowanie — ręczne oddzielanie różnych ciał stałych','Przesiewanie — wg wielkości ziaren']},
+    {t:'t4',h:'Metody rozdzielania II',items:['Destylacja — rozdziela ciecze o różnej temp. wrzenia','Rozdzielacz — rozdziela ciecze niemieszające się (np. olej/woda)','Magnes — wyciąga substancje magnetyczne (żelazo)','Wymrażanie — rozdziela wg temp. krzepnięcia','Dobór metody zależy od właściwości składników!']},
+  ],
+  formulas:`<strong>Jednorodna</strong> = jedna faza, składników NIE widać.<br><strong>Niejednorodna</strong> = kilka faz, składniki widać.<br>Metodę rozdzielania dobieramy do <strong>różnicy właściwości</strong> składników (rozpuszczalność, temp. wrzenia, magnetyzm).`,
+},
+examples:[
+  {q:'Jak rozdzielić mieszaninę piasku i wody?',steps:['Piasek nie rozpuszcza się w wodzie','To mieszanina niejednorodna','Stosujemy sączenie (filtrację)'],ans:'Sączenie (filtracja)'},
+  {q:'Jak odzyskać sól z roztworu wody i soli?',steps:['Sól jest rozpuszczona — mieszanina jednorodna','Sączenie tu nie pomoże','Odparowujemy wodę, zostaje sól'],ans:'Odparowanie'},
+  {q:'Jak rozdzielić mieszaninę opiłków żelaza i piasku?',steps:['Żelazo jest magnetyczne, piasek nie','Używamy magnesu','Żelazo przyciągnie się do magnesu'],ans:'Za pomocą magnesu'},
+],
+flashcards:[
+  {q:'Czym różni się mieszanina jednorodna od niejednorodnej?',a:'W <strong>jednorodnej</strong> nie widać składników (np. roztwór soli). W <strong>niejednorodnej</strong> składniki są widoczne (np. piasek z wodą).'},
+  {q:'Jaką metodą rozdzielisz piasek od wody?',a:'<strong>Sączeniem (filtracją)</strong> — piasek nie rozpuszcza się w wodzie i zostaje na sączku.'},
+  {q:'Jak odzyskać substancję rozpuszczoną w wodzie?',a:'Przez <strong>odparowanie</strong> wody — rozpuszczona substancja zostaje jako osad.'},
+  {q:'Czym jest destylacja?',a:'Metoda rozdzielania <strong>cieczy o różnych temperaturach wrzenia</strong> — np. rozdzielanie wody od alkoholu.'},
+  {q:'Jak rozdzielić mieszaninę oleju i wody?',a:'Za pomocą <strong>rozdzielacza</strong> — olej i woda nie mieszają się i tworzą osobne warstwy.'},
+],
+quiz:[
+  {q:'Która mieszanina jest JEDNORODNA?',opts:['Piasek z wodą','Woda z solą (roztwór)','Sałatka owocowa','Mgła'],a:1,hint:'Nie widać składników',expl:'<strong>Woda z solą</strong> to roztwór — nie widać oddzielnych składników.'},
+  {q:'Jak rozdzielić mieszaninę wody i piasku?',opts:['Odparowanie','Sączenie','Magnes','Rozdzielacz'],a:1,hint:'Piasek nie rozpuszcza się',expl:'<strong>Sączenie</strong> — piasek zostaje na sączku, woda przechodzi.'},
+  {q:'Jak odzyskać sól z wody słonej?',opts:['Sączenie','Magnes','Odparowanie wody','Sortowanie'],a:2,hint:'Sól jest rozpuszczona',expl:'<strong>Odparowanie</strong> wody — sól zostaje jako osad, bo nie odparowuje razem z wodą.'},
+  {q:'Czym rozdzielisz opiłki żelaza i opiłki miedzi?',opts:['Odparowaniem','Sączeniem','Magnesem','Destylacją'],a:2,hint:'Żelazo jest magnetyczne',expl:'<strong>Magnesem</strong> — żelazo jest magnetyczne, miedź nie.'},
+  {q:'Destylacja służy do rozdzielania:',opts:['Ciał stałych wg wielkości','Cieczy o różnych temp. wrzenia','Substancji magnetycznych','Gazów od cieczy'],a:1,hint:'Różnica temperatury wrzenia',expl:'Destylacja rozdziela <strong>ciecze o różnych temperaturach wrzenia</strong> — niżej wrząca odparowuje pierwsza.'},
+]},
+
+{id:'t5',ico:'🔥',num:'Dział 1 · Temat 5',name:'Zjawisko fizyczne a reakcja chemiczna',
+theory:{
+  summary:'Kluczowe rozróżnienie: w zjawisku fizycznym substancja pozostaje tą samą substancją, w reakcji chemicznej powstaje substancja nowa.',
+  blocks:[
+    {t:'t5',h:'Zjawisko fizyczne',items:['Substancja NIE zmienia się w inną','Zmienia się tylko stan skupienia lub kształt','Przykłady: topnienie lodu, parowanie wody','Rozpuszczanie cukru w wodzie','Łamanie kredy, cięcie papieru']},
+    {t:'t5',h:'Reakcja chemiczna',items:['Powstaje NOWA substancja o innych właściwościach','Przykłady: spalanie, rdzewienie żelaza','Gnicie, fotosynteza, trawienie','Substraty → produkty','Proces zwykle nieodwracalny']},
+    {t:'t5',h:'Objawy reakcji chemicznej',items:['Zmiana barwy','Wydzielanie lub pochłanianie ciepła','Wydzielanie gazu (pęcherzyki)','Wytrącanie się osadu','Wydzielanie światła lub zapachu']},
+    {t:'t5',h:'Substraty i produkty',items:['Substraty — substancje wyjściowe (przed reakcją)','Produkty — substancje powstałe (po reakcji)','Zapis: substraty → produkty','np. węgiel + tlen → tlenek węgla(IV)','Masa substratów = masa produktów']},
+  ],
+  formulas:`<strong>Zjawisko fizyczne:</strong> substancja ta sama, zmiana stanu/kształtu.<br><strong>Reakcja chemiczna:</strong> substraty → produkty (nowa substancja).<br><strong>Objawy reakcji:</strong> zmiana barwy, wydzielanie gazu/ciepła/światła, wytrącanie osadu.`,
+},
+examples:[
+  {q:'Czy topnienie lodu to zjawisko fizyczne czy reakcja chemiczna?',steps:['Lód i woda to ta sama substancja (H₂O)','Zmienia się tylko stan skupienia','Nie powstaje nowa substancja'],ans:'Zjawisko fizyczne'},
+  {q:'Czy rdzewienie żelaza to zjawisko fizyczne czy reakcja chemiczna?',steps:['Żelazo reaguje z tlenem i wodą','Powstaje nowa substancja — rdza (tlenek żelaza)','Rdza ma inne właściwości niż żelazo'],ans:'Reakcja chemiczna'},
+  {q:'Jakie są substraty i produkty spalania węgla?',steps:['Substraty: węgiel + tlen','Reakcja: spalanie','Produkt: tlenek węgla(IV)'],ans:'Substraty: C + O₂, produkt: CO₂'},
+],
+flashcards:[
+  {q:'Jak odróżnić zjawisko fizyczne od reakcji chemicznej?',a:'W zjawisku fizycznym substancja <strong>pozostaje tą samą</strong> substancją (zmienia się tylko stan/kształt). W reakcji chemicznej powstaje <strong>nowa substancja</strong>.'},
+  {q:'Wymień 3 objawy reakcji chemicznej.',a:'Zmiana <strong>barwy</strong>, wydzielanie <strong>gazu</strong> (pęcherzyki), wydzielanie lub pochłanianie <strong>ciepła</strong>, wytrącanie <strong>osadu</strong>.'},
+  {q:'Co to są substraty, a co produkty?',a:'<strong>Substraty</strong> to substancje wyjściowe (przed reakcją). <strong>Produkty</strong> to substancje powstałe (po reakcji). Zapis: substraty → produkty.'},
+  {q:'Czy rozpuszczanie cukru w herbacie to reakcja chemiczna?',a:'<strong>Nie</strong>, to zjawisko fizyczne — cukier nadal jest cukrem, tylko rozproszonym w wodzie. Po odparowaniu wody cukier wróci.'},
+],
+quiz:[
+  {q:'Które z poniższych jest ZJAWISKIEM FIZYCZNYM?',opts:['Spalanie drewna','Rdzewienie żelaza','Topnienie lodu','Gnicie liści'],a:2,hint:'Ta sama substancja, inny stan',expl:'<strong>Topnienie lodu</strong> — woda pozostaje wodą (H₂O), zmienia się tylko stan skupienia.'},
+  {q:'Które z poniższych jest REAKCJĄ CHEMICZNĄ?',opts:['Parowanie wody','Łamanie kredy','Spalanie papieru','Rozpuszczanie soli'],a:2,hint:'Powstaje nowa substancja',expl:'<strong>Spalanie papieru</strong> — powstaje popiół, dym i gazy — zupełnie nowe substancje.'},
+  {q:'Co NIE jest objawem reakcji chemicznej?',opts:['Zmiana barwy','Wydzielanie gazu','Zmiana kształtu bez zmiany substancji','Wytrącanie osadu'],a:2,hint:'To cecha zjawiska fizycznego',expl:'<strong>Zmiana kształtu bez zmiany substancji</strong> to cecha zjawiska fizycznego, nie reakcji chemicznej.'},
+  {q:'Jak nazywamy substancje powstałe w wyniku reakcji?',opts:['Substraty','Produkty','Katalizatory','Roztwory'],a:1,hint:'Powstają PO reakcji',expl:'<strong>Produkty</strong> to substancje powstałe w wyniku reakcji chemicznej.'},
+  {q:'Czy mieszanie piasku z wodą to reakcja chemiczna?',opts:['Tak, powstaje nowa substancja','Nie, to zjawisko fizyczne','Tak, bo zmienia się barwa','Nie da się określić'],a:1,hint:'Piasek pozostaje piaskiem',expl:'<strong>Nie</strong> — piasek i woda pozostają sobą, da się je rozdzielić sączeniem. To zjawisko fizyczne.'},
+]},
+
+{id:'t6',ico:'⚛️',num:'Dział 1 · Temat 6',name:'Pierwiastki i związki chemiczne',
+theory:{
+  summary:'Pierwiastek to substancja z atomów jednego rodzaju, związek chemiczny — z atomów różnych pierwiastków połączonych trwale.',
+  blocks:[
+    {t:'t6',h:'Pierwiastek chemiczny',items:['Substancja zbudowana z atomów JEDNEGO rodzaju','Nie da się go rozłożyć na prostsze substancje','Przykłady: tlen (O), wodór (H), żelazo (Fe), węgiel (C)','Każdy ma swój symbol chemiczny','Ponad 100 znanych pierwiastków']},
+    {t:'t6',h:'Związek chemiczny',items:['Substancja z atomów RÓŻNYCH pierwiastków','Atomy połączone trwale (chemicznie)','Można go rozłożyć na pierwiastki (reakcja analizy)','Przykłady: woda (H₂O), dwutlenek węgla (CO₂)','Ma inne właściwości niż pierwiastki składowe!']},
+    {t:'t6',h:'Symbole chemiczne',items:['Pierwsza litera zawsze DUŻA','Druga litera (jeśli jest) zawsze MAŁA','O = tlen, H = wodór, C = węgiel, N = azot','Fe = żelazo, Cu = miedź, Au = złoto','Symbole są międzynarodowe']},
+    {t:'t6',h:'Układ okresowy pierwiastków',items:['Uporządkowany zbiór wszystkich pierwiastków','Wiersze = okresy, kolumny = grupy','Metale zwykle po lewej/środku','Niemetale po prawej stronie','Pomaga przewidywać właściwości pierwiastków']},
+  ],
+  formulas:`<strong>Pierwiastek:</strong> atomy jednego rodzaju (np. O, Fe, C).<br><strong>Związek chemiczny:</strong> atomy różnych pierwiastków połączone trwale (np. H₂O, CO₂).<br><strong>Symbol:</strong> pierwsza litera duża, druga mała (np. Na, nie NA czy na).`,
+},
+examples:[
+  {q:'Czy woda (H₂O) to pierwiastek czy związek chemiczny?',steps:['Woda zawiera atomy wodoru (H) i tlenu (O)','To dwa różne pierwiastki','Więc woda to związek chemiczny'],ans:'Związek chemiczny'},
+  {q:'Czy tlen (O₂) to pierwiastek czy związek chemiczny?',steps:['Tlen zbudowany jest tylko z atomów tlenu','Jeden rodzaj atomów','Więc to pierwiastek'],ans:'Pierwiastek'},
+  {q:'Jaki symbol ma żelazo, a jaki złoto?',steps:['Żelazo po łacinie: Ferrum','Złoto po łacinie: Aurum','Stąd symbole: Fe i Au'],ans:'Fe (żelazo), Au (złoto)'},
+],
+flashcards:[
+  {q:'Czym różni się pierwiastek od związku chemicznego?',a:'<strong>Pierwiastek</strong> = atomy jednego rodzaju (np. tlen O). <strong>Związek</strong> = atomy różnych pierwiastków połączone trwale (np. woda H₂O).'},
+  {q:'Jak zapisujemy symbole chemiczne?',a:'Pierwsza litera zawsze <strong>duża</strong>, druga (jeśli jest) zawsze <strong>mała</strong>. Np. Na (sód) — nie "NA" ani "na".'},
+  {q:'Czy związek chemiczny można rozłożyć na pierwiastki?',a:'<strong>Tak</strong>, poprzez reakcję analizy (rozkładu). Np. woda rozłożona daje wodór i tlen.'},
+  {q:'Podaj symbole: wodór, węgiel, azot.',a:'Wodór = <strong>H</strong>, węgiel = <strong>C</strong>, azot = <strong>N</strong>.'},
+],
+quiz:[
+  {q:'Czym jest pierwiastek chemiczny?',opts:['Mieszaniną kilku substancji','Substancją z atomów jednego rodzaju','Substancją z atomów różnych rodzajów','Roztworem w wodzie'],a:1,hint:'Jeden rodzaj atomów',expl:'Pierwiastek to substancja zbudowana z atomów <strong>jednego rodzaju</strong>.'},
+  {q:'Dwutlenek węgla (CO₂) to:',opts:['Pierwiastek','Związek chemiczny','Mieszanina jednorodna','Mieszanina niejednorodna'],a:1,hint:'Dwa różne pierwiastki: C i O',expl:'CO₂ zawiera atomy węgla i tlenu — dwa różne pierwiastki, więc to <strong>związek chemiczny</strong>.'},
+  {q:'Który zapis symbolu jest poprawny?',opts:['NA (sód)','na (sód)','Na (sód)','nA (sód)'],a:2,hint:'Pierwsza litera duża, druga mała',expl:'Poprawny zapis to <strong>Na</strong> — pierwsza litera duża, druga mała.'},
+  {q:'Ile rodzajów atomów zawiera pierwiastek chemiczny?',opts:['Jeden','Dwa','Trzy lub więcej','Zależy od przykładu'],a:0,hint:'Z definicji',expl:'Pierwiastek zawiera <strong>jeden</strong> rodzaj atomów.'},
+  {q:'Jaki symbol ma węgiel?',opts:['W','C','Wę','Cb'],a:1,hint:'Od łacińskiego Carboneum',expl:'Węgiel ma symbol <strong>C</strong> (od łac. Carboneum).'},
+]},
+
+{id:'t7',ico:'🔩',num:'Dział 1 · Temat 7',name:'Właściwości metali i niemetali',
+theory:{
+  summary:'Metale i niemetale różnią się wyraźnie właściwościami fizycznymi — połyskiem, przewodnictwem, plastycznością.',
+  blocks:[
+    {t:'t7',h:'Właściwości metali',items:['Połysk metaliczny','Dobre przewodnictwo prądu i ciepła','Kowalność (dają się kuć)','Ciągliwość (dają się ciągnąć w druty)','W temp. pokojowej zwykle ciała stałe (wyjątek: rtęć — ciecz!)']},
+    {t:'t7',h:'Przykłady metali',items:['Żelazo (Fe) — konstrukcje, narzędzia','Miedź (Cu) — przewody elektryczne','Aluminium (Al) — lekkie konstrukcje','Złoto (Au), srebro (Ag) — biżuteria','Sód (Na) — bardzo reaktywny metal']},
+    {t:'t7',h:'Właściwości niemetali',items:['Brak połysku metalicznego (wyjątki: jod, grafit)','Słabe przewodnictwo (wyjątek: grafit)','Kruche w stanie stałym','Mogą być gazami, cieczami lub ciałami stałymi','Nie dają się kuć ani ciągnąć']},
+    {t:'t7',h:'Przykłady niemetali',items:['Tlen (O), azot (N) — gazy','Węgiel (C) — ciało stałe (grafit, diament)','Siarka (S) — żółte ciało stałe','Brom (Br) — jedyny ciekły niemetal','Jod (I) — ciało stałe z metalicznym połyskiem']},
+  ],
+  formulas:`<strong>Metale:</strong> połysk, przewodzą prąd i ciepło, kowalne, ciągliwe.<br><strong>Niemetale:</strong> brak połysku, słabo przewodzą, kruche.<br>W układzie okresowym: metale po lewej/środku, niemetale po prawej.`,
+},
+examples:[
+  {q:'Dlaczego miedź jest używana do przewodów elektrycznych?',steps:['Miedź jest metalem','Metale dobrze przewodzą prąd','Dlatego nadaje się na przewody'],ans:'Bo dobrze przewodzi prąd elektryczny'},
+  {q:'Czy rtęć jest metalem, mimo że jest cieczą?',steps:['Rtęć ma połysk metaliczny i przewodzi prąd','To wyjątek — jedyny metal ciekły w temp. pokojowej','Nadal klasyfikujemy ją jako metal'],ans:'Tak, rtęć to metal (wyjątek)'},
+  {q:'Dlaczego siarka łamie się, a nie da się jej wyciągnąć w drut?',steps:['Siarka to niemetal','Niemetale są kruche w stanie stałym','Nie mają właściwości ciągliwych jak metale'],ans:'Bo niemetale są kruche, nie są ciągliwe'},
+],
+flashcards:[
+  {q:'Wymień 4 cechy charakterystyczne metali.',a:'<strong>Połysk</strong> metaliczny, dobre <strong>przewodnictwo</strong> prądu i ciepła, <strong>kowalność</strong> (dają się kuć), <strong>ciągliwość</strong> (dają się ciągnąć w druty).'},
+  {q:'Który metal jest cieczą w temperaturze pokojowej?',a:'<strong>Rtęć (Hg)</strong> — jedyny metal, który w temperaturze pokojowej jest cieczą.'},
+  {q:'Czym różnią się niemetale od metali pod względem wyglądu?',a:'Niemetale zwykle <strong>nie mają połysku</strong> metalicznego (wyjątki: jod, grafit) i są <strong>kruche</strong> w stanie stałym.'},
+  {q:'Który niemetal jest cieczą w temperaturze pokojowej?',a:'<strong>Brom (Br)</strong> — jedyny ciekły niemetal w warunkach pokojowych.'},
+],
+quiz:[
+  {q:'Która cecha NIE jest charakterystyczna dla metali?',opts:['Połysk metaliczny','Dobre przewodnictwo prądu','Kruchość','Ciągliwość'],a:2,hint:'To cecha niemetali',expl:'<strong>Kruchość</strong> to cecha niemetali — metale są kowalne i ciągliwe, nie kruche.'},
+  {q:'Który metal w temperaturze pokojowej jest cieczą?',opts:['Żelazo','Złoto','Rtęć','Aluminium'],a:2,hint:'Jedyny wyjątek wśród metali',expl:'<strong>Rtęć</strong> — jedyny metal będący cieczą w temperaturze pokojowej.'},
+  {q:'Dlaczego z miedzi robi się przewody elektryczne?',opts:['Bo jest tania','Bo dobrze przewodzi prąd','Bo jest lekka','Bo jest magnetyczna'],a:1,hint:'Właściwość metali',expl:'Miedź <strong>dobrze przewodzi prąd</strong> — to typowa właściwość metali.'},
+  {q:'Które z poniższych to niemetal?',opts:['Żelazo','Miedź','Tlen','Aluminium'],a:2,hint:'Gaz, nie ma połysku metalicznego',expl:'<strong>Tlen</strong> to niemetal — gaz bez połysku metalicznego.'},
+  {q:'Gdzie w układzie okresowym znajdują się niemetale?',opts:['Po lewej stronie','Pośrodku','Po prawej stronie','Wszędzie równomiernie'],a:2,hint:'Linia schodkowa je oddziela',expl:'Niemetale znajdują się <strong>po prawej stronie</strong> układu okresowego.'},
+]},
+
+{id:'t8',ico:'💨',num:'Dział 2 · Temat 8',name:'Powietrze – mieszanina gazów',
+theory:{
+  summary:'Powietrze to mieszanina gazów o stałym i zmiennym składzie, niezbędna do życia i spalania.',
+  blocks:[
+    {t:'t8',h:'Skład powietrza',items:['Azot (N₂) — ok. 78%','Tlen (O₂) — ok. 21%','Gazy szlachetne (głównie argon) — ok. 1%','Dwutlenek węgla i inne — śladowe ilości','To mieszanina JEDNORODNA']},
+    {t:'t8',h:'Składniki stałe',items:['Azot — zawsze ok. 78%','Tlen — zawsze ok. 21%','Gazy szlachetne — zawsze ok. 1%','Ich zawartość praktycznie się nie zmienia','Nazywane składnikami stałymi powietrza']},
+    {t:'t8',h:'Składniki zmienne',items:['Para wodna — zależy od wilgotności','Dwutlenek węgla (CO₂) — zależy od lokalizacji','Pyły i zanieczyszczenia','Ozon, amoniak — w śladowych ilościach','Ich ilość zmienia się w zależności od miejsca i warunków']},
+    {t:'t8',h:'Właściwości powietrza',items:['Fizyczne: bezbarwne, bezwonne, gęstość ok. 1,29 kg/m³','Chemiczne: podtrzymuje spalanie (dzięki tlenowi)','Powietrze samo się NIE pali','Niezbędne do oddychania organizmów','Doświadczalnie można wykazać, że to mieszanina']},
+  ],
+  formulas:`<strong>Skład powietrza:</strong> azot ~78%, tlen ~21%, gazy szlachetne ~1%, CO₂ i inne — śladowo.<br><strong>Właściwości fizyczne:</strong> bezbarwne, bezwonne.<br><strong>Właściwości chemiczne:</strong> podtrzymuje spalanie, samo się nie pali.`,
+},
+examples:[
+  {q:'Jaki gaz stanowi największą część powietrza?',steps:['Powietrze składa się głównie z azotu i tlenu','Azot stanowi ok. 78%','Tlen ok. 21%'],ans:'Azot (ok. 78%)'},
+  {q:'Dlaczego zawartość pary wodnej w powietrzu się zmienia?',steps:['Para wodna to składnik zmienny','Zależy od wilgotności i pogody','Dlatego jej ilość nie jest stała'],ans:'Bo zależy od warunków pogodowych/wilgotności'},
+  {q:'Czy powietrze samo się pali?',steps:['Powietrze zawiera tlen, który podtrzymuje spalanie','Ale samo powietrze nie jest substancją palną','Podtrzymuje spalanie innych substancji'],ans:'Nie, ale podtrzymuje spalanie'},
+],
+flashcards:[
+  {q:'Jaki jest procentowy skład powietrza?',a:'Azot ok. <strong>78%</strong>, tlen ok. <strong>21%</strong>, gazy szlachetne ok. <strong>1%</strong>, reszta — CO₂ i inne śladowe składniki.'},
+  {q:'Czym różnią się składniki stałe od zmiennych powietrza?',a:'<strong>Stałe</strong> (azot, tlen, gazy szlachetne) mają praktycznie niezmienną zawartość. <strong>Zmienne</strong> (para wodna, CO₂, pyły) zależą od warunków.'},
+  {q:'Czy powietrze jest mieszaniną jednorodną czy niejednorodną?',a:'<strong>Jednorodną</strong> — nie widać poszczególnych gazów, są one równomiernie wymieszane.'},
+  {q:'Jakie są właściwości chemiczne powietrza?',a:'Powietrze <strong>podtrzymuje spalanie</strong> (dzięki tlenowi), ale samo się nie pali.'},
+],
+quiz:[
+  {q:'Ile procent powietrza stanowi azot?',opts:['Ok. 21%','Ok. 78%','Ok. 1%','Ok. 50%'],a:1,hint:'Największy składnik',expl:'Azot stanowi ok. <strong>78%</strong> powietrza — jego główny składnik.'},
+  {q:'Ile procent powietrza stanowi tlen?',opts:['Ok. 78%','Ok. 21%','Ok. 1%','Ok. 10%'],a:1,hint:'Niezbędny do oddychania',expl:'Tlen stanowi ok. <strong>21%</strong> powietrza.'},
+  {q:'Który składnik powietrza jest ZMIENNY?',opts:['Azot','Tlen','Para wodna','Gazy szlachetne'],a:2,hint:'Zależy od wilgotności',expl:'<strong>Para wodna</strong> to składnik zmienny — jej ilość zależy od warunków pogodowych.'},
+  {q:'Czy powietrze jest mieszaniną jednorodną?',opts:['Tak','Nie','Czasami','Tylko latem'],a:0,hint:'Nie widać poszczególnych gazów',expl:'<strong>Tak</strong> — powietrze to mieszanina jednorodna gazów.'},
+  {q:'Jaką rolę pełni tlen w powietrzu?',opts:['Gasi ogień','Podtrzymuje spalanie','Nie ma żadnej roli','Powoduje rdzewienie tylko metali'],a:1,hint:'Kluczowy dla spalania i oddychania',expl:'Tlen <strong>podtrzymuje spalanie</strong> i jest niezbędny do oddychania.'},
+]},
+
+{id:'t9',ico:'🫧',num:'Dział 2 · Temat 9',name:'Tlen – najważniejszy składnik powietrza',
+theory:{
+  summary:'Tlen (O₂) to gaz niezbędny do oddychania i spalania — można go otrzymać i wykryć w laboratorium.',
+  blocks:[
+    {t:'t9',h:'Właściwości fizyczne tlenu',items:['Wzór: O₂','Gaz bezbarwny i bezwonny','Bez smaku','Słabo rozpuszczalny w wodzie','Nieco cięższy od powietrza']},
+    {t:'t9',h:'Właściwości chemiczne tlenu',items:['Podtrzymuje spalanie (kluczowa cecha!)','Reaguje z metalami, tworząc tlenki','Reaguje z niemetalami, tworząc tlenki','Reakcja z tlenem = utlenianie','Bez tlenu nie ma spalania ani oddychania']},
+    {t:'t9',h:'Otrzymywanie tlenu',items:['Rozkład nadtlenku wodoru (wody utlenionej) z katalizatorem MnO₂','Rozkład manganianu(VII) potasu (po ogrzaniu)','To reakcje rozkładu (analizy)','W laboratorium zbiera się go nad wodą','W przyrodzie: fotosynteza roślin']},
+    {t:'t9',h:'Wykrywanie tlenu',items:['Próba z tlącym się łuczywem','Łuczywo wkładamy do naczynia z gazem','Jeśli to tlen — łuczywo ROZPALA SIĘ na nowo','To charakterystyczna próba na obecność tlenu','Bez tlenu łuczywo by zgasło']},
+  ],
+  formulas:`<strong>Wzór tlenu:</strong> O₂.<br><strong>Próba na tlen:</strong> tlące się łuczywo rozpala się (dowód obecności O₂).<br><strong>Rola tlenu:</strong> podtrzymuje spalanie i oddychanie, reaguje z metalami i niemetalami tworząc tlenki.`,
+},
+examples:[
+  {q:'Jak wykryć obecność tlenu w naczyniu?',steps:['Wkładamy do naczynia tlące się łuczywo','Jeśli jest tlen, łuczywo rozpala się na nowo','To dowód obecności tlenu'],ans:'Próba z tlącym się łuczywem'},
+  {q:'Skąd roślina czerpie tlen uwalniany do atmosfery?',steps:['Rośliny przeprowadzają fotosyntezę','W procesie tym powstaje tlen','Tlen jest uwalniany do powietrza'],ans:'Z procesu fotosyntezy'},
+  {q:'Co powstaje, gdy metal reaguje z tlenem?',steps:['Metal łączy się z tlenem','Zachodzi reakcja utleniania (syntezy)','Powstaje tlenek metalu'],ans:'Tlenek metalu'},
+],
+flashcards:[
+  {q:'Jaki jest wzór chemiczny tlenu?',a:'<strong>O₂</strong> — cząsteczka złożona z dwóch atomów tlenu.'},
+  {q:'Jak wykryć tlen w laboratorium?',a:'Za pomocą <strong>próby z tlącym się łuczywem</strong> — jeśli gaz to tlen, łuczywo ponownie się rozpala.'},
+  {q:'Jakie są właściwości fizyczne tlenu?',a:'Gaz <strong>bezbarwny, bezwonny</strong>, bez smaku, <strong>słabo rozpuszczalny</strong> w wodzie, nieco cięższy od powietrza.'},
+  {q:'Jak otrzymuje się tlen w laboratorium?',a:'Przez <strong>rozkład nadtlenku wodoru</strong> (z katalizatorem MnO₂) lub rozkład manganianu(VII) potasu.'},
+],
+quiz:[
+  {q:'Jaki jest wzór chemiczny tlenu?',opts:['O','O₂','O₃','H₂O'],a:1,hint:'Cząsteczka dwuatomowa',expl:'Wzór tlenu to <strong>O₂</strong> — dwa atomy tlenu połączone w cząsteczkę.'},
+  {q:'Jak wykrywamy obecność tlenu?',opts:['Próba z wodą wapienną','Próba z tlącym się łuczywem','Próba zapachu','Próba smaku'],a:1,hint:'Łuczywo się rozpala',expl:'<strong>Tlące się łuczywo</strong> rozpala się ponownie w obecności tlenu — to charakterystyczna próba.'},
+  {q:'Jaką rolę pełni tlen podczas spalania?',opts:['Gasi ogień','Podtrzymuje spalanie','Nie ma wpływu','Powoduje eksplozję zawsze'],a:1,hint:'Kluczowa właściwość chemiczna',expl:'Tlen <strong>podtrzymuje spalanie</strong> — bez niego spalanie nie zachodzi.'},
+  {q:'Jak nazywa się reakcja metalu z tlenem?',opts:['Redukcja','Utlenianie','Fermentacja','Neutralizacja'],a:1,hint:'Łączenie z tlenem',expl:'Reakcja z tlenem to <strong>utlenianie</strong> — powstaje tlenek.'},
+  {q:'Skąd pochodzi tlen uwalniany do atmosfery przez rośliny?',opts:['Z oddychania','Z fotosyntezy','Z gnicia','Z parowania'],a:1,hint:'Proces zachodzący w liściach na świetle',expl:'Tlen powstaje w procesie <strong>fotosyntezy</strong>.'},
+]},
+
+{id:'t10',ico:'☁️',num:'Dział 2 · Temat 10',name:'Tlenek węgla(IV)',
+theory:{
+  summary:'CO₂ to gaz powstający przy spalaniu i oddychaniu, nie podtrzymuje spalania ani oddychania, wykrywany wodą wapienną.',
+  blocks:[
+    {t:'t10',h:'Właściwości fizyczne CO₂',items:['Wzór: CO₂','Gaz bezbarwny, bezwonny','Cięższy od powietrza (opada w dół)','Słabo rozpuszczalny w wodzie (ale rozpuszcza się)','W stanie stałym: "suchy lód"']},
+    {t:'t10',h:'Właściwości chemiczne CO₂',items:['NIE podtrzymuje spalania (gasi płomień!)','NIE podtrzymuje oddychania','Powoduje mętnienie wody wapiennej','To charakterystyczna próba na CO₂!','Reaguje z wodą tworząc kwas węglowy']},
+    {t:'t10',h:'Powstawanie CO₂',items:['Produkt spalania węgla i jego związków','Powstaje podczas oddychania organizmów','Powstaje przy fermentacji','Wydzielany przez wulkany','Spalanie paliw kopalnych (węgiel, ropa, gaz)']},
+    {t:'t10',h:'Znaczenie CO₂',items:['Niezbędny do fotosyntezy roślin','Używany w gaśnicach (nie podtrzymuje spalania)','Nadmiar powoduje efekt cieplarniany','Używany do gazowania napojów','"Suchy lód" — stała postać CO₂, do chłodzenia']},
+  ],
+  formulas:`<strong>Wzór:</strong> CO₂.<br><strong>Próba na CO₂:</strong> powoduje mętnienie wody wapiennej.<br><strong>Właściwości:</strong> cięższy od powietrza, NIE podtrzymuje spalania ani oddychania.`,
+},
+examples:[
+  {q:'Jak wykryć obecność CO₂ w naczyniu?',steps:['Wlewamy do naczynia wodę wapienną','Jeśli jest CO₂, woda wapienna mętnieje','To charakterystyczna próba'],ans:'Woda wapienna mętnieje'},
+  {q:'Dlaczego gaśnica CO₂ gasi ogień?',steps:['CO₂ nie podtrzymuje spalania','Jest cięższy od powietrza, więc "przykrywa" płomień','Odcina dostęp tlenu do ognia'],ans:'Bo nie podtrzymuje spalania i odcina dostęp tlenu'},
+  {q:'Skąd pochodzi CO₂ wydychany przez człowieka?',steps:['Podczas oddychania zachodzi utlenianie pokarmu w organizmie','Produktem ubocznym jest CO₂','Jest wydalany przez płuca'],ans:'Z procesu oddychania komórkowego'},
+],
+flashcards:[
+  {q:'Jaki jest wzór chemiczny tlenku węgla(IV)?',a:'<strong>CO₂</strong> — jeden atom węgla, dwa atomy tlenu.'},
+  {q:'Jak wykrywamy CO₂?',a:'Za pomocą <strong>wody wapiennej</strong> — w obecności CO₂ mętnieje (staje się mleczno-biała).'},
+  {q:'Czy CO₂ podtrzymuje spalanie?',a:'<strong>Nie</strong> — CO₂ gasi płomień, dlatego jest używany w gaśnicach.'},
+  {q:'Dlaczego CO₂ opada w dół, a nie unosi się?',a:'Bo jest <strong>cięższy od powietrza</strong> — dlatego "osiada" przy podłodze w zamkniętych pomieszczeniach.'},
+],
+quiz:[
+  {q:'Jaki jest wzór tlenku węgla(IV)?',opts:['CO','CO₂','C₂O','H₂CO₃'],a:1,hint:'Jeden węgiel, dwa tleny',expl:'Wzór to <strong>CO₂</strong>.'},
+  {q:'Jak wykrywamy obecność CO₂?',opts:['Tlącym się łuczywem','Wodą wapienną (mętnieje)','Zapachem','Lakmusem'],a:1,hint:'Charakterystyczna reakcja',expl:'CO₂ wykrywamy, bo powoduje <strong>mętnienie wody wapiennej</strong>.'},
+  {q:'Czy CO₂ jest cięższy czy lżejszy od powietrza?',opts:['Lżejszy','Cięższy','Taki sam','Zależy od temperatury'],a:1,hint:'Dlatego "opada"',expl:'CO₂ jest <strong>cięższy</strong> od powietrza.'},
+  {q:'Dlaczego gaśnice wypełnia się CO₂?',opts:['Bo podtrzymuje spalanie','Bo nie podtrzymuje spalania','Bo jest łatwopalny','Bo jest lekki'],a:1,hint:'Gasi płomień',expl:'CO₂ <strong>nie podtrzymuje spalania</strong>, więc skutecznie gasi ogień.'},
+  {q:'Co powstaje przy spalaniu węgla w nadmiarze tlenu?',opts:['Tlenek węgla(II)','Tlenek węgla(IV)','Wodór','Azot'],a:1,hint:'Pełne spalanie',expl:'Przy pełnym spalaniu węgla powstaje <strong>tlenek węgla(IV) — CO₂</strong>.'},
+]},
+
+{id:'t11',ico:'🎈',num:'Dział 2 · Temat 11',name:'Wodór',
+theory:{
+  summary:'Wodór to najlżejszy gaz, bardzo palny, wykrywany charakterystycznym trzaskiem przy zapłonie.',
+  blocks:[
+    {t:'t11',h:'Właściwości fizyczne wodoru',items:['Wzór: H₂','Najlżejszy gaz we wszechświecie','Bezbarwny, bezwonny','Bardzo słabo rozpuszczalny w wodzie','Znacznie lżejszy od powietrza (unosi się)']},
+    {t:'t11',h:'Właściwości chemiczne wodoru',items:['Bardzo palny — reaguje gwałtownie z tlenem','Pali się niebieskawym płomieniem','Mieszanina wodoru z tlenem/powietrzem jest wybuchowa','Reaguje z metalami aktywnymi','Produkt spalania wodoru: woda (H₂O)']},
+    {t:'t11',h:'Otrzymywanie wodoru',items:['Reakcja metalu (np. cynku) z kwasem solnym','Metal + kwas → sól + wodór','To reakcja wymiany','W laboratorium zbiera się go "do góry dnem"','Elektroliza wody — inny sposób otrzymywania']},
+    {t:'t11',h:'Wykrywanie wodoru',items:['Próba z płonącym łuczywem','Zbliżamy płonące łuczywo do otworu naczynia','Charakterystyczny "PYK"/trzask przy zapłonie','To dowód obecności wodoru','Nazywana "próbą szczekającego pyska"']},
+  ],
+  formulas:`<strong>Wzór wodoru:</strong> H₂.<br><strong>Próba na wodór:</strong> charakterystyczny trzask ("pyk") przy zbliżeniu płomienia.<br><strong>Produkt spalania wodoru:</strong> woda (H₂O).`,
+},
+examples:[
+  {q:'Jak wykryć obecność wodoru w naczyniu?',steps:['Zbliżamy płonące łuczywo do otworu naczynia','Jeśli jest wodór, słychać charakterystyczny trzask','To dowód obecności wodoru'],ans:'Trzask ("pyk") przy zbliżeniu płomienia'},
+  {q:'Jak otrzymać wodór w laboratorium?',steps:['Bierzemy aktywny metal, np. cynk','Dodajemy kwas solny','Zachodzi reakcja: metal + kwas → sól + wodór'],ans:'Reakcja cynku z kwasem solnym'},
+  {q:'Co powstaje przy spalaniu wodoru w tlenie?',steps:['Wodór reaguje z tlenem','To reakcja syntezy','Produktem jest woda'],ans:'Woda (H₂O)'},
+],
+flashcards:[
+  {q:'Jaki jest wzór chemiczny wodoru?',a:'<strong>H₂</strong> — dwa atomy wodoru połączone w cząsteczkę.'},
+  {q:'Jak wykrywamy wodór?',a:'Przez zbliżenie <strong>płonącego łuczywa</strong> do naczynia — w obecności wodoru słychać charakterystyczny <strong>trzask</strong>.'},
+  {q:'Dlaczego wodór unosi się ku górze?',a:'Bo jest <strong>najlżejszym gazem</strong> — znacznie lżejszym od powietrza.'},
+  {q:'Co powstaje przy spalaniu wodoru?',a:'<strong>Woda (H₂O)</strong> — wodór łączy się z tlenem z powietrza.'},
+],
+quiz:[
+  {q:'Jaki jest wzór chemiczny wodoru?',opts:['H','H₂','H₂O','HO'],a:1,hint:'Cząsteczka dwuatomowa',expl:'Wzór wodoru to <strong>H₂</strong>.'},
+  {q:'Jak wykrywamy obecność wodoru?',opts:['Wodą wapienną','Trzaskiem przy zapłonie','Tlącym się łuczywem','Zapachem'],a:1,hint:'Charakterystyczny dźwięk',expl:'Wodór wykrywamy po charakterystycznym <strong>trzasku</strong> przy zbliżeniu płomienia.'},
+  {q:'Dlaczego wodór jest najlżejszym gazem?',opts:['Ma największą gęstość','Ma najmniejszą gęstość ze wszystkich gazów','Jest cięższy od powietrza','Nie ma gęstości'],a:1,hint:'Fakt o wodorze',expl:'Wodór ma <strong>najmniejszą gęstość</strong> ze wszystkich znanych gazów.'},
+  {q:'Jak otrzymuje się wodór w laboratorium?',opts:['Przez rozkład wody utlenionej','Przez reakcję metalu z kwasem','Przez ogrzewanie powietrza','Przez filtrację'],a:1,hint:'Metal + kwas',expl:'Wodór otrzymuje się w reakcji <strong>metalu (np. cynku) z kwasem</strong> solnym.'},
+  {q:'Co powstaje przy spalaniu wodoru w tlenie?',opts:['Tlenek węgla','Woda','Amoniak','Azot'],a:1,hint:'H₂ + O₂ → ?',expl:'Produktem spalania wodoru jest <strong>woda (H₂O)</strong>.'},
+]},
+
+{id:'t12',ico:'🏭',num:'Dział 2 · Temat 12',name:'Zanieczyszczenia powietrza',
+theory:{
+  summary:'Działalność człowieka wprowadza do atmosfery substancje szkodliwe, powodujące smog, kwaśne opady i efekt cieplarniany.',
+  blocks:[
+    {t:'t12',h:'Źródła zanieczyszczeń',items:['Spaliny samochodowe','Przemysł i elektrownie','Ogrzewanie domów (spalanie węgla)','Pożary i wypalanie traw','Rolnictwo (nawozy, hodowla)']},
+    {t:'t12',h:'Rodzaje zanieczyszczeń',items:['Tlenki siarki (SOₓ) — kwaśne deszcze','Tlenki azotu (NOₓ) — smog, kwaśne deszcze','Pyły zawieszone (PM2.5, PM10)','Tlenek węgla(II) — trujący "czad"','Metale ciężkie, sadza']},
+    {t:'t12',h:'Skutki zanieczyszczeń',items:['Smog — gęsta mgła z zanieczyszczeniami','Kwaśne opady — niszczą rośliny, budynki, wody','Dziura ozonowa — osłabiona warstwa ozonowa','Efekt cieplarniany — globalne ocieplenie (nadmiar CO₂)','Choroby układu oddechowego i krążenia']},
+    {t:'t12',h:'Jak ograniczać zanieczyszczenia',items:['Filtry w fabrykach i samochodach (katalizatory)','Odnawialne źródła energii (słońce, wiatr)','Komunikacja publiczna zamiast samochodów','Segregacja i recykling odpadów','Sadzenie drzew (pochłaniają CO₂)']},
+  ],
+  formulas:`<strong>Główne zanieczyszczenia:</strong> tlenki siarki, tlenki azotu, pyły zawieszone, tlenek węgla(II).<br><strong>Skutki:</strong> smog, kwaśne opady, dziura ozonowa, efekt cieplarniany.<br><strong>Ograniczanie:</strong> filtry, odnawialne źródła energii, komunikacja publiczna.`,
+},
+examples:[
+  {q:'Co powoduje kwaśne opady?',steps:['Tlenki siarki i azotu trafiają do atmosfery','Reagują z wodą w chmurach','Powstają kwasy, które opadają z deszczem'],ans:'Tlenki siarki i azotu w atmosferze'},
+  {q:'Dlaczego tlenek węgla(II) jest szczególnie niebezpieczny?',steps:['Jest bezbarwny i bezwonny — trudno go wykryć','Jest silnie trujący dla człowieka','Nazywany jest "cichym zabójcą" (czad)'],ans:'Bo jest bezwonny i silnie trujący'},
+  {q:'Jak możesz osobiście ograniczyć zanieczyszczenie powietrza?',steps:['Korzystać z komunikacji publicznej lub roweru','Oszczędzać energię','Segregować odpady'],ans:'Np. korzystać z komunikacji publicznej, oszczędzać energię'},
+],
+flashcards:[
+  {q:'Wymień główne źródła zanieczyszczeń powietrza.',a:'<strong>Spaliny samochodowe</strong>, przemysł, <strong>elektrownie</strong>, ogrzewanie domów węglem.'},
+  {q:'Co to jest smog?',a:'Gęsta mgła powstała z połączenia zanieczyszczeń powietrza (pyłów, tlenków) z parą wodną — szczególnie groźna zimą.'},
+  {q:'Co powoduje efekt cieplarniany?',a:'Nadmiar <strong>CO₂</strong> i innych gazów cieplarnianych w atmosferze — zatrzymują ciepło, powodując <strong>globalne ocieplenie</strong>.'},
+  {q:'Jak ograniczyć zanieczyszczenia powietrza?',a:'Stosować <strong>filtry i katalizatory</strong>, korzystać z <strong>odnawialnych źródeł energii</strong>, sadzić drzewa, ograniczać spalanie paliw kopalnych.'},
+],
+quiz:[
+  {q:'Co powoduje kwaśne opady?',opts:['Tlen i azot','Tlenki siarki i azotu','Para wodna','Gazy szlachetne'],a:1,hint:'Reagują z wodą tworząc kwasy',expl:'<strong>Tlenki siarki i azotu</strong> reagują z wodą w atmosferze, tworząc kwaśne opady.'},
+  {q:'Dlaczego tlenek węgla(II) jest szczególnie groźny?',opts:['Ma intensywny zapach','Jest bezbarwny i bezwonny, silnie trujący','Jest bardzo ciężki','Jest nieszkodliwy'],a:1,hint:'"Cichy zabójca"',expl:'Jest <strong>bezbarwny i bezwonny</strong>, dlatego trudno go wykryć, a jest silnie <strong>trujący</strong>.'},
+  {q:'Co powoduje efekt cieplarniany?',opts:['Niedobór CO₂','Nadmiar CO₂ w atmosferze','Brak tlenu','Nadmiar azotu'],a:1,hint:'Gazy zatrzymują ciepło',expl:'<strong>Nadmiar CO₂</strong> i innych gazów cieplarnianych zatrzymuje ciepło, powodując globalne ocieplenie.'},
+  {q:'Które z poniższych NIE jest sposobem ograniczania zanieczyszczeń?',opts:['Odnawialne źródła energii','Filtry w fabrykach','Spalanie większej ilości węgla','Komunikacja publiczna'],a:2,hint:'To zwiększa zanieczyszczenie',expl:'<strong>Spalanie większej ilości węgla</strong> zwiększa, a nie zmniejsza zanieczyszczenie powietrza.'},
+  {q:'Co to jest smog?',opts:['Czyste górskie powietrze','Mgła z zanieczyszczeniami powietrza','Rodzaj deszczu','Warstwa ozonowa'],a:1,hint:'Gęsta, szkodliwa mgła',expl:'Smog to <strong>mgła połączona z zanieczyszczeniami</strong> powietrza.'},
+]},
+
+{id:'t13',ico:'⚗️',num:'Dział 2 · Temat 13',name:'Rodzaje reakcji chemicznych',
+theory:{
+  summary:'Reakcje chemiczne klasyfikujemy na syntezę, analizę i wymianę — w zależności od liczby substratów i produktów.',
+  blocks:[
+    {t:'t13',h:'Reakcja syntezy (łączenia)',items:['Dwie (lub więcej) substancje łączą się w jedną','Zapis: A + B → AB','Przykład: 2H₂ + O₂ → 2H₂O','Przykład: węgiel + tlen → tlenek węgla(IV)','Spalanie to szczególny rodzaj syntezy']},
+    {t:'t13',h:'Reakcja analizy (rozkładu)',items:['Jedna substancja rozkłada się na kilka prostszych','Zapis: AB → A + B','Przykład: 2H₂O₂ → 2H₂O + O₂','Przykład: rozkład wody na wodór i tlen','Często wymaga ogrzewania lub katalizatora']},
+    {t:'t13',h:'Reakcja wymiany',items:['Składniki dwóch substancji "zamieniają się miejscami"','Zapis: AB + CD → AD + CB','Przykład: metal + kwas → sól + wodór','Przykład: cynk + kwas solny → chlorek cynku + wodór','Częsta w reakcjach metali z kwasami']},
+    {t:'t13',h:'Zapisywanie równań reakcji',items:['Substraty (po lewej) → Produkty (po prawej)','Liczba atomów musi się zgadzać po obu stronach!','Dobieramy współczynniki stechiometryczne','np. 2H₂ + O₂ → 2H₂O (zgadza się: 4H, 2O)','To zasada zachowania masy']},
+  ],
+  formulas:`<strong>Synteza:</strong> A + B → AB (łączenie).<br><strong>Analiza:</strong> AB → A + B (rozkład).<br><strong>Wymiana:</strong> AB + CD → AD + CB.<br>Zasada zachowania masy: liczba atomów <strong>musi się zgadzać</strong> po obu stronach równania.`,
+},
+examples:[
+  {q:'Jaki to rodzaj reakcji: 2H₂ + O₂ → 2H₂O?',steps:['Dwie substancje łączą się w jedną','To cecha reakcji syntezy'],ans:'Reakcja syntezy'},
+  {q:'Jaki to rodzaj reakcji: 2H₂O₂ → 2H₂O + O₂?',steps:['Jedna substancja rozkłada się na dwie','To cecha reakcji analizy (rozkładu)'],ans:'Reakcja analizy (rozkładu)'},
+  {q:'Jaki to rodzaj reakcji: Zn + 2HCl → ZnCl₂ + H₂?',steps:['Składniki zamieniają się miejscami','Cynk zastępuje wodór w kwasie','To reakcja wymiany'],ans:'Reakcja wymiany'},
+],
+flashcards:[
+  {q:'Jak rozpoznać reakcję syntezy?',a:'Kilka substancji <strong>łączy się w jedną</strong>: A + B → AB. Np. 2H₂ + O₂ → 2H₂O.'},
+  {q:'Jak rozpoznać reakcję analizy (rozkładu)?',a:'Jedna substancja <strong>rozkłada się</strong> na kilka prostszych: AB → A + B. Np. rozkład wody utlenionej.'},
+  {q:'Jak rozpoznać reakcję wymiany?',a:'Składniki dwóch substancji <strong>zamieniają się miejscami</strong>: AB + CD → AD + CB. Typowa dla reakcji metal + kwas.'},
+  {q:'Dlaczego liczba atomów musi się zgadzać w równaniu reakcji?',a:'Ze względu na <strong>zasadę zachowania masy</strong> — atomy nie znikają ani nie powstają znikąd, tylko się przegrupowują.'},
+],
+quiz:[
+  {q:'Jaki to typ reakcji: A + B → AB?',opts:['Analiza','Synteza','Wymiana','Neutralizacja'],a:1,hint:'Łączenie dwóch w jedno',expl:'To <strong>reakcja syntezy</strong> — substancje łączą się w jedną.'},
+  {q:'Jaki to typ reakcji: AB → A + B?',opts:['Analiza (rozkład)','Synteza','Wymiana','Spalanie'],a:0,hint:'Rozkład na części',expl:'To <strong>reakcja analizy (rozkładu)</strong> — jedna substancja rozkłada się na kilka.'},
+  {q:'Reakcja metalu z kwasem (np. Zn + HCl) to zwykle reakcja:',opts:['Syntezy','Analizy','Wymiany','Fotosyntezy'],a:2,hint:'Składniki zamieniają się miejscami',expl:'To <strong>reakcja wymiany</strong> — metal zastępuje wodór w kwasie.'},
+  {q:'Dlaczego w równaniu reakcji musimy dobierać współczynniki?',opts:['Żeby równanie było ładniejsze','Żeby liczba atomów zgadzała się po obu stronach','To nieważne','Żeby skrócić zapis'],a:1,hint:'Zasada zachowania masy',expl:'Współczynniki dobieramy, by <strong>liczba atomów</strong> była taka sama po obu stronach (zachowanie masy).'},
+  {q:'Które równanie jest przykładem SYNTEZY?',opts:['2H₂O₂ → 2H₂O + O₂','2H₂ + O₂ → 2H₂O','Zn + 2HCl → ZnCl₂ + H₂','CaCO₃ → CaO + CO₂'],a:1,hint:'Łączenie w jedno',expl:'<strong>2H₂ + O₂ → 2H₂O</strong> — dwie substancje łączą się w jedną (wodę).'},
+]},
+];
+
+// ══════════════════ STATE
+let ct=TOPICS[0],tab='theory',fcI=0,fcF=false,qi=0,sel=null,score=0,mistakes=[],qList=[];
+
+function applyColors(id){
+  const c=C[id];
+  document.documentElement.style.setProperty('--c',c.c);
+  document.documentElement.style.setProperty('--c-bg',c.bg);
+  document.documentElement.style.setProperty('--c-d',c.d);
+}
+
+function setTopic(id){
+  ct=TOPICS.find(t=>t.id===id);
+  tab='theory';fcI=0;fcF=false;
+  qi=0;sel=null;score=0;mistakes=[];
+  qList=[...ct.quiz].sort(()=>Math.random()-.5);
+  applyColors(id);
+  renderTopics();renderITabs();render();
+}
+
+function setTab(id){
+  tab=id;fcI=0;fcF=false;
+  if(id==='quiz'){qi=0;sel=null;score=0;mistakes=[];qList=[...ct.quiz].sort(()=>Math.random()-.5);}
+  renderITabs();render();
+}
+
+function renderTopics(){
+  document.getElementById('topic-grid').innerHTML=TOPICS.map(t=>`
+    <button class="tcard${t.id===ct.id?' active':''}" onclick="setTopic('${t.id}')"
+      style="${t.id===ct.id?`border-color:${C[t.id].c};background:${C[t.id].bg}`:''}">
+      <div class="tc-ico">${t.ico}</div>
+      <div class="tc-body">
+        <div class="tc-num">${t.num}</div>
+        <div class="tc-name">${t.name}</div>
+      </div>
+    </button>`).join('');
+}
+
+const TABS=[
+  {id:'theory',l:'📖 Teoria'},
+  {id:'formulas',l:'📋 Kluczowe fakty'},
+  {id:'examples',l:'✏️ Przykłady'},
+  {id:'flash',l:'🃏 Fiszki'},
+  {id:'quiz',l:'🧮 Test'},
+];
+
+function renderITabs(){
+  document.getElementById('itabs').innerHTML=TABS.map(t=>`
+    <button class="itab${tab===t.id?' active':''}"
+      style="${tab===t.id?`background:${C[ct.id].c}`:''}
+      " onclick="setTab('${t.id}')">${t.l}</button>`).join('');
+}
+
+function renderTheory(){
+  const th=ct.theory;
+  return `<div class="card">
+    <div class="card-h">${ct.ico} ${ct.name}</div>
+    <p style="font-size:14px;color:var(--muted);margin-bottom:14px;line-height:1.6">${th.summary}</p>
+    <div class="tgrid">${th.blocks.map(b=>`
+      <div class="tbox" style="background:${C[b.t].bg};border-color:${C[b.t].c}40">
+        <h3 style="color:${C[b.t].d}">${b.h}</h3>
+        <ul style="color:${C[b.t].d}">${b.items.map(i=>`<li>${i}</li>`).join('')}</ul>
+      </div>`).join('')}
+    </div>
+  </div>
+  <div style="margin-top:4px"><button class="btn btn-pri" onclick="setTab('formulas')">📋 Kluczowe fakty →</button></div>`;
+}
+
+function renderFormulas(){
+  return `<div class="card">
+    <div class="card-h">📋 Kluczowe fakty — ${ct.name}</div>
+    <div class="formula">${ct.theory.formulas}</div>
+    <div style="margin-top:4px"><button class="btn btn-pri" onclick="setTab('examples')">✏️ Przykłady →</button></div>
+  </div>`;
+}
+
+function renderExamples(){
+  return `<div class="card">
+    <div class="card-h">✏️ Przykłady krok po kroku</div>
+    <div class="ex-list">${ct.examples.map(e=>`
+      <div class="ex-item">
+        <div class="ex-q">${e.q}</div>
+        <div class="ex-steps">
+          ${e.steps.map((s,i)=>`
+            <div class="ex-step">
+              <div class="ex-step-n" style="background:${C[ct.id].c}">${i+1}</div>
+              <div>${s}</div>
+            </div>`).join('')}
+          <div class="ex-ans">✅ Odpowiedź: ${e.ans}</div>
+        </div>
+      </div>`).join('')}
+    </div>
+  </div>`;
+}
+
+function renderFlash(){
+  const cards=ct.flashcards;
+  const c=cards[fcI];
+  return `<div class="card">
+    <div class="card-h">🃏 Fiszki — ${ct.name}</div>
+    <div class="fc-meta">Kliknij kartę · ${fcI+1} z ${cards.length}</div>
+    <div class="flashcard${fcF?' flipped':''}" onclick="flipCard()">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-q">${c.q}</div><div class="fc-tap">👆 Kliknij, by zobaczyć odpowiedź</div></div>
+        <div class="fc-back" style="background:${C[ct.id].bg};border-color:${C[ct.id].c}">
+          <div class="fc-a" style="--c-d:${C[ct.id].d}">${c.a}</div>
+        </div>
+      </div>
+    </div>
+    <div class="fc-nav">
+      <button class="btn btn-sec" onclick="fcNav(-1)" ${fcI===0?'disabled':''}>← Poprzednia</button>
+      <span class="fc-count">${fcI+1} / ${cards.length}</span>
+      <button class="btn btn-pri" onclick="fcNav(1)" ${fcI===cards.length-1?'disabled':''}>Następna →</button>
+    </div>
+  </div>`;
+}
+
+function flipCard(){fcF=!fcF;render();}
+function fcNav(d){fcI+=d;fcF=false;render();}
+
+function renderQuiz(){
+  if(qi>=qList.length)return renderResult();
+  const q=qList[qi];
+  const total=qList.length;
+  const pct=Math.round((qi/total)*100);
+  const optsHTML=q.opts.map((o,i)=>{
+    let cls='opt';
+    if(sel!==null){if(i===q.a)cls+=' ok';else if(i===sel&&sel!==q.a)cls+=' no';}
+    return `<button class="${cls}" onclick="choose(${i})" ${sel!==null?'disabled':''}>${o}</button>`;
+  }).join('');
+  let fb='';
+  if(sel!==null){
+    fb=sel===q.a
+      ?`<div class="feedback ok">✓ Правильно! <div class="expl">${q.expl}</div></div>`
+      :`<div class="feedback no">✗ Правильна: <strong>${q.opts[q.a]}</strong><div class="expl">${q.expl}</div></div>`;
+  }
+  return `
+  <div class="prog-bar"><div class="prog-fill" style="background:${C[ct.id].c};width:${pct}%"></div></div>
+  <div class="score-row">
+    <span>Pytanie <b>${qi+1}/${total}</b></span>
+    <span>✅ <b style="color:var(--ok)">${score}</b></span>
+    <span>❌ <b style="color:var(--err)">${mistakes.length}</b></span>
+  </div>
+  <div class="card">
+    <div class="q-label">Pytanie ${qi+1}</div>
+    <div class="q-text">${q.q}</div>
+    <div class="q-hint">💡 ${q.hint}</div>
+    <div class="opts">${optsHTML}</div>
+    ${fb}
+  </div>
+  <div class="nav-row">${sel!==null?`<button class="btn btn-pri" onclick="nextQ()">Dalej →</button>`:''}</div>`;
+}
+
+function renderResult(){
+  const total=qList.length;
+  const pct=Math.round((score/total)*100);
+  const emoji=pct>=80?'🎉':pct>=60?'👍':'📚';
+  const stars=pct>=100?'⭐⭐⭐':pct>=80?'⭐⭐':pct>=60?'⭐':'';
+  const msg=pct>=80?'Warwara — gotowa na kontrolną!':pct>=60?'Dobrze! Powtórz błędy.':'Wróć do teorii i kluczowych faktów.';
+  const mHTML=mistakes.length?`
+    <div style="margin-top:16px;text-align:left">
+      <div style="font-size:14px;font-weight:800;margin-bottom:10px">Błędy:</div>
+      ${mistakes.map(m=>`
+        <div class="mk">
+          <div class="mk-q">${m.q}</div>
+          <div class="mk-w">Ти відповіла: <b>${m.wrong}</b></div>
+          <div class="mk-c">✓ ${m.correct}</div>
+          <div class="mk-r">${m.rule}</div>
+        </div>`).join('')}
+    </div>`:'';
+  return `<div class="card"><div class="result">
+    <div style="font-size:42px">${emoji}</div>
+    <div style="font-size:24px;margin:4px 0">${stars}</div>
+    <div class="big" style="color:${C[ct.id].c}">${score}/${total}</div>
+    <div class="msg">${msg}</div>
+    <div class="result-btns">
+      <button class="btn btn-sec" onclick="setTab('theory')">📖 Teoria</button>
+      <button class="btn btn-sec" onclick="setTab('formulas')">📋 Fakty</button>
+      <button class="btn btn-pri" onclick="setTab('quiz')">Ponownie ↺</button>
+    </div>
+    ${mHTML}
+  </div></div>`;
+}
+
+function choose(i){
+  if(sel!==null)return;
+  sel=i;
+  const q=qList[qi];
+  if(i===q.a)score++;
+  else mistakes.push({q:q.q,wrong:q.opts[i],correct:q.opts[q.a],rule:q.expl});
+  render();
+}
+function nextQ(){qi++;sel=null;render();}
+
+function render(){
+  const c=document.getElementById('content');
+  if(tab==='theory')c.innerHTML=renderTheory();
+  else if(tab==='formulas')c.innerHTML=renderFormulas();
+  else if(tab==='examples')c.innerHTML=renderExamples();
+  else if(tab==='flash')c.innerHTML=renderFlash();
+  else c.innerHTML=renderQuiz();
+}
+
+setTopic('t1');
+</script>
+</body>
+</html>
