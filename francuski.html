@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Français · Unité 1 · Варвара</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#fafafa;--card:#fff;--ink:#111827;--muted:#6b7280;--border:#e5e7eb;
+  --t1:#2563eb;--t1b:#dbeafe;--t1d:#1d4ed8;
+  --t2:#059669;--t2b:#d1fae5;--t2d:#065f46;
+  --t3:#7c3aed;--t3b:#ede9fe;--t3d:#5b21b6;
+  --t4:#dc2626;--t4b:#fee2e2;--t4d:#991b1b;
+  --t5:#d97706;--t5b:#fef3c7;--t5d:#92400e;
+  --t6:#0891b2;--t6b:#cffafe;--t6d:#164e63;
+  --t7:#be185d;--t7b:#fce7f3;--t7d:#9d174d;
+  --t8:#4f46e5;--t8b:#e0e7ff;--t8d:#3730a3;
+  --t9:#0d9488;--t9b:#ccfbf1;--t9d:#115e59;
+  --t10:#ea580c;--t10b:#ffedd5;--t10d:#9a3412;
+  --t11:#64748b;--t11b:#f1f5f9;--t11d:#334155;
+  --t12:#78716c;--t12b:#f5f5f4;--t12d:#44403c;
+  --t13:#c026d3;--t13b:#fae8ff;--t13d:#86198f;
+  --ok:#16a34a;--okb:#dcfce7;--err:#dc2626;--errb:#fee2e2;
+  --r:14px;--rs:8px;--sh:0 2px 12px rgba(0,0,0,.07);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Sora',sans-serif;background:var(--bg);color:var(--ink);min-height:100vh}
+.page{max-width:720px;margin:0 auto;padding:20px 14px 80px}
+.hero{text-align:center;padding:24px 0 20px;margin-bottom:20px;
+  background:linear-gradient(135deg,#1d4ed8 0%,#7c3aed 50%,#059669 100%);
+  border-radius:20px;color:white}
+.hero .badge{display:inline-block;background:rgba(255,255,255,.2);
+  font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  padding:4px 14px;border-radius:99px;margin-bottom:12px}
+.hero h1{font-size:24px;font-weight:800;line-height:1.2;margin-bottom:6px}
+.hero p{font-size:13px;opacity:.8}
+.topic-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:18px}
+.tcard{
+  padding:12px 14px;border:2px solid var(--border);border-radius:var(--r);
+  background:var(--card);cursor:pointer;transition:all .16s;box-shadow:var(--sh);
+  display:flex;align-items:center;gap:10px;
+}
+.tcard:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,.1)}
+.tcard .tc-ico{font-size:22px;flex-shrink:0}
+.tcard .tc-body{min-width:0}
+.tcard .tc-num{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:2px}
+.tcard .tc-name{font-size:13px;font-weight:700;color:var(--ink);line-height:1.3}
+.tcard.active{border-width:2px;background:var(--c-bg,#dbeafe)}
+.itabs{display:flex;gap:4px;background:var(--card);padding:4px;
+  border-radius:var(--r);border:1px solid var(--border);margin-bottom:16px;overflow-x:auto}
+.itab{flex-shrink:0;padding:7px 12px;border-radius:var(--rs);border:none;
+  font-family:'Sora',sans-serif;font-size:12px;font-weight:600;
+  cursor:pointer;background:transparent;color:var(--muted);transition:all .16s;white-space:nowrap}
+.itab:hover{background:var(--bg)}
+.itab.active{color:white}
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);
+  padding:18px;margin-bottom:12px;box-shadow:var(--sh);animation:up .2s ease}
+@keyframes up{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+.card-h{font-size:16px;font-weight:800;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.tgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
+.tbox{padding:12px 13px;border-radius:var(--rs);border:1.5px solid}
+.tbox h3{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:7px}
+.tbox ul{list-style:none;font-size:13px;line-height:2}
+.tbox ul li::before{content:"• ";opacity:.4}
+.formula{background:var(--c-bg,#dbeafe);border:1.5px solid var(--c,#2563eb);
+  border-radius:var(--rs);padding:14px 16px;margin-bottom:12px;font-size:14px;line-height:2}
+.formula strong{color:var(--c-d,#1d4ed8);font-weight:800}
+.math{font-family:'JetBrains Mono',monospace;background:rgba(0,0,0,.05);
+  padding:2px 7px;border-radius:5px;font-size:13px}
+.ex-list{display:flex;flex-direction:column;gap:10px}
+.ex-item{background:var(--bg);border-radius:var(--rs);border:1px solid var(--border);overflow:hidden}
+.ex-q{padding:10px 14px;font-size:14px;font-weight:600;border-bottom:1px solid var(--border)}
+.ex-steps{padding:10px 14px}
+.ex-step{display:flex;gap:8px;margin-bottom:6px;font-size:13px;line-height:1.6;align-items:flex-start}
+.ex-step-n{width:20px;height:20px;border-radius:50%;background:var(--c,#2563eb);color:white;
+  font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.ex-ans{background:var(--okb);color:#14532d;font-weight:700;font-size:13px;
+  padding:7px 12px;border-radius:6px;margin-top:6px;display:inline-block}
+.prog-bar{height:5px;background:var(--border);border-radius:99px;margin-bottom:10px;overflow:hidden}
+.prog-fill{height:100%;border-radius:99px;background:var(--c,#2563eb);transition:width .4s}
+.score-row{display:flex;gap:14px;font-size:12px;color:var(--muted);margin-bottom:12px}
+.score-row b{color:var(--ink)}
+.q-label{font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;font-weight:700}
+.q-text{font-size:16px;font-weight:800;line-height:1.5;margin-bottom:6px}
+.q-hint{font-size:13px;color:var(--muted);font-style:italic;margin-bottom:12px}
+.opts{display:flex;flex-direction:column;gap:6px}
+.opt{padding:10px 14px;border:1.5px solid var(--border);border-radius:var(--rs);
+  font-family:'Sora',sans-serif;font-size:14px;font-weight:500;
+  cursor:pointer;background:var(--card);color:var(--ink);text-align:left;transition:all .14s}
+.opt:hover:not(:disabled){border-color:var(--c,#2563eb);background:var(--c-bg,#dbeafe)}
+.opt.ok{background:var(--okb);border-color:#86efac;color:#14532d;font-weight:700}
+.opt.no{background:var(--errb);border-color:#fca5a5;color:#7f1d1d}
+.feedback{margin-top:10px;padding:11px 14px;border-radius:var(--rs);font-size:13px;line-height:1.7;animation:up .18s ease}
+.feedback.ok{background:var(--okb);color:#14532d;border:1px solid #86efac}
+.feedback.no{background:var(--errb);color:#7f1d1d;border:1px solid #fca5a5}
+.expl{margin-top:7px;background:white;border-radius:7px;padding:8px 12px;font-size:13px;color:#1e3a8a;line-height:1.7;border:1px solid #bfdbfe}
+.nav-row{display:flex;justify-content:flex-end;margin-top:10px}
+.btn{padding:9px 20px;border-radius:var(--rs);border:none;font-family:'Sora',sans-serif;
+  font-size:13px;font-weight:700;cursor:pointer;transition:all .14s}
+.btn-pri{background:var(--c,#2563eb);color:white}
+.btn-pri:hover{filter:brightness(.9);transform:translateY(-1px)}
+.btn-sec{background:var(--card);color:var(--ink);border:1.5px solid var(--border)}
+.btn-sec:hover{background:var(--bg)}
+.result{text-align:center;padding:10px 0 16px}
+.result .big{font-size:54px;font-weight:800;color:var(--c,#2563eb);line-height:1}
+.result .msg{font-size:15px;color:var(--muted);margin:8px 0 18px}
+.result-btns{display:flex;gap:7px;justify-content:center;flex-wrap:wrap}
+.mk{background:#fffbeb;border:1.5px solid #fcd34d;border-radius:var(--rs);padding:12px;margin-bottom:8px;text-align:left}
+.mk-q{font-weight:700;font-size:13px;margin-bottom:4px}
+.mk-w{font-size:12px;color:var(--err);margin-bottom:3px}
+.mk-c{display:inline-block;background:var(--okb);color:#14532d;font-size:12px;font-weight:700;padding:2px 9px;border-radius:5px;margin-bottom:6px}
+.mk-r{font-size:12px;color:#1e3a8a;background:#dbeafe;padding:7px 11px;border-radius:7px;line-height:1.7}
+.fc-meta{text-align:center;font-size:13px;color:var(--muted);margin-bottom:10px}
+.flashcard{perspective:900px;width:100%;min-height:160px;cursor:pointer;margin-bottom:10px}
+.fc-inner{position:relative;width:100%;min-height:160px;transform-style:preserve-3d;transition:transform .45s;border-radius:var(--r)}
+.flashcard.flipped .fc-inner{transform:rotateY(180deg)}
+.fc-front,.fc-back{position:absolute;width:100%;min-height:160px;backface-visibility:hidden;
+  border-radius:var(--r);padding:20px;display:flex;flex-direction:column;justify-content:center;
+  border:2px solid var(--border);box-shadow:var(--sh)}
+.fc-front{background:white;text-align:center}
+.fc-back{transform:rotateY(180deg);background:var(--c-bg,#dbeafe);border-color:var(--c,#2563eb)}
+.fc-q{font-size:16px;font-weight:800;line-height:1.4;margin-bottom:7px}
+.fc-tap{font-size:12px;color:var(--muted)}
+.fc-a{font-size:14px;line-height:1.75}
+.fc-a strong{color:var(--c-d,#1d4ed8)}
+.fc-nav{display:flex;justify-content:space-between;align-items:center}
+.fc-count{font-size:12px;color:var(--muted);font-weight:600}
+@media(max-width:500px){
+  .topic-grid{grid-template-columns:1fr}
+  .tgrid{grid-template-columns:1fr}
+  .hero h1{font-size:19px}
+  .result .big{font-size:40px}
+}
+</style>
+<style>.ld-home{position:fixed;top:10px;left:10px;z-index:100;background:rgba(45,38,87,.92);color:#fff!important;text-decoration:none;font:600 13px/1 system-ui,sans-serif;padding:9px 13px;border-radius:20px;box-shadow:0 2px 8px rgba(0,0,0,.2)}</style>
+</head>
+<body>
+<a class="ld-home" href="index.html">← Головна / Strona główna</a>
+<div class="page">
+
+<div class="hero">
+  <div class="badge">🇫🇷 Français · Unité 1 · Kartkówka</div>
+  <h1>Bonjour !<br>Перший французький</h1>
+  <p>Se présenter · Articles · Qu'est-ce que c'est ? · Les nombres · Варвара</p>
+</div>
+
+<div class="topic-grid" id="topic-grid"></div>
+<div class="itabs" id="itabs"></div>
+<div id="content"></div>
+
+</div>
+<style>
+.gender-tag{display:inline-block;font-size:11px;font-weight:800;padding:2px 9px;border-radius:9px;margin-left:6px}
+.gender-m{background:#dbeafe;color:#1d4ed8}
+.gender-f{background:#fce7f3;color:#9d174d}
+.gender-pl{background:#d1fae5;color:#065f46}
+.word-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.word-emoji{font-size:20px}
+</style>
+<script>
+const C={
+  t1:{c:'#2563eb',bg:'#dbeafe',d:'#1d4ed8'},
+  t2:{c:'#d97706',bg:'#fef3c7',d:'#92400e'},
+  t3:{c:'#059669',bg:'#d1fae5',d:'#065f46'},
+  t4:{c:'#7c3aed',bg:'#ede9fe',d:'#5b21b6'},
+  t5:{c:'#be185d',bg:'#fce7f3',d:'#9d174d'},
+  t6:{c:'#0891b2',bg:'#cffafe',d:'#164e63'},
+};
+
+const TOPICS=[
+{id:'t1',ico:'👋',num:'Thème 1',name:'Se présenter',
+theory:{
+  summary:'Jak przedstawić SAMEGO siebie po francusku — imię, wiek, powitanie. Podstawa każdej rozmowy!',
+  blocks:[
+    {t:'t1',h:'Powitanie',items:['Salut ! — Cześć! (do kolegów)','Bonjour ! — Dzień dobry! (uprzejme)','Comment ça va ? — Jak się masz?','Ça va bien, merci ! — Dobrze, dziękuję!','Au revoir ! — Do widzenia!']},
+    {t:'t1',h:'Je m\'appelle... (Nazywam się...)',items:['Je m\'appelle Varvara. — Nazywam się Varvara.','Comment tu t\'appelles ? — Jak się nazywasz?','"M\'appelle" = "nazywam SIĘ" — zawsze razem!','Nie mów "Je suis Varvara" na powitanie — to brzmi sztywno','"Je m\'appelle" brzmi naturalnie i jest standardem']},
+    {t:'t1',h:'J\'ai... ans (Mam... lat)',items:['J\'ai 13 ans. — Mam 13 lat.','Quel âge as-tu ? — Ile masz lat?','UWAGA: po francusku zawsze dodajemy słowo "ans" (lata)!','J\'ai dix ans. = Mam dziesięć lat.','Nie wolno pominąć "ans" — to częsty błąd początkujących']},
+    {t:'t1',h:'J\'habite à... (Mieszkam w...)',items:['J\'habite à Varsovie. — Mieszkam w Warszawie.','Où habites-tu ? — Gdzie mieszkasz?','Je suis polonaise / ukrainienne — Jestem Polką / Ukrainką','Można dodać: J\'ai ... ans et j\'habite à ... — pełne zdanie','Łączymy wszystko: Bonjour ! Je m\'appelle... J\'ai... ans. J\'habite à...']},
+  ],
+  formulas:`<strong>Je m'appelle</strong> ... — Nazywam się...<br><strong>J'ai</strong> ... <strong>ans</strong> — Mam ... lat (nie zapomnij "ans"!)<br><strong>J'habite à</strong> ... — Mieszkam w...<br><strong>Comment tu t'appelles ?</strong> — Jak się nazywasz?`,
+},
+examples:[
+  {q:'Jak powiesz "Nazywam się Varvara"?',steps:['Używamy zwrotu "Je m\'appelle"','Dodajemy imię','Je m\'appelle Varvara.'],ans:'Je m\'appelle Varvara.'},
+  {q:'Jak zapytasz kolegę "Ile masz lat?"',steps:['Pytanie zaczyna się od "Quel âge"','Potem "as-tu" (masz)','Quel âge as-tu ?'],ans:'Quel âge as-tu ?'},
+  {q:'Jak powiesz "Mam 13 lat"?',steps:['Zaczynamy od "J\'ai"','Dodajemy liczbę "13" (treize)','Kończymy słowem "ans" — zawsze!'],ans:'J\'ai treize ans.'},
+],
+flashcards:[
+  {q:'Jak powiedzieć "Nazywam się..." po francusku?',a:'<strong>Je m\'appelle...</strong> Np. Je m\'appelle Varvara. "M\'appelle" oznacza dosłownie "nazywam się" — zawsze razem, nie da się rozdzielić.'},
+  {q:'Czego NIE wolno zapomnieć, mówiąc o wieku?',a:'Słowa <strong>"ans"</strong> na końcu! J\'ai 13 <strong>ans</strong>. (Mam 13 LAT). Po polsku można powiedzieć "mam 13", po francusku — nigdy bez "ans".'},
+  {q:'Jak zapytać kogoś "Jak się nazywasz?"',a:'<strong>Comment tu t\'appelles ?</strong> — dosłownie "jak ty się nazywasz?"'},
+  {q:'Czym różni się "Salut" od "Bonjour"?',a:'<strong>Salut</strong> — swobodne "cześć", do kolegów. <strong>Bonjour</strong> — uprzejme "dzień dobry", do dorosłych/nauczycieli.'},
+],
+quiz:[
+  {q:'Jak powiesz "Nazywam się Anna"?',opts:['J\'ai Anna','Je m\'appelle Anna','Je suis appelle Anna','Tu t\'appelles Anna'],a:1,hint:'"M\'appelle" = nazywam się',expl:'<strong>Je m\'appelle Anna</strong> — poprawna forma. "M\'appelle" to zwrotna forma czasownika "appeler".'},
+  {q:'Co oznacza "Quel âge as-tu ?"',opts:['Jak się nazywasz?','Gdzie mieszkasz?','Ile masz lat?','Jak się masz?'],a:2,hint:'"âge" = wiek',expl:'<strong>"Quel âge as-tu ?"</strong> = Ile masz lat? ("âge" to po francusku "wiek").'},
+  {q:'Które zdanie jest POPRAWNE?',opts:['J\'ai 12.','J\'ai 12 ans.','Je m\'appelle 12 ans.','J\'ai ans 12.'],a:1,hint:'Nie zapomnij o "ans"!',expl:'<strong>J\'ai 12 ans.</strong> — zawsze dodajemy "ans" po liczbie, mówiąc o wieku.'},
+  {q:'Jak powiesz "Mieszkam w Warszawie"?',opts:['Je suis à Varsovie','J\'habite à Varsovie','Je m\'appelle Varsovie','J\'ai Varsovie'],a:1,hint:'"habite" = mieszkam',expl:'<strong>J\'habite à Varsovie.</strong> — "habiter" to czasownik "mieszkać".'},
+  {q:'Jak odpowiesz na "Comment ça va ?"',opts:['Je m\'appelle bien','Ça va bien, merci !','J\'ai bien','Bonjour bien'],a:1,hint:'Standardowa odpowiedź na "jak się masz"',expl:'<strong>Ça va bien, merci !</strong> — Dobrze, dziękuję! To standardowa, uprzejma odpowiedź.'},
+]},
+
+{id:'t2',ico:'🤝',num:'Thème 2',name:'Présenter quelqu\'un',
+theory:{
+  summary:'Jak przedstawić KOGOŚ innego po francusku — kolegę, koleżankę, członka rodziny.',
+  blocks:[
+    {t:'t2',h:'C\'est... (To jest...)',items:['C\'est Thomas. — To jest Thomas.','C\'est ma sœur. — To moja siostra.','C\'est mon ami. — To mój kolega.','"C\'est" używamy do WSKAZANIA jednej osoby/rzeczy','Działa dla chłopców i dziewczynek — forma się nie zmienia!']},
+    {t:'t2',h:'Voici / Voilà (Oto...)',items:['Voici Léa. — Oto Léa. (blisko mnie)','Voilà Marc. — Oto Marc. (dalej, "tam jest")','Voici i voilà to sposób na "przedstawienie" kogoś gestem','Je te présente... — Przedstawiam ci...','Je te présente mon ami Paul. — Przedstawiam ci mojego kolegę Paula.']},
+    {t:'t2',h:'Il / Elle s\'appelle (On/Ona się nazywa)',items:['Il s\'appelle Marc. — On nazywa się Marc. (chłopiec)','Elle s\'appelle Léa. — Ona nazywa się Léa. (dziewczynka)','Il a 12 ans. — On ma 12 lat.','Elle a 11 ans. — Ona ma 11 lat.','Pamiętaj: il = on, elle = ona — zawsze pasuj do płci!']},
+    {t:'t2',h:'Pełne przedstawienie — przykład',items:['Voici mon amie. — Oto moja koleżanka.','Elle s\'appelle Chloé. — Ona nazywa się Chloé.','Elle a 13 ans. — Ona ma 13 lat.','Elle habite à Cracovie. — Ona mieszka w Krakowie.','Tak łączymy zdania w pełną wypowiedź!']},
+  ],
+  formulas:`<strong>C'est</strong> ... — To jest... (wskazanie 1 osoby)<br><strong>Voici / Voilà</strong> ... — Oto... (przedstawienie gestem)<br><strong>Il s'appelle</strong> ... — On nazywa się... (chłopiec)<br><strong>Elle s'appelle</strong> ... — Ona nazywa się... (dziewczynka)`,
+},
+examples:[
+  {q:'Jak przedstawisz kolegę Marca?',steps:['Możesz użyć "C\'est" lub "Voici"','Dodajemy imię','C\'est Marc. / Voici Marc.'],ans:'C\'est Marc. (lub: Voici Marc.)'},
+  {q:'Jak powiesz "Ona nazywa się Léa i ma 12 lat"?',steps:['Zaczynamy od "Elle s\'appelle" (bo to dziewczynka)','Dodajemy imię: Léa','Dodajemy wiek: "et elle a 12 ans"'],ans:'Elle s\'appelle Léa et elle a 12 ans.'},
+  {q:'Jak powiesz "Przedstawiam ci mojego kolegę Toma"?',steps:['Zaczynamy od "Je te présente"','Dodajemy "mon ami" (mój kolega)','Dodajemy imię: Tom'],ans:'Je te présente mon ami Tom.'},
+],
+flashcards:[
+  {q:'Kiedy mówimy "Il s\'appelle", a kiedy "Elle s\'appelle"?',a:'<strong>Il s\'appelle</strong> — gdy mówimy o CHŁOPCU (on). <strong>Elle s\'appelle</strong> — gdy mówimy o DZIEWCZYNCE (ona). To zawsze musi pasować do płci osoby!'},
+  {q:'Jaka jest różnica między "C\'est" a "Voici"?',a:'<strong>C\'est</strong> — neutralne "to jest" (opis). <strong>Voici</strong> — "oto", często z gestem wskazania, bardziej żywe przedstawienie.'},
+  {q:'Jak powiedzieć "Przedstawiam ci..."?',a:'<strong>Je te présente...</strong> Np. Je te présente ma sœur. (Przedstawiam ci moją siostrę.)'},
+  {q:'Jak zmienia się forma w zależności od płci — podaj przykład.',a:'<strong>Il a 12 ans</strong> (chłopiec ma 12 lat) vs <strong>Elle a 12 ans</strong> (dziewczynka ma 12 lat). Samo "a" się nie zmienia, zmienia się tylko "il/elle".'},
+],
+quiz:[
+  {q:'Jak powiesz o koledze Tomaszu: "On nazywa się Tomasz"?',opts:['Elle s\'appelle Tomasz','Il s\'appelle Tomasz','C\'est s\'appelle Tomasz','Je m\'appelle Tomasz'],a:1,hint:'Chłopiec = il',expl:'<strong>Il s\'appelle Tomasz.</strong> — "il" używamy dla chłopca.'},
+  {q:'Jak powiesz o koleżance Marii: "Ona ma 11 lat"?',opts:['Il a 11 ans','J\'ai 11 ans','Elle a 11 ans','Tu as 11 ans'],a:2,hint:'Dziewczynka = elle',expl:'<strong>Elle a 11 ans.</strong> — "elle" dla dziewczynki.'},
+  {q:'Co oznacza "Je te présente mon ami" ?',opts:['Jestem twoim przyjacielem','Przedstawiam ci mojego kolegę','To jest mój przyjaciel','Mój przyjaciel ma na imię'],a:1,hint:'"présente" = przedstawiam',expl:'<strong>"Je te présente mon ami"</strong> = Przedstawiam ci mojego kolegę.'},
+  {q:'Które zdanie poprawnie przedstawia dziewczynkę Léa?',opts:['Il s\'appelle Léa.','Elle s\'appelle Léa.','C\'est s\'appelle Léa.','Je s\'appelle Léa.'],a:1,hint:'Léa to dziewczynka',expl:'<strong>Elle s\'appelle Léa.</strong> — Léa to imię żeńskie, używamy "elle".'},
+  {q:'Jak powiesz "To jest moja siostra"?',opts:['Voici je ma sœur','C\'est ma sœur','Il ma sœur','J\'ai ma sœur'],a:1,hint:'"C\'est" + rzeczownik',expl:'<strong>C\'est ma sœur.</strong> — "to jest moja siostra".'},
+]},
+
+{id:'t3',ico:'🔢',num:'Thème 3',name:'Compter de 1 à 10',
+theory:{
+  summary:'Liczby od 1 do 10 po francusku — z wymową. Konieczne do liczenia przedmiotów w klasie!',
+  blocks:[
+    {t:'t3',h:'1–5',items:['1 — un (ан)','2 — deux (dö)','3 — trois (труа)','4 — quatre (катр)','5 — cinq (сенк)']},
+    {t:'t3',h:'6–10',items:['6 — six (сіс)','7 — sept (сет)','8 — huit (віт)','9 — neuf (ньоф)','10 — dix (діс)']},
+    {t:'t3',h:'Jak ćwiczyć wymowę',items:['"un" brzmi przez nos — jak "ан" z lekkim "n"','"trois" — "r" francuskie, z tyłu gardła','"huit" — "h" jest NIEME, czytamy "wit"','"six" i "dix" na końcu liczby brzmią jak "s" (сіс, діс)','Policz na głos: un, deux, trois, quatre, cinq...']},
+    {t:'t3',h:'Gdzie się przydadzą liczby',items:['Il y a un livre. — Jest jedna książka.','Il y a deux crayons. — Są dwa ołówki.','J\'ai dix ans. — Mam dziesięć lat. (temat 1!)','Liczymy przedmioty w klasie (temat 6)','Zawsze ćwicz liczenie na głos, w kolejności!']},
+  ],
+  formulas:`<strong>1</strong> un · <strong>2</strong> deux · <strong>3</strong> trois · <strong>4</strong> quatre · <strong>5</strong> cinq<br><strong>6</strong> six · <strong>7</strong> sept · <strong>8</strong> huit · <strong>9</strong> neuf · <strong>10</strong> dix<br>💡 Zapamiętaj rymem: un, deux, trois — raz, dwa, trzy!`,
+},
+examples:[
+  {q:'Jak powiesz liczbę 7 po francusku?',steps:['7 to "sept"','Wymowa: "set"'],ans:'sept'},
+  {q:'Jak policzysz od 1 do 5 po francusku?',steps:['un, deux, trois, quatre, cinq'],ans:'un, deux, trois, quatre, cinq'},
+  {q:'Jak powiesz "Mam 10 lat" po francusku?',steps:['J\'ai + liczba + ans','10 to "dix"','J\'ai dix ans.'],ans:'J\'ai dix ans.'},
+],
+flashcards:[
+  {q:'Jak policzyć od 1 do 5 po francusku?',a:'<strong>un, deux, trois, quatre, cinq</strong> (1, 2, 3, 4, 5).'},
+  {q:'Jak policzyć od 6 do 10 po francusku?',a:'<strong>six, sept, huit, neuf, dix</strong> (6, 7, 8, 9, 10).'},
+  {q:'Jak wymawia się "huit" (8)?',a:'Wymawiamy <strong>"wit"</strong> — litera "h" jest NIEMA, nie wymawiamy jej wcale!'},
+  {q:'Która liczba brzmi podobnie: "six" czy "dix"? Jak je rozróżnić?',a:'<strong>Six</strong> (6, "сіс") i <strong>dix</strong> (10, "діс") brzmią podobnie — różni je tylko pierwsza głoska: s- vs d-.'},
+],
+quiz:[
+  {q:'Jak powiesz liczbę 3 po francusku?',opts:['deux','trois','quatre','cinq'],a:1,hint:'3 = ?',expl:'<strong>trois</strong> = 3.'},
+  {q:'Jak powiesz liczbę 8 po francusku?',opts:['sept','neuf','huit','six'],a:2,hint:'Litera "h" jest niema',expl:'<strong>huit</strong> = 8 (wymowa: "wit").'},
+  {q:'Która liczba to "neuf"?',opts:['7','8','9','10'],a:2,hint:'Blisko "dix"',expl:'<strong>neuf</strong> = 9.'},
+  {q:'Jak powiesz "Mam 5 lat"?',opts:['J\'ai cinq ans.','J\'ai cinq.','Je cinq ans.','J\'ai ans cinq.'],a:0,hint:'Nie zapomnij "ans"!',expl:'<strong>J\'ai cinq ans.</strong> — zawsze z "ans" na końcu.'},
+  {q:'Ułóż liczby w kolejności rosnącej: dix, deux, cinq',opts:['dix, deux, cinq','deux, cinq, dix','cinq, dix, deux','deux, dix, cinq'],a:1,hint:'2, 5, 10',expl:'<strong>deux (2), cinq (5), dix (10)</strong> — rosnąco.'},
+]},
+
+{id:'t4',ico:'📦',num:'Thème 4',name:'Un / Une / Des',
+theory:{
+  summary:'Rodzajniki NIEOKREŚLONE — "jakiś/jakaś przedmiot" (jeszcze nieznany, nowy). Kluczowe dla "Qu\'est-ce que c\'est?"',
+  blocks:[
+    {t:'t4',h:'UN — rodzaj męski (🔵)',items:['un crayon — (jakiś) ołówek','un livre — (jakaś) książka','un sac — (jakaś) torba','un stylo — (jakiś) długopis','Zasada: UN przed słowem rodzaju męskiego']},
+    {t:'t4',h:'UNE — rodzaj żeński (🔴)',items:['une gomme — (jakaś) gumka','une règle — (jakaś) linijka','une trousse — (jakiś) piórnik','une table — (jakiś) stół','Zasada: UNE przed słowem rodzaju żeńskiego']},
+    {t:'t4',h:'DES — liczba mnoga (🟢)',items:['des crayons — (jakieś) ołówki','des livres — (jakieś) książki','des stylos — (jakieś) długopisy','DES używamy dla WIELU przedmiotów (2+)','Działa niezależnie od rodzaju — i dla "un", i dla "une"!']},
+    {t:'t4',h:'Jak zapamiętać — gra skojarzeń',items:['UN = 🔵 (niebieski, chłopiec)','UNE = 🔴 (różowy, dziewczynka)','DES = 🟢 (grupa, wiele rzeczy razem)','Niestety rodzaj słowa trzeba ZAPAMIĘTAĆ — nie zawsze jest logiczny!','Najlepiej uczyć się słówka RAZEM z rodzajnikiem: "un crayon", nie samo "crayon"']},
+  ],
+  formulas:`<strong>un</strong> + rzeczownik rodzaju męskiego (un crayon) 🔵<br><strong>une</strong> + rzeczownik rodzaju żeńskiego (une gomme) 🔴<br><strong>des</strong> + liczba mnoga, bez względu na rodzaj (des crayons, des gommes) 🟢<br>💡 Ucz się słówek ZAWSZE z rodzajnikiem!`,
+},
+examples:[
+  {q:'Jaki rodzajnik pasuje do "livre" (książka, rodzaj męski)?',steps:['Livre to rzeczownik rodzaju męskiego','Dla pojedynczej rzeczy rodzaju męskiego używamy "un"'],ans:'un livre'},
+  {q:'Jaki rodzajnik pasuje do "gomme" (gumka, rodzaj żeński)?',steps:['Gomme to rzeczownik rodzaju żeńskiego','Dla pojedynczej rzeczy rodzaju żeńskiego używamy "une"'],ans:'une gomme'},
+  {q:'Jak powiesz "jakieś książki" (liczba mnoga)?',steps:['Mamy więcej niż jedną książkę','Dla liczby mnogiej zawsze używamy "des", niezależnie od rodzaju'],ans:'des livres'},
+],
+flashcards:[
+  {q:'Kiedy używamy "un", a kiedy "une"?',a:'<strong>un</strong> 🔵 — przed rzeczownikiem rodzaju MĘSKIEGO (un crayon). <strong>une</strong> 🔴 — przed rzeczownikiem rodzaju ŻEŃSKIEGO (une gomme).'},
+  {q:'Kiedy używamy "des"?',a:'<strong>des</strong> 🟢 — gdy mówimy o KILKU przedmiotach (liczba mnoga), niezależnie od ich rodzaju. Np. des crayons, des gommes.'},
+  {q:'Jak najlepiej uczyć się rodzaju francuskich słów?',a:'Zawsze ucz się słówka <strong>razem z rodzajnikiem</strong> — nie "crayon", tylko "<strong>un</strong> crayon". Rodzaj często trzeba po prostu zapamiętać.'},
+  {q:'Czy "des" zmienia się w zależności od rodzaju?',a:'<strong>Nie!</strong> "des" jest takie samo dla liczby mnogiej rodzaju męskiego i żeńskiego: des crayons (m.) i des gommes (ż.).'},
+],
+quiz:[
+  {q:'Jaki rodzajnik pasuje: "___ stylo" (długopis, rodzaj męski)?',opts:['un','une','des','la'],a:0,hint:'Rodzaj męski, liczba pojedyncza',expl:'<strong>un stylo</strong> — rodzaj męski, liczba pojedyncza.'},
+  {q:'Jaki rodzajnik pasuje: "___ règle" (linijka, rodzaj żeński)?',opts:['un','une','des','le'],a:1,hint:'Rodzaj żeński, liczba pojedyncza',expl:'<strong>une règle</strong> — rodzaj żeński, liczba pojedyncza.'},
+  {q:'Jaki rodzajnik pasuje: "___ cahiers" (zeszyty, liczba mnoga)?',opts:['un','une','des','la'],a:2,hint:'Więcej niż jeden',expl:'<strong>des cahiers</strong> — liczba mnoga, zawsze "des".'},
+  {q:'Który rodzajnik jest POPRAWNY dla "une ___" ?',opts:['un crayon','une trousse','des livres','un sac'],a:1,hint:'"une" pasuje do rodzaju żeńskiego',expl:'<strong>une trousse</strong> (piórnik) — rodzaj żeński.'},
+  {q:'"Un" używamy dla:',opts:['Rodzaju żeńskiego','Rodzaju męskiego, liczba pojedyncza','Liczby mnogiej','Wszystkich rzeczowników'],a:1,hint:'🔵',expl:'<strong>"un"</strong> — rodzaj męski, liczba pojedyncza.'},
+]},
+
+{id:'t5',ico:'🎯',num:'Thème 5',name:'Le / La / L\' / Les',
+theory:{
+  summary:'Rodzajniki OKREŚLONE — "TEN KONKRETNY przedmiot" (już znany, wskazany). Łatwo pomylić z un/une/des!',
+  blocks:[
+    {t:'t5',h:'LE — rodzaj męski (🔵)',items:['le crayon — TEN ołówek (konkretny)','le livre — TA książka (konkretna)','le tableau — TA tablica','Używamy, gdy wiemy DOKŁADNIE, o który przedmiot chodzi','Różnica z "un": un crayon = jakiś, le crayon = TEN konkretny']},
+    {t:'t5',h:'LA — rodzaj żeński (🔴)',items:['la gomme — TA gumka (konkretna)','la règle — TA linijka','la table — TEN stół','Używamy dla rodzaju żeńskiego, znanego przedmiotu','la + spółgłoska na początku słowa']},
+    {t:'t5',h:'L\' — przed samogłoską (⚡)',items:['l\'école — TA szkoła (zaczyna się na "é")','l\'ami — TEN kolega (zaczyna się na "a")','l\'élève — TEN/TA uczeń/uczennica','Używamy L\' zamiast LE/LA, gdy słowo zaczyna się na SAMOGŁOSKĘ (a,e,i,o,u) lub "h"','To ułatwia wymowę — unikamy zderzenia dwóch samogłosek!']},
+    {t:'t5',h:'LES — liczba mnoga (🟢)',items:['les crayons — TE ołówki','les gommes — TE gumki','les élèves — CI uczniowie','LES używamy dla liczby mnogiej, niezależnie od rodzaju','Tak jak "des", ale dla przedmiotów JUŻ ZNANYCH/konkretnych']},
+  ],
+  formulas:`<strong>le</strong> + rzeczownik męski (le crayon) 🔵<br><strong>la</strong> + rzeczownik żeński (la gomme) 🔴<br><strong>l'</strong> + rzeczownik zaczynający się na samogłoskę/h (l'école) ⚡<br><strong>les</strong> + liczba mnoga, bez względu na rodzaj (les crayons) 🟢`,
+},
+examples:[
+  {q:'Jaki rodzajnik pasuje do "école" (szkoła, zaczyna się na samogłoskę)?',steps:['École zaczyna się na literę "é" (samogłoska)','Dla samogłosek NIE używamy "la", tylko "l\'"','l\'école'],ans:'l\'école'},
+  {q:'Czym różni się "un crayon" od "le crayon"?',steps:['"un crayon" = JAKIŚ ołówek (nieznany, dowolny)','"le crayon" = TEN KONKRETNY ołówek (znany, wskazany)','Różnica w znaczeniu, nie w rodzaju!'],ans:'un = jakiś, le = ten konkretny'},
+  {q:'Jaki rodzajnik pasuje do "élèves" (uczniowie, liczba mnoga)?',steps:['Mamy liczbę mnogą','Dla liczby mnogiej zawsze "les", niezależnie od samogłoski na początku'],ans:'les élèves'},
+],
+flashcards:[
+  {q:'Kiedy używamy "l\'" zamiast "le" lub "la"?',a:'Gdy słowo zaczyna się na <strong>samogłoskę (a,e,i,o,u) lub "h"</strong>. Np. l\'école, l\'ami. To ułatwia wymowę.'},
+  {q:'Czym różni się "un/une/des" od "le/la/les"?',a:'<strong>un/une/des</strong> = JAKIŚ, nieznany przedmiot (rodzajnik NIEOKREŚLONY). <strong>le/la/les</strong> = TEN KONKRETNY, znany przedmiot (rodzajnik OKREŚLONY).'},
+  {q:'Jak zapamiętać różnicę: "un crayon" vs "le crayon"?',a:'<strong>Un crayon</strong> — mówisz o ołówku pierwszy raz, nieznany ("jakiś ołówek"). <strong>Le crayon</strong> — mówisz o ołówku, który już znasz lub widzisz ("TEN ołówek, o którym mówiliśmy").'},
+  {q:'Co zastępuje "l\'" — "le" czy "la"?',a:'<strong>Oba!</strong> "l\'" zastępuje zarówno "le" (męski), jak i "la" (żeński), gdy słowo zaczyna się na samogłoskę. l\'ami (on) i l\'école (ona) — nie widać rodzaju w samym rodzajniku!'},
+],
+quiz:[
+  {q:'Jaki rodzajnik pasuje do "ami" (kolega, zaczyna się na samogłoskę)?',opts:['le ami','la ami','l\'ami','les ami'],a:2,hint:'Samogłoska na początku',expl:'<strong>l\'ami</strong> — "ami" zaczyna się na samogłoskę "a", więc używamy "l\'".'},
+  {q:'Jaki rodzajnik pasuje do "table" (stół, rodzaj żeński)?',opts:['le table','la table','l\'table','les table'],a:1,hint:'Rodzaj żeński, spółgłoska na początku',expl:'<strong>la table</strong> — rodzaj żeński, zaczyna się na spółgłoskę "t".'},
+  {q:'Które zdanie oznacza "jakiś ołówek" (nieznany)?',opts:['le crayon','un crayon','les crayons','l\'crayon'],a:1,hint:'Rodzajnik NIEOKREŚLONY',expl:'<strong>un crayon</strong> — rodzajnik nieokreślony, "jakiś" ołówek.'},
+  {q:'Które zdanie oznacza "TEN konkretny ołówek" (znany)?',opts:['un crayon','des crayons','le crayon','une crayon'],a:2,hint:'Rodzajnik OKREŚLONY',expl:'<strong>le crayon</strong> — rodzajnik określony, "ten konkretny" ołówek.'},
+  {q:'Jaki rodzajnik pasuje do "élèves" (uczniowie, liczba mnoga)?',opts:['le élèves','la élèves','l\'élèves','les élèves'],a:3,hint:'Liczba mnoga',expl:'<strong>les élèves</strong> — liczba mnoga, zawsze "les".'},
+]},
+
+{id:'t6',ico:'🎒',num:'Thème 6',name:'Qu\'est-ce que c\'est ? + Objets de la classe',
+theory:{
+  summary:'Jak pytać "Co to jest?" i nazywać standardowe przedmioty szkolne po francusku.',
+  blocks:[
+    {t:'t6',h:'Pytanie i odpowiedź',items:['Qu\'est-ce que c\'est ? — Co to jest?','C\'est un/une... — To jest (jakiś/jakaś)...','Ce sont des... — To są (jakieś, liczba mnoga)...','Qu\'est-ce que c\'est ? — C\'est un livre. (Co to jest? — To jest książka.)','Qu\'est-ce que c\'est ? — Ce sont des stylos. (Co to jest? — To są długopisy.)']},
+    {t:'t6',h:'Przedmioty — rodzaj męski 🔵',items:['un stylo — długopis','un crayon — ołówek','un livre — książka','un cahier — zeszyt','un sac à dos — plecak','un taille-crayon — temperówka','un tableau — tablica']},
+    {t:'t6',h:'Przedmioty — rodzaj żeński 🔴',items:['une gomme — gumka','une règle — linijka','une trousse — piórnik','une table — stół/ławka','une chaise — krzesło','une feuille — kartka','une craie — kreda']},
+    {t:'t6',h:'Liczba mnoga i ciekawostki',items:['des ciseaux — nożyczki (zawsze liczba mnoga!)','des crayons de couleur — kredki','C\'est un stylo ROUGE. — To jest CZERWONY długopis (kolor po rzeczowniku!)','Ce sont des gommes. — To są gumki.','Zapamiętaj rodzaj RAZEM ze słówkiem — np. "une trousse", nie samo "trousse"']},
+  ],
+  formulas:`<strong>Qu'est-ce que c'est ?</strong> — Co to jest?<br><strong>C'est un/une</strong> ... — To jest... (1 przedmiot)<br><strong>Ce sont des</strong> ... — To są... (kilka przedmiotów)<br>💡 We francuskim kolor stawiamy PO rzeczowniku: un stylo rouge (czerwony długopis)`,
+},
+examples:[
+  {q:'Jak zapytasz "Co to jest?" wskazując na przedmiot?',steps:['Pytanie: Qu\'est-ce que c\'est ?'],ans:'Qu\'est-ce que c\'est ?'},
+  {q:'Jak odpowiesz na pytanie o pojedynczy ołówek?',steps:['Ołówek to "crayon", rodzaj męski','Odpowiadamy: C\'est un crayon.'],ans:'C\'est un crayon.'},
+  {q:'Jak odpowiesz, gdy pokazujesz kilka książek?',steps:['Książki = liczba mnoga','Dla liczby mnogiej używamy "Ce sont des..."','Ce sont des livres.'],ans:'Ce sont des livres.'},
+],
+flashcards:[
+  {q:'Jak zapytać "Co to jest?" po francusku?',a:'<strong>Qu\'est-ce que c\'est ?</strong> — standardowe pytanie, gdy wskazujemy na nieznany przedmiot.'},
+  {q:'Jak odpowiedzieć na pytanie o JEDEN przedmiot?',a:'<strong>C\'est un/une ...</strong> Np. C\'est un livre. (To jest książka.) C\'est une gomme. (To jest gumka.)'},
+  {q:'Jak odpowiedzieć na pytanie o KILKA przedmiotów?',a:'<strong>Ce sont des ...</strong> Np. Ce sont des stylos. (To są długopisy.)'},
+  {q:'Jakiego rodzaju jest "trousse" (piórnik)?',a:'<strong>Rodzaj żeński</strong> — une trousse. Zawsze ucz się słówka razem z rodzajnikiem!'},
+],
+quiz:[
+  {q:'Jak zapytasz "Co to jest?"',opts:['Comment ça va ?','Qu\'est-ce que c\'est ?','Quel âge as-tu ?','Comment tu t\'appelles ?'],a:1,hint:'Pytanie o przedmiot',expl:'<strong>Qu\'est-ce que c\'est ?</strong> — standardowe pytanie o nieznany przedmiot.'},
+  {q:'Jak nazywa się "piórnik" po francusku?',opts:['un cahier','une trousse','un stylo','une règle'],a:1,hint:'Rodzaj żeński',expl:'<strong>une trousse</strong> — piórnik, rodzaj żeński.'},
+  {q:'Jak odpowiesz na pytanie o jedną linijkę?',opts:['C\'est un règle.','C\'est une règle.','Ce sont des règles.','C\'est la règle.'],a:1,hint:'"règle" to rodzaj żeński',expl:'<strong>C\'est une règle.</strong> — règle to rodzaj żeński, liczba pojedyncza.'},
+  {q:'Jak nazywają się "nożyczki" po francusku?',opts:['un ciseau','une ciseau','des ciseaux','le ciseaux'],a:2,hint:'Zawsze liczba mnoga!',expl:'<strong>des ciseaux</strong> — nożyczki zawsze występują w liczbie mnogiej.'},
+  {q:'Jak odpowiesz, pokazując kilka ołówków?',opts:['C\'est un crayon.','C\'est une crayon.','Ce sont des crayons.','C\'est les crayons.'],a:2,hint:'Liczba mnoga',expl:'<strong>Ce sont des crayons.</strong> — dla kilku przedmiotów używamy "Ce sont des...".'},
+]},
+];
+
+// ══════════════════ STATE
+let ct=TOPICS[0],tab='theory',fcI=0,fcF=false,qi=0,sel=null,score=0,mistakes=[],qList=[];
+
+function applyColors(id){
+  const c=C[id];
+  document.documentElement.style.setProperty('--c',c.c);
+  document.documentElement.style.setProperty('--c-bg',c.bg);
+  document.documentElement.style.setProperty('--c-d',c.d);
+}
+
+function setTopic(id){
+  ct=TOPICS.find(t=>t.id===id);
+  tab='theory';fcI=0;fcF=false;
+  qi=0;sel=null;score=0;mistakes=[];
+  qList=[...ct.quiz].sort(()=>Math.random()-.5);
+  applyColors(id);
+  renderTopics();renderITabs();render();
+}
+
+function setTab(id){
+  tab=id;fcI=0;fcF=false;
+  if(id==='quiz'){qi=0;sel=null;score=0;mistakes=[];qList=[...ct.quiz].sort(()=>Math.random()-.5);}
+  renderITabs();render();
+}
+
+function renderTopics(){
+  document.getElementById('topic-grid').innerHTML=TOPICS.map(t=>`
+    <button class="tcard${t.id===ct.id?' active':''}" onclick="setTopic('${t.id}')"
+      style="${t.id===ct.id?`border-color:${C[t.id].c};background:${C[t.id].bg}`:''}">
+      <div class="tc-ico">${t.ico}</div>
+      <div class="tc-body">
+        <div class="tc-num">${t.num}</div>
+        <div class="tc-name">${t.name}</div>
+      </div>
+    </button>`).join('');
+}
+
+const TABS=[
+  {id:'theory',l:'📖 Teoria'},
+  {id:'formulas',l:'📋 Kluczowe fakty'},
+  {id:'examples',l:'✏️ Przykłady'},
+  {id:'flash',l:'🃏 Fiszki'},
+  {id:'quiz',l:'🧮 Test'},
+];
+
+function renderITabs(){
+  document.getElementById('itabs').innerHTML=TABS.map(t=>`
+    <button class="itab${tab===t.id?' active':''}"
+      style="${tab===t.id?`background:${C[ct.id].c}`:''}
+      " onclick="setTab('${t.id}')">${t.l}</button>`).join('');
+}
+
+function renderTheory(){
+  const th=ct.theory;
+  return `<div class="card">
+    <div class="card-h">${ct.ico} ${ct.name}</div>
+    <p style="font-size:14px;color:var(--muted);margin-bottom:14px;line-height:1.6">${th.summary}</p>
+    <div class="tgrid">${th.blocks.map(b=>`
+      <div class="tbox" style="background:${C[b.t].bg};border-color:${C[b.t].c}40">
+        <h3 style="color:${C[b.t].d}">${b.h}</h3>
+        <ul style="color:${C[b.t].d}">${b.items.map(i=>`<li>${i}</li>`).join('')}</ul>
+      </div>`).join('')}
+    </div>
+  </div>
+  <div style="margin-top:4px"><button class="btn btn-pri" onclick="setTab('formulas')">📋 Kluczowe fakty →</button></div>`;
+}
+
+function renderFormulas(){
+  return `<div class="card">
+    <div class="card-h">📋 Kluczowe fakty — ${ct.name}</div>
+    <div class="formula">${ct.theory.formulas}</div>
+    <div style="margin-top:4px"><button class="btn btn-pri" onclick="setTab('examples')">✏️ Przykłady →</button></div>
+  </div>`;
+}
+
+function renderExamples(){
+  return `<div class="card">
+    <div class="card-h">✏️ Przykłady krok po kroku</div>
+    <div class="ex-list">${ct.examples.map(e=>`
+      <div class="ex-item">
+        <div class="ex-q">${e.q}</div>
+        <div class="ex-steps">
+          ${e.steps.map((s,i)=>`
+            <div class="ex-step">
+              <div class="ex-step-n" style="background:${C[ct.id].c}">${i+1}</div>
+              <div>${s}</div>
+            </div>`).join('')}
+          <div class="ex-ans">✅ Odpowiedź: ${e.ans}</div>
+        </div>
+      </div>`).join('')}
+    </div>
+  </div>`;
+}
+
+function renderFlash(){
+  const cards=ct.flashcards;
+  const c=cards[fcI];
+  return `<div class="card">
+    <div class="card-h">🃏 Fiszki — ${ct.name}</div>
+    <div class="fc-meta">Kliknij kartę · ${fcI+1} z ${cards.length}</div>
+    <div class="flashcard${fcF?' flipped':''}" onclick="flipCard()">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-q">${c.q}</div><div class="fc-tap">👆 Kliknij, by zobaczyć odpowiedź</div></div>
+        <div class="fc-back" style="background:${C[ct.id].bg};border-color:${C[ct.id].c}">
+          <div class="fc-a" style="--c-d:${C[ct.id].d}">${c.a}</div>
+        </div>
+      </div>
+    </div>
+    <div class="fc-nav">
+      <button class="btn btn-sec" onclick="fcNav(-1)" ${fcI===0?'disabled':''}>← Poprzednia</button>
+      <span class="fc-count">${fcI+1} / ${cards.length}</span>
+      <button class="btn btn-pri" onclick="fcNav(1)" ${fcI===cards.length-1?'disabled':''}>Następna →</button>
+    </div>
+  </div>`;
+}
+
+function flipCard(){fcF=!fcF;render();}
+function fcNav(d){fcI+=d;fcF=false;render();}
+
+function renderQuiz(){
+  if(qi>=qList.length)return renderResult();
+  const q=qList[qi];
+  const total=qList.length;
+  const pct=Math.round((qi/total)*100);
+  const optsHTML=q.opts.map((o,i)=>{
+    let cls='opt';
+    if(sel!==null){if(i===q.a)cls+=' ok';else if(i===sel&&sel!==q.a)cls+=' no';}
+    return `<button class="${cls}" onclick="choose(${i})" ${sel!==null?'disabled':''}>${o}</button>`;
+  }).join('');
+  let fb='';
+  if(sel!==null){
+    fb=sel===q.a
+      ?`<div class="feedback ok">✓ Правильно! <div class="expl">${q.expl}</div></div>`
+      :`<div class="feedback no">✗ Правильна: <strong>${q.opts[q.a]}</strong><div class="expl">${q.expl}</div></div>`;
+  }
+  return `
+  <div class="prog-bar"><div class="prog-fill" style="background:${C[ct.id].c};width:${pct}%"></div></div>
+  <div class="score-row">
+    <span>Pytanie <b>${qi+1}/${total}</b></span>
+    <span>✅ <b style="color:var(--ok)">${score}</b></span>
+    <span>❌ <b style="color:var(--err)">${mistakes.length}</b></span>
+  </div>
+  <div class="card">
+    <div class="q-label">Pytanie ${qi+1}</div>
+    <div class="q-text">${q.q}</div>
+    <div class="q-hint">💡 ${q.hint}</div>
+    <div class="opts">${optsHTML}</div>
+    ${fb}
+  </div>
+  <div class="nav-row">${sel!==null?`<button class="btn btn-pri" onclick="nextQ()">Dalej →</button>`:''}</div>`;
+}
+
+function renderResult(){
+  const total=qList.length;
+  const pct=Math.round((score/total)*100);
+  const emoji=pct>=80?'🎉':pct>=60?'👍':'📚';
+  const stars=pct>=100?'⭐⭐⭐':pct>=80?'⭐⭐':pct>=60?'⭐':'';
+  const msg=pct>=80?'Warwara — gotowa na kontrolną!':pct>=60?'Dobrze! Powtórz błędy.':'Wróć do teorii i kluczowych faktów.';
+  const mHTML=mistakes.length?`
+    <div style="margin-top:16px;text-align:left">
+      <div style="font-size:14px;font-weight:800;margin-bottom:10px">Błędy:</div>
+      ${mistakes.map(m=>`
+        <div class="mk">
+          <div class="mk-q">${m.q}</div>
+          <div class="mk-w">Ти відповіла: <b>${m.wrong}</b></div>
+          <div class="mk-c">✓ ${m.correct}</div>
+          <div class="mk-r">${m.rule}</div>
+        </div>`).join('')}
+    </div>`:'';
+  return `<div class="card"><div class="result">
+    <div style="font-size:42px">${emoji}</div>
+    <div style="font-size:24px;margin:4px 0">${stars}</div>
+    <div class="big" style="color:${C[ct.id].c}">${score}/${total}</div>
+    <div class="msg">${msg}</div>
+    <div class="result-btns">
+      <button class="btn btn-sec" onclick="setTab('theory')">📖 Teoria</button>
+      <button class="btn btn-sec" onclick="setTab('formulas')">📋 Fakty</button>
+      <button class="btn btn-pri" onclick="setTab('quiz')">Ponownie ↺</button>
+    </div>
+    ${mHTML}
+  </div></div>`;
+}
+
+function choose(i){
+  if(sel!==null)return;
+  sel=i;
+  const q=qList[qi];
+  if(i===q.a)score++;
+  else mistakes.push({q:q.q,wrong:q.opts[i],correct:q.opts[q.a],rule:q.expl});
+  render();
+}
+function nextQ(){qi++;sel=null;render();}
+
+function render(){
+  const c=document.getElementById('content');
+  if(tab==='theory')c.innerHTML=renderTheory();
+  else if(tab==='formulas')c.innerHTML=renderFormulas();
+  else if(tab==='examples')c.innerHTML=renderExamples();
+  else if(tab==='flash')c.innerHTML=renderFlash();
+  else c.innerHTML=renderQuiz();
+}
+
+setTopic('t1');
+</script>
+</body>
+</html>
