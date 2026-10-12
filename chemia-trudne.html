@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chemia · Powtórka trudnych tematów · Варвара</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#fafafa;--card:#fff;--ink:#111827;--muted:#6b7280;--border:#e5e7eb;
+  --t1:#2563eb;--t1b:#dbeafe;--t1d:#1d4ed8;
+  --t2:#059669;--t2b:#d1fae5;--t2d:#065f46;
+  --t3:#7c3aed;--t3b:#ede9fe;--t3d:#5b21b6;
+  --t4:#dc2626;--t4b:#fee2e2;--t4d:#991b1b;
+  --t5:#d97706;--t5b:#fef3c7;--t5d:#92400e;
+  --t6:#0891b2;--t6b:#cffafe;--t6d:#164e63;
+  --t7:#be185d;--t7b:#fce7f3;--t7d:#9d174d;
+  --t8:#4f46e5;--t8b:#e0e7ff;--t8d:#3730a3;
+  --t9:#0d9488;--t9b:#ccfbf1;--t9d:#115e59;
+  --t10:#ea580c;--t10b:#ffedd5;--t10d:#9a3412;
+  --t11:#64748b;--t11b:#f1f5f9;--t11d:#334155;
+  --t12:#78716c;--t12b:#f5f5f4;--t12d:#44403c;
+  --t13:#c026d3;--t13b:#fae8ff;--t13d:#86198f;
+  --ok:#16a34a;--okb:#dcfce7;--err:#dc2626;--errb:#fee2e2;
+  --r:14px;--rs:8px;--sh:0 2px 12px rgba(0,0,0,.07);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Sora',sans-serif;background:var(--bg);color:var(--ink);min-height:100vh}
+.page{max-width:720px;margin:0 auto;padding:20px 14px 80px}
+.hero{text-align:center;padding:24px 0 20px;margin-bottom:20px;
+  background:linear-gradient(135deg,#1d4ed8 0%,#7c3aed 50%,#059669 100%);
+  border-radius:20px;color:white}
+.hero .badge{display:inline-block;background:rgba(255,255,255,.2);
+  font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  padding:4px 14px;border-radius:99px;margin-bottom:12px}
+.hero h1{font-size:24px;font-weight:800;line-height:1.2;margin-bottom:6px}
+.hero p{font-size:13px;opacity:.8}
+.topic-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:18px}
+.tcard{
+  padding:12px 14px;border:2px solid var(--border);border-radius:var(--r);
+  background:var(--card);cursor:pointer;transition:all .16s;box-shadow:var(--sh);
+  display:flex;align-items:center;gap:10px;
+}
+.tcard:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,.1)}
+.tcard .tc-ico{font-size:22px;flex-shrink:0}
+.tcard .tc-body{min-width:0}
+.tcard .tc-num{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:2px}
+.tcard .tc-name{font-size:13px;font-weight:700;color:var(--ink);line-height:1.3}
+.tcard.active{border-width:2px;background:var(--c-bg,#dbeafe)}
+.itabs{display:flex;gap:4px;background:var(--card);padding:4px;
+  border-radius:var(--r);border:1px solid var(--border);margin-bottom:16px;overflow-x:auto}
+.itab{flex-shrink:0;padding:7px 12px;border-radius:var(--rs);border:none;
+  font-family:'Sora',sans-serif;font-size:12px;font-weight:600;
+  cursor:pointer;background:transparent;color:var(--muted);transition:all .16s;white-space:nowrap}
+.itab:hover{background:var(--bg)}
+.itab.active{color:white}
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);
+  padding:18px;margin-bottom:12px;box-shadow:var(--sh);animation:up .2s ease}
+@keyframes up{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+.card-h{font-size:16px;font-weight:800;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.tgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
+.tbox{padding:12px 13px;border-radius:var(--rs);border:1.5px solid}
+.tbox h3{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:7px}
+.tbox ul{list-style:none;font-size:13px;line-height:2}
+.tbox ul li::before{content:"• ";opacity:.4}
+.formula{background:var(--c-bg,#dbeafe);border:1.5px solid var(--c,#2563eb);
+  border-radius:var(--rs);padding:14px 16px;margin-bottom:12px;font-size:14px;line-height:2}
+.formula strong{color:var(--c-d,#1d4ed8);font-weight:800}
+.math{font-family:'JetBrains Mono',monospace;background:rgba(0,0,0,.05);
+  padding:2px 7px;border-radius:5px;font-size:13px}
+.ex-list{display:flex;flex-direction:column;gap:10px}
+.ex-item{background:var(--bg);border-radius:var(--rs);border:1px solid var(--border);overflow:hidden}
+.ex-q{padding:10px 14px;font-size:14px;font-weight:600;border-bottom:1px solid var(--border)}
+.ex-steps{padding:10px 14px}
+.ex-step{display:flex;gap:8px;margin-bottom:6px;font-size:13px;line-height:1.6;align-items:flex-start}
+.ex-step-n{width:20px;height:20px;border-radius:50%;background:var(--c,#2563eb);color:white;
+  font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.ex-ans{background:var(--okb);color:#14532d;font-weight:700;font-size:13px;
+  padding:7px 12px;border-radius:6px;margin-top:6px;display:inline-block}
+.prog-bar{height:5px;background:var(--border);border-radius:99px;margin-bottom:10px;overflow:hidden}
+.prog-fill{height:100%;border-radius:99px;background:var(--c,#2563eb);transition:width .4s}
+.score-row{display:flex;gap:14px;font-size:12px;color:var(--muted);margin-bottom:12px}
+.score-row b{color:var(--ink)}
+.q-label{font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;font-weight:700}
+.q-text{font-size:16px;font-weight:800;line-height:1.5;margin-bottom:6px}
+.q-hint{font-size:13px;color:var(--muted);font-style:italic;margin-bottom:12px}
+.opts{display:flex;flex-direction:column;gap:6px}
+.opt{padding:10px 14px;border:1.5px solid var(--border);border-radius:var(--rs);
+  font-family:'Sora',sans-serif;font-size:14px;font-weight:500;
+  cursor:pointer;background:var(--card);color:var(--ink);text-align:left;transition:all .14s}
+.opt:hover:not(:disabled){border-color:var(--c,#2563eb);background:var(--c-bg,#dbeafe)}
+.opt.ok{background:var(--okb);border-color:#86efac;color:#14532d;font-weight:700}
+.opt.no{background:var(--errb);border-color:#fca5a5;color:#7f1d1d}
+.feedback{margin-top:10px;padding:11px 14px;border-radius:var(--rs);font-size:13px;line-height:1.7;animation:up .18s ease}
+.feedback.ok{background:var(--okb);color:#14532d;border:1px solid #86efac}
+.feedback.no{background:var(--errb);color:#7f1d1d;border:1px solid #fca5a5}
+.expl{margin-top:7px;background:white;border-radius:7px;padding:8px 12px;font-size:13px;color:#1e3a8a;line-height:1.7;border:1px solid #bfdbfe}
+.nav-row{display:flex;justify-content:flex-end;margin-top:10px}
+.btn{padding:9px 20px;border-radius:var(--rs);border:none;font-family:'Sora',sans-serif;
+  font-size:13px;font-weight:700;cursor:pointer;transition:all .14s}
+.btn-pri{background:var(--c,#2563eb);color:white}
+.btn-pri:hover{filter:brightness(.9);transform:translateY(-1px)}
+.btn-sec{background:var(--card);color:var(--ink);border:1.5px solid var(--border)}
+.btn-sec:hover{background:var(--bg)}
+.result{text-align:center;padding:10px 0 16px}
+.result .big{font-size:54px;font-weight:800;color:var(--c,#2563eb);line-height:1}
+.result .msg{font-size:15px;color:var(--muted);margin:8px 0 18px}
+.result-btns{display:flex;gap:7px;justify-content:center;flex-wrap:wrap}
+.mk{background:#fffbeb;border:1.5px solid #fcd34d;border-radius:var(--rs);padding:12px;margin-bottom:8px;text-align:left}
+.mk-q{font-weight:700;font-size:13px;margin-bottom:4px}
+.mk-w{font-size:12px;color:var(--err);margin-bottom:3px}
+.mk-c{display:inline-block;background:var(--okb);color:#14532d;font-size:12px;font-weight:700;padding:2px 9px;border-radius:5px;margin-bottom:6px}
+.mk-r{font-size:12px;color:#1e3a8a;background:#dbeafe;padding:7px 11px;border-radius:7px;line-height:1.7}
+.fc-meta{text-align:center;font-size:13px;color:var(--muted);margin-bottom:10px}
+.flashcard{perspective:900px;width:100%;min-height:160px;cursor:pointer;margin-bottom:10px}
+.fc-inner{position:relative;width:100%;min-height:160px;transform-style:preserve-3d;transition:transform .45s;border-radius:var(--r)}
+.flashcard.flipped .fc-inner{transform:rotateY(180deg)}
+.fc-front,.fc-back{position:absolute;width:100%;min-height:160px;backface-visibility:hidden;
+  border-radius:var(--r);padding:20px;display:flex;flex-direction:column;justify-content:center;
+  border:2px solid var(--border);box-shadow:var(--sh)}
+.fc-front{background:white;text-align:center}
+.fc-back{transform:rotateY(180deg);background:var(--c-bg,#dbeafe);border-color:var(--c,#2563eb)}
+.fc-q{font-size:16px;font-weight:800;line-height:1.4;margin-bottom:7px}
+.fc-tap{font-size:12px;color:var(--muted)}
+.fc-a{font-size:14px;line-height:1.75}
+.fc-a strong{color:var(--c-d,#1d4ed8)}
+.fc-nav{display:flex;justify-content:space-between;align-items:center}
+.fc-count{font-size:12px;color:var(--muted);font-weight:600}
+@media(max-width:500px){
+  .topic-grid{grid-template-columns:1fr}
+  .tgrid{grid-template-columns:1fr}
+  .hero h1{font-size:19px}
+  .result .big{font-size:40px}
+}
+</style>
+<style>.ld-home{position:fixed;top:10px;left:10px;z-index:100;background:rgba(45,38,87,.92);color:#fff!important;text-decoration:none;font:600 13px/1 system-ui,sans-serif;padding:9px 13px;border-radius:20px;box-shadow:0 2px 8px rgba(0,0,0,.2)}</style>
+</head>
+<body>
+<a class="ld-home" href="index.html">← Головна / Strona główna</a>
+<div class="page">
+
+<div class="hero">
+  <div class="badge">🎯 Chemia · Powtórka błędów z klasówek</div>
+  <h1>Трудні теми —<br>8 тем з помилок</h1>
+  <p>Szkło · Piktogramy · Korozja · Rozdzielanie mieszanin · Gęstość · Metale · Варвара</p>
+</div>
+
+<div class="topic-grid" id="topic-grid"></div>
+<div class="itabs" id="itabs"></div>
+<div id="content"></div>
+
+</div>
+<script>
+const C={
+  t1:{c:'#7c3aed',bg:'#ede9fe',d:'#5b21b6'},
+  t2:{c:'#dc2626',bg:'#fee2e2',d:'#991b1b'},
+  t3:{c:'#0891b2',bg:'#cffafe',d:'#164e63'},
+  t4:{c:'#059669',bg:'#d1fae5',d:'#065f46'},
+  t5:{c:'#d97706',bg:'#fef3c7',d:'#92400e'},
+  t6:{c:'#be185d',bg:'#fce7f3',d:'#9d174d'},
+  t7:{c:'#64748b',bg:'#f1f5f9',d:'#334155'},
+  t8:{c:'#4f46e5',bg:'#e0e7ff',d:'#3730a3'},
+};
+
+const TOPICS=[
+{id:'t1',ico:'🧫',num:'Temat 1',name:'Szkło i sprzęt laboratoryjny',
+theory:{
+  summary:'Rozpoznawanie podstawowego sprzętu laboratoryjnego na schematach — częsty błąd na klasówkach (rozdzielacz, zlewka, pipeta, kolba).',
+  blocks:[
+    {t:'t1',h:'Rozdzielacz',items:['Kształt gruszki/lejka z kranikiem na dole','Do rozdzielania cieczy NIEMIESZAJĄCYCH się (np. olej + woda)','Dwie warstwy — otwieramy kranik, spuszczamy dolną warstwę','NIE używamy go do ciał stałych!','Zawiesza się na statywie w pierścieniu']},
+    {t:'t1',h:'Zlewka',items:['Szerokie, proste naczynie cylindryczne','Do mieszania, ogrzewania, zbierania cieczy','Ma dzióbek do wylewania','NIE jest precyzyjna (przybliżona skala)','Stoi pod rozdzielaczem/lejkiem podczas sączenia']},
+    {t:'t1',h:'Pipeta',items:['Wąska szklana rurka','Do precyzyjnego odmierzania małych objętości cieczy','NIE myli się jej z rozdzielaczem — inny kształt!','Czasem z gruszką gumową na końcu','Używana np. do kroplowego dodawania odczynnika']},
+    {t:'t1',h:'Inne elementy',items:['Lejek z sączkiem — do sączenia (filtracji)','Probówka — małe ilości, obserwacja reakcji','Kolba stożkowa — reakcje, miareczkowanie','Statyw — mocuje szkło nad zlewką','Bagietka — do mieszania i przenoszenia kropli']},
+  ],
+  formulas:`<strong>Kluczowa różnica:</strong> rozdzielacz ma kranik i kształt gruszki — do cieczy niemieszających się. Pipeta jest wąska i prosta — do precyzyjnego odmierzania. Zlewka jest szeroka, bez kranika — do mieszania/zbierania.<br><strong>Na schemacie "lejek + kranik nad zlewką"</strong> = zawsze rozdzielacz, NIE pipeta!`,
+},
+examples:[
+  {q:'Na schemacie widać naczynie w kształcie gruszki z kranikiem, zawieszone nad zlewką. Co to za sprzęt?',steps:['Kształt gruszki + kranik na dole = charakterystyczne cechy','Służy do rozdzielania cieczy niemieszających się','To rozdzielacz, NIE pipeta'],ans:'Rozdzielacz'},
+  {q:'Jak rozdzielić mieszaninę oleju i wody za pomocą rozdzielacza?',steps:['Wlewamy mieszaninę do rozdzielacza','Czekamy, aż ciecze się rozdzielą na warstwy (olej na wierzchu — mniejsza gęstość)','Otwieramy kranik i spuszczamy dolną warstwę (wodę) do zlewki'],ans:'Olej ma mniejszą gęstość niż woda, więc jest na wierzchu — spuszczamy wodę dołem'},
+  {q:'Czym różni się pipeta od rozdzielacza?',steps:['Pipeta jest wąska, prosta, bez kranika','Rozdzielacz ma kształt gruszki z kranikiem','Pipeta odmierza małe ilości, rozdzielacz rozdziela ciecze'],ans:'Pipeta odmierza, rozdzielacz rozdziela niemieszające się ciecze'},
+],
+flashcards:[
+  {q:'Jak rozpoznać rozdzielacz na schemacie?',a:'Ma kształt <strong>gruszki/lejka z kranikiem</strong> na dole, zawieszony nad zlewką. Służy do rozdzielania cieczy, które się nie mieszają (np. olej i woda).'},
+  {q:'Czym różni się rozdzielacz od pipety?',a:'<strong>Rozdzielacz</strong> ma kształt gruszki i kranik — rozdziela ciecze. <strong>Pipeta</strong> jest wąska i prosta — służy do precyzyjnego odmierzania małych objętości. To częsty błąd — łatwo je pomylić na schemacie!'},
+  {q:'Do czego służy zlewka?',a:'Do <strong>mieszania, ogrzewania</strong> i zbierania cieczy. Ma dzióbek do wylewania, ale NIE jest precyzyjna.'},
+  {q:'Jaki przykład mieszaniny rozdzielisz rozdzielaczem?',a:'<strong>Olej i wodę</strong> — nie mieszają się, tworzą dwie warstwy. To mieszanina <strong>niejednorodna</strong>.'},
+],
+quiz:[
+  {q:'Na schemacie: naczynie w kształcie gruszki z kranikiem nad zlewką. Co to?',opts:['Pipeta','Rozdzielacz','Probówka','Kolba stożkowa'],a:1,hint:'Kranik + kształt gruszki',expl:'To <strong>rozdzielacz</strong> — kranik na dole i kształt gruszki to jego charakterystyczne cechy.'},
+  {q:'Do czego służy rozdzielacz?',opts:['Do ogrzewania cieczy','Do rozdzielania cieczy niemieszających się','Do precyzyjnego odmierzania','Do sączenia ciał stałych'],a:1,hint:'Dwie warstwy cieczy',expl:'Rozdzielacz rozdziela <strong>ciecze niemieszające się</strong>, np. olej i wodę.'},
+  {q:'Jaką mieszaninę rozdzielisz za pomocą rozdzielacza?',opts:['Piasek i wodę','Olej i wodę','Sól rozpuszczoną w wodzie','Opiłki żelaza i piasek'],a:1,hint:'Dwie niemieszające się ciecze',expl:'<strong>Olej i woda</strong> nie mieszają się — tworzą dwie warstwy, które rozdziela rozdzielacz.'},
+  {q:'Czym różni się zlewka od kolby stożkowej?',opts:['Zlewka jest węższa','Zlewka jest szeroka i cylindryczna, kolba ma zwężającą się szyjkę','To to samo naczynie','Kolba służy tylko do przechowywania'],a:1,hint:'Kształt naczynia',expl:'<strong>Zlewka</strong> jest szeroka i prosta, <strong>kolba stożkowa</strong> ma charakterystyczną zwężającą się szyjkę.'},
+  {q:'Jaka jest różnica między pipetą a rozdzielaczem?',opts:['Nie ma różnicy','Pipeta odmierza małe objętości, rozdzielacz rozdziela ciecze','Rozdzielacz jest mniejszy od pipety','Pipeta ma kranik, rozdzielacz nie'],a:1,hint:'Funkcja i kształt',expl:'<strong>Pipeta</strong> — wąska, do precyzyjnego odmierzania. <strong>Rozdzielacz</strong> — gruszka z kranikiem, do rozdzielania cieczy.'},
+]},
+
+{id:'t2',ico:'⚠️',num:'Temat 2',name:'Piktogramy GHS (pełny zestaw)',
+theory:{
+  summary:'Piktogramy ostrzegawcze GHS — pomarańczowo-czerwone romby z czarnym symbolem. Każdy oznacza konkretne zagrożenie.',
+  blocks:[
+    {t:'t2',h:'Płomień i koło z płomieniem',items:['Płomień — substancja ŁATWOPALNA','Płomień nad kołem — substancja UTLENIAJĄCA (wzmaga spalanie)','To DWA różne piktogramy — nie mylić!','Utleniająca: np. nadtlenek wodoru stężony, tlen sprężony','Łatwopalna: np. benzyna, alkohol, aceton']},
+    {t:'t2',h:'Czaszka i wykrzyknik',items:['Czaszka ze skrzyżowanymi piszczelami — substancja TOKSYCZNA (trująca)','Wykrzyknik (!) — substancja SZKODLIWA/drażniąca (słabsze zagrożenie)','Czaszka = poważne zagrożenie życia','Wykrzyknik = podrażnienie skóry/oczu, działanie uczulające']},
+    {t:'t2',h:'Korozja i środowisko',items:['Probówki wylewające płyn na dłoń/powierzchnię — substancja ŻRĄCA (korozyjna)','Niszczy skórę, metale, tkaniny','Martwe drzewo i ryba — NIEBEZPIECZNA DLA ŚRODOWISKA','Zanieczyszcza wodę, szkodzi organizmom wodnym']},
+    {t:'t2',h:'Jak odpowiadać na klasówce',items:['Zawsze podaj PEŁNĄ nazwę zagrożenia, nie tylko "niebezpieczna"','"substancja toksyczna" — nie "substancja zła"','"substancja żrąca/korozyjna" — nie "substancja szkodliwa"','"substancja niebezpieczna dla środowiska" (pełna nazwa)','Rozróżniaj: szkodliwa (wykrzyknik) ≠ toksyczna (czaszka)!']},
+  ],
+  formulas:`<strong>Płomień</strong> = łatwopalna. <strong>Płomień+koło</strong> = utleniająca.<br><strong>Czaszka</strong> = toksyczna. <strong>Wykrzyknik</strong> = szkodliwa/drażniąca.<br><strong>Probówki na dłoni</strong> = żrąca/korozyjna. <strong>Drzewo+ryba</strong> = niebezpieczna dla środowiska.`,
+},
+examples:[
+  {q:'Widzisz piktogram: płomień wewnątrz koła. Co oznacza?',steps:['To NIE jest zwykły płomień (bez koła)','Koło + płomień = wzmaganie spalania innych substancji','To substancja utleniająca'],ans:'Substancja utleniająca'},
+  {q:'Widzisz piktogram: probówki wylewające płyn na dłoń i na powierzchnię. Co to?',steps:['Obraz niszczenia skóry i materiału','To oznacza działanie żrące','Substancja żrąca (korozyjna)'],ans:'Substancja żrąca/korozyjna'},
+  {q:'Jaka jest różnica między piktogramem z czaszką a piktogramem z wykrzyknikiem?',steps:['Czaszka = poważne zagrożenie życia (substancja toksyczna)','Wykrzyknik = słabsze zagrożenie (substancja szkodliwa, drażniąca)','Oba ostrzegają, ale o różnym poziomie ryzyka'],ans:'Czaszka = toksyczna (poważne), wykrzyknik = szkodliwa (słabsze)'},
+],
+flashcards:[
+  {q:'Co oznacza piktogram z płomieniem WEWNĄTRZ koła?',a:'<strong>Substancja utleniająca</strong> — wzmaga spalanie innych substancji. To INNY piktogram niż zwykły płomień (łatwopalna)!'},
+  {q:'Jaka jest różnica między czaszką a wykrzyknikiem na piktogramie?',a:'<strong>Czaszka</strong> = substancja <strong>toksyczna</strong> (poważne zagrożenie życia). <strong>Wykrzyknik (!)</strong> = substancja <strong>szkodliwa/drażniąca</strong> (słabsze zagrożenie, np. podrażnienie skóry).'},
+  {q:'Co oznaczają probówki wylewające płyn na dłoń?',a:'<strong>Substancja żrąca (korozyjna)</strong> — niszczy skórę, metale i tkaniny po kontakcie.'},
+  {q:'Co oznacza piktogram z martwym drzewem i rybą?',a:'<strong>Substancja niebezpieczna dla środowiska</strong> — zanieczyszcza wodę, szkodzi organizmom wodnym i roślinom.'},
+],
+quiz:[
+  {q:'Piktogram: płomień wewnątrz koła. Co to znaczy?',opts:['Substancja łatwopalna','Substancja utleniająca','Substancja toksyczna','Substancja żrąca'],a:1,hint:'Koło + płomień = wzmaga spalanie',expl:'<strong>Substancja utleniająca</strong> — koło wokół płomienia to osobny piktogram od zwykłej łatwopalności.'},
+  {q:'Piktogram z czaszką oznacza substancję:',opts:['Szkodliwą','Toksyczną','Łatwopalną','Utleniającą'],a:1,hint:'Poważne zagrożenie',expl:'Czaszka = substancja <strong>toksyczna</strong> — poważne zagrożenie dla życia.'},
+  {q:'Piktogram z wykrzyknikiem (!) oznacza substancję:',opts:['Toksyczną','Szkodliwą/drażniącą','Żrącą','Wybuchową'],a:1,hint:'Słabsze zagrożenie niż czaszka',expl:'Wykrzyknik = substancja <strong>szkodliwa/drażniąca</strong> — słabsze zagrożenie niż toksyczna.'},
+  {q:'Probówki wylewające płyn na dłoń i powierzchnię to piktogram:',opts:['Substancji toksycznej','Substancji żrącej (korozyjnej)','Substancji łatwopalnej','Substancji wybuchowej'],a:1,hint:'Niszczenie skóry i materiałów',expl:'To <strong>substancja żrąca/korozyjna</strong> — niszczy skórę i materiały.'},
+  {q:'Martwe drzewo i ryba na piktogramie oznaczają:',opts:['Substancję toksyczną dla ludzi','Substancję niebezpieczną dla środowiska','Substancję łatwopalną','Substancję utleniającą'],a:1,hint:'Przyroda na symbolu',expl:'Martwe drzewo i ryba = substancja <strong>niebezpieczna dla środowiska</strong>.'},
+]},
+
+{id:'t3',ico:'⚖️',num:'Temat 3',name:'Obliczenia gęstości (trudniejsze zadania)',
+theory:{
+  summary:'Zadania z gęstością na klasówce wymagają przeliczania kg↔g i dm³↔cm³ PRZED podstawieniem do wzoru — tu najczęściej są błędy.',
+  blocks:[
+    {t:'t3',h:'Wzór i jednostki',items:['d = m ÷ V  (gęstość = masa ÷ objętość)','m = d × V  (masa = gęstość × objętość)','V = m ÷ d  (objętość = masa ÷ gęstość)','Jednostki muszą być SPÓJNE: g i cm³, lub kg i dm³','1 dm³ = 1000 cm³ = 1 litr']},
+    {t:'t3',h:'Przeliczanie przed obliczeniem',items:['Jeśli gęstość podana w g/dm³, a masa w kg — PRZELICZ najpierw!','1 kg = 1000 g','np. m = 3,6 kg = 3600 g (jeśli d w g/dm³)','Zawsze sprawdź, czy jednostki się zgadzają PRZED podstawieniem','To najczęstszy błąd na klasówce!']},
+    {t:'t3',h:'Typowe zadanie: zbiornik/kanister',items:['Dane: gęstość (g/dm³ lub g/cm³) i masa (często w kg)','Szukane: objętość (V = m ÷ d)','Krok 1: przelicz masę na te same jednostki co gęstość','Krok 2: podstaw do wzoru V = m ÷ d','Krok 3: sprawdź wynik — czy ma sens (realistyczna objętość)?']},
+    {t:'t3',h:'Wynik z dokładnością',items:['Czytaj polecenie: "z dokładnością do dwóch miejsc po przecinku"','Zaokrąglaj PO obliczeniu, nie w trakcie','Zawsze podawaj jednostkę wyniku (g, kg, cm³, dm³)','Sprawdź: czy pytanie o masę, objętość, czy gęstość?']},
+  ],
+  formulas:`<strong>d = m ÷ V</strong> &nbsp; <strong>m = d × V</strong> &nbsp; <strong>V = m ÷ d</strong><br><strong>Przelicznik:</strong> 1 kg = 1000 g, &nbsp; 1 dm³ = 1000 cm³ = 1 L<br>⚠️ Zawsze przelicz jednostki PRZED podstawieniem do wzoru!`,
+},
+examples:[
+  {q:'Oblicz masę oleju napędowego (d = 810 g/dm³) w zbiorniku o pojemności 5 dm³.',steps:['Jednostki już się zgadzają: g/dm³ i dm³','m = d × V','m = 810 × 5 = 4050 g'],ans:'m = 4050 g = 4,05 kg'},
+  {q:'Ile decymetrów sześciennych ma kanister, jeśli mieści 3,6 kg benzyny (d = 720 g/dm³)?',steps:['Gęstość jest w g/dm³, więc masę przeliczamy na gramy','3,6 kg = 3600 g','V = m ÷ d = 3600 ÷ 720 = 5 dm³'],ans:'V = 5 dm³'},
+  {q:'Oblicz gęstość substancji: m = 2 kg, V = 2500 cm³.',steps:['Przelicz: 2 kg = 2000 g','d = m ÷ V = 2000 ÷ 2500','d = 0,8 g/cm³'],ans:'d = 0,8 g/cm³'},
+],
+flashcards:[
+  {q:'Dlaczego trzeba przeliczać jednostki przed obliczeniem gęstości?',a:'Bo gęstość podaje się zwykle w <strong>g/cm³ lub g/dm³</strong>, a masa bywa podana w <strong>kg</strong>. Trzeba je ujednolicić (np. kg→g), inaczej wynik będzie błędny 1000 razy!'},
+  {q:'Ile to jest 1 dm³ w cm³?',a:'<strong>1 dm³ = 1000 cm³</strong> = 1 litr. To ważne przy zadaniach z kanistrami i zbiornikami.'},
+  {q:'Jaki wzór stosujesz, gdy szukasz objętości, znając masę i gęstość?',a:'<strong>V = m ÷ d</strong> — objętość równa się masa podzielona przez gęstość.'},
+  {q:'Masz m = 4,05 kg i d = 810 g/dm³. Jak zacząć obliczenia?',a:'Najpierw <strong>przelicz masę na gramy</strong>: 4,05 kg = 4050 g. Dopiero wtedy stosuj wzór V = m ÷ d (bo gęstość jest w g/dm³).'},
+],
+quiz:[
+  {q:'Oblicz masę: d = 2 g/cm³, V = 50 cm³.',opts:['25 g','52 g','100 g','0,04 g'],a:2,hint:'m = d × V',expl:'m = 2 × 50 = <strong>100 g</strong>.'},
+  {q:'Ile decymetrów sześciennych mieści kanister z 4 kg benzyny (d = 800 g/dm³)?',opts:['3200 dm³','5 dm³','0,2 dm³','4,8 dm³'],a:1,hint:'Przelicz kg na g najpierw!',expl:'4 kg = 4000 g. V = 4000 ÷ 800 = <strong>5 dm³</strong>.'},
+  {q:'Jaka jest gęstość substancji o masie 1,5 kg i objętości 2 dm³?',opts:['0,75 g/dm³','750 g/dm³','3 g/dm³','1333 g/dm³'],a:1,hint:'Przelicz kg na g',expl:'1,5 kg = 1500 g. d = 1500 ÷ 2 = <strong>750 g/dm³</strong>.'},
+  {q:'Ile cm³ zajmuje 200 g substancji o gęstości 4 g/cm³?',opts:['800 cm³','50 cm³','196 cm³','204 cm³'],a:1,hint:'V = m ÷ d',expl:'V = 200 ÷ 4 = <strong>50 cm³</strong>.'},
+  {q:'1 dm³ to ile cm³?',opts:['10 cm³','100 cm³','1000 cm³','10000 cm³'],a:2,hint:'Podstawowy przelicznik',expl:'<strong>1 dm³ = 1000 cm³</strong> = 1 litr.'},
+]},
+
+{id:'t4',ico:'🔬',num:'Temat 4',name:'Rozdzielanie mieszanin — jednorodne i niejednorodne',
+theory:{
+  summary:'Metody rozdzielania dzielimy na te dla mieszanin JEDNORODNYCH (roztworów) i NIEJEDNORODNYCH — to częsta pomyłka na klasówce.',
+  blocks:[
+    {t:'t4',h:'Mieszaniny JEDNORODNE — metody',items:['Odparowanie — ciecz odparowuje, zostaje rozpuszczona substancja stała','Krystalizacja — powolne odparowanie, tworzą się kryształy','Destylacja — rozdziela ciecze o różnych temp. wrzenia','Te metody stosujemy, gdy składników NIE WIDAĆ (roztwór)','np. woda + sól, woda + cukier']},
+    {t:'t4',h:'Mieszaniny NIEJEDNORODNE — metody',items:['Sączenie (filtracja) — ciało stałe + ciecz, widać składniki','Dekantacja — zlewanie cieczy znad osadu','Rozdzielacz — ciecze NIEmieszające się (olej + woda)','Magnes — substancje magnetyczne (żelazo)','Sortowanie/przesiewanie — ciała stałe różnej wielkości']},
+    {t:'t4',h:'Jak rozpoznać, która metoda pasuje',items:['Krok 1: czy widać składniki? NIE → jednorodna (odparowanie/destylacja)','Krok 2: TAK widać? → niejednorodna','Ciecz + ciecz, nie mieszają się → rozdzielacz','Ciało stałe + ciecz (nierozpuszczone) → sączenie','Ciało stałe magnetyczne + inne → magnes']},
+    {t:'t4',h:'Najczęstsze błędy',items:['Mylenie destylacji z sączeniem — destylacja jest dla ROZTWORÓW (jednorodnych)!','Sączenie NIE rozdzieli soli rozpuszczonej w wodzie (trzeba odparować)','Rozdzielacz NIE jest do ciał stałych','Dekantacja to zlewanie cieczy, nie sączenie przez sączek']},
+  ],
+  formulas:`<strong>Jednorodna</strong> (nie widać składników) → odparowanie, krystalizacja, destylacja.<br><strong>Niejednorodna</strong> (widać składniki) → sączenie, dekantacja, rozdzielacz, magnes, sortowanie.<br>Pytanie kluczowe: <strong>czy widzę poszczególne składniki?</strong>`,
+},
+examples:[
+  {q:'Jak rozdzielić mieszaninę wody i oleju?',steps:['Olej i woda nie mieszają się — to mieszanina niejednorodna','Tworzą dwie warstwy (olej na wierzchu)','Używamy rozdzielacza'],ans:'Za pomocą rozdzielacza'},
+  {q:'Jak odzyskać sól z roztworu wody i soli?',steps:['To mieszanina jednorodna — nie widać soli','Sączenie tu NIE zadziała (sól jest rozpuszczona)','Odparowujemy wodę, zostaje sól'],ans:'Odparowanie (nie sączenie!)'},
+  {q:'Jak rozdzielić mieszaninę wody z piaskiem?',steps:['Piasek nie rozpuszcza się — widać go w wodzie','To mieszanina niejednorodna','Stosujemy sączenie (filtrację)'],ans:'Sączenie (filtracja)'},
+],
+flashcards:[
+  {q:'Jakimi metodami rozdzielasz mieszaniny JEDNORODNE?',a:'<strong>Odparowanie, krystalizacja, destylacja</strong> — bo nie widać poszczególnych składników (to roztwory).'},
+  {q:'Jakimi metodami rozdzielasz mieszaniny NIEJEDNORODNE?',a:'<strong>Sączenie, dekantacja, rozdzielacz, magnes, sortowanie</strong> — bo widać poszczególne składniki.'},
+  {q:'Dlaczego sączenie nie rozdzieli wody słonej?',a:'Bo sól jest <strong>rozpuszczona</strong> (mieszanina jednorodna) — przechodzi przez sączek razem z wodą. Trzeba <strong>odparować</strong> wodę.'},
+  {q:'Jak sprawdzić, którą metodę zastosować?',a:'Zadaj pytanie: <strong>czy widać poszczególne składniki?</strong> Nie widać → metody dla jednorodnych (odparowanie). Widać → metody dla niejednorodnych (sączenie, rozdzielacz).'},
+],
+quiz:[
+  {q:'Którą metodą rozdzielisz wodę i olej?',opts:['Odparowaniem','Rozdzielaczem','Sączeniem','Krystalizacją'],a:1,hint:'Dwie niemieszające się ciecze',expl:'<strong>Rozdzielaczem</strong> — olej i woda tworzą dwie warstwy.'},
+  {q:'Jak odzyskać cukier rozpuszczony w wodzie?',opts:['Sączeniem','Magnesem','Odparowaniem wody','Dekantacją'],a:2,hint:'Cukier jest rozpuszczony — mieszanina jednorodna',expl:'<strong>Odparowanie</strong> wody — cukier zostaje jako osad.'},
+  {q:'Która metoda NIE pasuje do mieszanin jednorodnych?',opts:['Destylacja','Krystalizacja','Sączenie','Odparowanie'],a:2,hint:'Sączenie jest dla niejednorodnych',expl:'<strong>Sączenie</strong> — stosujemy je dla mieszanin NIEJEDNORODNYCH (widać składniki), nie jednorodnych.'},
+  {q:'Jak rozdzielisz mieszaninę wody z kredą (nierozpuszczoną)?',opts:['Odparowaniem','Sączeniem','Destylacją','Krystalizacją'],a:1,hint:'Kreda nie rozpuszcza się — widać ją',expl:'<strong>Sączeniem</strong> — kreda jest nierozpuszczona, mieszanina niejednorodna.'},
+  {q:'Destylacja służy do rozdzielania:',opts:['Ciał stałych od cieczy','Cieczy o różnych temperaturach wrzenia (mieszanina jednorodna)','Substancji magnetycznych','Cieczy niemieszających się'],a:1,hint:'Roztwór, nie widać składników',expl:'<strong>Destylacja</strong> rozdziela ciecze o różnych temperaturach wrzenia w mieszaninie <strong>jednorodnej</strong>.'},
+]},
+
+{id:'t5',ico:'🧩',num:'Temat 5',name:'Pierwiastki, związki i mieszaniny — klasyfikacja',
+theory:{
+  summary:'Klasyfikacja konkretnych substancji do trzech grup — częsty błąd: "powietrze" i "mosiądz" uznawane za pierwiastki, a to MIESZANINY!',
+  blocks:[
+    {t:'t5',h:'Pierwiastki — pamiętaj te przykłady',items:['Tlen (O₂), wodór (H₂), azot (N₂) — gazy jednoatomowe/dwuatomowe','Hel (He) — gaz szlachetny','Żelazo (Fe), miedź (Cu), złoto (Au) — metale','Węgiel (C), siarka (S) — niemetale stałe','TYLKO jeden rodzaj atomów!']},
+    {t:'t5',h:'Związki chemiczne — pamiętaj te przykłady',items:['Woda destylowana (H₂O) — wodór + tlen','Sól kamienna (NaCl) — sód + chlor','Tlenek węgla(IV) (CO₂) — węgiel + tlen','Dwa lub więcej RÓŻNYCH pierwiastków, połączone trwale','Da się rozłożyć na pierwiastki (reakcja analizy)']},
+    {t:'t5',h:'Mieszaniny — UWAGA na pułapki!',items:['Powietrze — mieszanina gazów (azot+tlen+inne) — NIE pierwiastek!','Mosiądz — stop miedzi i cynku — mieszanina metali (stop)','Woda mineralna, mleko, stal — też mieszaniny','Składniki NIE są połączone chemicznie trwale','Można je (teoretycznie) rozdzielić metodami fizycznymi']},
+    {t:'t5',h:'Jak sprawdzić — pytania kontrolne',items:['Czy to JEDEN rodzaj atomów? → pierwiastek','Czy to KILKA różnych pierwiastków POŁĄCZONYCH chemicznie? → związek','Czy to KILKA składników wymieszanych, nie związanych chemicznie? → mieszanina','"Woda destylowana" ≠ czysta woda w naturze (ta zawiera też minerały = mieszanina)','Stop metali (mosiądz, stal) = ZAWSZE mieszanina']},
+  ],
+  formulas:`<strong>Pierwiastek:</strong> jeden rodzaj atomów (O₂, Fe, He).<br><strong>Związek:</strong> różne pierwiastki połączone trwale (H₂O, NaCl, CO₂).<br><strong>Mieszanina:</strong> składniki NIE połączone chemicznie (powietrze, mosiądz, woda mineralna).<br>⚠️ Powietrze i mosiądz to MIESZANINY, nie pierwiastki!`,
+},
+examples:[
+  {q:'Czy powietrze to pierwiastek, związek czy mieszanina?',steps:['Powietrze zawiera azot, tlen, gazy szlachetne i inne','To kilka różnych substancji wymieszanych razem, nie połączonych chemicznie','Więc to mieszanina'],ans:'Mieszanina (NIE pierwiastek!)'},
+  {q:'Czy mosiądz to pierwiastek, związek czy mieszanina?',steps:['Mosiądz to stop (połączenie) miedzi i cynku','Metale są ze sobą wymieszane, nie związane chemicznie w jedną substancję','Więc to mieszanina'],ans:'Mieszanina (stop metali)'},
+  {q:'Czy sól kamienna (NaCl) to pierwiastek, związek czy mieszanina?',steps:['Sól zawiera sód (Na) i chlor (Cl) — dwa różne pierwiastki','Są połączone trwale, chemicznie','Więc to związek chemiczny'],ans:'Związek chemiczny'},
+],
+flashcards:[
+  {q:'Czy powietrze jest pierwiastkiem?',a:'<strong>Nie!</strong> To <strong>mieszanina</strong> gazów (azot, tlen, gazy szlachetne i inne). Częsty błąd na klasówce — nie myl z pierwiastkiem!'},
+  {q:'Czy mosiądz jest pierwiastkiem?',a:'<strong>Nie!</strong> Mosiądz to <strong>mieszanina (stop)</strong> miedzi i cynku — metale są wymieszane, nie związane chemicznie.'},
+  {q:'Podaj przykłady pierwiastków z helu, tlenu i wodoru.',a:'Wszystkie trzy (<strong>hel, tlen, wodór</strong>) to <strong>pierwiastki</strong> — każdy zbudowany z jednego rodzaju atomów.'},
+  {q:'Czy woda destylowana to związek czy mieszanina?',a:'<strong>Związek chemiczny</strong> (H₂O) — wodór i tlen są połączone trwale. (Zwykła woda z kranu to już mieszanina — zawiera minerały!)'},
+],
+quiz:[
+  {q:'Czym jest powietrze?',opts:['Pierwiastkiem','Związkiem chemicznym','Mieszaniną','Metalem'],a:2,hint:'Składa się z wielu gazów',expl:'Powietrze to <strong>mieszanina</strong> gazów (azot, tlen i inne) — NIE pierwiastek!'},
+  {q:'Czym jest mosiądz?',opts:['Pierwiastkiem','Związkiem chemicznym','Mieszaniną (stopem)','Niemetalem'],a:2,hint:'Stop dwóch metali',expl:'Mosiądz to <strong>mieszanina (stop)</strong> miedzi i cynku.'},
+  {q:'Które z poniższych to PIERWIASTEK?',opts:['Woda destylowana','Sól kamienna','Hel','Powietrze'],a:2,hint:'Jeden rodzaj atomów',expl:'<strong>Hel</strong> to pierwiastek — jeden rodzaj atomów. Pozostałe to związek (woda, sól) lub mieszanina (powietrze).'},
+  {q:'Które z poniższych to ZWIĄZEK CHEMICZNY?',opts:['Powietrze','Mosiądz','Woda destylowana','Hel'],a:2,hint:'Różne pierwiastki połączone trwale',expl:'<strong>Woda destylowana (H₂O)</strong> — wodór i tlen połączone trwale, to związek chemiczny.'},
+  {q:'Które z poniższych to MIESZANINA?',opts:['Tlen','Hel','Sól kamienna','Powietrze'],a:3,hint:'Nie połączone chemicznie',expl:'<strong>Powietrze</strong> — mieszanina gazów, nie związanych chemicznie.'},
+]},
+
+{id:'t6',ico:'🔩',num:'Temat 6',name:'Rozpoznawanie metali po właściwościach',
+theory:{
+  summary:'Zadania typu "opisana jest substancja — wskaż jej nazwę" wymagają znajomości charakterystycznych właściwości konkretnych metali.',
+  blocks:[
+    {t:'t6',h:'Rtęć (Hg)',items:['JEDYNY metal będący CIECZĄ w temperaturze pokojowej!','Dobry przewodnik ciepła i prądu','Dawniej stosowana w termometrach','Srebrzysty połysk, bardzo gęsta (ciężka)','Kluczowe słowo w zadaniu: "ciecz" + "termometr" → rtęć']},
+    {t:'t6',h:'Srebro (Ag)',items:['Najlepszy przewodnik prądu elektrycznego ze wszystkich metali!','Charakterystyczny połysk (używane w biżuterii)','Ciągliwe — da się rozciągać w cienkie druty','Białawy, jasny metal','Kluczowe słowo: "najlepszy przewodnik" → srebro']},
+    {t:'t6',h:'Inne metale do zapamiętania',items:['Złoto (Au) — nie koroduje, miękkie, żółte, biżuteria','Miedź (Cu) — czerwonawy kolor, przewody elektryczne','Żelazo (Fe) — magnetyczne, koroduje (rdzewieje)','Aluminium (Al) — lekkie, odporne na korozję, opakowania']},
+    {t:'t6',h:'Jak podejść do zadania wyboru (ABCD)',items:['Szukaj SŁÓW KLUCZOWYCH w opisie: "ciecz" = rtęć, "najlepszy przewodnik" = srebro','Sprawdź, czy opisana substancja to metal czy niemetal (chlor, brom, węgiel = niemetale!)','Brom — jedyny ciekły NIEMETAL (łatwo pomylić z rtęcią!)','Eliminuj odpowiedzi, które nie pasują do żadnej cechy']},
+  ],
+  formulas:`<strong>Rtęć (Hg):</strong> jedyny metal-ciecz, dawniej w termometrach.<br><strong>Srebro (Ag):</strong> najlepszy przewodnik prądu, połysk.<br>⚠️ Nie mylić: <strong>brom</strong> to jedyny ciekły NIEMETAL (rtęć = metal-ciecz, brom = niemetal-ciecz).`,
+},
+examples:[
+  {q:'Substancja dobrze przewodzi ciepło i prąd, w warunkach normalnych jest cieczą, dawniej stosowana w termometrach. Co to?',steps:['Kluczowe cechy: ciecz + przewodnik + termometr','To jedyny metal będący cieczą','To rtęć'],ans:'Rtęć (Hg)'},
+  {q:'Substancja przewodzi prąd elektryczny najlepiej ze wszystkich metali, ma połysk i jest ciągliwa. Co to?',steps:['Kluczowa cecha: "najlepszy przewodnik"','To charakterystyczna cecha srebra','To srebro'],ans:'Srebro (Ag)'},
+  {q:'Dlaczego nie można pomylić rtęci z bromem, mimo że oba są cieczami?',steps:['Rtęć to METAL (ma połysk metaliczny, przewodzi prąd)','Brom to NIEMETAL (czerwonobrunatna ciecz, inne właściwości)','Oba są ciekłe, ale należą do różnych grup'],ans:'Rtęć to metal, brom to niemetal — mimo że oba są cieczami'},
+],
+flashcards:[
+  {q:'Który metal jest cieczą w temperaturze pokojowej?',a:'<strong>Rtęć (Hg)</strong> — jedyny metal będący cieczą w warunkach normalnych. Dawniej stosowana w termometrach.'},
+  {q:'Który metal jest najlepszym przewodnikiem prądu?',a:'<strong>Srebro (Ag)</strong> — przewodzi prąd elektryczny lepiej niż jakikolwiek inny metal.'},
+  {q:'Jaka jest pułapka w pytaniu o "ciekły pierwiastek"?',a:'Mogą pytać o <strong>metal</strong> (rtęć) lub <strong>niemetal</strong> (brom) — oba są cieczami! Czytaj uważnie, czy pytają o metal czy dowolny pierwiastek.'},
+  {q:'Jakie są charakterystyczne cechy złota?',a:'<strong>Nie koroduje</strong> (nie rdzewieje), jest <strong>miękkie</strong> i ma żółty kolor — dlatego używane w biżuterii.'},
+],
+quiz:[
+  {q:'Który metal jest cieczą w warunkach normalnych i był stosowany w termometrach?',opts:['Ołów','Brom','Rtęć','Chlor'],a:2,hint:'Jedyny metal-ciecz',expl:'<strong>Rtęć</strong> — jedyny metal będący cieczą w temperaturze pokojowej.'},
+  {q:'Który metal najlepiej przewodzi prąd elektryczny?',opts:['Wodór','Węgiel','Chlor','Srebro'],a:3,hint:'Najlepszy przewodnik ze wszystkich metali',expl:'<strong>Srebro</strong> — najlepszy przewodnik prądu elektrycznego.'},
+  {q:'Który z poniższych jest NIEMETALEM, mimo że jest cieczą?',opts:['Rtęć','Brom','Srebro','Złoto'],a:1,hint:'Jedyny ciekły niemetal',expl:'<strong>Brom</strong> — jedyny ciekły niemetal (rtęć to metal-ciecz, nie niemetal).'},
+  {q:'Który metal nie koroduje i używany jest w biżuterii?',opts:['Żelazo','Złoto','Aluminium','Rtęć'],a:1,hint:'Odporny na rdzewienie',expl:'<strong>Złoto</strong> — nie koroduje, miękkie, stosowane w biżuterii.'},
+  {q:'Substancja ma charakterystyczny połysk i jest ciągliwa (da się ciągnąć w druty). To cecha:',opts:['Tylko niemetali','Tylko gazów','Metali','Tylko cieczy'],a:2,hint:'Połysk i ciągliwość',expl:'Połysk i ciągliwość to typowe cechy <strong>metali</strong>.'},
+]},
+
+{id:'t7',ico:'🦠',num:'Temat 7',name:'Korozja',
+theory:{
+  summary:'Korozja to powolne niszczenie metalu w wyniku reakcji z otoczeniem — temat, który nie zawsze pojawia się w podręczniku, ale często na klasówce!',
+  blocks:[
+    {t:'t7',h:'Co to jest korozja',items:['Powolny proces niszczenia metali przez czynniki środowiska','Metal reaguje z tlenem, wodą, wilgocią','Rdza (na żelazie) to najpopularniejszy przykład korozji','To REAKCJA CHEMICZNA — powstaje nowa substancja (tlenek)','Korozja osłabia i niszczy przedmioty metalowe']},
+    {t:'t7',h:'Przyczyny korozji',items:['Wilgoć i woda (szczególnie słona — przyspiesza korozję)','Tlen z powietrza','Zanieczyszczenia powietrza (kwaśne opady)','Wysoka temperatura przyspiesza proces','Kontakt z różnymi metalami (korozja galwaniczna)']},
+    {t:'t7',h:'Sposoby zabezpieczania przed korozją (WAŻNE — 3 sposoby!)',items:['Malowanie/powłoki ochronne (farba, lakier)','Smarowanie olejem lub smarem','Cynkowanie (pokrywanie warstwą cynku — ocynkowanie)','Przechowywanie w suchym miejscu, z dala od wilgoci','Stosowanie stopów odpornych na korozję (stal nierdzewna)']},
+    {t:'t7',h:'Jak odpowiadać na klasówce',items:['Definicja: "korozja to powolny proces niszczenia metali pod wpływem czynników środowiska (tlenu, wody)"','Zawsze podaj TRZY różne sposoby ochrony, nie jeden z wariantami','Przykłady: malowanie, smarowanie/natłuszczanie, cynkowanie/powłoki ochronne','NIE wystarczy napisać tylko "trzymać w suchym miejscu" — to jeden sposób, potrzeba trzech!']},
+  ],
+  formulas:`<strong>Korozja</strong> = powolne niszczenie metalu pod wpływem tlenu i wody (reakcja chemiczna).<br><strong>3 sposoby ochrony:</strong> malowanie/powłoki, smarowanie (olej/smar), cynkowanie (powłoka cynkowa).<br>Przykład: rdza = tlenek żelaza, powstały z reakcji żelaza z tlenem i wodą.`,
+},
+examples:[
+  {q:'Na czym polega korozja żelaza?',steps:['Żelazo reaguje z tlenem i wodą z otoczenia','Powstaje nowa substancja — rdza (tlenek żelaza)','To proces niszczący metal'],ans:'Żelazo reaguje z tlenem i wodą, tworząc rdzę'},
+  {q:'Podaj trzy sposoby zabezpieczenia metalu przed korozją.',steps:['Malowanie lub pokrywanie lakierem','Smarowanie olejem/smarem','Cynkowanie (powłoka ochronna z cynku)'],ans:'Malowanie, smarowanie, cynkowanie'},
+  {q:'Dlaczego słona woda przyspiesza korozję bardziej niż czysta woda?',steps:['Sól zwiększa przewodnictwo elektryczne wody','Przyspiesza to reakcje chemiczne na powierzchni metalu','Dlatego metal w morskiej wodzie koroduje szybciej'],ans:'Bo sól przyspiesza reakcje chemiczne (zwiększa przewodnictwo)'},
+],
+flashcards:[
+  {q:'Co to jest korozja?',a:'<strong>Powolny proces niszczenia metalu</strong> pod wpływem czynników środowiska — głównie tlenu i wody. To reakcja chemiczna (np. rdza = tlenek żelaza).'},
+  {q:'Podaj TRZY sposoby zabezpieczenia metalu przed korozją.',a:'1) <strong>Malowanie</strong>/powłoki ochronne, 2) <strong>Smarowanie</strong> olejem lub smarem, 3) <strong>Cynkowanie</strong> (powłoka z cynku). Można dodać: przechowywanie w suchym miejscu.'},
+  {q:'Czy korozja to zjawisko fizyczne czy reakcja chemiczna?',a:'<strong>Reakcja chemiczna</strong> — powstaje nowa substancja (np. tlenek żelaza = rdza) o innych właściwościach niż czysty metal.'},
+  {q:'Dlaczego malowanie chroni metal przed korozją?',a:'Warstwa farby <strong>odcina dostęp tlenu i wody</strong> do powierzchni metalu, więc reakcja korozji nie może zajść.'},
+],
+quiz:[
+  {q:'Co to jest korozja?',opts:['Szybkie topnienie metalu','Powolne niszczenie metalu przez tlen i wodę','Zjawisko fizyczne zmiany kształtu','Proces chłodzenia metalu'],a:1,hint:'Niszczenie metalu w czasie',expl:'Korozja to <strong>powolne niszczenie metalu</strong> pod wpływem tlenu i wody z otoczenia.'},
+  {q:'Które z poniższych NIE jest sposobem ochrony przed korozją?',opts:['Malowanie','Smarowanie olejem','Zanurzenie w słonej wodzie','Cynkowanie'],a:2,hint:'To przyspiesza korozję!',expl:'<strong>Zanurzenie w słonej wodzie</strong> przyspiesza korozję, zamiast przed nią chronić.'},
+  {q:'Czym jest rdza?',opts:['Czystym żelazem','Tlenkiem żelaza (produkt korozji)','Stopem żelaza i węgla','Solą żelaza'],a:1,hint:'Produkt reakcji z tlenem',expl:'Rdza to <strong>tlenek żelaza</strong> — powstaje w reakcji żelaza z tlenem i wodą.'},
+  {q:'Czy korozja jest zjawiskiem fizycznym czy reakcją chemiczną?',opts:['Zjawiskiem fizycznym','Reakcją chemiczną','Ani jednym, ani drugim','Zależy od metalu'],a:1,hint:'Powstaje nowa substancja',expl:'To <strong>reakcja chemiczna</strong> — powstaje nowa substancja (tlenek) o innych właściwościach.'},
+  {q:'Dlaczego cynkowanie chroni żelazo przed korozją?',opts:['Cynk jest cięższy od żelaza','Warstwa cynku odcina dostęp tlenu i wody do żelaza','Cynk rozpuszcza rdzę','Cynk podgrzewa metal'],a:1,hint:'Powłoka ochronna',expl:'Warstwa cynku <strong>odcina dostęp tlenu i wody</strong> do żelaza pod spodem.'},
+]},
+
+{id:'t8',ico:'🔥',num:'Temat 8',name:'Zjawisko fizyczne a reakcja chemiczna (powtórka)',
+theory:{
+  summary:'Klasyfikacja konkretnych procesów do zjawisk fizycznych lub reakcji chemicznych — to zadanie wraca na każdej klasówce z różnymi przykładami!',
+  blocks:[
+    {t:'t8',h:'Zapamiętaj: ZJAWISKA FIZYCZNE',items:['Topnienie tłuszczu/lodu/masła — zmiana stanu skupienia','Gotowanie wody (parowanie) — nadal H₂O','Powstawanie szronu na drzewach — para wodna → lód','Topnienie lodu na jeziorze — nadal woda','Łamanie, cięcie, mielenie — zmiana kształtu, nie substancji']},
+    {t:'t8',h:'Zapamiętaj: REAKCJE CHEMICZNE',items:['Spalanie paliwa w samochodzie — powstają spaliny (nowe substancje)','Kwaśnienie mleka — bakterie tworzą kwas mlekowy (nowa substancja)','Rdzewienie żelaza — powstaje tlenek żelaza','Pieczenie chleba — składniki reagują, powstaje nowa struktura','Gnicie, fermentacja, trawienie — zawsze reakcje chemiczne']},
+    {t:'t8',h:'Trudne przypadki — uważaj!',items:['"Gotowanie wody" = fizyczne (woda→para, ta sama substancja)','"Pieczenie chleba" = CHEMICZNE (ciasto → zupełnie inna struktura/substancje)','"Kwaśnienie mleka" = CHEMICZNE (fermentacja = reakcja)','"Powstawanie szronu" = fizyczne (para wodna zamarza, nadal H₂O)','Kluczowe pytanie: czy na końcu mam TĘ SAMĄ substancję?']},
+    {t:'t8',h:'Strategia na klasówce',items:['Zadaj sobie pytanie: czy po procesie to WCIĄŻ ta sama substancja?','TAK (zmienił się tylko kształt/stan) → zjawisko fizyczne','NIE (powstała inna substancja o innych właściwościach) → reakcja chemiczna','Szukaj znaków reakcji: zmiana barwy, zapach, gaz, ciepło, nieodwracalność','Pieczenie/gotowanie żywności = zwykle reakcja chemiczna (wyjątek: gotowanie SAMEJ wody)']},
+  ],
+  formulas:`<strong>Pytanie kluczowe:</strong> czy po procesie to wciąż ta sama substancja?<br><strong>TAK</strong> → zjawisko fizyczne (topnienie, parowanie, łamanie, mielenie).<br><strong>NIE</strong> → reakcja chemiczna (spalanie, rdzewienie, kwaśnienie, pieczenie, gnicie).`,
+},
+examples:[
+  {q:'Czy gotowanie wody to zjawisko fizyczne czy reakcja chemiczna?',steps:['Woda zamienia się w parę wodną','To wciąż H₂O — ta sama substancja, inny stan skupienia','Więc to zjawisko fizyczne'],ans:'Zjawisko fizyczne'},
+  {q:'Czy pieczenie chleba to zjawisko fizyczne czy reakcja chemiczna?',steps:['Ciasto pod wpływem temperatury zmienia strukturę chemiczną','Powstają nowe substancje (np. skórka, inny smak i zapach)','To proces nieodwracalny — reakcja chemiczna'],ans:'Reakcja chemiczna'},
+  {q:'Czy powstawanie szronu na drzewach to zjawisko fizyczne czy reakcja chemiczna?',steps:['Para wodna z powietrza zamarza na gałęziach','To wciąż H₂O, tylko w postaci lodu','Więc to zjawisko fizyczne'],ans:'Zjawisko fizyczne'},
+],
+flashcards:[
+  {q:'Jak szybko sprawdzić, czy proces to zjawisko fizyczne czy reakcja chemiczna?',a:'Zadaj pytanie: <strong>czy po procesie to wciąż ta sama substancja?</strong> Tak → fizyczne. Nie (powstała nowa substancja) → chemiczne.'},
+  {q:'Czy kwaśnienie mleka to zjawisko fizyczne czy reakcja chemiczna?',a:'<strong>Reakcja chemiczna</strong> — bakterie przekształcają laktozę w kwas mlekowy, powstaje nowa substancja.'},
+  {q:'Czy topnienie lodu na jeziorze to zjawisko fizyczne czy reakcja chemiczna?',a:'<strong>Zjawisko fizyczne</strong> — lód i woda to ta sama substancja (H₂O), zmienia się tylko stan skupienia.'},
+  {q:'Dlaczego pieczenie chleba to reakcja chemiczna, a gotowanie wody — nie?',a:'Przy pieczeniu chleba <strong>powstają nowe substancje</strong> (zmienia się struktura, smak, zapach — proces nieodwracalny). Przy gotowaniu wody substancja <strong>pozostaje ta sama (H₂O)</strong>, zmienia się tylko stan skupienia.'},
+],
+quiz:[
+  {q:'Gotowanie wody to:',opts:['Reakcja chemiczna','Zjawisko fizyczne','I jedno, i drugie','Żadne z nich'],a:1,hint:'Woda pozostaje wodą',expl:'<strong>Zjawisko fizyczne</strong> — woda zamienia się w parę, ale to nadal H₂O.'},
+  {q:'Pieczenie chleba to:',opts:['Zjawisko fizyczne','Reakcja chemiczna','Mieszanie składników bez zmian','Rozpuszczanie'],a:1,hint:'Powstaje zupełnie nowa struktura',expl:'<strong>Reakcja chemiczna</strong> — składniki ciasta przekształcają się w nowe substancje.'},
+  {q:'Kwaśnienie mleka to:',opts:['Zjawisko fizyczne','Reakcja chemiczna','Zmiana koloru bez zmiany substancji','Topnienie'],a:1,hint:'Bakterie tworzą kwas mlekowy',expl:'<strong>Reakcja chemiczna</strong> — powstaje kwas mlekowy, nowa substancja.'},
+  {q:'Powstawanie szronu na drzewach to:',opts:['Reakcja chemiczna','Zjawisko fizyczne','Korozja','Fermentacja'],a:1,hint:'Para wodna zamarza',expl:'<strong>Zjawisko fizyczne</strong> — para wodna zamienia się w lód, to wciąż H₂O.'},
+  {q:'Które z poniższych jest REAKCJĄ CHEMICZNĄ?',opts:['Topnienie tłuszczu na patelni','Rdzewienie żelaza','Gotowanie wody','Topnienie lodu na jeziorze'],a:1,hint:'Powstaje nowa substancja (tlenek)',expl:'<strong>Rdzewienie żelaza</strong> — powstaje tlenek żelaza, nowa substancja. Pozostałe to zjawiska fizyczne.'},
+]},
+];
+
+// ══════════════════ STATE
+let ct=TOPICS[0],tab='theory',fcI=0,fcF=false,qi=0,sel=null,score=0,mistakes=[],qList=[];
+
+function applyColors(id){
+  const c=C[id];
+  document.documentElement.style.setProperty('--c',c.c);
+  document.documentElement.style.setProperty('--c-bg',c.bg);
+  document.documentElement.style.setProperty('--c-d',c.d);
+}
+
+function setTopic(id){
+  ct=TOPICS.find(t=>t.id===id);
+  tab='theory';fcI=0;fcF=false;
+  qi=0;sel=null;score=0;mistakes=[];
+  qList=[...ct.quiz].sort(()=>Math.random()-.5);
+  applyColors(id);
+  renderTopics();renderITabs();render();
+}
+
+function setTab(id){
+  tab=id;fcI=0;fcF=false;
+  if(id==='quiz'){qi=0;sel=null;score=0;mistakes=[];qList=[...ct.quiz].sort(()=>Math.random()-.5);}
+  renderITabs();render();
+}
+
+function renderTopics(){
+  document.getElementById('topic-grid').innerHTML=TOPICS.map(t=>`
+    <button class="tcard${t.id===ct.id?' active':''}" onclick="setTopic('${t.id}')"
+      style="${t.id===ct.id?`border-color:${C[t.id].c};background:${C[t.id].bg}`:''}">
+      <div class="tc-ico">${t.ico}</div>
+      <div class="tc-body">
+        <div class="tc-num">${t.num}</div>
+        <div class="tc-name">${t.name}</div>
+      </div>
+    </button>`).join('');
+}
+
+const TABS=[
+  {id:'theory',l:'📖 Teoria'},
+  {id:'formulas',l:'📋 Kluczowe fakty'},
+  {id:'examples',l:'✏️ Przykłady'},
+  {id:'flash',l:'🃏 Fiszki'},
+  {id:'quiz',l:'🧮 Test'},
+];
+
+function renderITabs(){
+  document.getElementById('itabs').innerHTML=TABS.map(t=>`
+    <button class="itab${tab===t.id?' active':''}"
+      style="${tab===t.id?`background:${C[ct.id].c}`:''}
+      " onclick="setTab('${t.id}')">${t.l}</button>`).join('');
+}
+
+function renderTheory(){
+  const th=ct.theory;
+  return `<div class="card">
+    <div class="card-h">${ct.ico} ${ct.name}</div>
+    <p style="font-size:14px;color:var(--muted);margin-bottom:14px;line-height:1.6">${th.summary}</p>
+    <div class="tgrid">${th.blocks.map(b=>`
+      <div class="tbox" style="background:${C[b.t].bg};border-color:${C[b.t].c}40">
+        <h3 style="color:${C[b.t].d}">${b.h}</h3>
+        <ul style="color:${C[b.t].d}">${b.items.map(i=>`<li>${i}</li>`).join('')}</ul>
+      </div>`).join('')}
+    </div>
+  </div>
+  <div style="margin-top:4px"><button class="btn btn-pri" onclick="setTab('formulas')">📋 Kluczowe fakty →</button></div>`;
+}
+
+function renderFormulas(){
+  return `<div class="card">
+    <div class="card-h">📋 Kluczowe fakty — ${ct.name}</div>
+    <div class="formula">${ct.theory.formulas}</div>
+    <div style="margin-top:4px"><button class="btn btn-pri" onclick="setTab('examples')">✏️ Przykłady →</button></div>
+  </div>`;
+}
+
+function renderExamples(){
+  return `<div class="card">
+    <div class="card-h">✏️ Przykłady krok po kroku</div>
+    <div class="ex-list">${ct.examples.map(e=>`
+      <div class="ex-item">
+        <div class="ex-q">${e.q}</div>
+        <div class="ex-steps">
+          ${e.steps.map((s,i)=>`
+            <div class="ex-step">
+              <div class="ex-step-n" style="background:${C[ct.id].c}">${i+1}</div>
+              <div>${s}</div>
+            </div>`).join('')}
+          <div class="ex-ans">✅ Odpowiedź: ${e.ans}</div>
+        </div>
+      </div>`).join('')}
+    </div>
+  </div>`;
+}
+
+function renderFlash(){
+  const cards=ct.flashcards;
+  const c=cards[fcI];
+  return `<div class="card">
+    <div class="card-h">🃏 Fiszki — ${ct.name}</div>
+    <div class="fc-meta">Kliknij kartę · ${fcI+1} z ${cards.length}</div>
+    <div class="flashcard${fcF?' flipped':''}" onclick="flipCard()">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-q">${c.q}</div><div class="fc-tap">👆 Kliknij, by zobaczyć odpowiedź</div></div>
+        <div class="fc-back" style="background:${C[ct.id].bg};border-color:${C[ct.id].c}">
+          <div class="fc-a" style="--c-d:${C[ct.id].d}">${c.a}</div>
+        </div>
+      </div>
+    </div>
+    <div class="fc-nav">
+      <button class="btn btn-sec" onclick="fcNav(-1)" ${fcI===0?'disabled':''}>← Poprzednia</button>
+      <span class="fc-count">${fcI+1} / ${cards.length}</span>
+      <button class="btn btn-pri" onclick="fcNav(1)" ${fcI===cards.length-1?'disabled':''}>Następna →</button>
+    </div>
+  </div>`;
+}
+
+function flipCard(){fcF=!fcF;render();}
+function fcNav(d){fcI+=d;fcF=false;render();}
+
+function renderQuiz(){
+  if(qi>=qList.length)return renderResult();
+  const q=qList[qi];
+  const total=qList.length;
+  const pct=Math.round((qi/total)*100);
+  const optsHTML=q.opts.map((o,i)=>{
+    let cls='opt';
+    if(sel!==null){if(i===q.a)cls+=' ok';else if(i===sel&&sel!==q.a)cls+=' no';}
+    return `<button class="${cls}" onclick="choose(${i})" ${sel!==null?'disabled':''}>${o}</button>`;
+  }).join('');
+  let fb='';
+  if(sel!==null){
+    fb=sel===q.a
+      ?`<div class="feedback ok">✓ Правильно! <div class="expl">${q.expl}</div></div>`
+      :`<div class="feedback no">✗ Правильна: <strong>${q.opts[q.a]}</strong><div class="expl">${q.expl}</div></div>`;
+  }
+  return `
+  <div class="prog-bar"><div class="prog-fill" style="background:${C[ct.id].c};width:${pct}%"></div></div>
+  <div class="score-row">
+    <span>Pytanie <b>${qi+1}/${total}</b></span>
+    <span>✅ <b style="color:var(--ok)">${score}</b></span>
+    <span>❌ <b style="color:var(--err)">${mistakes.length}</b></span>
+  </div>
+  <div class="card">
+    <div class="q-label">Pytanie ${qi+1}</div>
+    <div class="q-text">${q.q}</div>
+    <div class="q-hint">💡 ${q.hint}</div>
+    <div class="opts">${optsHTML}</div>
+    ${fb}
+  </div>
+  <div class="nav-row">${sel!==null?`<button class="btn btn-pri" onclick="nextQ()">Dalej →</button>`:''}</div>`;
+}
+
+function renderResult(){
+  const total=qList.length;
+  const pct=Math.round((score/total)*100);
+  const emoji=pct>=80?'🎉':pct>=60?'👍':'📚';
+  const stars=pct>=100?'⭐⭐⭐':pct>=80?'⭐⭐':pct>=60?'⭐':'';
+  const msg=pct>=80?'Warwara — gotowa na kontrolną!':pct>=60?'Dobrze! Powtórz błędy.':'Wróć do teorii i kluczowych faktów.';
+  const mHTML=mistakes.length?`
+    <div style="margin-top:16px;text-align:left">
+      <div style="font-size:14px;font-weight:800;margin-bottom:10px">Błędy:</div>
+      ${mistakes.map(m=>`
+        <div class="mk">
+          <div class="mk-q">${m.q}</div>
+          <div class="mk-w">Ти відповіла: <b>${m.wrong}</b></div>
+          <div class="mk-c">✓ ${m.correct}</div>
+          <div class="mk-r">${m.rule}</div>
+        </div>`).join('')}
+    </div>`:'';
+  return `<div class="card"><div class="result">
+    <div style="font-size:42px">${emoji}</div>
+    <div style="font-size:24px;margin:4px 0">${stars}</div>
+    <div class="big" style="color:${C[ct.id].c}">${score}/${total}</div>
+    <div class="msg">${msg}</div>
+    <div class="result-btns">
+      <button class="btn btn-sec" onclick="setTab('theory')">📖 Teoria</button>
+      <button class="btn btn-sec" onclick="setTab('formulas')">📋 Fakty</button>
+      <button class="btn btn-pri" onclick="setTab('quiz')">Ponownie ↺</button>
+    </div>
+    ${mHTML}
+  </div></div>`;
+}
+
+function choose(i){
+  if(sel!==null)return;
+  sel=i;
+  const q=qList[qi];
+  if(i===q.a)score++;
+  else mistakes.push({q:q.q,wrong:q.opts[i],correct:q.opts[q.a],rule:q.expl});
+  render();
+}
+function nextQ(){qi++;sel=null;render();}
+
+function render(){
+  const c=document.getElementById('content');
+  if(tab==='theory')c.innerHTML=renderTheory();
+  else if(tab==='formulas')c.innerHTML=renderFormulas();
+  else if(tab==='examples')c.innerHTML=renderExamples();
+  else if(tab==='flash')c.innerHTML=renderFlash();
+  else c.innerHTML=renderQuiz();
+}
+
+setTopic('t1');
+</script>
+</body>
+</html>
