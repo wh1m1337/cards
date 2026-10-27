@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Matematyka · Варвара</title>
+<title>Варвара · Тренажери</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%93%90%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Sora:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -32,17 +32,20 @@ a.tile.main{border:2px solid var(--teal);background:linear-gradient(180deg,#fff,
 .chip.good{background:var(--teal-soft);border-color:#bfe0d9;color:#1d5c53;}
 .go{display:inline-block;margin-top:12px;font-weight:600;color:var(--teal);font-size:15px;}
 footer{text-align:center;font-size:12px;color:#9891b0;padding:8px 20px 30px;}
+.jump{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:6px}.jump a{display:block;text-align:center;text-decoration:none;background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:11px;font-weight:700;color:var(--plum-deep);font-size:15px}.jump a:hover{background:var(--teal-soft)}h2.sec{scroll-margin-top:110px}html{scroll-behavior:smooth}
 </style>
 </head>
 <body>
 <header class="hero"><div class="in">
-  <div class="kicker">Matematyka · Варвара</div>
-  <h1>Тренажери з математики</h1>
-  <p>Теорія, вправи з новими прикладами та тести — українською й польською.</p>
+  <div class="kicker">Варвара · 7 клас</div>
+  <h1>Тренажери для Варвари</h1>
+  <p>Математика, фізика, хімія, французька: теорія, приклади, картки й тести.</p>
 </div></header>
 <main>
-  <h2 class="sec">Зараз в зошиті</h2>
-  <a class="tile main" href="liczby-i-dzialania.html">
+  <div class="jump"><a href="#mat">🧮 Matematyka</a><a href="#fiz">🔬 Fizyka</a><a href="#chem">🧪 Chemia</a><a href="#fr">🇫🇷 Français</a></div>
+
+  <h2 class="sec" id="mat">🧮 Matematyka</h2>
+<a class="tile main" href="liczby-i-dzialania.html">
     <span class="tag">Нове</span>
     <div class="row"><div class="ico">🔢</div><div>
       <h3>Liczby i działania · уроки 1–4</h3>
@@ -51,9 +54,15 @@ footer{text-align:center;font-size:12px;color:#9891b0;padding:8px 20px 30px;}
     <div class="chips" id="prog"><span class="chip">Теорія</span><span class="chip">Тренажер без кінця</span><span class="chip">Тести з розбором помилок</span><span class="chip">UA / PL</span></div>
     <span class="go">Відкрити →</span>
   </a>
+<a class="tile" href="liczby-wymierne.html"><div class="row"><div class="ico">🧮</div><div>
+    <h3>Liczby wymierne</h3><div class="sub">Натуральні, цілі, раціональні · дроби ↔ десяткові · протилежні й обернені числа · тест (UA / PL)</div></div></div></a>
+<a class="tile" href="liczby_dodatnie_ujemne.html"><div class="row"><div class="ico">➕</div><div>
+    <h3>Liczby dodatnie i ujemne</h3><div class="sub">Порівняння, додавання, віднімання, множення й ділення з від’ємними числами · тест на 20 питань</div></div></div></a>
+<a class="tile" href="rok.html"><div class="row"><div class="ico">📅</div><div>
+    <h3>Річна контрольна · 8 тем</h3><div class="sub">Дроби · геометрія · швидкість, шлях, час · площі · відсотки · рівняння — теорія, формули, фішки, тест</div></div></div></a>
 
-  <h2 class="sec">Fizyka · kartkówka</h2>
-  <a class="tile main" href="fizyka.html">
+  <h2 class="sec" id="fiz">🔬 Fizyka</h2>
+<a class="tile main" href="fizyka.html">
     <span class="tag">Нове</span>
     <div class="row"><div class="ico">🔬</div><div>
       <h3>Fizyka — Pierwsze spotkanie z fizyką</h3>
@@ -63,8 +72,8 @@ footer{text-align:center;font-size:12px;color:#9891b0;padding:8px 20px 30px;}
     <span class="go">Відкрити →</span>
   </a>
 
-  <h2 class="sec">Chemia · kontrolna</h2>
-  <a class="tile main" href="chemia.html">
+  <h2 class="sec" id="chem">🧪 Chemia</h2>
+<a class="tile main" href="chemia.html">
     <span class="tag">Нове</span>
     <div class="row"><div class="ico">🧪</div><div>
       <h3>Chemia — Dział 1 + Dział 2</h3>
@@ -73,7 +82,7 @@ footer{text-align:center;font-size:12px;color:#9891b0;padding:8px 20px 30px;}
     <div class="chips"><span class="chip">13 тем</span><span class="chip">Теорія + фішки</span><span class="chip">Тест по кожній темі</span></div>
     <span class="go">Відкрити →</span>
   </a>
-  <a class="tile" href="chemia-trudne.html">
+<a class="tile" href="chemia-trudne.html">
     <span class="tag" style="background:var(--amber)">Повторення</span>
     <div class="row"><div class="ico">🎯</div><div>
       <h3>Chemia — трудні теми (з помилок)</h3>
@@ -83,8 +92,8 @@ footer{text-align:center;font-size:12px;color:#9891b0;padding:8px 20px 30px;}
     <span class="go">Відкрити →</span>
   </a>
 
-  <h2 class="sec">Français · kartkówka</h2>
-  <a class="tile main" href="francuski.html">
+  <h2 class="sec" id="fr">🇫🇷 Français</h2>
+<a class="tile main" href="francuski.html">
     <span class="tag">Нове</span>
     <div class="row"><div class="ico">🇫🇷</div><div>
       <h3>Bonjour ! — Перший французький</h3>
@@ -93,14 +102,6 @@ footer{text-align:center;font-size:12px;color:#9891b0;padding:8px 20px 30px;}
     <div class="chips"><span class="chip">6 тем</span><span class="chip">Ілюстрації 🔵🔴🟢</span><span class="chip">Тест по кожній темі</span></div>
     <span class="go">Відкрити →</span>
   </a>
-
-  <h2 class="sec">Додатково</h2>
-  <a class="tile" href="liczby-wymierne.html"><div class="row"><div class="ico">🧮</div><div>
-    <h3>Liczby wymierne</h3><div class="sub">Натуральні, цілі, раціональні · дроби ↔ десяткові · протилежні й обернені числа · тест (UA / PL)</div></div></div></a>
-  <a class="tile" href="liczby_dodatnie_ujemne.html"><div class="row"><div class="ico">➕</div><div>
-    <h3>Liczby dodatnie i ujemne</h3><div class="sub">Порівняння, додавання, віднімання, множення й ділення з від’ємними числами · тест на 20 питань</div></div></div></a>
-  <a class="tile" href="rok.html"><div class="row"><div class="ico">📅</div><div>
-    <h3>Річна контрольна · 8 тем</h3><div class="sub">Дроби · геометрія · швидкість, шлях, час · площі · відсотки · рівняння — теорія, формули, фішки, тест</div></div></div></a>
 </main>
 <footer>Zrobione z ❤️ dla Warwary</footer>
 <script>
@@ -115,5 +116,6 @@ footer{text-align:center;font-size:12px;color:#9891b0;padding:8px 20px 30px;}
   }catch(e){}
 })();
 </script>
+<script src="nav.js"></script>
 </body>
 </html>
