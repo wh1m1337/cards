@@ -1,404 +1,737 @@
 <!DOCTYPE html>
-<html lang="pl">
+<html lang="uk">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Fizyka — start! 🔬</title>
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%94%AC%3C/text%3E%3C/svg%3E">
-<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Baloo+2:wght@400;600;700;800&display=swap" rel="stylesheet">
+<title>Fizyka · Pierwsze spotkanie z fizyką · Варвара</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --blue: #2563eb;
-    --blue-soft: #dbeafe;
-    --teal: #0d9488;
-    --teal-soft: #ccfbf1;
-    --purple: #7c3aed;
-    --purple-soft: #ede9fe;
-    --orange: #ea580c;
-    --orange-soft: #ffedd5;
-    --pink: #db2777;
-    --pink-soft: #fce7f3;
-    --bg: #f5f7fb;
-    --card: #ffffff;
-    --text: #1e293b;
-    --muted: #64748b;
-    --border: #e2e8f0;
-    --shadow: 0 4px 24px rgba(0,0,0,0.08);
-  }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: 'Nunito', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
-
-  .hero { background: linear-gradient(135deg, #1e3a8a 0%, #7c3aed 100%); padding: 38px 20px 28px; text-align: center; position: relative; overflow: hidden; }
-  .hero::before { content:''; position:absolute; inset:0; background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.06'%3E%3Ccircle cx='30' cy='30' r='3'/%3E%3Ccircle cx='6' cy='6' r='2'/%3E%3Ccircle cx='54' cy='54' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"); }
-  .hero h1 { font-family:'Baloo 2',sans-serif; font-size:clamp(1.7rem,5.5vw,2.8rem); font-weight:800; color:#fff; text-shadow:0 2px 8px rgba(0,0,0,.2); position:relative; }
-  .hero p { color:rgba(255,255,255,.85); font-size:1rem; margin-top:8px; position:relative; }
-  .hero a.back { display:inline-block; margin-top:14px; color:#fff; background:rgba(255,255,255,.18); border:1px solid rgba(255,255,255,.35); padding:5px 14px; border-radius:16px; font-size:.85rem; font-weight:700; text-decoration:none; position:relative; }
-
-  .tabs { display:flex; gap:0; background:#fff; border-bottom:2px solid var(--border); overflow-x:auto; position:sticky; top:0; z-index:100; box-shadow:0 2px 8px rgba(0,0,0,.06); }
-  .tab { padding:14px 18px; font-weight:700; font-size:.88rem; color:var(--muted); cursor:pointer; white-space:nowrap; border:none; border-bottom:3px solid transparent; background:none; transition:all .2s; font-family:'Nunito',sans-serif; }
-  .tab:hover { color:var(--purple); background:#f8f7ff; }
-  .tab.active { color:var(--purple); border-bottom-color:var(--purple); }
-
-  .main { max-width:900px; margin:0 auto; padding:26px 16px 60px; }
-  .section { display:none; }
-  .section.active { display:block; }
-
-  .card { background:var(--card); border-radius:16px; padding:24px; margin-bottom:18px; box-shadow:var(--shadow); border:1px solid var(--border); }
-  .card-title { font-family:'Baloo 2',sans-serif; font-size:1.2rem; font-weight:700; margin-bottom:14px; display:flex; align-items:center; gap:10px; }
-  .card-title .icon { width:34px; height:34px; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:1.05rem; flex-shrink:0; }
-  .icon-blue{background:var(--blue-soft);} .icon-teal{background:var(--teal-soft);} .icon-purple{background:var(--purple-soft);} .icon-orange{background:var(--orange-soft);} .icon-pink{background:var(--pink-soft);}
-
-  .card p, .card li { font-size:.95rem; line-height:1.65; color:var(--text); }
-  .card ul, .card ol { margin-left:20px; margin-top:6px; }
-  .card ol li, .card ul li { margin-bottom:6px; }
-  .ua { color:var(--muted); font-size:.82rem; font-style:italic; }
-
-  .rules-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:14px; margin-top:6px; }
-  .rule-box { border-radius:12px; padding:16px; border-left:4px solid; }
-  .rule-box.blue{background:#eff6ff;border-color:var(--blue);} .rule-box.teal{background:#f0fdfa;border-color:var(--teal);}
-  .rule-box.purple{background:#f5f3ff;border-color:var(--purple);} .rule-box.orange{background:#fff7ed;border-color:var(--orange);}
-  .rule-box.pink{background:#fdf2f8;border-color:var(--pink);}
-  .rule-title{font-weight:800;font-size:.9rem;margin-bottom:6px;}
-  .rule-title.blue{color:#1d4ed8;} .rule-title.teal{color:#0f766e;} .rule-title.purple{color:#5b21b6;} .rule-title.orange{color:#9a3412;} .rule-title.pink{color:#9d174d;}
-  .rule-text{font-size:.87rem;line-height:1.55;color:var(--text);}
-
-  .table-wrap { overflow-x:auto; }
-  table.units { width:100%; border-collapse:collapse; margin-top:8px; font-size:.88rem; }
-  table.units th, table.units td { border:1px solid var(--border); padding:8px 10px; text-align:left; }
-  table.units th { background:#f1f5f9; font-weight:800; }
-  table.units td.sym { font-weight:800; color:var(--blue); white-space:nowrap; }
-
-  .steps { counter-reset: step; list-style:none; margin-left:0 !important; }
-  .steps li { counter-increment: step; position:relative; padding-left:42px; margin-bottom:14px; }
-  .steps li::before { content:counter(step); position:absolute; left:0; top:0; width:30px; height:30px; border-radius:50%; background:linear-gradient(135deg,var(--purple),var(--blue)); color:#fff; font-weight:800; display:flex; align-items:center; justify-content:center; font-size:.9rem; }
-  .steps b { color:var(--purple); }
-
-  .trick-box { background:linear-gradient(135deg,#fef3c7,#fde68a); border-radius:12px; padding:16px; margin-top:14px; }
-  .trick-title{font-weight:800;font-size:.9rem;color:#92400e;margin-bottom:6px;}
-  .trick-text{font-size:.87rem;line-height:1.55;color:#78350f;}
-
-  /* QUIZ */
-  .quiz-header{text-align:center;margin-bottom:16px;}
-  .quiz-header h2{font-family:'Baloo 2',sans-serif;font-size:1.5rem;color:var(--purple);}
-  .quiz-header p{color:var(--muted);margin-top:4px;font-size:.9rem;}
-  .quiz-progress{display:flex;align-items:center;gap:12px;margin-bottom:16px;}
-  .progress-bar-wrap{flex:1;height:10px;background:var(--border);border-radius:6px;overflow:hidden;}
-  .progress-bar{height:100%;background:linear-gradient(90deg,var(--purple),var(--blue));width:0%;transition:width .3s;}
-  .progress-text{font-weight:700;font-size:.85rem;color:var(--muted);white-space:nowrap;}
-  .question-card{background:var(--card);border-radius:16px;padding:26px;box-shadow:var(--shadow);border:1px solid var(--border);}
-  .question-card.correct{border-color:var(--teal);} .question-card.wrong{border-color:#ef4444;}
-  .q-number{font-size:.8rem;font-weight:800;color:var(--muted);margin-bottom:8px;text-transform:uppercase;letter-spacing:.03em;}
-  .q-category{background:var(--purple-soft);color:var(--purple);padding:2px 10px;border-radius:10px;margin-left:8px;text-transform:none;}
-  .q-text{font-size:1.08rem;font-weight:700;margin-bottom:18px;line-height:1.5;}
-  .answers{display:flex;flex-direction:column;gap:10px;}
-  .answer-btn{display:flex;align-items:center;gap:12px;text-align:left;padding:14px 16px;border-radius:12px;border:2px solid var(--border);background:#fff;font-family:'Nunito',sans-serif;font-size:.95rem;font-weight:600;color:var(--text);cursor:pointer;transition:all .15s;}
-  .answer-btn:hover:not(:disabled){border-color:var(--purple);background:#faf9ff;}
-  .answer-letter{width:26px;height:26px;border-radius:50%;background:var(--bg);border:2px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:800;flex-shrink:0;}
-  .answer-btn.selected-correct{border-color:var(--teal);background:#f0fdfa;}
-  .answer-btn.selected-correct .answer-letter{background:var(--teal);border-color:var(--teal);color:#fff;}
-  .answer-btn.selected-wrong{border-color:#ef4444;background:#fef2f2;}
-  .answer-btn.selected-wrong .answer-letter{background:#ef4444;border-color:#ef4444;color:#fff;}
-  .answer-btn.show-correct{border-color:var(--teal);background:#f0fdfa;}
-  .answer-btn:disabled{cursor:default;}
-  .feedback-msg{margin-top:14px;padding:12px 14px;border-radius:10px;font-weight:700;font-size:.9rem;display:none;}
-  .feedback-msg.correct{display:block;background:#f0fdfa;color:#0f766e;}
-  .feedback-msg.wrong{display:block;background:#fef2f2;color:#b91c1c;}
-  .next-btn{display:none;margin-top:16px;width:100%;padding:13px;border:none;border-radius:12px;background:linear-gradient(135deg,var(--purple),var(--blue));color:#fff;font-family:'Nunito',sans-serif;font-weight:800;font-size:.95rem;cursor:pointer;}
-  .next-btn.show{display:block;}
-  .results-card{display:none;text-align:center;background:var(--card);border-radius:16px;padding:36px 24px;box-shadow:var(--shadow);border:1px solid var(--border);}
-  .results-card.show{display:block;}
-  .results-emoji{font-size:3.5rem;margin-bottom:10px;}
-  .results-score{font-family:'Baloo 2',sans-serif;font-size:2.2rem;font-weight:800;color:var(--purple);}
-  .results-label{color:var(--muted);font-size:.9rem;margin-top:4px;}
-  .results-msg{margin-top:14px;font-size:1rem;font-weight:700;}
-  .retry-btn{margin-top:18px;margin-right:8px;padding:11px 22px;border:none;border-radius:12px;background:linear-gradient(135deg,var(--purple),var(--blue));color:#fff;font-weight:800;font-size:.9rem;cursor:pointer;font-family:'Nunito',sans-serif;}
+:root{
+  --bg:#fafafa;--card:#fff;--ink:#111827;--muted:#6b7280;--border:#e5e7eb;
+  --t1:#2563eb;--t1b:#dbeafe;--t1d:#1d4ed8;
+  --t2:#059669;--t2b:#d1fae5;--t2d:#065f46;
+  --t3:#7c3aed;--t3b:#ede9fe;--t3d:#5b21b6;
+  --t4:#dc2626;--t4b:#fee2e2;--t4d:#991b1b;
+  --t5:#d97706;--t5b:#fef3c7;--t5d:#92400e;
+  --t6:#0891b2;--t6b:#cffafe;--t6d:#164e63;
+  --t7:#be185d;--t7b:#fce7f3;--t7d:#9d174d;
+  --t8:#4f46e5;--t8b:#e0e7ff;--t8d:#3730a3;
+  --t9:#0d9488;--t9b:#ccfbf1;--t9d:#115e59;
+  --t10:#ea580c;--t10b:#ffedd5;--t10d:#9a3412;
+  --t11:#64748b;--t11b:#f1f5f9;--t11d:#334155;
+  --t12:#78716c;--t12b:#f5f5f4;--t12d:#44403c;
+  --t13:#c026d3;--t13b:#fae8ff;--t13d:#86198f;
+  --ok:#16a34a;--okb:#dcfce7;--err:#dc2626;--errb:#fee2e2;
+  --r:14px;--rs:8px;--sh:0 2px 12px rgba(0,0,0,.07);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Sora',sans-serif;background:var(--bg);color:var(--ink);min-height:100vh}
+.page{max-width:720px;margin:0 auto;padding:20px 14px 80px}
+.hero{text-align:center;padding:24px 0 20px;margin-bottom:20px;
+  background:linear-gradient(135deg,#1d4ed8 0%,#7c3aed 50%,#059669 100%);
+  border-radius:20px;color:white}
+.hero .badge{display:inline-block;background:rgba(255,255,255,.2);
+  font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  padding:4px 14px;border-radius:99px;margin-bottom:12px}
+.hero h1{font-size:24px;font-weight:800;line-height:1.2;margin-bottom:6px}
+.hero p{font-size:13px;opacity:.8}
+.topic-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:18px}
+.tcard{
+  padding:12px 14px;border:2px solid var(--border);border-radius:var(--r);
+  background:var(--card);cursor:pointer;transition:all .16s;box-shadow:var(--sh);
+  display:flex;align-items:center;gap:10px;
+}
+.tcard:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,.1)}
+.tcard .tc-ico{font-size:22px;flex-shrink:0}
+.tcard .tc-body{min-width:0}
+.tcard .tc-num{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:2px}
+.tcard .tc-name{font-size:13px;font-weight:700;color:var(--ink);line-height:1.3}
+.tcard.active{border-width:2px;background:var(--c-bg,#dbeafe)}
+.itabs{display:flex;gap:4px;background:var(--card);padding:4px;
+  border-radius:var(--r);border:1px solid var(--border);margin-bottom:16px;overflow-x:auto}
+.itab{flex-shrink:0;padding:7px 12px;border-radius:var(--rs);border:none;
+  font-family:'Sora',sans-serif;font-size:12px;font-weight:600;
+  cursor:pointer;background:transparent;color:var(--muted);transition:all .16s;white-space:nowrap}
+.itab:hover{background:var(--bg)}
+.itab.active{color:white}
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);
+  padding:18px;margin-bottom:12px;box-shadow:var(--sh);animation:up .2s ease}
+@keyframes up{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+.card-h{font-size:16px;font-weight:800;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.tgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
+.tbox{padding:12px 13px;border-radius:var(--rs);border:1.5px solid}
+.tbox h3{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:7px}
+.tbox ul{list-style:none;font-size:13px;line-height:2}
+.tbox ul li::before{content:"• ";opacity:.4}
+.formula{background:var(--c-bg,#dbeafe);border:1.5px solid var(--c,#2563eb);
+  border-radius:var(--rs);padding:14px 16px;margin-bottom:12px;font-size:14px;line-height:2}
+.formula strong{color:var(--c-d,#1d4ed8);font-weight:800}
+.math{font-family:'JetBrains Mono',monospace;background:rgba(0,0,0,.05);
+  padding:2px 7px;border-radius:5px;font-size:13px}
+.ex-list{display:flex;flex-direction:column;gap:10px}
+.ex-item{background:var(--bg);border-radius:var(--rs);border:1px solid var(--border);overflow:hidden}
+.ex-q{padding:10px 14px;font-size:14px;font-weight:600;border-bottom:1px solid var(--border)}
+.ex-steps{padding:10px 14px}
+.ex-step{display:flex;gap:8px;margin-bottom:6px;font-size:13px;line-height:1.6;align-items:flex-start}
+.ex-step-n{width:20px;height:20px;border-radius:50%;background:var(--c,#2563eb);color:white;
+  font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.ex-ans{background:var(--okb);color:#14532d;font-weight:700;font-size:13px;
+  padding:7px 12px;border-radius:6px;margin-top:6px;display:inline-block}
+.prog-bar{height:5px;background:var(--border);border-radius:99px;margin-bottom:10px;overflow:hidden}
+.prog-fill{height:100%;border-radius:99px;background:var(--c,#2563eb);transition:width .4s}
+.score-row{display:flex;gap:14px;font-size:12px;color:var(--muted);margin-bottom:12px}
+.score-row b{color:var(--ink)}
+.q-label{font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;font-weight:700}
+.q-text{font-size:16px;font-weight:800;line-height:1.5;margin-bottom:6px}
+.q-hint{font-size:13px;color:var(--muted);font-style:italic;margin-bottom:12px}
+.opts{display:flex;flex-direction:column;gap:6px}
+.opt{padding:10px 14px;border:1.5px solid var(--border);border-radius:var(--rs);
+  font-family:'Sora',sans-serif;font-size:14px;font-weight:500;
+  cursor:pointer;background:var(--card);color:var(--ink);text-align:left;transition:all .14s}
+.opt:hover:not(:disabled){border-color:var(--c,#2563eb);background:var(--c-bg,#dbeafe)}
+.opt.ok{background:var(--okb);border-color:#86efac;color:#14532d;font-weight:700}
+.opt.no{background:var(--errb);border-color:#fca5a5;color:#7f1d1d}
+.feedback{margin-top:10px;padding:11px 14px;border-radius:var(--rs);font-size:13px;line-height:1.7;animation:up .18s ease}
+.feedback.ok{background:var(--okb);color:#14532d;border:1px solid #86efac}
+.feedback.no{background:var(--errb);color:#7f1d1d;border:1px solid #fca5a5}
+.expl{margin-top:7px;background:white;border-radius:7px;padding:8px 12px;font-size:13px;color:#1e3a8a;line-height:1.7;border:1px solid #bfdbfe}
+.nav-row{display:flex;justify-content:flex-end;margin-top:10px}
+.btn{padding:9px 20px;border-radius:var(--rs);border:none;font-family:'Sora',sans-serif;
+  font-size:13px;font-weight:700;cursor:pointer;transition:all .14s}
+.btn-pri{background:var(--c,#2563eb);color:white}
+.btn-pri:hover{filter:brightness(.9);transform:translateY(-1px)}
+.btn-sec{background:var(--card);color:var(--ink);border:1.5px solid var(--border)}
+.btn-sec:hover{background:var(--bg)}
+.result{text-align:center;padding:10px 0 16px}
+.result .big{font-size:54px;font-weight:800;color:var(--c,#2563eb);line-height:1}
+.result .msg{font-size:15px;color:var(--muted);margin:8px 0 18px}
+.result-btns{display:flex;gap:7px;justify-content:center;flex-wrap:wrap}
+.mk{background:#fffbeb;border:1.5px solid #fcd34d;border-radius:var(--rs);padding:12px;margin-bottom:8px;text-align:left}
+.mk-q{font-weight:700;font-size:13px;margin-bottom:4px}
+.mk-w{font-size:12px;color:var(--err);margin-bottom:3px}
+.mk-c{display:inline-block;background:var(--okb);color:#14532d;font-size:12px;font-weight:700;padding:2px 9px;border-radius:5px;margin-bottom:6px}
+.mk-r{font-size:12px;color:#1e3a8a;background:#dbeafe;padding:7px 11px;border-radius:7px;line-height:1.7}
+.fc-meta{text-align:center;font-size:13px;color:var(--muted);margin-bottom:10px}
+.flashcard{perspective:900px;width:100%;min-height:160px;cursor:pointer;margin-bottom:10px}
+.fc-inner{position:relative;width:100%;min-height:160px;transform-style:preserve-3d;transition:transform .45s;border-radius:var(--r)}
+.flashcard.flipped .fc-inner{transform:rotateY(180deg)}
+.fc-front,.fc-back{position:absolute;width:100%;min-height:160px;backface-visibility:hidden;
+  border-radius:var(--r);padding:20px;display:flex;flex-direction:column;justify-content:center;
+  border:2px solid var(--border);box-shadow:var(--sh)}
+.fc-front{background:white;text-align:center}
+.fc-back{transform:rotateY(180deg);background:var(--c-bg,#dbeafe);border-color:var(--c,#2563eb)}
+.fc-q{font-size:16px;font-weight:800;line-height:1.4;margin-bottom:7px}
+.fc-tap{font-size:12px;color:var(--muted)}
+.fc-a{font-size:14px;line-height:1.75}
+.fc-a strong{color:var(--c-d,#1d4ed8)}
+.fc-nav{display:flex;justify-content:space-between;align-items:center}
+.fc-count{font-size:12px;color:var(--muted);font-weight:600}
+@media(max-width:500px){
+  .topic-grid{grid-template-columns:1fr}
+  .tgrid{grid-template-columns:1fr}
+  .hero h1{font-size:19px}
+  .result .big{font-size:40px}
+}
 </style>
+<style>.ld-home{position:fixed;top:10px;left:10px;z-index:100;background:rgba(45,38,87,.92);color:#fff!important;text-decoration:none;font:600 13px/1 system-ui,sans-serif;padding:9px 13px;border-radius:20px;box-shadow:0 2px 8px rgba(0,0,0,.2)}</style>
 </head>
 <body>
+<a class="ld-home" href="index.html">← Головна / Strona główna</a>
+<div class="page">
 
-<header class="hero">
-  <h1>🔬 Fizyka — start!</h1>
-  <p>Czym zajmuje się fizyka · Wielkości, jednostki i pomiary · Jak przeprowadzić doświadczenie</p>
-  <a class="back" href="index.html">← усі тренажери</a>
-</header>
-
-<nav class="tabs">
-  <button class="tab active" onclick="showSection('teoria1')">1. Czym jest fizyka</button>
-  <button class="tab" onclick="showSection('teoria2')">2. Wielkości i pomiary</button>
-  <button class="tab" onclick="showSection('teoria3')">3. Doświadczenie</button>
-  <button class="tab" onclick="showSection('test')">📝 Test</button>
-</nav>
-
-<div class="main">
-
-<!-- ============ TEORIA 1 ============ -->
-<div class="section active" id="teoria1">
-
-  <div class="card">
-    <div class="card-title"><div class="icon icon-blue">🌌</div>Czym zajmuje się fizyka?</div>
-    <p><b>Fizyka</b> to nauka przyrodnicza, która bada <b>materię, energię</b> i zjawiska zachodzące w przyrodzie — od ruchu ciał, przez światło i dźwięk, po elektryczność, magnetyzm, ciepło i budowę materii.</p>
-    <p class="ua">Фізика — наука, яка досліджує матерію, енергію та явища природи.</p>
-    <p style="margin-top:10px;">Fizyk stara się odpowiedzieć na pytania: <i>dlaczego</i> coś się dzieje i <i>jak</i> to opisać za pomocą liczb i praw.</p>
-  </div>
-
-  <div class="card">
-    <div class="card-title"><div class="icon icon-purple">🧩</div>Działy fizyki</div>
-    <div class="rules-grid">
-      <div class="rule-box blue"><div class="rule-title blue">Mechanika</div><div class="rule-text">ruch ciał, siły, prędkość <span class="ua">(рух тіл, сили)</span></div></div>
-      <div class="rule-box teal"><div class="rule-title teal">Optyka</div><div class="rule-text">światło, odbicie, załamanie <span class="ua">(світло)</span></div></div>
-      <div class="rule-box orange"><div class="rule-title orange">Termodynamika</div><div class="rule-text">ciepło, temperatura <span class="ua">(тепло)</span></div></div>
-      <div class="rule-box purple"><div class="rule-title purple">Elektryczność i magnetyzm</div><div class="rule-text">prąd, pole magnetyczne <span class="ua">(струм, магнетизм)</span></div></div>
-      <div class="rule-box pink"><div class="rule-title pink">Akustyka</div><div class="rule-text">dźwięk i drgania <span class="ua">(звук)</span></div></div>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-title"><div class="icon icon-teal">🔍</div>Obserwacja, pomiar, doświadczenie</div>
-    <p>Fizyka opiera się na <b>obserwacji</b> zjawisk, <b>pomiarze</b> wielkości fizycznych i <b>doświadczeniu</b>, które sprawdza, czy przewidywania są prawdziwe. Fizyka jest ściśle powiązana z matematyką — prawa fizyczne zapisuje się często jako wzory.</p>
-    <div class="trick-box">
-      <div class="trick-title">💡 Zapamiętaj</div>
-      <div class="trick-text">Obserwacja → pytanie → hipoteza → doświadczenie → wniosek. To jest tzw. <b>metoda naukowa</b> <span class="ua">(науковий метод)</span>, z której korzysta fizyka i inne nauki przyrodnicze (chemia, biologia, astronomia).</div>
-    </div>
-  </div>
-
+<div class="hero">
+  <div class="badge">🔬 Fizyka · Rozdział I · Kartkówka</div>
+  <h1>Pierwsze spotkanie z fizyką<br>10 тем, уроки 1–3</h1>
+  <p>Czym zajmuje się fizyka · Wielkości, jednostki i pomiary · Jak przeprowadzać doświadczenia</p>
 </div>
 
-<!-- ============ TEORIA 2 ============ -->
-<div class="section" id="teoria2">
-
-  <div class="card">
-    <div class="card-title"><div class="icon icon-blue">📏</div>Co to jest wielkość fizyczna?</div>
-    <p><b>Wielkość fizyczna</b> to cecha ciała lub zjawiska, którą można <b>zmierzyć</b> i wyrazić liczbą z jednostką. Np. długość, masa, czas, temperatura, prędkość.</p>
-    <p class="ua">Фізична величина — це те, що можна виміряти і виразити числом з одиницею (довжина, маса, час...).</p>
-    <p style="margin-top:10px;">Wynik pomiaru zawsze zapisujemy jako: <b>liczba + jednostka</b>, np. <b>1,5 m</b>, <b>250 g</b>, <b>12 s</b>. Sama liczba bez jednostki nie ma sensu fizycznego!</p>
-  </div>
-
-  <div class="card">
-    <div class="card-title"><div class="icon icon-purple">⚖️</div>Podstawowe wielkości i jednostki (układ SI)</div>
-    <div class="table-wrap">
-    <table class="units">
-      <tr><th>Wielkość</th><th>Jednostka</th><th>Symbol</th><th>Przyrząd</th></tr>
-      <tr><td>Długość <span class="ua">довжина</span></td><td>metr</td><td class="sym">m</td><td>linijka, taśma miernicza</td></tr>
-      <tr><td>Masa <span class="ua">маса</span></td><td>kilogram</td><td class="sym">kg</td><td>waga</td></tr>
-      <tr><td>Czas <span class="ua">час</span></td><td>sekunda</td><td class="sym">s</td><td>stoper, zegar</td></tr>
-      <tr><td>Temperatura <span class="ua">температура</span></td><td>kelwin (w szkole często °C)</td><td class="sym">K, °C</td><td>termometr</td></tr>
-      <tr><td>Natężenie prądu <span class="ua">сила струму</span></td><td>amper</td><td class="sym">A</td><td>amperomierz</td></tr>
-      <tr><td>Liczność materii</td><td>mol</td><td class="sym">mol</td><td>—</td></tr>
-      <tr><td>Światłość</td><td>kandela</td><td class="sym">cd</td><td>—</td></tr>
-    </table>
-    </div>
-    <p style="margin-top:10px;">Z jednostek podstawowych powstają <b>jednostki pochodne</b>, np. prędkość — <b>m/s</b>, pole powierzchni — <b>m²</b>, objętość — <b>m³</b>, gęstość — <b>kg/m³</b>.</p>
-  </div>
-
-  <div class="card">
-    <div class="card-title"><div class="icon icon-orange">🔁</div>Przedrostki jednostek</div>
-    <div class="rules-grid">
-      <div class="rule-box blue"><div class="rule-title blue">kilo- (k)</div><div class="rule-text">×1000, np. 1 km = 1000 m; 1 kg = 1000 g</div></div>
-      <div class="rule-box teal"><div class="rule-title teal">centy- (c)</div><div class="rule-text">×0,01, np. 1 cm = 0,01 m</div></div>
-      <div class="rule-box purple"><div class="rule-title purple">mili- (m)</div><div class="rule-text">×0,001, np. 1 mm = 0,001 m</div></div>
-      <div class="rule-box orange"><div class="rule-title orange">Zamiana</div><div class="rule-text">2,5 km = 2500 m<br>350 g = 0,35 kg</div></div>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-title"><div class="icon icon-pink">🎯</div>Dokładność pomiaru</div>
-    <p>Każdy pomiar ma pewną <b>dokładność</b> — zależy od przyrządu (np. linijka mierzy z dokładnością do 1 mm). Wynik pomiaru różni się nieco od wartości rzeczywistej — to <b>niepewność pomiarowa</b>.</p>
-    <p class="ua">Точність вимірювання залежить від приладу; результат завжди трохи відрізняється від справжнього значення.</p>
-    <div class="trick-box">
-      <div class="trick-title">💡 Zapamiętaj</div>
-      <div class="trick-text">Im dokładniejszy przyrząd, tym mniejsza niepewność pomiaru. Pomiar warto powtórzyć kilka razy i obliczyć <b>średnią</b>.</div>
-    </div>
-  </div>
+<div class="topic-grid" id="topic-grid"></div>
+<div class="itabs" id="itabs"></div>
+<div id="content"></div>
 
 </div>
-
-<!-- ============ TEORIA 3 ============ -->
-<div class="section" id="teoria3">
-
-  <div class="card">
-    <div class="card-title"><div class="icon icon-purple">🧪</div>Etapy doświadczenia</div>
-    <ol class="steps">
-      <li><b>Problem badawczy / pytanie</b> — co chcemy sprawdzić? <span class="ua">(дослідницьке питання)</span></li>
-      <li><b>Hipoteza</b> — nasze przypuszczenie, co się stanie <span class="ua">(гіпотеза)</span></li>
-      <li><b>Plan doświadczenia</b> — dobór przyrządów i sposobu pomiaru</li>
-      <li><b>Przeprowadzenie doświadczenia</b> — wykonanie pomiarów</li>
-      <li><b>Obserwacje i zapis wyników</b> — najlepiej w tabeli</li>
-      <li><b>Wnioski</b> — czy hipoteza się potwierdziła? <span class="ua">(висновок)</span></li>
-    </ol>
-  </div>
-
-  <div class="card">
-    <div class="card-title"><div class="icon icon-blue">🎛️</div>Zmienne w doświadczeniu</div>
-    <div class="rules-grid">
-      <div class="rule-box blue"><div class="rule-title blue">Zmienna niezależna</div><div class="rule-text">to, co <b>sami zmieniamy</b> w doświadczeniu, np. długość wahadła</div></div>
-      <div class="rule-box teal"><div class="rule-title teal">Zmienna zależna</div><div class="rule-text">to, co <b>mierzymy</b> i co się zmienia w wyniku, np. czas wahnięcia</div></div>
-      <div class="rule-box orange"><div class="rule-title orange">Warunki kontrolowane</div><div class="rule-text">to, co musi <b>zostać takie samo</b>, aby wynik był wiarygodny</div></div>
-    </div>
-    <p class="ua" style="margin-top:10px;">Незалежна змінна — те, що ми самі змінюємо; залежна — те, що вимірюємо; контрольовані умови — те, що має лишатися однаковим.</p>
-  </div>
-
-  <div class="card">
-    <div class="card-title"><div class="icon icon-teal">📋</div>Sprawozdanie z doświadczenia</div>
-    <p>Dobre sprawozdanie zawiera: <b>cel</b>, <b>hipotezę</b>, <b>listę przyrządów i materiałów</b>, <b>opis przebiegu</b>, <b>tabelę wyników</b> oraz <b>wniosek</b>.</p>
-    <div class="trick-box">
-      <div class="trick-title">💡 Przykład</div>
-      <div class="trick-text">Cel: sprawdzić, czy masa ciała wpływa na czas jego spadania.<br>Hipoteza: masa nie wpływa na czas spadania.<br>Przebieg: upuszczamy z tej samej wysokości kulki tej samej wielkości, ale o różnej masie (np. plastelinową i stalową), i mierzymy czas stoperem. Pomiar powtarzamy kilka razy.<br>Wniosek: porównujemy zmierzone czasy z hipotezą.</div>
-    </div>
-  </div>
-
-</div>
-
-<!-- ============ TEST ============ -->
-<div class="section" id="test">
-
-  <div class="quiz-header">
-    <h2>📝 Test: Fizyka — start!</h2>
-    <p>18 pytań • Sprawdź się przed kartkówką!</p>
-  </div>
-
-  <div class="quiz-progress">
-    <div class="progress-bar-wrap"><div class="progress-bar" id="progressBar" style="width:0%"></div></div>
-    <div class="progress-text" id="progressText">0 / 18</div>
-    <div style="font-weight:700;font-size:.9rem;color:var(--teal);" id="scoreText">✅ 0</div>
-  </div>
-
-  <div id="quizContainer"></div>
-
-  <div class="results-card" id="resultsCard">
-    <div class="results-emoji" id="resultsEmoji">🎉</div>
-    <div class="results-score" id="resultsScore">0/18</div>
-    <div class="results-label">Twój wynik</div>
-    <div class="results-msg" id="resultsMsg"></div>
-    <button class="retry-btn" onclick="restartQuiz()">🔄 Spróbuj jeszcze raz</button>
-    <button class="retry-btn" onclick="showSection('teoria1')" style="background:linear-gradient(135deg,#0d9488,#0f766e)">📖 Wróć do teorii</button>
-  </div>
-
-</div>
-
-</div><!-- end main -->
-
 <script>
-function showSection(id) {
-  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-  const tabs = ['teoria1','teoria2','teoria3','test'];
-  const tabEls = document.querySelectorAll('.tab');
-  const idx = tabs.indexOf(id);
-  if (idx >= 0) tabEls[idx].classList.add('active');
-  window.scrollTo({top:0, behavior:'smooth'});
-  if (id === 'test' && !quizStarted) initQuiz();
-}
+const C={
+  t1:{c:'#2563eb',bg:'#dbeafe',d:'#1d4ed8'},
+  t2:{c:'#059669',bg:'#d1fae5',d:'#065f46'},
+  t3:{c:'#7c3aed',bg:'#ede9fe',d:'#5b21b6'},
+  t4:{c:'#dc2626',bg:'#fee2e2',d:'#991b1b'},
+  t5:{c:'#d97706',bg:'#fef3c7',d:'#92400e'},
+  t6:{c:'#0891b2',bg:'#cffafe',d:'#164e63'},
+  t7:{c:'#be185d',bg:'#fce7f3',d:'#9d174d'},
+  t8:{c:'#4f46e5',bg:'#e0e7ff',d:'#3730a3'},
+  t9:{c:'#0d9488',bg:'#ccfbf1',d:'#115e59'},
+  t10:{c:'#ea580c',bg:'#ffedd5',d:'#9a3412'},
+};
 
-const bank = [
-  { cat:"Czym jest fizyka", q:"Co bada fizyka?", opts:["Tylko żywe organizmy","Materię, energię i zjawiska przyrody","Tylko liczby i wzory","Tylko historię wynalazków"], ans:1 },
-  { cat:"Czym jest fizyka", q:"Który dział fizyki zajmuje się ruchem ciał i siłami?", opts:["Optyka","Akustyka","Mechanika","Termodynamika"], ans:2 },
-  { cat:"Czym jest fizyka", q:"Który dział fizyki bada światło?", opts:["Mechanika","Optyka","Elektryczność","Akustyka"], ans:1 },
-  { cat:"Czym jest fizyka", q:"Który dział fizyki zajmuje się ciepłem i temperaturą?", opts:["Termodynamika","Akustyka","Optyka","Mechanika"], ans:0 },
-  { cat:"Czym jest fizyka", q:"Co to jest metoda naukowa?", opts:["Zgadywanie odpowiedzi","Obserwacja → hipoteza → doświadczenie → wniosek","Uczenie się wzorów na pamięć","Czytanie podręcznika"], ans:1 },
-  { cat:"Czym jest fizyka", q:"Z jaką nauką fizyka jest najściślej powiązana przy zapisie praw?", opts:["Historią","Geografią","Matematyką","Plastyką"], ans:2 },
-  { cat:"Wielkości i pomiary", q:"Co to jest wielkość fizyczna?", opts:["Dowolne słowo w fizyce","Cecha, którą można zmierzyć i wyrazić liczbą z jednostką","Nazwa przyrządu pomiarowego","Rodzaj doświadczenia"], ans:1 },
-  { cat:"Wielkości i pomiary", q:"Jaka jest podstawowa jednostka długości w układzie SI?", opts:["Kilogram","Sekunda","Metr","Kelwin"], ans:2 },
-  { cat:"Wielkości i pomiary", q:"Jaka jest podstawowa jednostka masy w układzie SI?", opts:["Gram","Kilogram","Metr","Tona"], ans:1 },
-  { cat:"Wielkości i pomiary", q:"Jaka jest podstawowa jednostka czasu w układzie SI?", opts:["Minuta","Godzina","Sekunda","Doba"], ans:2 },
-  { cat:"Wielkości i pomiary", q:"Jakim przyrządem mierzymy masę ciała?", opts:["Linijką","Stoperem","Wagą","Termometrem"], ans:2 },
-  { cat:"Wielkości i pomiary", q:"Jakim przyrządem mierzymy czas trwania zjawiska?", opts:["Wagą","Stoperem","Linijką","Amperomierzem"], ans:1 },
-  { cat:"Wielkości i pomiary", q:"Ile metrów ma 1 kilometr?", opts:["10 m","100 m","1000 m","10000 m"], ans:2 },
-  { cat:"Wielkości i pomiary", q:"Ile gramów ma 1 kilogram?", opts:["10 g","100 g","1000 g","10000 g"], ans:2 },
-  { cat:"Wielkości i pomiary", q:"Wynik pomiaru zawsze zapisujemy jako:", opts:["Samą liczbę","Liczbę i jednostkę","Sam wzór","Nazwę przyrządu"], ans:1 },
-  { cat:"Doświadczenie", q:"Co to jest hipoteza?", opts:["Zapis wyników w tabeli","Nasze przypuszczenie, co się stanie","Nazwa przyrządu","Ostateczny wniosek"], ans:1 },
-  { cat:"Doświadczenie", q:"Co to jest zmienna niezależna w doświadczeniu?", opts:["To, co mierzymy na końcu","To, co sami zmieniamy w doświadczeniu","To, co musi zostać stałe","Błąd pomiaru"], ans:1 },
-  { cat:"Doświadczenie", q:"Które z poniższych NIE jest etapem doświadczenia?", opts:["Postawienie hipotezy","Zapis wyników","Losowe zgadywanie odpowiedzi","Wyciągnięcie wniosków"], ans:2 },
+const TOPICS=[
+{id:'t1',ico:'🌌',num:'Lekcja 1 · Temat 1',name:'Czym zajmuje się fizyka',
+theory:{
+  summary:'Fizyka to nauka przyrodnicza. Szuka odpowiedzi na pytania „jak?” i „dlaczego?” i opisuje świat za pomocą praw. (Фізика — наука про закони природи.)',
+  blocks:[
+    {t:'t1',h:'Definicja fizyki',items:['Fizyka to nauka, która bada i wyjaśnia podstawowe PRAWA PRZYRODY, ZJAWISKA zachodzące w przyrodzie oraz WŁAŚCIWOŚCI MATERII','Fizyk pyta: jak i dlaczego coś się dzieje?','Fizyka należy do nauk przyrodniczych (obok chemii, biologii, astronomii)','Inne nauki (np. biologia, chemia) korzystają z odkryć fizyki','Prawa fizyki zapisuje się często wzorami']},
+    {t:'t1',h:'Dym z komina: kto o co pyta?',items:['FIZYK: dlaczego dym unosi się w górę? Czy można zdobyć energię bez spalania węgla?','CHEMIK: skąd się bierze dym? Jakie reakcje chemiczne go tworzą?','BIOLOG: jak wdychanie dymu wpływa na organizm?','EKOLOG: jak chronić środowisko przed zanieczyszczeniem?','Ten sam obiekt, ale każda nauka pyta o co innego']},
+    {t:'t1',h:'Zjawisko fizyczne',items:['Zjawisko fizyczne — zmiana zachodząca w otaczającym nas świecie','Przykłady: spadanie kamienia, tęcza, grzmot, topnienie lodu, odbicie w lustrze','Fizyk bada, od czego zjawisko zależy (jakie czynniki na nie wpływają)','Szuka reguł, według których zjawisko przebiega','Zjawiska opisujemy liczbami: wielkościami fizycznymi (lekcja 2)']},
+    {t:'t1',h:'Po co nam fizyka',items:['Telefony, samoloty, okulary, laser w medycynie: wszystko opiera się na prawach fizyki','Znajomość praw pozwala budować maszyny i planować np. lot na Księżyc','Polskie zespoły studentów wygrywają zawody łazików University Rover Challenge','Odkrycia fizyki dają podstawy technice i innym naukom','Nie da się budować nowoczesnych urządzeń bez znajomości fizyki']},
+  ],
+  formulas:`<strong>Fizyka</strong> = nauka o prawach przyrody, zjawiskach w przyrodzie i właściwościach materii.<br><strong>Metody:</strong> obserwacja, doświadczenie, pomiar.<br><strong>Pytanie fizyka:</strong> dlaczego tak się dzieje i od czego to zależy?<br>Chemik pyta o reakcje i skład, biolog o organizmy, ekolog o ochronę środowiska.`,
+},
+examples:[
+  {q:'Dym unosi się nad kominem. Które pytanie zada FIZYK?',steps:['Fizyk bada zjawiska i ich przyczyny','Pytanie o to, dlaczego dym unosi się w górę, dotyczy samego zjawiska','Pytanie o reakcje chemiczne zada chemik, o wpływ na zdrowie biolog, o ochronę środowiska ekolog'],ans:'Dlaczego dym unosi się w górę?'},
+  {q:'Dokończ zdanie: Fizyka to nauka, która bada...',steps:['Pamiętaj trzy elementy: prawa, zjawiska, materia','Zapisujemy je w jednym zdaniu'],ans:'...podstawowe prawa przyrody, zjawiska zachodzące w przyrodzie oraz właściwości materii'},
+  {q:'Podaj trzy przykłady zjawisk fizycznych z życia.',steps:['Szukamy zmian zachodzących wokół nas','Np. spadanie kamienia, tęcza, topnienie lodu'],ans:'Spadanie kamienia, tęcza, topnienie lodu (także grzmot, odbicie w lustrze)'},
+],
+flashcards:[
+  {q:'Czym zajmuje się fizyka?',a:'Bada i wyjaśnia <strong>podstawowe prawa przyrody</strong>, <strong>zjawiska</strong> zachodzące w przyrodzie oraz <strong>właściwości materii</strong>.'},
+  {q:'Podaj przykłady nauk przyrodniczych.',a:'<strong>Fizyka, chemia, biologia, astronomia</strong> (także geografia). Wszystkie badają przyrodę, ale każda inny jej aspekt.'},
+  {q:'Kto i o co pyta, patrząc na dym z komina?',a:'<strong>Fizyk</strong>: dlaczego dym się unosi? <strong>Chemik</strong>: jakie reakcje go tworzą? <strong>Biolog</strong>: jak dym wpływa na organizm? <strong>Ekolog</strong>: jak chronić środowisko?'},
+  {q:'Czym jest zjawisko fizyczne?',a:'Zmianą zachodzącą w otaczającym nas świecie, np. <strong>spadanie ciała, tęcza, grzmot, topnienie lodu</strong>.'},
+  {q:'Dlaczego fizyka jest ważna dla techniki?',a:'Znajomość <strong>praw fizyki</strong> pozwala konstruować urządzenia: telefony, samoloty, lasery, okulary, silniki.'},
+  {q:'Jakie metody badawcze stosuje fizyka?',a:'<strong>Obserwację, doświadczenie i pomiar.</strong> Na ich podstawie formułuje się prawa fizyczne.'},
+],
+quiz:[
+  {q:'Co bada fizyka?',opts:['Wyłącznie organizmy żywe','Prawa przyrody, zjawiska i właściwości materii','Tylko reakcje chemiczne','Historię wynalazków'],a:1,hint:'Trzy elementy definicji',expl:'Fizyka bada <strong>podstawowe prawa przyrody, zjawiska zachodzące w przyrodzie i właściwości materii</strong>.'},
+  {q:'Które pytanie o dym z komina zada FIZYK?',opts:['Jakie reakcje chemiczne tworzą dym?','Jak dym wpływa na zdrowie człowieka?','Dlaczego dym unosi się w górę?','Jak chronić środowisko przed zanieczyszczeniem?'],a:2,hint:'Fizyk pyta o zjawisko i jego przyczynę',expl:'Fizyka bada <strong>zjawiska</strong>. Pytania o reakcje (chemik), zdrowie (biolog) i ochronę środowiska (ekolog) należą do innych nauk.'},
+  {q:'Kto zada pytanie „Jak wdychanie dymu wpływa na funkcje organizmu?”',opts:['Fizyk','Chemik','Biolog','Astronom'],a:2,hint:'Organizm = nauka o życiu',expl:'To pytanie o organizm żywy, więc zada je <strong>biolog</strong>.'},
+  {q:'Kto zada pytanie „Jak chronić środowisko przed zanieczyszczeniem dymem?”',opts:['Ekolog','Fizyk','Matematyk','Geolog'],a:0,hint:'Ochrona środowiska',expl:'O ochronę środowiska pyta <strong>ekolog</strong>.'},
+  {q:'Do jakiej grupy nauk należy fizyka?',opts:['Humanistycznych','Przyrodniczych','Artystycznych','Społecznych'],a:1,hint:'Obok chemii, biologii i astronomii',expl:'Fizyka jest nauką <strong>przyrodniczą</strong>.'},
+  {q:'Które z poniższych jest zjawiskiem fizycznym?',opts:['Napisanie zadania w zeszycie','Spadanie kamienia','Kupienie biletu','Nazwanie przedmiotu'],a:1,hint:'To zmiana zachodząca w przyrodzie',expl:'<strong>Spadanie kamienia</strong> to zjawisko fizyczne: zmiana zachodząca w przyrodzie.'},
+  {q:'Jakie metody badawcze stosuje fizyka?',opts:['Tylko zgadywanie','Obserwację, doświadczenie i pomiar','Wyłącznie czytanie książek','Tylko rysowanie'],a:1,hint:'Trzy podstawowe narzędzia badawcze',expl:'Podstawą fizyki są <strong>obserwacje, doświadczenia i pomiary</strong>.'},
+  {q:'Dlaczego znajomość praw fizyki jest ważna?',opts:['Pozwala budować i ulepszać urządzenia, np. samoloty, lasery, telefony','Zastępuje wszystkie inne nauki','Nie ma praktycznego znaczenia','Służy tylko do nauki w szkole'],a:0,hint:'Technika opiera się na fizyce',expl:'Prawa fizyki są <strong>podstawą techniki</strong>: dzięki nim powstają urządzenia, które wykorzystujemy na co dzień.'},
+]},
+
+{id:'t2',ico:'🚲',num:'Lekcja 1 · Temat 2',name:'Ciało fizyczne i substancja',
+theory:{
+  summary:'Dwa pojęcia, które łatwo pomylić: CIAŁO FIZYCZNE (przedmiot) i SUBSTANCJA (materiał, z którego jest zrobione). (Фізичне тіло і речовина.)',
+  blocks:[
+    {t:'t2',h:'Definicje',items:['Ciało fizyczne to każdy przedmiot lub organizm żywy stanowiący obiekt zainteresowania fizyki','Substancja to materiał, z którego zbudowane jest ciało fizyczne','Ciało odpowiada na pytanie „CO to jest?”','Substancja odpowiada na pytanie „Z CZEGO to jest?”','Ciałem fizycznym bywa też organizm żywy (drzewo, kangur)']},
+    {t:'t2',h:'Przykłady ciał fizycznych',items:['rower, książka, śruba, piłka, gumka recepturka','Ziemia (planeta też jest ciałem fizycznym)','drzewo, człowiek, skaczący kangur (organizmy żywe)','kubek, długopis, stół, samochód','Ciało ma kształt i granice, można je pokazać palcem']},
+    {t:'t2',h:'Przykłady substancji',items:['żelazo, miedź, aluminium','drewno, papier, guma','plastelina, szkło, plastik','woda, olej, powietrze','Substancja to „tworzywo”, nie konkretny przedmiot']},
+    {t:'t2',h:'Jak nie pomylić',items:['Śruba (ciało) jest zrobiona z żelaza (substancja)','Książka (ciało) jest zrobiona z papieru (substancja)','Jedno ciało może składać się z kilku substancji (rower: metal, guma, plastik)','Z jednej substancji można zrobić wiele ciał (żelazo: śruba, gwóźdź, nożyczki)','Uwaga: „woda” na liście to substancja, a „kropla wody” lub „jezioro” to już ciało']},
+  ],
+  formulas:`<strong>Ciało fizyczne</strong> = przedmiot lub organizm (rower, książka, śruba, drzewo, Ziemia).<br><strong>Substancja</strong> = materiał (żelazo, papier, drewno, plastelina, woda).<br>Pytanie kontrolne: „CO to jest?” → ciało. „Z CZEGO to jest?” → substancja.`,
+},
+examples:[
+  {q:'Przyporządkuj słowa: żelazo, rower, książka, papier, plastelina, drzewo, drewno, Ziemia, śruba, woda.',steps:['Pytamy o każde słowo: czy to przedmiot/organizm (ciało), czy materiał (substancja)?','Ciała: rower, książka, drzewo, Ziemia, śruba','Substancje: żelazo, papier, plastelina, drewno, woda'],ans:'Ciała: rower, książka, drzewo, Ziemia, śruba. Substancje: żelazo, papier, plastelina, drewno, woda'},
+  {q:'Śruba jest zrobiona z żelaza. Które słowo oznacza ciało, a które substancję?',steps:['Śruba to konkretny przedmiot','Żelazo to materiał, z którego ją zrobiono'],ans:'Ciało: śruba. Substancja: żelazo'},
+  {q:'Z jakiej substancji składa się książka?',steps:['Książka to ciało fizyczne','Jej kartki są zrobione z papieru'],ans:'Z papieru (substancja)'},
+],
+flashcards:[
+  {q:'Co to jest ciało fizyczne?',a:'Każdy <strong>przedmiot lub organizm żywy</strong>, który jest obiektem zainteresowania fizyki. Np. piłka, rower, drzewo, kangur, Ziemia.'},
+  {q:'Co to jest substancja?',a:'<strong>Materiał, z którego zbudowane jest ciało fizyczne.</strong> Np. żelazo, drewno, papier, plastelina.'},
+  {q:'Jak szybko odróżnić ciało od substancji?',a:'Zapytaj: „<strong>CO to jest?</strong>” (przedmiot → ciało) albo „<strong>Z CZEGO to jest?</strong>” (materiał → substancja).'},
+  {q:'Czy drzewo to ciało fizyczne?',a:'<strong>Tak.</strong> Ciałem fizycznym jest też organizm żywy. A drewno, z którego jest zbudowane, to substancja.'},
+  {q:'Podaj przykład jednej substancji i trzech ciał z niej zrobionych.',a:'Substancja: <strong>żelazo</strong>. Ciała: śruba, gwóźdź, nożyczki.'},
+  {q:'Czy Ziemia to ciało fizyczne?',a:'<strong>Tak.</strong> Planeta Ziemia jest ciałem fizycznym (a skały czy woda, z których się składa, to substancje).'},
+],
+quiz:[
+  {q:'Które słowo oznacza CIAŁO fizyczne?',opts:['Żelazo','Rower','Drewno','Papier'],a:1,hint:'Szukamy przedmiotu',expl:'<strong>Rower</strong> to przedmiot, czyli ciało fizyczne. Żelazo, drewno i papier to substancje.'},
+  {q:'Które słowo oznacza SUBSTANCJĘ?',opts:['Śruba','Książka','Plastelina','Ziemia'],a:2,hint:'Szukamy materiału',expl:'<strong>Plastelina</strong> to materiał (substancja). Śruba, książka i Ziemia to ciała.'},
+  {q:'Substancją jest:',opts:['Drzewo','Drewno','Rower','Książka'],a:1,hint:'Z czego zbudowane jest drzewo?',expl:'<strong>Drewno</strong> to substancja, a drzewo to ciało fizyczne (organizm).'},
+  {q:'Ciałem fizycznym jest:',opts:['Papier','Woda','Żelazo','Śruba'],a:3,hint:'Konkretny przedmiot',expl:'<strong>Śruba</strong> to przedmiot. Papier, woda i żelazo to substancje.'},
+  {q:'Książka jest zrobiona z papieru. Papier to:',opts:['Ciało fizyczne','Substancja','Zjawisko fizyczne','Wielkość fizyczna'],a:1,hint:'Z czego jest zrobiona książka?',expl:'<strong>Papier</strong> to materiał, więc substancja.'},
+  {q:'Czy organizm żywy (np. kangur) może być ciałem fizycznym?',opts:['Tak, organizm żywy też jest ciałem fizycznym','Nie, ciała fizyczne to tylko przedmioty martwe','Tylko rośliny','Tylko jeśli się porusza szybko'],a:0,hint:'Wystarczy, że jest obiektem zainteresowania fizyki',expl:'Ciałem fizycznym jest <strong>każdy przedmiot lub organizm żywy</strong> badany przez fizykę.'},
+  {q:'Z jednej substancji (żelaza) można wykonać wiele:',opts:['Zjawisk','Ciał fizycznych','Wielkości','Praw przyrody'],a:1,hint:'Śruba, gwóźdź, nożyczki',expl:'Z jednej substancji można zrobić wiele <strong>ciał fizycznych</strong>.'},
+  {q:'Jakie pytanie pomaga rozpoznać SUBSTANCJĘ?',opts:['CO to jest?','Z CZEGO to jest zrobione?','Ile to waży?','Kiedy to powstało?'],a:1,hint:'Substancja to tworzywo',expl:'Substancję rozpoznasz pytaniem <strong>„Z czego to jest zrobione?”</strong>'},
+]},
+
+{id:'t3',ico:'🔭',num:'Lekcja 1 · Temat 3',name:'Obserwacja, doświadczenie i wielcy fizycy',
+theory:{
+  summary:'Fizyka poznaje świat dwoma sposobami: obserwuje zjawiska albo wywołuje je w doświadczeniu. Na tej podstawie odkryto prawa, bez których nie byłoby lasera, radia i lotów w kosmos.',
+  blocks:[
+    {t:'t3',h:'Obserwacja',items:['Obserwacja to oglądanie zjawiska BEZ wpływania na jego przebieg','Niektórych zjawisk nie da się wywołać ani powtórzyć: możemy je tylko obserwować','Przykłady: tornado, lawina, ruch planet, wygląd Księżyca na niebie','Notujemy to, co widzimy: opis, rysunek, zdjęcie, nagranie','Obserwacja pozwala zauważyć, jakie czynniki mogą mieć znaczenie']},
+    {t:'t3',h:'Doświadczenie (eksperyment)',items:['Doświadczenie to zjawisko wywołane PRZEZ NAS w kontrolowanych warunkach','Można je powtórzyć i zmienić jeden czynnik naraz','Przykład: upuszczanie ciał z tej samej wysokości i porównywanie czasu spadania','Pozwala wskazać, które czynniki naprawdę wpływają na zjawisko','Z obserwacji i doświadczeń formułuje się prawa fizyczne']},
+    {t:'t3',h:'Obserwacja czy doświadczenie? (zadanie z podręcznika)',items:['A. Nagranie lawiny wpadającej do jeziora i opis skutków = OBSERWACJA','B. Upuszczenie z tej samej wysokości piłki tenisowej i kartki papieru, porównanie czasu spadania = DOŚWIADCZENIE','C. Wkładanie różnych przedmiotów do miski z wodą i sprawdzanie, co pływa, a co tonie = DOŚWIADCZENIE','D. Rysowanie wyglądu Księżyca w zeszycie w pogodne noce = OBSERWACJA','Reguła: sami coś robimy i zmieniamy warunki → doświadczenie; tylko patrzymy → obserwacja']},
+    {t:'t3',h:'Co zawdzięczamy fizykom',items:['Isaac Newton (1643–1727): prawo powszechnego ciążenia i zasady dynamiki → loty na Księżyc, planowanie lotów, satelity','Albert Einstein (1879–1955): badania nad światłem i materią → laser (medycyna, odczyt danych, pomiar odległości)','James Clerk Maxwell (1831–1879): przewidział istnienie fal radiowych','Heinrich Hertz (1857–1894): w 1886 r. pierwsza próba nadania i odebrania fal radiowych','Thomas Newcomen i James Watt: silniki parowe (XVIII w.); dziś też silniki spalinowe, elektryczne i odrzutowe']},
+  ],
+  formulas:`<strong>Obserwacja</strong> = tylko patrzymy, nie wpływamy na zjawisko (lawina, Księżyc).<br><strong>Doświadczenie</strong> = sami wywołujemy zjawisko i możemy je powtarzać (upuszczanie piłki i kartki).<br><strong>Newton</strong> → ciążenie, <strong>Einstein</strong> → laser, <strong>Maxwell</strong> → przewidział fale radiowe, <strong>Hertz</strong> → pierwsze nadawanie fal (1886), <strong>Watt i Newcomen</strong> → silnik parowy.`,
+},
+examples:[
+  {q:'Nagrywasz lawinę spadającą do jeziora i opisujesz jej skutki. To obserwacja czy doświadczenie?',steps:['Lawiny nie wywołujemy sami','Tylko patrzymy i notujemy','Brak wpływu na przebieg zjawiska'],ans:'Obserwacja'},
+  {q:'Upuszczasz z tej samej wysokości piłkę tenisową i kartkę papieru i porównujesz czas spadania. Co to jest?',steps:['Sami wywołujemy zjawisko','Kontrolujemy warunki (ta sama wysokość)','Możemy to powtórzyć'],ans:'Doświadczenie'},
+  {q:'Który uczony przyczynił się do skonstruowania lasera?',steps:['Laser powstał dzięki badaniom nad oddziaływaniem światła z materią','Prowadził je Albert Einstein'],ans:'Albert Einstein'},
+  {q:'Uzupełnij: Podróż na Księżyc nie byłaby możliwa bez prac Isaaca ..., który sformułował prawo ...',steps:['Chodzi o angielskiego uczonego (1643–1727)','Jego odkrycie pomogło precyzyjnie zaplanować lot'],ans:'Isaaca Newtona; prawo powszechnego ciążenia'},
+],
+flashcards:[
+  {q:'Czym różni się obserwacja od doświadczenia?',a:'Przy <strong>obserwacji</strong> tylko patrzymy (nie wpływamy na zjawisko). W <strong>doświadczeniu</strong> sami wywołujemy zjawisko w kontrolowanych warunkach i możemy je powtarzać.'},
+  {q:'Podaj przykład zjawiska, które możemy tylko obserwować.',a:'<strong>Tornado, lawina, ruch planet, fazy Księżyca.</strong> Nie da się ich powtórzyć w laboratorium.'},
+  {q:'Co odkrył Isaac Newton?',a:'<strong>Prawo powszechnego ciążenia i zasady dynamiki.</strong> Dzięki nim możliwe są loty na Księżyc i użycie satelitów.'},
+  {q:'Czyim odkryciom zawdzięczamy laser?',a:'Badania <strong>Alberta Einsteina</strong> nad oddziaływaniem światła z materią doprowadziły do konstrukcji lasera.'},
+  {q:'Kto przewidział istnienie fal radiowych, a kto je pierwszy nadał i odebrał?',a:'Istnienie przewidział <strong>James Clerk Maxwell</strong>. Pierwszą próbę nadania i odbioru wykonał <strong>Heinrich Hertz</strong> w 1886 r.'},
+  {q:'Kto stworzył pierwsze silniki parowe?',a:'W XVIII w. dzięki doświadczeniom <strong>Thomasa Newcomena i Jamesa Watta</strong>.'},
+  {q:'Do czego służą fale radiowe?',a:'Do <strong>komunikacji na duże odległości</strong> (także z załogą statku kosmicznego) i do badania Wszechświata.'},
+],
+quiz:[
+  {q:'Rejestrowanie lawiny wpadającej do jeziora to:',opts:['Doświadczenie','Obserwacja','Pomiar masy','Prawo fizyczne'],a:1,hint:'Czy sami wywołujemy lawinę?',expl:'Lawiny nie wywołujemy, tylko ją opisujemy: to <strong>obserwacja</strong>.'},
+  {q:'Upuszczanie z tej samej wysokości piłki tenisowej i kartki papieru to:',opts:['Obserwacja','Doświadczenie','Zjawisko atmosferyczne','Substancja'],a:1,hint:'Sami wywołujemy i kontrolujemy warunki',expl:'To <strong>doświadczenie</strong>: sami wywołujemy zjawisko w kontrolowanych warunkach.'},
+  {q:'Rysowanie wyglądu Księżyca w pogodne noce to:',opts:['Doświadczenie','Obserwacja','Pomiar','Odkrycie prawa'],a:1,hint:'Tylko patrzymy na niebo',expl:'Na Księżyc nie wpływamy, więc to <strong>obserwacja</strong>.'},
+  {q:'Wkładanie różnych przedmiotów do wody i sprawdzanie, co pływa, to:',opts:['Obserwacja','Doświadczenie','Prawo przyrody','Wielkość fizyczna'],a:1,hint:'Sami wykonujemy próbę',expl:'Sami wywołujemy zjawisko i możemy je powtarzać: to <strong>doświadczenie</strong>.'},
+  {q:'Kto sformułował prawo powszechnego ciążenia?',opts:['Albert Einstein','Heinrich Hertz','Isaac Newton','James Watt'],a:2,hint:'Dzięki niemu planuje się loty na Księżyc',expl:'Prawo powszechnego ciążenia sformułował <strong>Isaac Newton</strong>.'},
+  {q:'Badania którego uczonego przyczyniły się do powstania lasera?',opts:['Isaaca Newtona','Alberta Einsteina','Jamesa Watta','Heinricha Hertza'],a:1,hint:'Światło i materia',expl:'Do lasera przyczyniły się badania <strong>Alberta Einsteina</strong>.'},
+  {q:'Kto przewidział istnienie fal radiowych?',opts:['James Clerk Maxwell','Thomas Newcomen','Isaac Newton','Albert Einstein'],a:0,hint:'Szkocki uczony (1831–1879)',expl:'Istnienie fal radiowych przewidział <strong>James Clerk Maxwell</strong>, a Hertz próbował je nadać w 1886 r.'},
+  {q:'Pierwsze silniki parowe powstały w:',opts:['XVIII wieku','XX wieku','XV wieku','XXI wieku'],a:0,hint:'Newcomen i Watt',expl:'Pierwsze silniki parowe skonstruowano w <strong>XVIII wieku</strong>.'},
+]},
+
+{id:'t4',ico:'📏',num:'Lekcja 2 · Temat 4',name:'Wielkości fizyczne i pomiar',
+theory:{
+  summary:'Wielkość fizyczna to cecha, którą można zmierzyć i zapisać jako liczbę z jednostką. Pomiar to porównanie z wzorcem. (Фізична величина — те, що можна виміряти.)',
+  blocks:[
+    {t:'t4',h:'Co jest wielkością fizyczną',items:['Wielkość fizyczna to cecha ciała lub zjawiska wyrażona liczbą i jednostką','Przykłady: długość, masa, temperatura, czas, objętość, wysokość','NIE są wielkościami fizycznymi: zapach, smak, barwa, a także samo słowo „substancja”','Wielkości mierzymy, więc musi istnieć jednostka i przyrząd','Pomiary pozwalają opisać zjawisko dokładnie, nie „na oko”']},
+    {t:'t4',h:'Pomiar',items:['Pomiar jest porównaniem wartości mierzonej wielkości z jej wzorcem','Wzorzec to przyjęta jednostka (lub jej kopia)','Przykład: długość porównujemy z wzorcem metra (linijka, taśma)','Wynik pomiaru to ZAWSZE liczba z jednostką','Sama liczba bez jednostki nie ma sensu fizycznego']},
+    {t:'t4',h:'Jak zapisujemy wartość wielkości',items:['Schemat: oznaczenie wielkości = wartość jednostka','Przykłady: T = 20 °C (temperatura), m = 50 kg (masa), l = 1,2 m (długość)','Oznaczenia: t – czas (s), m – masa (kg), l – długość (m), T – temperatura','Ten sam symbol bywa używany dla różnych rzeczy: t (czas) i T (temperatura), m jako masa i m jako metr','W druku symbole wielkości piszemy kursywą, a jednostki zwykłym pismem']},
+    {t:'t4',h:'Pułapki i ciekawostki',items:['„Kilo pomarańczy” nie jest poprawne w fizyce: „kilo” to przedrostek, nie jednostka. Poprawnie: masa pomarańczy wynosi 1 kg','Dawniej mierzono łokciem, stopą, krokiem (mila = 1000 kroków); jednostki różniły się w zależności od kraju','Metr (Francja, XVIII w.): jedna dziesięciomilionowa część odległości od bieguna północnego do równika','Wzorzec kilograma (walec z platyny i irydu, 1 kg) leży w Sèvres pod Paryżem','Cal (inch) nie należy do SI: 1 cal = 2,54 cm, używany np. dla przekątnej ekranu']},
+  ],
+  formulas:`<strong>Wielkość fizyczna</strong> = da się zmierzyć (liczba + jednostka): długość, masa, czas, temperatura, objętość.<br><strong>Nie</strong> są wielkościami: zapach, smak, barwa.<br><strong>Pomiar</strong> = porównanie z wzorcem.<br><strong>Zapis:</strong> m = 50 kg → m (oznaczenie), 50 (wartość), kg (jednostka).`,
+},
+examples:[
+  {q:'Z listy wybierz wielkości fizyczne: objętość, zapach, temperatura, substancja, masa, smak, barwa, wysokość.',steps:['Sprawdzamy: czy da się to zmierzyć i podać liczbą z jednostką?','Objętość, temperatura, masa, wysokość: tak','Zapach, smak, barwa, substancja: nie'],ans:'Objętość, temperatura, masa, wysokość'},
+  {q:'Rozbierz zapis l = 3,5 cm na części.',steps:['l to oznaczenie wielkości (długość)','3,5 to wartość','cm to jednostka (przedrostek c- i metr)'],ans:'l – oznaczenie, 3,5 – wartość, cm – jednostka (c – przedrostek)'},
+  {q:'Wyjaśnij, dlaczego „kilo pomarańczy” nie jest poprawnym zapisem w fizyce.',steps:['„Kilo” to tylko przedrostek oznaczający 1000','Brak nazwy jednostki (gram)','Poprawnie: masa pomarańczy m = 1 kg'],ans:'Bo „kilo” jest przedrostkiem, a nie jednostką; poprawnie: 1 kg'},
+  {q:'Przekątna telewizora to 32 cale. Ile to centymetrów?',steps:['1 cal = 2,54 cm','32 · 2,54 = 81,28'],ans:'81,28 cm'},
+],
+flashcards:[
+  {q:'Co to jest wielkość fizyczna?',a:'Cecha ciała lub zjawiska, którą można <strong>zmierzyć</strong> i wyrazić <strong>liczbą z jednostką</strong>. Np. długość, masa, czas, temperatura.'},
+  {q:'Co to jest pomiar?',a:'<strong>Porównanie wartości mierzonej wielkości z jej wzorcem.</strong>'},
+  {q:'Które cechy NIE są wielkościami fizycznymi?',a:'<strong>Zapach, smak, barwa</strong> (oraz pojęcie „substancja”). Nie wyrażamy ich liczbą z jednostką.'},
+  {q:'Jak zapisujemy wartość wielkości fizycznej?',a:'<strong>oznaczenie = wartość jednostka</strong>, np. <strong>m = 50 kg</strong>, T = 20 °C, l = 1,2 m.'},
+  {q:'Dlaczego „kilo pomarańczy” jest niepoprawne?',a:'<strong>„Kilo” to przedrostek</strong> (×1000), nie jednostka. Poprawnie podajemy masę w kg: m = 1 kg.'},
+  {q:'Ile centymetrów ma 1 cal?',a:'<strong>1 cal = 2,54 cm.</strong> Cal to jednostka pozaukładowa, używana np. dla przekątnej ekranów.'},
+  {q:'Skąd pochodzi metr?',a:'W XVIII w. we Francji zdefiniowano go jako <strong>jedną dziesięciomilionową część odległości od bieguna północnego do równika</strong>.'},
+],
+quiz:[
+  {q:'Która z cech jest wielkością fizyczną?',opts:['Zapach','Masa','Smak','Barwa'],a:1,hint:'Da się zmierzyć i podać z jednostką',expl:'<strong>Masa</strong> jest wielkością fizyczną (kg). Zapach, smak i barwa nie mają jednostek.'},
+  {q:'Które z podanych NIE jest wielkością fizyczną?',opts:['Temperatura','Długość','Czas','Smak'],a:3,hint:'Nie da się go zmierzyć miarą',expl:'<strong>Smak</strong> nie jest wielkością fizyczną.'},
+  {q:'Pomiar to:',opts:['Zgadywanie wartości','Porównanie mierzonej wielkości z jej wzorcem','Zapis wzoru','Opis zjawiska słowami'],a:1,hint:'Definicja z podręcznika',expl:'Pomiar jest <strong>porównaniem wartości mierzonej wielkości z jej wzorcem</strong>.'},
+  {q:'W zapisie m = 50 kg WARTOŚCIĄ wielkości jest:',opts:['m','50','kg','m = 50'],a:1,hint:'Liczba bez jednostki',expl:'Wartość to <strong>50</strong>, jednostka to kg, a m to oznaczenie masy.'},
+  {q:'W zapisie l = 3,5 cm JEDNOSTKĄ jest:',opts:['l','3,5','cm','c'],a:2,hint:'Przedrostek + metr',expl:'Jednostką jest <strong>cm</strong> (centymetr); „c” to tylko przedrostek.'},
+  {q:'Dlaczego zwrot „kilo pomarańczy” nie jest poprawny w fizyce?',opts:['Bo pomarańcze nie mają masy','Bo „kilo” to przedrostek, a nie jednostka','Bo kilogram nie istnieje','Bo trzeba podać temperaturę'],a:1,hint:'Kilo = ×1000',expl:'„Kilo” jest <strong>przedrostkiem</strong>. Poprawnie: masa pomarańczy wynosi 1 kg.'},
+  {q:'Ile centymetrów ma 1 cal?',opts:['1 cm','2,54 cm','10 cm','25,4 cm'],a:1,hint:'Jednostka pozaukładowa',expl:'<strong>1 cal = 2,54 cm</strong>.'},
+  {q:'Wartość wielkości fizycznej podajemy zawsze:',opts:['Bez jednostki','Z jednostką','Tylko słownie','Tylko w minutach'],a:1,hint:'Liczba + jednostka',expl:'Wartość wielkości fizycznej zawsze podajemy <strong>wraz z jednostką</strong>.'},
+]},
+
+{id:'t5',ico:'🌍',num:'Lekcja 2 · Temat 5',name:'Układ SI i jednostki podstawowe',
+theory:{
+  summary:'SI to wspólny, międzynarodowy układ jednostek. Dzięki niemu naukowcy i producenci na całym świecie mierzą tak samo. (SI — міжнародна система одиниць.)',
+  blocks:[
+    {t:'t5',h:'Czym jest układ SI',items:['SI (Système International d’Unités) to Międzynarodowy Układ Jednostek','Przyjęto go, żeby wyniki pomiarów były takie same i zrozumiałe w każdym kraju','Ma 7 jednostek podstawowych; pozostałe tworzy się z nich (jednostki pochodne)','W szkole najczęściej używamy: metr, kilogram, sekunda, kelwin','Jednostki spoza SI (cal, mila, godzina, doba, litr) są dozwolone, ale trzeba umieć je przeliczyć']},
+    {t:'t5',h:'Jednostki podstawowe SI',items:['Długość: metr (m)','Masa: kilogram (kg)','Czas: sekunda (s)','Temperatura: kelwin (K)','Natężenie prądu: amper (A)','Światłość: kandela (cd)','Liczność materii: mol (mol)']},
+    {t:'t5',h:'Jednostki w życiu codziennym',items:['Czas: 1 min = 60 s, 1 h = 60 min = 3600 s, 1 doba = 24 h = 86 400 s','Masa: 1 t = 1000 kg, 1 kg = 1000 g, 1 dag = 10 g','Temperatura: w Polsce stopnie Celsjusza (°C), w SI kelwiny (K)','Jednostki masy w sklepie: gram, dekagram, kilogram','Ten sam pomiar można zapisać różnymi jednostkami: 0,5 m = 50 cm']},
+    {t:'t5',h:'Uwaga: co jest, a co nie jest jednostką SI',items:['Gram NIE jest jednostką podstawową SI: podstawowy jest KILOGRAM','Centymetr, milimetr i kilometr to jednostki z przedrostkami, pochodzą od metra','Godzina, minuta i doba nie należą do SI (podstawą jest sekunda)','Cal, mila, stopa to jednostki anglosaskie, nie SI','Przy zadaniach „podaj w jednostce SI” zamieniamy zawsze na m, kg, s, K']},
+  ],
+  formulas:`<strong>Podstawowe SI:</strong> długość – <span class="math">m</span>, masa – <span class="math">kg</span>, czas – <span class="math">s</span>, temperatura – <span class="math">K</span>, prąd – <span class="math">A</span>, światłość – <span class="math">cd</span>, liczność materii – <span class="math">mol</span>.<br><strong>Czas:</strong> 1 min = 60 s; 1 h = 3600 s; 1 doba = 86 400 s.<br><strong>Masa:</strong> 1 kg = 1000 g; 1 t = 1000 kg.`,
+},
+examples:[
+  {q:'Podaj jednostki SI: długości, masy, czasu i temperatury.',steps:['Długość: metr','Masa: kilogram (nie gram!)','Czas: sekunda','Temperatura: kelwin'],ans:'m, kg, s, K'},
+  {q:'Zamień 25 minut na sekundy (jednostka SI czasu).',steps:['1 min = 60 s','25 · 60 = 1500'],ans:'25 min = 1500 s'},
+  {q:'Zamień 1 godzinę i 1 dobę na sekundy.',steps:['1 h = 60 min = 60 · 60 s = 3600 s','1 doba = 24 h = 24 · 3600 s'],ans:'1 h = 3600 s; 1 doba = 86 400 s'},
+  {q:'Samochód waży 1,2 t. Ile to kilogramów?',steps:['1 t = 1000 kg','1,2 · 1000 = 1200'],ans:'1200 kg'},
+],
+flashcards:[
+  {q:'Co oznacza skrót SI?',a:'<strong>Międzynarodowy Układ Jednostek</strong> (Système International d’Unités).'},
+  {q:'Po co wprowadzono układ SI?',a:'Aby <strong>wyniki pomiarów były jednakowe i zrozumiałe na całym świecie</strong>.'},
+  {q:'Podaj jednostki podstawowe SI, których uczymy się w klasie 7.',a:'<strong>Długość – metr (m), masa – kilogram (kg), czas – sekunda (s), temperatura – kelwin (K).</strong>'},
+  {q:'Ile jest jednostek podstawowych SI i które pozostałe?',a:'<strong>Siedem.</strong> Oprócz m, kg, s, K są jeszcze: amper (A), kandela (cd), mol (mol).'},
+  {q:'Jaka jest jednostka masy w SI: gram czy kilogram?',a:'<strong>Kilogram (kg).</strong> Gram jest jednostką pochodną (1 g = 0,001 kg).'},
+  {q:'Ile sekund ma godzina, a ile doba?',a:'<strong>1 h = 3600 s. 1 doba = 86 400 s.</strong>'},
+  {q:'Jak zapisać temperaturę w SI?',a:'W <strong>kelwinach (K)</strong>. W życiu codziennym używamy stopni Celsjusza (°C).'},
+],
+quiz:[
+  {q:'Co oznacza skrót SI?',opts:['Szybki Układ','Międzynarodowy Układ Jednostek','Standardowa Informacja','System Impulsów'],a:1,hint:'Układ używany na całym świecie',expl:'SI = <strong>Międzynarodowy Układ Jednostek</strong>.'},
+  {q:'Jednostką masy w układzie SI jest:',opts:['gram','dekagram','kilogram','tona'],a:2,hint:'Tylko ta jednostka z przedrostkiem jest podstawowa',expl:'Podstawową jednostką masy w SI jest <strong>kilogram (kg)</strong>.'},
+  {q:'Jednostką długości w SI jest:',opts:['centymetr','metr','kilometr','cal'],a:1,hint:'Bez przedrostka',expl:'Podstawowa jednostka długości to <strong>metr (m)</strong>.'},
+  {q:'Jednostką czasu w SI jest:',opts:['minuta','godzina','sekunda','doba'],a:2,hint:'Najkrótsza z tych jednostek',expl:'Podstawowa jednostka czasu w SI to <strong>sekunda (s)</strong>.'},
+  {q:'Jednostką temperatury w SI jest:',opts:['°C','K','°F','cd'],a:1,hint:'Nazwa kończy się na -in',expl:'W SI temperaturę mierzymy w <strong>kelwinach (K)</strong>.'},
+  {q:'25 minut to w sekundach:',opts:['250 s','600 s','1500 s','2500 s'],a:2,hint:'25 · 60',expl:'25 · 60 = <strong>1500 s</strong>.'},
+  {q:'Ile sekund ma 1 doba?',opts:['3600 s','24 000 s','86 400 s','1440 s'],a:2,hint:'24 · 3600',expl:'24 · 3600 = <strong>86 400 s</strong>.'},
+  {q:'Które z jednostek NIE należą do jednostek podstawowych SI?',opts:['metr','kilogram','godzina','sekunda'],a:2,hint:'Godzina składa się z 3600 sekund',expl:'<strong>Godzina</strong> nie jest jednostką podstawową SI; podstawą jest sekunda.'},
+]},
+
+{id:'t6',ico:'🔄',num:'Lekcja 2 · Temat 6',name:'Przedrostki i zamiana jednostek',
+theory:{
+  summary:'Przedrostki skracają zapis bardzo dużych i bardzo małych liczb. Najważniejsze: kilo (×1000), centy (÷100), mili (÷1000). Zamiana jednostek to najczęstsze zadanie na kartkówce.',
+  blocks:[
+    {t:'t6',h:'Przedrostki',items:['giga G = 1 000 000 000 (miliard)','mega M = 1 000 000 (milion)','kilo k = 1000','hekto h = 100','deka da = 10','decy d = 0,1 (1/10)','centy c = 0,01 (1/100)','mili m = 0,001 (1/1000)','mikro µ = 0,000 001 (1/1 000 000)']},
+    {t:'t6',h:'Jak zamieniać (szybka metoda)',items:['Z większej jednostki na mniejszą → MNOŻYMY (liczba rośnie)','Z mniejszej jednostki na większą → DZIELIMY (liczba maleje)','Najpierw ustal: ile małych mieści się w dużej (np. 1 m = 100 cm)','Sprawdź sensowność: 2 m = 200 cm (dużo małych), a nie 0,02 cm','Wynik zawsze zapisz z nową jednostką']},
+    {t:'t6',h:'Najważniejsze zamiany',items:['Długość: 1 km = 1000 m; 1 m = 10 dm = 100 cm = 1000 mm','Masa: 1 t = 1000 kg; 1 kg = 100 dag = 1000 g; 1 g = 1000 mg','Czas: 1 h = 60 min; 1 min = 60 s','Przykłady: 50 cm = 0,5 m; 20 dm = 2 m; 0,1 km = 100 m','Przykłady: 50 dag = 0,5 kg; 1200 g = 1,2 kg; 4,5 t = 4500 kg']},
+    {t:'t6',h:'Typowe błędy',items:['Mylenie centy (c) z mili (m): 1 cm = 10 mm, ale 1 m = 1000 mm','Dzielenie zamiast mnożenia (i odwrotnie)','Zapominanie o tym, że 1 h = 60 min, a nie 100 min','Zamiana 1 dag na gramy: to 10 g, a nie 100 g','Zostawienie wyniku bez jednostki']},
+  ],
+  formulas:`<strong>Mnożymy:</strong> duża → mała (m → cm: ×100).<br><strong>Dzielimy:</strong> mała → duża (cm → m: ÷100).<br><span class="math">1 km = 1000 m</span> · <span class="math">1 m = 100 cm = 1000 mm</span><br><span class="math">1 t = 1000 kg</span> · <span class="math">1 kg = 1000 g</span> · <span class="math">1 dag = 10 g</span><br><span class="math">1 h = 60 min = 3600 s</span>`,
+},
+examples:[
+  {q:'Zamień 50 cm na metry.',steps:['1 m = 100 cm, czyli centymetr jest 100 razy mniejszy','Z małej na dużą: dzielimy','50 : 100 = 0,5'],ans:'0,5 m'},
+  {q:'Zamień 20 dm na metry.',steps:['1 m = 10 dm','20 : 10 = 2'],ans:'2 m'},
+  {q:'Zamień 0,1 km na metry.',steps:['1 km = 1000 m','Z dużej na małą: mnożymy','0,1 · 1000 = 100'],ans:'100 m'},
+  {q:'Zamień 1200 g na kilogramy.',steps:['1 kg = 1000 g','1200 : 1000 = 1,2'],ans:'1,2 kg'},
+  {q:'Zamień 4,5 t na kilogramy i 50 dag na kilogramy.',steps:['1 t = 1000 kg, więc 4,5 · 1000 = 4500','1 kg = 100 dag, więc 50 : 100 = 0,5'],ans:'4,5 t = 4500 kg; 50 dag = 0,5 kg'},
+  {q:'Zamień 3 min 20 s na sekundy.',steps:['3 min = 3 · 60 = 180 s','180 + 20 = 200'],ans:'200 s'},
+],
+flashcards:[
+  {q:'Ile wynosi przedrostek kilo, ile mili, a ile centy?',a:'<strong>kilo = 1000, mili = 0,001 (1/1000), centy = 0,01 (1/100).</strong>'},
+  {q:'Jak zamienić jednostkę większą na mniejszą?',a:'<strong>Mnożymy.</strong> Np. 2 m = 2 · 100 cm = 200 cm.'},
+  {q:'Jak zamienić jednostkę mniejszą na większą?',a:'<strong>Dzielimy.</strong> Np. 300 g = 300 : 1000 kg = 0,3 kg.'},
+  {q:'Ile milimetrów ma 1 metr?',a:'<strong>1000 mm.</strong> 1 m = 100 cm = 1000 mm.'},
+  {q:'Ile gramów ma 1 dekagram?',a:'<strong>10 g.</strong> 100 dag = 1 kg.'},
+  {q:'Co oznacza przedrostek mega i mikro?',a:'<strong>mega (M) = 1 000 000, mikro (µ) = 0,000 001</strong> (jedna milionowa).'},
+  {q:'Ile sekund jest w 1 godzinie?',a:'<strong>3600 s</strong> (60 min · 60 s).'},
+],
+quiz:[
+  {q:'50 cm to w metrach:',opts:['5 m','0,5 m','0,05 m','500 m'],a:1,hint:'1 m = 100 cm',expl:'50 : 100 = <strong>0,5 m</strong>.'},
+  {q:'20 dm to w metrach:',opts:['0,2 m','2 m','20 m','200 m'],a:1,hint:'1 m = 10 dm',expl:'20 : 10 = <strong>2 m</strong>.'},
+  {q:'0,1 km to w metrach:',opts:['1 m','10 m','100 m','1000 m'],a:2,hint:'1 km = 1000 m',expl:'0,1 · 1000 = <strong>100 m</strong>.'},
+  {q:'1200 g to w kilogramach:',opts:['0,12 kg','1,2 kg','12 kg','120 kg'],a:1,hint:'1 kg = 1000 g',expl:'1200 : 1000 = <strong>1,2 kg</strong>.'},
+  {q:'50 dag to w kilogramach:',opts:['0,05 kg','0,5 kg','5 kg','50 kg'],a:1,hint:'1 kg = 100 dag',expl:'50 : 100 = <strong>0,5 kg</strong>.'},
+  {q:'4,5 t to w kilogramach:',opts:['45 kg','450 kg','4500 kg','45 000 kg'],a:2,hint:'1 t = 1000 kg',expl:'4,5 · 1000 = <strong>4500 kg</strong>.'},
+  {q:'3 min 20 s to w sekundach:',opts:['80 s','200 s','320 s','3200 s'],a:1,hint:'3 · 60 + 20',expl:'180 + 20 = <strong>200 s</strong>.'},
+  {q:'Przedrostek „mili” oznacza:',opts:['×1000','×0,001','×0,01','×1 000 000'],a:1,hint:'Jedna tysięczna',expl:'Mili (m) = <strong>0,001</strong>, czyli jedna tysięczna.'},
+  {q:'Ile milimetrów ma 1 m?',opts:['10','100','1000','10 000'],a:2,hint:'1 m = 100 cm, a 1 cm = 10 mm',expl:'1 m = 100 cm = <strong>1000 mm</strong>.'},
+  {q:'Czas 45 min to w sekundach:',opts:['450 s','2700 s','4500 s','270 s'],a:1,hint:'45 · 60',expl:'45 · 60 = <strong>2700 s</strong>.'},
+]},
+
+{id:'t7',ico:'🎯',num:'Lekcja 3 · Temat 7',name:'Niepewność pomiarowa i dokładność',
+theory:{
+  summary:'Żaden pomiar nie jest idealnie dokładny. Wynik zależy od przyrządu, od nas i od warunków. Dlatego mówimy o niepewności pomiaru.',
+  blocks:[
+    {t:'t7',h:'Dlaczego pomiar nie jest dokładny',items:['Przyrząd ma ograniczoną dokładność (podziałka linijki co 1 mm)','Człowiek może źle ustawić przyrząd lub źle odczytać wynik','Warunki mogą się zmieniać (temperatura, drgania)','Zawsze mierzymy z jakąś niepewnością, nigdy „idealnie”','Wynik pomiaru to przybliżenie wartości prawdziwej']},
+    {t:'t7',h:'Dokładność przyrządu',items:['Najmniejsza działka (podziałka) skali określa dokładność przyrządu','Linijka z podziałką 1 mm → dokładność 1 mm','Im mniejsza podziałka, tym dokładniejszy pomiar','Wynik zapisujemy nie dokładniej niż pozwala przyrząd','Do małych elementów wybieramy przyrząd o małej podziałce (np. suwmiarka)']},
+    {t:'t7',h:'Jak mierzyć poprawnie',items:['Wybierz przyrząd odpowiedni do mierzonej wielkości i zakresu','Zero skali ustaw na początku mierzonego obiektu','Patrz prostopadle na skalę (nie z boku), by uniknąć błędu paralaksy','Odczytaj wynik z dokładnością do najmniejszej działki','Zapisz wynik z jednostką']},
+    {t:'t7',h:'Co jeśli kreska wypada między działkami',items:['Wynik zaokrąglamy do najbliższej działki lub zapisujemy w połowie podziałki, jeśli przyrząd na to pozwala','Nie podajemy wyniku dokładniejszego niż skala (np. 12,34 cm z linijki mm)','Zawsze zapisujemy dokładnie to, co odczytaliśmy','Przy powtarzaniu pomiaru wyniki mogą się lekko różnić: to normalne','Różnice między pomiarami pokazują niepewność']},
+  ],
+  formulas:`<strong>Dokładność przyrządu</strong> = najmniejsza działka skali.<br>Linijka z mm: dokładność <span class="math">1 mm = 0,1 cm</span>.<br><strong>Pomiar zawsze ma niepewność</strong> i nie zapisujemy go dokładniej niż pozwala przyrząd.<br>Patrz na skalę <strong>prostopadle</strong>.`,
+},
+examples:[
+  {q:'Linijka ma podziałkę co 1 mm. Jaka jest jej dokładność?',steps:['Dokładność = najmniejsza działka','Najmniejsza działka to 1 mm'],ans:'1 mm (0,1 cm)'},
+  {q:'Zmierzyłaś zeszyt linijką z podziałką mm. Który zapis jest poprawny: 21 cm, 21,0 cm, 21,03 cm?',steps:['Dokładność to 1 mm = 0,1 cm','Wynik zapisujemy z jednym miejscem po przecinku','21,03 cm jest zbyt dokładne'],ans:'21,0 cm'},
+  {q:'Jak ustawić oko przy odczycie skali?',steps:['Patrzenie z boku zmienia odczyt (paralaksa)','Należy patrzeć prostopadle do skali'],ans:'Prostopadle do skali'},
+],
+flashcards:[
+  {q:'Od czego zależy dokładność pomiaru?',a:'Od <strong>przyrządu</strong> (jego podziałki), <strong>osoby mierzącej</strong> i <strong>warunków</strong> pomiaru.'},
+  {q:'Co określa dokładność przyrządu?',a:'<strong>Najmniejsza działka skali</strong> (podziałka).'},
+  {q:'Jaka jest dokładność zwykłej linijki z podziałką milimetrową?',a:'<strong>1 mm = 0,1 cm.</strong>'},
+  {q:'Jak patrzeć na skalę przyrządu?',a:'<strong>Prostopadle</strong> do skali, żeby nie zafałszować odczytu.'},
+  {q:'Czy pomiar może być idealnie dokładny?',a:'<strong>Nie.</strong> Każdy pomiar jest obarczony niepewnością.'},
+  {q:'Który przyrząd wybrać do pomiaru bardzo małych elementów?',a:'Taki o <strong>małej podziałce</strong>, np. suwmiarkę lub śrubę mikrometryczną.'},
+],
+quiz:[
+  {q:'Dokładność przyrządu pomiarowego określa:',opts:['Cena','Najmniejsza działka skali','Kolor skali','Długość przyrządu'],a:1,hint:'Podziałka',expl:'Dokładność określa <strong>najmniejsza działka skali</strong>.'},
+  {q:'Jaka jest dokładność linijki z podziałką milimetrową?',opts:['1 cm','0,1 cm','0,01 cm','10 cm'],a:1,hint:'1 mm w cm',expl:'1 mm = <strong>0,1 cm</strong>.'},
+  {q:'Czy pomiar może być idealnie dokładny?',opts:['Tak, zawsze','Nie, każdy pomiar ma niepewność','Tylko linijką','Tylko wagą'],a:1,hint:'Zawsze jest jakiś błąd',expl:'Każdy pomiar jest obarczony <strong>niepewnością</strong>.'},
+  {q:'Skalę przyrządu należy odczytywać patrząc:',opts:['Z boku','Z góry pod kątem','Prostopadle do skali','Z zamkniętym okiem'],a:2,hint:'Unikamy błędu paralaksy',expl:'Patrzymy <strong>prostopadle do skali</strong>.'},
+  {q:'Który zapis jest poprawny dla pomiaru linijką z podziałką mm?',opts:['12 cm','12,4 cm','12,43 cm','12,432 cm'],a:1,hint:'Tylko jedno miejsce po przecinku w cm',expl:'Dokładność 0,1 cm, więc <strong>12,4 cm</strong>.'},
+  {q:'Który przyrząd jest odpowiedni do pomiaru grubości kartki?',opts:['Miarka krawiecka','Taśma zwijana','Przyrząd o bardzo małej podziałce','Linijka 1 m'],a:2,hint:'Mała wielkość wymaga małej podziałki',expl:'Do małych wielkości potrzebny jest <strong>przyrząd o małej podziałce</strong>.'},
+  {q:'Pierwszy krok przy pomiarze linijką to:',opts:['Zapisać wynik','Ustawić zero skali na początku obiektu','Zmierzyć dwa razy','Obliczyć średnią'],a:1,hint:'Punkt startu',expl:'Zero skali ustawiamy <strong>na początku mierzonego obiektu</strong>.'},
+]},
+
+{id:'t8',ico:'➗',num:'Lekcja 3 · Temat 8',name:'Pomiar wielokrotny i średnia',
+theory:{
+  summary:'Aby wynik był wiarygodniejszy, mierzymy kilka razy i liczymy średnią arytmetyczną. Wynik końcowy zaokrąglamy do dokładności przyrządu.',
+  blocks:[
+    {t:'t8',h:'Dlaczego mierzymy wielokrotnie',items:['Pojedynczy pomiar może zawierać przypadkowy błąd','Wiele pomiarów zmniejsza wpływ błędów przypadkowych','Wyniki zapisujemy w tabeli','Obliczamy średnią arytmetyczną jako wynik końcowy','Zazwyczaj wykonuje się co najmniej 3 pomiary (lepiej 5–10)']},
+    {t:'t8',h:'Średnia arytmetyczna',items:['Dodajemy wszystkie wyniki pomiarów','Dzielimy sumę przez liczbę pomiarów','Wzór: x̄ = (x₁ + x₂ + … + xₙ) / n','Przykład: 20, 22, 21 → suma 63, n = 3, średnia 21','Średnia leży między najmniejszym a największym wynikiem']},
+    {t:'t8',h:'Jak zaokrąglić wynik',items:['Średnią zaokrąglamy do dokładności przyrządu (zwykle tyle miejsc, ile mają pomiary)','Pomiary w cm z jednym miejscem po przecinku → wynik też z jednym miejscem','Zasada: cyfra ≥ 5 → zaokrąglamy w górę, cyfra ≤ 4 → w dół','Przykład: 46,8857 cm → 46,9 cm','Przykład: 21,0857 cm → 21,1 cm']},
+    {t:'t8',h:'Przykłady z podręcznika',items:['Pomiary: 46,7; 47,3; 46,8; 47,0; 46,8; 47,2; 46,4 cm → suma 328,2; 328,2 : 7 ≈ 46,9 cm','Pomiary: 144,2 cm sześć razy i raz 144,3 cm → średnia ≈ 144,2 cm','Mierzymy tę samą rzecz kilka razy, nawet jeśli wyniki są podobne','Wynik końcowy zapisujemy z jednostką','Jeśli jeden wynik jest bardzo odległy od reszty, najpierw sprawdzamy, czy nie było pomyłki']},
+  ],
+  formulas:`<strong>Średnia arytmetyczna:</strong> <span class="math">x̄ = (x₁ + x₂ + … + xₙ) : n</span><br>Przykład: (46,7 + 47,3 + 46,8 + 47,0 + 46,8 + 47,2 + 46,4) : 7 = 328,2 : 7 ≈ <strong>46,9 cm</strong><br>Wynik zaokrąglamy do <strong>dokładności przyrządu</strong>.`,
+},
+examples:[
+  {q:'Trzy pomiary długości: 20 cm, 22 cm, 21 cm. Oblicz wynik.',steps:['Suma: 20 + 22 + 21 = 63','Liczba pomiarów: 3','63 : 3 = 21'],ans:'21 cm'},
+  {q:'Pomiary: 46,7; 47,3; 46,8; 47,0; 46,8; 47,2; 46,4 (cm). Oblicz średnią.',steps:['Suma = 328,2','n = 7','328,2 : 7 = 46,8857…','Zaokrąglamy do 0,1 cm'],ans:'46,9 cm'},
+  {q:'Sześć pomiarów 144,2 cm i jeden 144,3 cm. Jaka jest średnia?',steps:['6 · 144,2 = 865,2','865,2 + 144,3 = 1009,5','1009,5 : 7 = 144,214…'],ans:'144,2 cm'},
+  {q:'Czasy pomiaru: 12,4 s; 12,6 s; 12,5 s; 12,5 s. Wynik?',steps:['Suma: 12,4 + 12,6 + 12,5 + 12,5 = 50,0','50,0 : 4 = 12,5'],ans:'12,5 s'},
+],
+flashcards:[
+  {q:'Dlaczego wykonujemy kilka pomiarów?',a:'Aby <strong>zmniejszyć wpływ przypadkowych błędów</strong> i dostać bardziej wiarygodny wynik.'},
+  {q:'Jak obliczamy średnią arytmetyczną?',a:'<strong>Suma wyników : liczba wyników.</strong>'},
+  {q:'Do jakiej dokładności zaokrąglamy średnią?',a:'Do <strong>dokładności przyrządu</strong> (tyle miejsc po przecinku, ile mają pomiary).'},
+  {q:'Ile pomiarów zwykle wykonujemy?',a:'<strong>Co najmniej 3</strong>, a najlepiej 5–10.'},
+  {q:'Zaokrąglij 46,8857 cm do 0,1 cm.',a:'<strong>46,9 cm</strong> (cyfra 8 ≥ 5 → w górę).'},
+  {q:'Gdzie zapisujemy wyniki pomiarów?',a:'W <strong>tabeli</strong>, wraz z jednostką.'},
+],
+quiz:[
+  {q:'Średnia z liczb 20, 22, 21 to:',opts:['20','21','22','63'],a:1,hint:'63 : 3',expl:'(20 + 22 + 21) : 3 = <strong>21</strong>.'},
+  {q:'Aby obliczyć średnią arytmetyczną, trzeba:',opts:['Pomnożyć wyniki','Dodać wyniki i podzielić przez ich liczbę','Wziąć największy wynik','Odjąć najmniejszy od największego'],a:1,hint:'Suma przez liczbę',expl:'Średnia = <strong>suma : liczba pomiarów</strong>.'},
+  {q:'Pomiary: 46,7; 47,3; 46,8; 47,0; 46,8; 47,2; 46,4 cm. Średnia po zaokrągleniu to:',opts:['46,8 cm','46,9 cm','47,0 cm','47,3 cm'],a:1,hint:'328,2 : 7',expl:'328,2 : 7 = 46,8857…, czyli <strong>46,9 cm</strong>.'},
+  {q:'Dlaczego mierzymy kilka razy?',opts:['Żeby się nudzić','Żeby zmniejszyć wpływ przypadkowych błędów','Bo tak każe linijka','Żeby wynik był zawsze równy 0'],a:1,hint:'Błąd przypadkowy',expl:'Wiele pomiarów <strong>zmniejsza wpływ błędów przypadkowych</strong>.'},
+  {q:'Średnia nie może być:',opts:['Liczbą z przecinkiem','Większa od największego wyniku','Równa jednemu z wyników','Zaokrąglona'],a:1,hint:'Leży pomiędzy wynikami',expl:'Średnia leży <strong>między najmniejszym a największym wynikiem</strong>.'},
+  {q:'Pomiary: 12,4 s; 12,6 s; 12,5 s; 12,5 s. Średnia to:',opts:['12,4 s','12,5 s','12,6 s','50 s'],a:1,hint:'Suma 50,0 : 4',expl:'50,0 : 4 = <strong>12,5 s</strong>.'},
+  {q:'Pomiary 144,2 cm (6 razy) i 144,3 cm (raz). Średnia ≈',opts:['144,0 cm','144,2 cm','144,3 cm','145 cm'],a:1,hint:'Prawie wszystkie wyniki są takie same',expl:'1009,5 : 7 = 144,214…, czyli <strong>144,2 cm</strong>.'},
+  {q:'Pomiary w cm mają jedno miejsce po przecinku. Wynik końcowy zapisujemy z:',opts:['Trzema miejscami po przecinku','Jednym miejscem po przecinku','Bez przecinka','Dziesięcioma miejscami'],a:1,hint:'Dokładność przyrządu',expl:'Wynik zaokrąglamy do <strong>dokładności pomiarów</strong>, czyli jedno miejsce po przecinku.'},
+]},
+
+{id:'t9',ico:'🔢',num:'Lekcja 3 · Temat 9',name:'Zaokrąglanie i zapis wyniku pomiaru',
+theory:{
+  summary:'Wynik pomiaru musi mieć sensowną liczbę cyfr. Zaokrąglamy tak, jak pozwala przyrząd, a wynik zawsze podajemy z jednostką.',
+  blocks:[
+    {t:'t9',h:'Zasada zaokrąglania',items:['Patrzymy na cyfrę zaraz za miejscem, do którego zaokrąglamy','Cyfra 0, 1, 2, 3, 4 → zostawiamy poprzednią cyfrę bez zmian (w dół)','Cyfra 5, 6, 7, 8, 9 → zwiększamy poprzednią cyfrę o 1 (w górę)','Przykłady: 46,8857 → 46,9; 21,0857 → 21,1; 144,214 → 144,2','Zaokrąglamy tylko wynik końcowy, nie wyniki pośrednie']},
+    {t:'t9',h:'Do ilu miejsc zaokrąglać',items:['Do tylu miejsc po przecinku, ile ma dokładność przyrządu','Linijka mm, wynik w cm → 1 miejsce po przecinku (np. 21,1 cm)','Waga z dokładnością 0,1 g → wynik np. 12,3 g','Stoper z dokładnością 0,01 s → wynik np. 12,52 s','Nie wolno „dopisywać” dokładności, której przyrząd nie dał']},
+    {t:'t9',h:'Zapis końcowego wyniku',items:['Zawsze: liczba + jednostka, np. l = 21,1 cm','Używamy przecinka dziesiętnego (po polsku), np. 12,5 s','Podajemy pełną odpowiedź w zadaniu: „Długość wynosi 21,1 cm”','Można zapisać wynik w innej jednostce, np. 21,1 cm = 0,211 m','W tabeli pomiarów pamiętaj o nagłówkach z jednostkami']},
+    {t:'t9',h:'Przykład z podręcznika (pokrywki Kuby)',items:['Kuba zmierzył średnicę pokrywki 7 razy','Suma wyników: 147,6 cm','147,6 : 7 = 21,0857… cm','Zaokrąglenie do 0,1 cm daje 21,1 cm','Odpowiedź: średnica pokrywki wynosi ok. 21,1 cm']},
+  ],
+  formulas:`<strong>Zaokrąglanie:</strong> cyfra za miejscem 0–4 → w dół, 5–9 → w górę.<br><span class="math">46,8857 → 46,9</span> · <span class="math">21,0857 → 21,1</span> · <span class="math">144,214 → 144,2</span><br>Wynik zapisujemy z <strong>jednostką</strong> i z dokładnością przyrządu.`,
+},
+examples:[
+  {q:'Zaokrąglij 21,0857 cm do 0,1 cm.',steps:['Miejsce po przecinku: 0','Następna cyfra to 8 (≥ 5)','Zwiększamy 0 o 1 → 1'],ans:'21,1 cm'},
+  {q:'Zaokrąglij 144,214 cm do 0,1 cm.',steps:['Cyfra dziesiątych: 2','Następna cyfra: 1 (≤ 4)','Zostawiamy 2'],ans:'144,2 cm'},
+  {q:'Kuba zmierzył średnicę pokrywki 7 razy, suma wyników 147,6 cm. Podaj średnią.',steps:['147,6 : 7 = 21,0857…','Zaokrąglamy do 0,1 cm'],ans:'21,1 cm'},
+  {q:'Zapisz 21,1 cm w metrach.',steps:['1 m = 100 cm','21,1 : 100 = 0,211'],ans:'0,211 m'},
+],
+flashcards:[
+  {q:'Kiedy zaokrąglamy w górę?',a:'Gdy cyfra za miejscem zaokrąglenia to <strong>5, 6, 7, 8 lub 9</strong>.'},
+  {q:'Kiedy zaokrąglamy w dół?',a:'Gdy ta cyfra to <strong>0, 1, 2, 3 lub 4</strong>.'},
+  {q:'Do ilu miejsc zaokrąglamy wynik pomiaru?',a:'Do <strong>dokładności przyrządu</strong>, np. linijka mm → 0,1 cm → jedno miejsce po przecinku.'},
+  {q:'Zaokrąglij 46,8857 do 0,1.',a:'<strong>46,9</strong>'},
+  {q:'Czy do wyniku pomiaru zawsze dopisujemy jednostkę?',a:'<strong>Tak.</strong> Liczba bez jednostki nie jest wynikiem pomiaru.'},
+  {q:'Czy zaokrąglamy wyniki pośrednie?',a:'<strong>Nie.</strong> Zaokrąglamy dopiero wynik końcowy.'},
+],
+quiz:[
+  {q:'Zaokrąglij 21,0857 do jednego miejsca po przecinku:',opts:['21,0','21,1','21,08','21,09'],a:1,hint:'Cyfra za miejscem to 8',expl:'8 ≥ 5, więc w górę: <strong>21,1</strong>.'},
+  {q:'Zaokrąglij 144,214 do jednego miejsca po przecinku:',opts:['144,2','144,3','144,21','144,0'],a:0,hint:'Cyfra za miejscem to 1',expl:'1 ≤ 4, więc zostaje <strong>144,2</strong>.'},
+  {q:'Zaokrąglij 46,8857 do jednego miejsca po przecinku:',opts:['46,8','46,9','47','46,89'],a:1,hint:'Cyfra za miejscem to 8',expl:'Wynik to <strong>46,9</strong>.'},
+  {q:'Linijka z podziałką mm. Wynik średniej 12,3456 cm zapiszesz jako:',opts:['12 cm','12,3 cm','12,35 cm','12,3456 cm'],a:1,hint:'Dokładność 0,1 cm',expl:'Dokładność 0,1 cm, więc <strong>12,3 cm</strong>.'},
+  {q:'Cyfra 5 za miejscem zaokrąglenia oznacza:',opts:['Zaokrąglenie w dół','Zaokrąglenie w górę','Brak zaokrąglenia','Podwojenie liczby'],a:1,hint:'5–9',expl:'Cyfry 5–9 → <strong>w górę</strong>.'},
+  {q:'Suma 7 pomiarów to 147,6 cm. Średnia po zaokrągleniu to:',opts:['20,9 cm','21,0 cm','21,1 cm','21,3 cm'],a:2,hint:'147,6 : 7 = 21,0857',expl:'<strong>21,1 cm</strong>.'},
+  {q:'Wynik pomiaru powinien zawsze zawierać:',opts:['Tylko liczbę','Liczbę i jednostkę','Tylko jednostkę','Nazwę przyrządu'],a:1,hint:'Cecha wielkości fizycznej',expl:'Wynik to <strong>liczba i jednostka</strong>.'},
+  {q:'21,1 cm zapisane w metrach to:',opts:['2,11 m','0,211 m','0,0211 m','211 m'],a:1,hint:'÷ 100',expl:'21,1 : 100 = <strong>0,211 m</strong>.'},
+]},
+
+{id:'t10',ico:'🧪',num:'Lekcja 3 · Temat 10',name:'Jak przeprowadzić doświadczenie',
+theory:{
+  summary:'Dobre doświadczenie ma plan: pytanie, hipoteza, przygotowanie, pomiary, wyniki i wnioski. Zmieniamy jeden czynnik naraz, resztę utrzymujemy bez zmian.',
+  blocks:[
+    {t:'t10',h:'Etapy doświadczenia',items:['1. Problem badawczy (pytanie): co chcemy sprawdzić?','2. Hipoteza: co naszym zdaniem się stanie i dlaczego','3. Plan: potrzebne przedmioty i przyrządy, opis kroków','4. Wykonanie doświadczenia i pomiary (kilka powtórzeń)','5. Zapis wyników w tabeli','6. Opracowanie wyników (np. średnia), wnioski']},
+    {t:'t10',h:'Zmienna zależna i niezależna',items:['Zmieniamy tylko JEDEN czynnik, resztę utrzymujemy takie same','Czynnik, który zmieniamy, to zmienna niezależna','Wielkość, którą mierzymy jako wynik, to zmienna zależna','Przykład: zmieniamy wysokość upuszczenia piłki, mierzymy czas spadania','Dzięki temu wiemy, co naprawdę wpływa na wynik']},
+    {t:'t10',h:'Dobre praktyki',items:['Bezpieczeństwo: poznaj zasady pracy w pracowni, nie dotykaj gorących i ostrych rzeczy','Wykonuj pomiary kilka razy i licz średnią','Wynik zapisuj od razu w tabeli, nie z pamięci','Kolumny tabeli opisz: nazwa wielkości i jednostka','Porządek na stanowisku i opisanie przyrządów']},
+    {t:'t10',h:'Wnioski i sprawozdanie',items:['Wniosek odpowiada na pytanie z początku doświadczenia','Porównaj wynik z hipotezą: potwierdziła się czy nie?','Zapisz, co mogło wpłynąć na dokładność pomiaru','Nie wyciągaj wniosków, których wyniki nie potwierdzają','Wniosek pisz pełnymi zdaniami, z liczbami i jednostkami']},
+  ],
+  formulas:`<strong>Schemat:</strong> problem → hipoteza → plan → pomiary → tabela → wnioski.<br><strong>Zmieniamy jeden czynnik</strong>, resztę warunków utrzymujemy.<br><strong>Wiele pomiarów</strong> + średnia = wiarygodniejszy wynik.<br><strong>Wniosek</strong> odpowiada na pytanie badawcze.`,
+},
+examples:[
+  {q:'Chcesz sprawdzić, czy ciężka piłka spada szybciej niż lekka. Co jest problemem badawczym, a co hipotezą?',steps:['Problem: czy masa wpływa na czas spadania?','Hipoteza: ciężka piłka spada szybciej (lub: czas nie zależy od masy)'],ans:'Problem: wpływ masy na czas spadania; hipoteza: przypuszczenie, co się stanie'},
+  {q:'Badasz, jak długość wahadła wpływa na czas wahnięć. Co zmieniasz, a co utrzymujesz stałe?',steps:['Zmieniasz: długość nici','Stałe: masa ciężarka, kąt wychylenia, sposób pomiaru czasu','Mierzysz: czas wahnięć'],ans:'Zmieniamy tylko długość nici, resztę utrzymujemy stałą'},
+  {q:'Podaj poprawną kolejność: wnioski, pomiary, hipoteza, problem, tabela.',steps:['Najpierw pytanie, potem przypuszczenie','Potem pomiary i ich zapis','Na końcu wnioski'],ans:'Problem → hipoteza → pomiary → tabela → wnioski'},
+],
+flashcards:[
+  {q:'Z jakich etapów składa się doświadczenie?',a:'<strong>Problem → hipoteza → plan → pomiary → tabela → wnioski.</strong>'},
+  {q:'Co to jest hipoteza?',a:'<strong>Przypuszczenie</strong>, jaki będzie wynik doświadczenia i dlaczego.'},
+  {q:'Dlaczego zmieniamy tylko jeden czynnik naraz?',a:'Żeby wiedzieć, <strong>który czynnik wpływa na wynik</strong>.'},
+  {q:'Po co powtarzamy pomiary?',a:'Aby <strong>zmniejszyć wpływ błędów</strong> i obliczyć średnią.'},
+  {q:'Do czego służy tabela pomiarów?',a:'Do <strong>uporządkowanego zapisu wyników</strong> z nazwami wielkości i jednostkami.'},
+  {q:'Czym jest wniosek?',a:'<strong>Odpowiedzią na pytanie badawcze</strong>, opartą na wynikach i porównaną z hipotezą.'},
+],
+quiz:[
+  {q:'Co jest pierwszym etapem doświadczenia?',opts:['Wnioski','Pomiary','Sformułowanie problemu badawczego','Tabela wyników'],a:2,hint:'Najpierw pytanie',expl:'Zaczynamy od <strong>problemu badawczego</strong>.'},
+  {q:'Hipoteza to:',opts:['Wynik pomiaru','Przypuszczenie co do wyniku doświadczenia','Przyrząd','Jednostka'],a:1,hint:'Zgadujemy, ale z uzasadnieniem',expl:'Hipoteza to <strong>przypuszczenie</strong> przed doświadczeniem.'},
+  {q:'Dlaczego w doświadczeniu zmieniamy tylko jeden czynnik?',opts:['Bo tak łatwiej policzyć sumę','Żeby wiedzieć, który czynnik wpływa na wynik','Bo to wymaga nauczyciel','Żeby zaoszczędzić czas'],a:1,hint:'Chcemy poznać przyczynę',expl:'Wtedy wiemy, <strong>który czynnik wpływa na wynik</strong>.'},
+  {q:'Poprawna kolejność to:',opts:['Wnioski, pomiary, hipoteza','Problem, hipoteza, pomiary, wnioski','Pomiary, problem, wnioski, hipoteza','Hipoteza, wnioski, problem, pomiary'],a:1,hint:'Od pytania do odpowiedzi',expl:'<strong>Problem → hipoteza → pomiary → wnioski.</strong>'},
+  {q:'Po co wykonujemy pomiary kilka razy?',opts:['Żeby zużyć więcej czasu','Aby zmniejszyć wpływ błędów i obliczyć średnią','Bo pierwszy zawsze jest zły','Bo tak wymaga tabela'],a:1,hint:'Średnia arytmetyczna',expl:'Wiele pomiarów <strong>zmniejsza wpływ błędów</strong>.'},
+  {q:'Wniosek z doświadczenia powinien:',opts:['Być dowolny','Odpowiadać na pytanie badawcze i wynikać z wyników','Zawierać same przypuszczenia','Być pominięty'],a:1,hint:'Odpowiedź na pytanie z początku',expl:'Wniosek <strong>odpowiada na pytanie</strong> i opiera się na wynikach.'},
+  {q:'W tabeli pomiarów każda kolumna powinna mieć:',opts:['Tylko numer','Nazwę wielkości i jednostkę','Rysunek','Kolor'],a:1,hint:'Liczba bez jednostki nic nie znaczy',expl:'Opisujemy <strong>wielkość i jednostkę</strong>.'},
+  {q:'Badasz wpływ długości nici na czas wahnięć wahadła. Co musi pozostać bez zmian?',opts:['Długość nici','Masa ciężarka i kąt wychylenia','Wynik pomiaru','Wniosek'],a:1,hint:'Zmieniamy tylko długość',expl:'Utrzymujemy <strong>masę i kąt wychylenia</strong> bez zmian.'},
+]},
 ];
 
-// Każda próba: nowa kolejność pytań i odpowiedzi — żeby liczyło się rozumienie, nie zapamiętanie liter.
-function shuffle(a){ a=a.slice(); for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
-function buildQuiz(){
-  return shuffle(bank).map(q => {
-    const order = shuffle(q.opts.map((_,i)=>i));
-    return { cat:q.cat, q:q.q, opts:order.map(i=>q.opts[i]), ans:order.indexOf(q.ans) };
-  });
+// ══════════════════ STATE
+let ct=TOPICS[0],tab='theory',fcI=0,fcF=false,qi=0,sel=null,score=0,mistakes=[],qList=[];
+
+function applyColors(id){
+  const c=C[id];
+  document.documentElement.style.setProperty('--c',c.c);
+  document.documentElement.style.setProperty('--c-bg',c.bg);
+  document.documentElement.style.setProperty('--c-d',c.d);
 }
 
-let questions=[], quizStarted=false, current=0, score=0, answered=false;
+function setTopic(id){
+  ct=TOPICS.find(t=>t.id===id);
+  tab='theory';fcI=0;fcF=false;
+  qi=0;sel=null;score=0;mistakes=[];
+  qList=[...ct.quiz].sort(()=>Math.random()-.5);
+  applyColors(id);
+  renderTopics();renderITabs();render();
+}
 
-function initQuiz(){ questions=buildQuiz(); quizStarted=true; current=0; score=0; answered=false; document.getElementById('resultsCard').classList.remove('show'); document.getElementById('scoreText').textContent='✅ 0'; renderQuestion(); }
-function restartQuiz(){ initQuiz(); }
+function setTab(id){
+  tab=id;fcI=0;fcF=false;
+  if(id==='quiz'){qi=0;sel=null;score=0;mistakes=[];qList=[...ct.quiz].sort(()=>Math.random()-.5);}
+  renderITabs();render();
+}
 
-function renderQuestion(){
-  const container=document.getElementById('quizContainer');
-  if(current>=questions.length){ showResults(); return; }
-  const q=questions[current];
-  const letters=['A','B','C','D'];
-  updateProgress();
-  container.innerHTML=`
-    <div class="question-card" id="qCard">
-      <div class="q-number">Pytanie ${current+1} z ${questions.length} <span class="q-category">${q.cat}</span></div>
-      <div class="q-text">${q.q}</div>
-      <div class="answers" id="answers">
-        ${q.opts.map((opt,i)=>`
-          <button class="answer-btn" onclick="selectAnswer(${i})" id="btn${i}">
-            <span class="answer-letter">${letters[i]}</span>${opt}
-          </button>`).join('')}
+function renderTopics(){
+  document.getElementById('topic-grid').innerHTML=TOPICS.map(t=>`
+    <button class="tcard${t.id===ct.id?' active':''}" onclick="setTopic('${t.id}')"
+      style="${t.id===ct.id?`border-color:${C[t.id].c};background:${C[t.id].bg}`:''}">
+      <div class="tc-ico">${t.ico}</div>
+      <div class="tc-body">
+        <div class="tc-num">${t.num}</div>
+        <div class="tc-name">${t.name}</div>
       </div>
-      <div class="feedback-msg" id="feedback"></div>
-      <button class="next-btn" id="nextBtn" onclick="nextQuestion()">${current+1<questions.length?'Następne pytanie →':'Zobacz wynik 🎉'}</button>
-    </div>`;
-  answered=false;
+    </button>`).join('');
 }
 
-function selectAnswer(idx){
-  if(answered) return;
-  answered=true;
-  const q=questions[current];
-  const btns=document.querySelectorAll('.answer-btn');
-  const feedback=document.getElementById('feedback');
-  const qCard=document.getElementById('qCard');
-  const nextBtn=document.getElementById('nextBtn');
-  btns.forEach(b=>b.disabled=true);
-  if(idx===q.ans){
-    score++;
-    btns[idx].classList.add('selected-correct');
-    feedback.textContent='✅ Brawo! Dobra odpowiedź!';
-    feedback.className='feedback-msg correct';
-    qCard.classList.add('correct');
-  } else {
-    btns[idx].classList.add('selected-wrong');
-    btns[q.ans].classList.add('show-correct');
-    feedback.textContent=`❌ Błąd. Poprawna odpowiedź: ${q.opts[q.ans]}`;
-    feedback.className='feedback-msg wrong';
-    qCard.classList.add('wrong');
+const TABS=[
+  {id:'theory',l:'📖 Teoria'},
+  {id:'formulas',l:'📋 Kluczowe fakty'},
+  {id:'examples',l:'✏️ Przykłady'},
+  {id:'flash',l:'🃏 Fiszki'},
+  {id:'quiz',l:'🧮 Test'},
+];
+
+function renderITabs(){
+  document.getElementById('itabs').innerHTML=TABS.map(t=>`
+    <button class="itab${tab===t.id?' active':''}"
+      style="${tab===t.id?`background:${C[ct.id].c}`:''}
+      " onclick="setTab('${t.id}')">${t.l}</button>`).join('');
+}
+
+function renderTheory(){
+  const th=ct.theory;
+  return `<div class="card">
+    <div class="card-h">${ct.ico} ${ct.name}</div>
+    <p style="font-size:14px;color:var(--muted);margin-bottom:14px;line-height:1.6">${th.summary}</p>
+    <div class="tgrid">${th.blocks.map(b=>`
+      <div class="tbox" style="background:${C[b.t].bg};border-color:${C[b.t].c}40">
+        <h3 style="color:${C[b.t].d}">${b.h}</h3>
+        <ul style="color:${C[b.t].d}">${b.items.map(i=>`<li>${i}</li>`).join('')}</ul>
+      </div>`).join('')}
+    </div>
+  </div>
+  <div style="margin-top:4px"><button class="btn btn-pri" onclick="setTab('formulas')">📋 Kluczowe fakty →</button></div>`;
+}
+
+function renderFormulas(){
+  return `<div class="card">
+    <div class="card-h">📋 Kluczowe fakty — ${ct.name}</div>
+    <div class="formula">${ct.theory.formulas}</div>
+    <div style="margin-top:4px"><button class="btn btn-pri" onclick="setTab('examples')">✏️ Przykłady →</button></div>
+  </div>`;
+}
+
+function renderExamples(){
+  return `<div class="card">
+    <div class="card-h">✏️ Przykłady krok po kroku</div>
+    <div class="ex-list">${ct.examples.map(e=>`
+      <div class="ex-item">
+        <div class="ex-q">${e.q}</div>
+        <div class="ex-steps">
+          ${e.steps.map((s,i)=>`
+            <div class="ex-step">
+              <div class="ex-step-n" style="background:${C[ct.id].c}">${i+1}</div>
+              <div>${s}</div>
+            </div>`).join('')}
+          <div class="ex-ans">✅ Odpowiedź: ${e.ans}</div>
+        </div>
+      </div>`).join('')}
+    </div>
+  </div>`;
+}
+
+function renderFlash(){
+  const cards=ct.flashcards;
+  const c=cards[fcI];
+  return `<div class="card">
+    <div class="card-h">🃏 Fiszki — ${ct.name}</div>
+    <div class="fc-meta">Kliknij kartę · ${fcI+1} z ${cards.length}</div>
+    <div class="flashcard${fcF?' flipped':''}" onclick="flipCard()">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-q">${c.q}</div><div class="fc-tap">👆 Kliknij, by zobaczyć odpowiedź</div></div>
+        <div class="fc-back" style="background:${C[ct.id].bg};border-color:${C[ct.id].c}">
+          <div class="fc-a" style="--c-d:${C[ct.id].d}">${c.a}</div>
+        </div>
+      </div>
+    </div>
+    <div class="fc-nav">
+      <button class="btn btn-sec" onclick="fcNav(-1)" ${fcI===0?'disabled':''}>← Poprzednia</button>
+      <span class="fc-count">${fcI+1} / ${cards.length}</span>
+      <button class="btn btn-pri" onclick="fcNav(1)" ${fcI===cards.length-1?'disabled':''}>Następna →</button>
+    </div>
+  </div>`;
+}
+
+function flipCard(){fcF=!fcF;render();}
+function fcNav(d){fcI+=d;fcF=false;render();}
+
+function renderQuiz(){
+  if(qi>=qList.length)return renderResult();
+  const q=qList[qi];
+  const total=qList.length;
+  const pct=Math.round((qi/total)*100);
+  const optsHTML=q.opts.map((o,i)=>{
+    let cls='opt';
+    if(sel!==null){if(i===q.a)cls+=' ok';else if(i===sel&&sel!==q.a)cls+=' no';}
+    return `<button class="${cls}" onclick="choose(${i})" ${sel!==null?'disabled':''}>${o}</button>`;
+  }).join('');
+  let fb='';
+  if(sel!==null){
+    fb=sel===q.a
+      ?`<div class="feedback ok">✓ Правильно! <div class="expl">${q.expl}</div></div>`
+      :`<div class="feedback no">✗ Правильна: <strong>${q.opts[q.a]}</strong><div class="expl">${q.expl}</div></div>`;
   }
-  nextBtn.classList.add('show');
-  document.getElementById('scoreText').textContent=`✅ ${score}`;
+  return `
+  <div class="prog-bar"><div class="prog-fill" style="background:${C[ct.id].c};width:${pct}%"></div></div>
+  <div class="score-row">
+    <span>Pytanie <b>${qi+1}/${total}</b></span>
+    <span>✅ <b style="color:var(--ok)">${score}</b></span>
+    <span>❌ <b style="color:var(--err)">${mistakes.length}</b></span>
+  </div>
+  <div class="card">
+    <div class="q-label">Pytanie ${qi+1}</div>
+    <div class="q-text">${q.q}</div>
+    <div class="q-hint">💡 ${q.hint}</div>
+    <div class="opts">${optsHTML}</div>
+    ${fb}
+  </div>
+  <div class="nav-row">${sel!==null?`<button class="btn btn-pri" onclick="nextQ()">Dalej →</button>`:''}</div>`;
 }
 
-function nextQuestion(){ current++; renderQuestion(); }
-
-function updateProgress(){
-  const pct=(current/questions.length)*100;
-  document.getElementById('progressBar').style.width=pct+'%';
-  document.getElementById('progressText').textContent=`${current} / ${questions.length}`;
+function renderResult(){
+  const total=qList.length;
+  const pct=Math.round((score/total)*100);
+  const emoji=pct>=80?'🎉':pct>=60?'👍':'📚';
+  const stars=pct>=100?'⭐⭐⭐':pct>=80?'⭐⭐':pct>=60?'⭐':'';
+  const msg=pct>=80?'Warwara — gotowa na kontrolną!':pct>=60?'Dobrze! Powtórz błędy.':'Wróć do teorii i kluczowych faktów.';
+  const mHTML=mistakes.length?`
+    <div style="margin-top:16px;text-align:left">
+      <div style="font-size:14px;font-weight:800;margin-bottom:10px">Błędy:</div>
+      ${mistakes.map(m=>`
+        <div class="mk">
+          <div class="mk-q">${m.q}</div>
+          <div class="mk-w">Ти відповіла: <b>${m.wrong}</b></div>
+          <div class="mk-c">✓ ${m.correct}</div>
+          <div class="mk-r">${m.rule}</div>
+        </div>`).join('')}
+    </div>`:'';
+  return `<div class="card"><div class="result">
+    <div style="font-size:42px">${emoji}</div>
+    <div style="font-size:24px;margin:4px 0">${stars}</div>
+    <div class="big" style="color:${C[ct.id].c}">${score}/${total}</div>
+    <div class="msg">${msg}</div>
+    <div class="result-btns">
+      <button class="btn btn-sec" onclick="setTab('theory')">📖 Teoria</button>
+      <button class="btn btn-sec" onclick="setTab('formulas')">📋 Fakty</button>
+      <button class="btn btn-pri" onclick="setTab('quiz')">Ponownie ↺</button>
+    </div>
+    ${mHTML}
+  </div></div>`;
 }
 
-function showResults(){
-  document.getElementById('quizContainer').innerHTML='';
-  updateProgress();
-  document.getElementById('progressBar').style.width='100%';
-  document.getElementById('progressText').textContent=`${questions.length} / ${questions.length}`;
-  const resultsCard=document.getElementById('resultsCard');
-  resultsCard.classList.add('show');
-  document.getElementById('resultsScore').textContent=`${score}/${questions.length}`;
-  let emoji, msg;
-  const pct=score/questions.length;
-  if(pct>=0.9){ emoji='🏆'; msg='Doskonale! Jesteś gotowa na kartkówkę! 🌟'; }
-  else if(pct>=0.75){ emoji='🎉'; msg='Bardzo dobrze! Jeszcze trochę powtórki i będziesz super!'; }
-  else if(pct>=0.6){ emoji='😊'; msg='Nieźle! Przejrzyj błędne tematy i spróbuj jeszcze raz.'; }
-  else { emoji='💪'; msg='Nie martw się! Wróć do teorii i poćwicz — dasz radę!'; }
-  document.getElementById('resultsEmoji').textContent=emoji;
-  document.getElementById('resultsMsg').textContent=msg;
+function choose(i){
+  if(sel!==null)return;
+  sel=i;
+  const q=qList[qi];
+  if(i===q.a)score++;
+  else mistakes.push({q:q.q,wrong:q.opts[i],correct:q.opts[q.a],rule:q.expl});
+  render();
 }
+function nextQ(){qi++;sel=null;render();}
+
+function render(){
+  const c=document.getElementById('content');
+  if(tab==='theory')c.innerHTML=renderTheory();
+  else if(tab==='formulas')c.innerHTML=renderFormulas();
+  else if(tab==='examples')c.innerHTML=renderExamples();
+  else if(tab==='flash')c.innerHTML=renderFlash();
+  else c.innerHTML=renderQuiz();
+}
+
+setTopic('t1');
 </script>
-
 </body>
 </html>
